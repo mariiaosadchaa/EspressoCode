@@ -262,24 +262,28 @@ svg{display:block}
 
 /* ---------- mascot ---------- */
 .mascot{display:block;overflow:visible}
-.mascot .body{fill:var(--primary)}
-.mascot .rim{fill:var(--primary-edge)}
+.mascot .body{fill:#EC7A2C}
+.mascot .muzzle{fill:#FFF4E6}
+.mascot .etip{fill:#2B1A12}
+.mascot .ttip{fill:none;stroke:#FFF4E6;stroke-width:6;stroke-linecap:round}
+.mascot .rim{fill:#C45A17}
 .mascot .coffee{fill:var(--con-bg)}
 .mascot .saucer{fill:var(--line-edge)}
-.mascot .tail{fill:none;stroke:var(--primary);stroke-width:5.5;stroke-linecap:round;transform-box:fill-box;transform-origin:0 100%}
-.mascot .ear{fill:var(--primary);stroke:var(--primary);stroke-width:2;stroke-linejoin:round}
-.mascot .earin{fill:#F4A6B5}
-.mascot .nose{fill:#F4A6B5}
+.mascot .tail{fill:none;stroke:#EC7A2C;stroke-width:7;stroke-linecap:round;transform-box:fill-box;transform-origin:0 100%}
+.mascot .ear{fill:#EC7A2C;stroke:#EC7A2C;stroke-width:2;stroke-linejoin:round}
+.mascot .earin{fill:#FFD9B3}
+.mascot .nose{fill:#2B1A12}
 .mascot .wh{fill:none;stroke:var(--muted);stroke-width:1.6;stroke-linecap:round;opacity:.8}
 .m-idle .tail,.m-cheer .tail{animation:wag 2.2s ease-in-out infinite}
 .m-sad .tail{transform:rotate(18deg)}
+.m-sad .ttip{transform:rotate(0)}
 @keyframes wag{0%,100%{transform:rotate(0)}50%{transform:rotate(-14deg)}}
 .mascot .steam{fill:none;stroke:var(--muted);stroke-width:2.5;stroke-linecap:round;opacity:.7}
-.mascot .eye{fill:var(--on-primary)}
-.mascot .ln,.mascot .mo{fill:none;stroke:var(--on-primary);stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
-.mascot .open{fill:var(--on-primary)}
+.mascot .eye{fill:#2B1A12}
+.mascot .ln,.mascot .mo{fill:none;stroke:#2B1A12;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
+.mascot .open{fill:#2B1A12}
 .mascot .blush{fill:var(--bad);opacity:.35}
-.mascot .tear{fill:var(--on-primary);opacity:.9}
+.mascot .tear{fill:#6FB6FF;opacity:.95}
 @keyframes blink{0%,92%,100%{transform:scaleY(1)}96%{transform:scaleY(.1)}}
 @keyframes steam{0%{opacity:0;transform:translateY(4px)}40%{opacity:.7}100%{opacity:0;transform:translateY(-6px)}}
 @keyframes cheer{0%,100%{transform:translateY(0) rotate(0)}25%{transform:translateY(-8px) rotate(-4deg)}75%{transform:translateY(-8px) rotate(4deg)}}
@@ -1164,18 +1168,17 @@ function pumpToast(){
 /* ---------- mascot ---------- */
 function mascot(mood,px){
   const faces={
-    idle:'<circle class="eye" cx="23" cy="35" r="2.6"/><circle class="eye" cx="37" cy="35" r="2.6"/><path class="mo" d="M26 42q4 3 8 0"/>',
-    happy:'<path class="ln" d="M20 36q3-4 6 0M34 36q3-4 6 0"/><path class="mo" d="M25 41q5 5 10 0"/>',
-    cheer:'<path class="ln" d="M20 36q3-4 6 0M34 36q3-4 6 0"/><path class="open" d="M25 41h10q0 8-5 8t-5-8z"/><circle class="blush" cx="17" cy="41" r="3"/><circle class="blush" cx="43" cy="41" r="3"/>',
+    idle:'<circle class="eye" cx="23" cy="35" r="2.6"/><circle class="eye" cx="37" cy="35" r="2.6"/><path class="mo" d="M26.5 43q3.5 3 7 0"/>',
+    happy:'<path class="ln" d="M20 36q3-4 6 0M34 36q3-4 6 0"/><path class="mo" d="M26 42.5q4 4.5 8 0"/>',
+    cheer:'<path class="ln" d="M20 36q3-4 6 0M34 36q3-4 6 0"/><path class="open" d="M25.5 42h9q0 7-4.5 7t-4.5-7z"/><circle class="blush" cx="17" cy="41" r="3"/><circle class="blush" cx="43" cy="41" r="3"/>',
     sad:'<path class="ln" d="M20 37q3 3 6 0M34 37q3 3 6 0"/><path class="mo" d="M25 45q5-5 10 0"/><path class="tear" d="M42 40q2.4 3 0 5.2q-2.4-2.2 0-5.2z"/>'
   };
   const steam=(mood==='idle'||mood==='cheer')?'<path class="steam s1" d="M28 12q-3-3 0-6"/><path class="steam s2" d="M32 12q3-3 0-6"/>':'';
-  const whisk='<path class="wh" d="M9 41l-6-1.5M9 44.5l-6 1.5"/>';
   return '<svg class="mascot m-'+mood+'" viewBox="0 0 64 60" width="'+px+'" height="'+Math.round(px*60/64)+'" aria-hidden="true">'+steam
-    +'<path class="ear" d="M12 26L13 6l15 14z"/><path class="ear" d="M48 26L47 6L32 20z"/><path class="earin" d="M16.5 20.5l.6-9.5 6.8 6.4z"/><path class="earin" d="M43.5 20.5l-.6-9.5-6.8 6.4z"/>'
-    +'<rect class="saucer" x="12" y="52" width="36" height="5" rx="2.5"/><path class="tail" d="M49 47q12 1 10-14"/>'
-    +'<path class="body" d="M10 22h40v14a16 16 0 0 1-16 16H26A16 16 0 0 1 10 36z"/><ellipse class="rim" cx="30" cy="22" rx="20" ry="4.5"/><ellipse class="coffee" cx="30" cy="22" rx="16.5" ry="3"/>'
-    +whisk+'<path class="nose" d="M28.2 37.4h3.6L30 39.6z"/>'
+    +'<path class="ear" d="M12 26L13 6l15 14z"/><path class="ear" d="M48 26L47 6L32 20z"/><path class="etip" d="M13 6l-.4 8 6.4-1.4z"/><path class="etip" d="M47 6l.4 8-6.4-1.4z"/><path class="earin" d="M16.5 20.5l.6-7 5.4 4.6z"/><path class="earin" d="M43.5 20.5l-.6-7-5.4 4.6z"/>'
+    +'<rect class="saucer" x="12" y="52" width="36" height="5" rx="2.5"/><path class="tail" d="M49 47q12 1 10-14"/><path class="ttip" d="M59.6 40q.4-4-.6-7"/>'
+    +'<path class="body" d="M10 22h40v14a16 16 0 0 1-16 16H26A16 16 0 0 1 10 36z"/><path class="muzzle" d="M10 38Q22 38 30 41Q38 38 50 38V36a16 16 0 0 1-16 16H26A16 16 0 0 1 10 36z"/><ellipse class="rim" cx="30" cy="22" rx="20" ry="4.5"/><ellipse class="coffee" cx="30" cy="22" rx="16.5" ry="3"/>'
+    +'<ellipse class="nose" cx="30" cy="38.2" rx="2.4" ry="1.7"/>'
     +(faces[mood]||'')+'</svg>';
 }
 
