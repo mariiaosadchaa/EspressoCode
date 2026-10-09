@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#142033">
+<meta name="theme-color" content="#100B08">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Java Бариста">
@@ -14,45 +14,46 @@
 <title>Java Бариста</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700&family=Unbounded:wght@600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700&family=Playfair+Display:wght@600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
 /* Layout: one phone-width column. Home = summary card + zigzag lesson path; lesson = full-screen exercise with a fixed action bar. */
+/* Luxe: espresso black, ivory and gold */
 :root{
-  --display:'Unbounded','Onest',system-ui,sans-serif;
+  --display:'Playfair Display','Georgia',serif;
   --body:'Onest',system-ui,-apple-system,'Segoe UI',sans-serif;
   --mono:'JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
 
-  --bg:#ECEFF4; --surface:#FFFFFF; --ink:#142033; --muted:#566377; --line:#D3DAE6; --line-edge:#BAC3D2;
-  --primary:#2556D8; --primary-edge:#173C9E; --on-primary:#FFFFFF;
-  --good:#169B66; --good-edge:#0F7A50; --good-bg:#DDF5E9; --on-good:#FFFFFF; --good-ink:#0B5C3B;
-  --bad:#D63A41; --bad-edge:#A32A30; --bad-bg:#FDE4E5; --on-bad:#FFFFFF; --bad-ink:#8E2227;
-  --warm:#D98200;
-  --code-bg:#F2F5FA; --code-ink:#1B2740; --con-bg:#162033; --con-ink:#DCE6F7; --gold:#D99A00;
-  --kw:#A1308F; --str:#1A7F4B; --num:#B85600; --com:#76839A; --ty:#1B5FC4;
-  --u1:#2556D8; --u2:#0B7F8A; --u3:#6A3FCF; --u4:#B35F00; --u5:#C23A60; --u6:#1F8A4C; --on-u:#FFFFFF;
+  --bg:#F5EFE4; --surface:#FFFCF6; --ink:#1E1510; --muted:#6A5B4C; --line:#E2D6BF; --line-edge:#CDBE9F;
+  --primary:#2B1B11; --primary-edge:#0F0804; --on-primary:#F1D790;
+  --good:#2E7D5B; --good-edge:#1F5C41; --good-bg:#E0F0E6; --on-good:#FFFFFF; --good-ink:#17482F;
+  --bad:#B5373F; --bad-edge:#8A262D; --bad-bg:#F8E3E1; --on-bad:#FFFFFF; --bad-ink:#7B2026;
+  --warm:#B8862B;
+  --code-bg:#F3ECDD; --code-ink:#2A1D14; --con-bg:#1A120C; --con-ink:#EADFCB; --gold:#C79A2E;
+  --kw:#9A2F7F; --str:#2A7A4B; --num:#A8561A; --com:#8A7C6A; --ty:#1F5FA8;
+  --u1:#9A7424; --u2:#1F6F6B; --u3:#5B3A8C; --u4:#A5521F; --u5:#9B2F4B; --u6:#2F6B3F; --on-u:#FFFCF6;
 }
 @media (prefers-color-scheme: dark){
   :root:not([data-theme="light"]){
-    --bg:#0E141D; --surface:#171F2C; --ink:#E7ECF4; --muted:#93A0B4; --line:#29344A; --line-edge:#1F2838;
-    --primary:#6D98FF; --primary-edge:#3E67CF; --on-primary:#0B1220;
-    --good:#3DCB8C; --good-edge:#23996A; --good-bg:#12362A; --on-good:#062015; --good-ink:#8FE8BF;
-    --bad:#FF7479; --bad-edge:#C94950; --bad-bg:#3A1A1E; --on-bad:#2A0A0C; --bad-ink:#FFA5A8;
-    --warm:#FFB32E;
-    --code-bg:#0B1019; --code-ink:#DCE4F2; --con-bg:#05080E; --con-ink:#DCE6F7; --gold:#FFC857;
-    --kw:#E58BDD; --str:#7FDDA6; --num:#FFB066; --com:#7D8BA3; --ty:#7DB2FF;
-    --u1:#7BA0FF; --u2:#4CC9D6; --u3:#A98BFF; --u4:#FFB347; --u5:#FF8FAA; --u6:#5FD38E; --on-u:#0B1220;
+    --bg:#100B08; --surface:#1B1411; --ink:#F2E8D5; --muted:#A8998A; --line:#33271E; --line-edge:#241A14;
+    --primary:#D8B45F; --primary-edge:#9C7B2E; --on-primary:#1A1108;
+    --good:#5FCB98; --good-edge:#35996B; --good-bg:#14301F; --on-good:#07210F; --good-ink:#A3EBC5;
+    --bad:#F0777C; --bad-edge:#B8454B; --bad-bg:#3A1A1C; --on-bad:#2A0A0C; --bad-ink:#FFB0B3;
+    --warm:#E8B64C;
+    --code-bg:#0C0806; --code-ink:#EADFCB; --con-bg:#060403; --con-ink:#EADFCB; --gold:#E8C46B;
+    --kw:#E8A0DA; --str:#8BDDA6; --num:#F0B070; --com:#8F8070; --ty:#8DBBF0;
+    --u1:#E0BC63; --u2:#5CC5BD; --u3:#B596E8; --u4:#E8955A; --u5:#E9809C; --u6:#6FCB8B; --on-u:#1A1108;
     color-scheme:dark;
   }
 }
 :root[data-theme="dark"]{
-  --bg:#0E141D; --surface:#171F2C; --ink:#E7ECF4; --muted:#93A0B4; --line:#29344A; --line-edge:#1F2838;
-  --primary:#6D98FF; --primary-edge:#3E67CF; --on-primary:#0B1220;
-  --good:#3DCB8C; --good-edge:#23996A; --good-bg:#12362A; --on-good:#062015; --good-ink:#8FE8BF;
-  --bad:#FF7479; --bad-edge:#C94950; --bad-bg:#3A1A1E; --on-bad:#2A0A0C; --bad-ink:#FFA5A8;
-  --warm:#FFB32E;
-  --code-bg:#0B1019; --code-ink:#DCE4F2; --con-bg:#05080E; --con-ink:#DCE6F7; --gold:#FFC857;
-  --kw:#E58BDD; --str:#7FDDA6; --num:#FFB066; --com:#7D8BA3; --ty:#7DB2FF;
-  --u1:#7BA0FF; --u2:#4CC9D6; --u3:#A98BFF; --u4:#FFB347; --u5:#FF8FAA; --u6:#5FD38E; --on-u:#0B1220;
+  --bg:#100B08; --surface:#1B1411; --ink:#F2E8D5; --muted:#A8998A; --line:#33271E; --line-edge:#241A14;
+  --primary:#D8B45F; --primary-edge:#9C7B2E; --on-primary:#1A1108;
+  --good:#5FCB98; --good-edge:#35996B; --good-bg:#14301F; --on-good:#07210F; --good-ink:#A3EBC5;
+  --bad:#F0777C; --bad-edge:#B8454B; --bad-bg:#3A1A1C; --on-bad:#2A0A0C; --bad-ink:#FFB0B3;
+  --warm:#E8B64C;
+  --code-bg:#0C0806; --code-ink:#EADFCB; --con-bg:#060403; --con-ink:#EADFCB; --gold:#E8C46B;
+  --kw:#E8A0DA; --str:#8BDDA6; --num:#F0B070; --com:#8F8070; --ty:#8DBBF0;
+  --u1:#E0BC63; --u2:#5CC5BD; --u3:#B596E8; --u4:#E8955A; --u5:#E9809C; --u6:#6FCB8B; --on-u:#1A1108;
   color-scheme:dark;
 }
 
@@ -406,6 +407,10 @@ svg{display:block}
 .gate h1{font-family:var(--display);font-size:26px;margin:0}
 .gate-m{display:flex;justify-content:center;margin-bottom:8px}
 .gate .desc{margin:4px 0 14px;color:var(--muted)}
+.brand,.top .brand{letter-spacing:.01em}
+.btn{border-radius:12px;letter-spacing:.12em;font-size:13.5px}
+.card,.next,.unit-h{box-shadow:0 1px 0 rgba(200,160,70,.18)}
+.mascot{filter:drop-shadow(0 6px 10px rgba(0,0,0,.18))}
 </style><style>*,*::before,*::after{box-sizing:border-box}html{-webkit-text-size-adjust:100%}body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--body)}</style>
 </head>
 <body>
