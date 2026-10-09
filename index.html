@@ -126,9 +126,9 @@ svg{display:block}
 .xpc.dip{animation:shake .5s}
 .xpc.up{animation:bump .6s cubic-bezier(.3,1.6,.5,1)}
 @keyframes xpfloat{0%{opacity:0;transform:translateY(-6px)}20%{opacity:1}100%{opacity:0;transform:translateY(16px)}}
-.seg{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:8px}
-.segb{padding:12px;border-radius:14px;border:2px solid var(--line);background:var(--surface);color:var(--ink);font:inherit;font-weight:700;cursor:pointer}
-.segb.on{border-color:var(--primary);box-shadow:0 0 0 2px var(--primary) inset}
+.sx{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:8px}
+.sxb{padding:12px;border-radius:14px;border:2px solid var(--line);background:var(--surface);color:var(--ink);font:inherit;font-weight:700;cursor:pointer}
+.sxb.on{border-color:var(--primary);box-shadow:0 0 0 2px var(--primary) inset}
 .hello{margin:10px 4px 0;font-size:16px;color:var(--muted)}.hello b{color:var(--ink);font-family:var(--display)}
 .hintnote{color:var(--bad);font-weight:700}
 .hrt.lost{color:var(--line)}
@@ -488,6 +488,20 @@ input.inp::-webkit-date-and-time-value{text-align:left;min-width:0}
 .sh-l{font-size:13px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin:22px 0 8px}
 .sh-c{background:var(--surface);border:2px solid var(--line);border-radius:16px;padding:14px 16px;margin:10px 0;display:grid;gap:10px}
 .sh-c h3{margin:0;font-size:16px}
+.sh-tools{padding:0 16px;position:sticky;top:env(safe-area-inset-top,0px);z-index:4;background:var(--bg)}
+.sh-tools .inp{margin:4px 0 8px}
+.sheet-h{margin:4px 0 0}
+.chips-row[hidden]{display:none}
+.sh-n{margin:12px 4px 0;color:var(--muted);font-size:13px;font-weight:700}
+.sh-c.acc{padding:0;gap:0;overflow:hidden}
+.sh-h{display:flex;align-items:center;justify-content:space-between;gap:12px;width:100%;padding:14px 16px;background:none;border:0;color:var(--ink);font:inherit;text-align:left;cursor:pointer}
+.sh-h b{font-size:16px;display:block}
+.sh-h small{display:block;color:var(--muted);font-size:12px;margin-top:2px;font-weight:600}
+.chev{flex:none;width:10px;height:10px;border-right:2.5px solid var(--muted);border-bottom:2.5px solid var(--muted);transform:rotate(45deg) translate(-2px,-2px);transition:transform .25s}
+.sh-c.open .chev{transform:rotate(225deg) translate(-2px,-2px)}
+.sh-b{display:none;padding:0 16px 16px;gap:10px}
+.sh-c.open .sh-b{display:grid;animation:rise .3s ease}
+@media print{.sh-b{display:grid!important;padding-top:4px}.chev,.sh-tools{display:none!important}}
 .sh-c p{margin:0}
 .speakrow{margin-top:12px}
 .btn.sm.speak{display:inline-flex;align-items:center;gap:8px;width:auto;padding:9px 14px}
@@ -2133,6 +2147,7 @@ $app.addEventListener('click',e=>{
   if(a==='start'){startLesson(el.dataset.uid);return;}
   if(a==='snext'||a==='sback'||a==='leave')stopSpeak();
   if(a==='speak'){if(L&&L.info&&L.info.lesson.learn)speak(L.info.lesson.learn[L.si]);return;}
+  if(a==='shtoggle'){const k=el.dataset.k,art=el.closest('.sh-c');const on=!art.classList.contains('open');art.classList.toggle('open',on);el.setAttribute('aria-expanded',on);if(on)SHO.add(k);else SHO.delete(k);return;}
   if(a==='sheetunit'){sheetUi=+el.dataset.i;fx.view=false;render();window.scrollTo(0,0);return;}
   if(a==='print'){try{window.print();}catch(e){}return;}
   if(a==='fit'){S.fit[el.dataset.slot]=el.dataset.v;save();fx.view=false;render();return;}
@@ -2204,6 +2219,7 @@ $app.addEventListener('click',e=>{
 });
 $app.addEventListener('input',e=>{
   const t=e.target;
+  if(t.id==='shq'){sheetQ=t.value;const r=document.getElementById('shres'),c=document.getElementById('shchips');if(r)r.innerHTML=sheetBody();if(c)c.hidden=!!sheetQ.trim();return;}
   if(t.id==='onname'){ONB.name=t.value;return;}
   if(t.id==='onnv'){ONB.nv=t.value;return;}
   if(t.id==='rtime'){S.remind=t.value||'19:00';save();pushTime();return;}
@@ -2488,7 +2504,7 @@ function introView(){
     h+='<h1 class="ide-t" style="text-align:center">Привіт! Я лисичка-бариста</h1><p class="desc" style="text-align:center">Давай познайомимось. Як тебе звати?</p>'
      +'<input id="onname" class="inp" type="text" maxlength="24" autocomplete="given-name" placeholder="Твоє ім’я" value="'+esc(ONB.name)+'" aria-label="Твоє ім’я">'
      +'<p class="desc" style="text-align:center;margin-top:14px">Як до тебе звертатись?</p>'
-     +'<div class="seg" role="group" aria-label="Звертання"><button class="segb'+(ONB.sex==='f'?' on':'')+'" data-act="onsex" data-v="f">Вона</button><button class="segb'+(ONB.sex==='m'?' on':'')+'" data-act="onsex" data-v="m">Він</button></div>';
+     +'<div class="sx" role="group" aria-label="Звертання"><button class="sxb'+(ONB.sex==='f'?' on':'')+'" data-act="onsex" data-v="f">Вона</button><button class="sxb'+(ONB.sex==='m'?' on':'')+'" data-act="onsex" data-v="m">Він</button></div>';
     if(ONB.err)h+='<p class="desc authmsg" role="alert" style="text-align:center">'+esc(ONB.err)+'</p>';
     h+='<button class="btn" style="margin-top:16px" data-act="onnext">Далі</button>';
     if(S.nm&&ONB.force)h+='<button class="btn ghost" style="margin-top:10px" data-act="oncancel">Скасувати</button>';
@@ -2501,7 +2517,7 @@ function introView(){
   return h+'</div></div>';
 }
 /* ---------- mandatory update gate ---------- */
-const BUILD='1791561906';
+const BUILD='1791562216';
 let PULLED=false;
 let NEWVER=false,UPDBUSY=false;
 async function checkUpdate(){
@@ -2630,21 +2646,36 @@ function fitUnlocked(it){return lvlInfo(S.xp).n>=it.lv;}
 function fitNow(slot){const f=(S.fit&&S.fit[slot])||'';const it=FIT[slot].find(x=>x.id===f);return it&&fitUnlocked(it)?f:'';}
 /* ---- cheat sheets ---- */
 let sheetUi=0;
-function sheetView(){
-  let h='<div class="view hastabs'+(fx.view?' enter':'')+'"><header class="top"><div class="brand">Шпаргалки</div><div class="stats"><button class="stat" data-act="print" aria-label="Роздрукувати">'+IC.book+'<span>Друк</span></button></div></header>';
-  h+='<div class="chips-row" role="tablist">'+UNITS.map((u,i)=>'<button class="uchip'+(i===sheetUi?' on':'')+'" role="tab" aria-selected="'+(i===sheetUi)+'" data-act="sheetunit" data-i="'+i+'">'+(i+1)+'. '+esc(u.title)+'</button>').join('')+'</div>';
+let sheetQ='';const SHO=new Set();
+function sheetCard(l,k,idx,tag){
+  const key=l.uid+':'+idx,open=SHO.has(key)||!!sheetQ;
+  let h='<article class="sh-c acc'+(open?' open':'')+'" data-k="'+esc(key)+'"><button class="sh-h" data-act="shtoggle" data-k="'+esc(key)+'" aria-expanded="'+open+'"><span><b>'+esc(k.h)+'</b>'+(tag?'<small>'+esc(tag)+'</small>':'')+'</span><i class="chev" aria-hidden="true"></i></button><div class="sh-b"><p>'+fmt(k.p)+'</p>';
+  if(k.code)h+=codeBlock(k.code);
+  if(k.out!=null)h+='<div class="console"><span class="con-l">Результат</span><pre>'+esc(k.out)+'</pre></div>';
+  return h+'</div></article>';
+}
+function sheetBody(){
+  const q=sheetQ.trim().toLowerCase();let h='',n=0;
+  if(q){
+    ALL.forEach(l=>{(l.lesson.learn||[]).forEach((k,idx)=>{
+      if((k.h+' '+k.p+' '+(k.code||'')).toLowerCase().includes(q)){n++;h+=sheetCard(l,k,idx,(l.ui+1)+'. '+UNITS[l.ui].title);}
+    });});
+    return n?'<p class="sh-n">Знайдено тем: '+n+'</p>'+h:'<p class="desc" style="text-align:center;margin-top:24px">Нічого не знайшлося. Спробуй інше слово, наприклад «цикл» чи «String».</p>';
+  }
   const u=UNITS[sheetUi];
-  h+='<div class="sheet" style="--uc:var(--u'+((sheetUi%6)+1)+')"><h1>'+esc(u.title)+'</h1><p class="sub">'+esc(u.sub)+'</p>';
+  h+='<div class="sheet-h" style="--uc:var(--u'+((sheetUi%6)+1)+')"><h1>'+esc(u.title)+'</h1><p class="sub">'+esc(u.sub)+'</p></div>';
   ALL.filter(l=>l.ui===sheetUi).forEach(l=>{
     h+='<h2 class="sh-l">'+esc(l.lesson.title)+'</h2>';
-    (l.lesson.learn||[]).forEach(k=>{
-      h+='<article class="sh-c"><h3>'+esc(k.h)+'</h3><p>'+fmt(k.p)+'</p>';
-      if(k.code)h+=codeBlock(k.code);
-      if(k.out!=null)h+='<div class="console"><span class="con-l">Результат</span><pre>'+esc(k.out)+'</pre></div>';
-      h+='</article>';
-    });
+    (l.lesson.learn||[]).forEach((k,idx)=>{h+=sheetCard(l,k,idx,'');});
   });
-  return h+'</div></div>'+tabs('sheet');
+  return h;
+}
+function sheetView(){
+  let h='<div class="view hastabs'+(fx.view?' enter':'')+'"><header class="top"><div class="brand">Шпаргалки</div><div class="stats"><button class="stat" data-act="print" aria-label="Роздрукувати">'+IC.book+'<span>Друк</span></button></div></header>';
+  h+='<div class="sh-tools"><input id="shq" class="inp" type="search" placeholder="Пошук по всіх темах" value="'+esc(sheetQ)+'" aria-label="Пошук по шпаргалках" autocomplete="off"></div>';
+  h+='<div class="chips-row" id="shchips" role="tablist"'+(sheetQ.trim()?' hidden':'')+'>'+UNITS.map((u,i)=>'<button class="uchip'+(i===sheetUi?' on':'')+'" role="tab" aria-selected="'+(i===sheetUi)+'" data-act="sheetunit" data-i="'+i+'">'+(i+1)+'. '+esc(u.title)+'</button>').join('')+'</div>';
+  h+='<div class="sheet" id="shres" style="--uc:var(--u'+((sheetUi%6)+1)+')">'+sheetBody()+'</div></div>'+tabs('sheet');
+  return h;
 }
 /* ---- voice ---- */
 function speak(k){
