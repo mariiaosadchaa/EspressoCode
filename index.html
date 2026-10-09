@@ -10,6 +10,7 @@
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" href="icon-192.png">
 <link rel="apple-touch-icon" href="icon-192.png">
+<script src="config.js"></script>
 <title>Java Бариста</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -385,6 +386,9 @@ svg{display:block}
   *,*::before,*::after{animation:none!important;transition:none!important}
   .btn:active,.opt:active,.chip:active,.line:active,.node:active{transform:none}
 }
+.inp{width:100%;margin:10px 0 0;padding:12px 14px;border:2px solid var(--line);border-radius:14px;background:var(--surface);color:var(--ink);font:inherit;font-size:16px}
+.inp:focus{outline:none;border-color:var(--primary)}
+.authmsg{margin:10px 0 0;color:var(--bad-ink)}
 </style><style>*,*::before,*::after{box-sizing:border-box}html{-webkit-text-size-adjust:100%}body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--body)}</style>
 </head>
 <body>
@@ -1036,7 +1040,7 @@ function norm(s){
   return r;
 }
 function load(){try{const s=JSON.parse(localStorage.getItem(KEY));if(s&&typeof s==='object'&&s.done)return norm(s);}catch(e){}return fresh();}
-function save(){try{localStorage.setItem(KEY,JSON.stringify(S));}catch(e){}}
+function save(quiet){try{localStorage.setItem(KEY,JSON.stringify(S));}catch(e){}if(!quiet&&typeof cloudDirty==='function')cloudDirty();}
 let S=load();
 
 const REDUCED=!!(window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches);
@@ -1271,6 +1275,7 @@ function shareText(){
 function backupCode(){try{return btoa(unescape(encodeURIComponent(JSON.stringify(S))));}catch(e){return '';}}
 function setView(){
   let h='<div class="view hastabs'+(fx.view?' enter':'')+'"><header class="top"><div class="brand">Налаштування</div></header><div class="sets">';
+  h+=accountCard();
   h+='<section class="card"><h2>Складність</h2>'+seg('setlevel',[{v:'easy',t:'Легкий'},{v:'normal',t:'Звичайний'},{v:'hard',t:'Складний'}],S.level)+'<p class="desc">'+esc(LEVELS[S.level].desc)+'</p></section>';
   h+='<section class="card"><h2>Ціль на день</h2>'+seg('setgoal',[{v:20,t:'20 XP'},{v:30,t:'30 XP'},{v:50,t:'50 XP'}],S.goal)+'</section>';
   h+='<section class="card">'+tog('sound','Звуки','Короткі сигнали правильної й неправильної відповіді.')+tog('big','Великий шрифт','Збільшує весь інтерфейс.')+tog('calm','Спокійний режим','Вимикає анімації.')+'</section>';
@@ -1707,6 +1712,9 @@ $app.addEventListener('click',e=>{
   const el=e.target.closest('[data-act]');if(!el||el.disabled)return;
   const a=el.dataset.act;
   if(a==='start'){startLesson(el.dataset.uid);return;}
+  if(a==='auth'){doAuth();return;}
+  if(a==='signout'){doSignOut();return;}
+  if(a==='authmode'){AUI.mode=el.dataset.v;AUI.msg='';AUI.email=((document.getElementById('em')||{}).value||AUI.email);fx.view=false;render();return;}
   if(a==='placement'){startPlacement();return;}
   if(a==='home'){goHome();return;}
   if(a==='tab'){screen=el.dataset.tab;confirmReset=false;fx.view=true;render();window.scrollTo(0,0);return;}
@@ -1757,6 +1765,7 @@ $app.addEventListener('input',e=>{
   }
 });
 document.addEventListener('keydown',e=>{
+  if(e.key==='Enter'&&e.target&&(e.target.id==='pw'||e.target.id==='em')){e.preventDefault();doAuth();return;}
   if(e.key!=='Enter'||screen!=='lesson'||!L||L.leave)return;
   const ae=document.activeElement;
   if(ae&&ae.id==='ans'){
@@ -1768,6 +1777,119 @@ document.addEventListener('keydown',e=>{
   const b=$app.querySelector('[data-act="check"]:not([disabled]),[data-act="next"],[data-act="snext"]');
   if(b){e.preventDefault();b.click();}
 });
+
+/* ---------- cloud: account + progress sync (Supabase REST, no library) ---------- */
+const CFG=window.BARISTA_CONFIG||{};
+const CLOUD=!!(CFG.url&&CFG.key);
+const AKEY='barista-auth';
+let AUTH=null;try{AUTH=JSON.parse(localStorage.getItem(AKEY));}catch(e){}
+const AUI={mode:'in',email:'',msg:'',busy:false,sync:AUTH?'idle':''};
+let pushTimer=0;
+function authSave(){try{if(AUTH)localStorage.setItem(AKEY,JSON.stringify(AUTH));else localStorage.removeItem(AKEY);}catch(e){}}
+function authErr(j){
+  const m=String((j&&(j.msg||j.error_description||j.message||j.error))||'');
+  if(/invalid login/i.test(m))return 'Невірна пошта або пароль.';
+  if(/already registered|already been registered/i.test(m))return 'Ця пошта вже зареєстрована. Спробуй увійти.';
+  if(/at least 6|weak/i.test(m))return 'Пароль має бути щонайменше 6 символів.';
+  if(/valid email|invalid.*email|unable to validate email/i.test(m))return 'Перевір, чи правильно записана пошта.';
+  if(/not confirmed/i.test(m))return 'Підтверди пошту за листом, потім увійди.';
+  if(/rate limit|too many/i.test(m))return 'Забагато спроб. Зачекай хвилину.';
+  return 'Не вийшло: '+(m||'немає зв\'язку з сервером');
+}
+async function api(path,opt,authed){
+  const h=Object.assign({apikey:CFG.key,'Content-Type':'application/json'},(opt&&opt.headers)||{});
+  if(authed){
+    if(AUTH&&AUTH.expires_at&&AUTH.expires_at-60<Date.now()/1000)await refreshAuth();
+    if(!AUTH)throw new Error('no session');
+    h.Authorization='Bearer '+AUTH.access_token;
+  }
+  const r=await fetch(CFG.url+path,Object.assign({},opt,{headers:h}));
+  let j=null;try{j=await r.json();}catch(e){}
+  if(!r.ok){const er=new Error('http');er.status=r.status;er.body=j;throw er;}
+  return j;
+}
+function takeSession(j){
+  if(!j||!j.access_token)return false;
+  AUTH={access_token:j.access_token,refresh_token:j.refresh_token,expires_at:j.expires_at||Math.floor(Date.now()/1000)+(j.expires_in||3600),email:(j.user&&j.user.email)||(AUTH&&AUTH.email)||'',uid:(j.user&&j.user.id)||(AUTH&&AUTH.uid)||''};
+  authSave();return true;
+}
+async function refreshAuth(){
+  try{const j=await api('/auth/v1/token?grant_type=refresh_token',{method:'POST',body:JSON.stringify({refresh_token:AUTH.refresh_token})});takeSession(j);}
+  catch(e){if(e.status===400||e.status===401){AUTH=null;authSave();AUI.sync='';}else throw e;}
+}
+function mergeProgress(a,b){ // a = local, b = cloud (both normalised)
+  const o=norm(JSON.parse(JSON.stringify(b)));
+  for(const k in a.done){const x=a.done[k],y=o.done[k];
+    if(!y)o.done[k]=x;
+    else if(y.skip&&!x.skip)o.done[k]=x;
+    else if(!y.skip&&!x.skip)o.done[k]={a:Math.max(x.a||0,y.a||0),t:Math.max(x.t||0,y.t||0)};}
+  for(const k in a.miss)if(!(k in o.miss))o.miss[k]=a.miss[k];
+  o.xp=Math.max(a.xp,b.xp);
+  if(a.last>b.last||(a.last===b.last&&a.streak>b.streak)){o.last=a.last;o.streak=a.streak;o.freeze=a.freeze;}
+  if(a.day&&b.day){if(a.day.d>b.day.d||(a.day.d===b.day.d&&a.day.xp>b.day.xp))o.day=a.day;}
+  for(const k in a.ach)if(!o.ach[k])o.ach[k]=a.ach[k];
+  for(const k in a.stats)o.stats[k]=Math.max(a.stats[k]||0,o.stats[k]||0);
+  return o;
+}
+async function cloudPull(){
+  AUI.sync='saving';
+  try{
+    const rows=await api('/rest/v1/progress?select=data&user_id=eq.'+encodeURIComponent(AUTH.uid),{method:'GET'},true);
+    if(rows&&rows[0]&&rows[0].data&&rows[0].data.done){S=mergeProgress(S,norm(rows[0].data));save(true);applyPrefs();resetShown();}
+    await cloudPush();
+  }catch(e){AUI.sync='err';}
+  if(screen!=='lesson'){fx.view=false;render();}
+}
+async function cloudPush(){
+  if(!AUTH)return;
+  AUI.sync='saving';
+  try{
+    await api('/rest/v1/progress?on_conflict=user_id',{method:'POST',headers:{Prefer:'resolution=merge-duplicates,return=minimal'},body:JSON.stringify({user_id:AUTH.uid,data:S,updated_at:new Date().toISOString()})},true);
+    AUI.sync='ok';
+  }catch(e){AUI.sync='err';}
+  if(screen==='set'){fx.view=false;render();}
+}
+function cloudDirty(){
+  try{if(!CLOUD||!AUTH)return;clearTimeout(pushTimer);pushTimer=setTimeout(cloudPush,1500);}catch(e){}
+}
+async function doAuth(){
+  const em=(document.getElementById('em')||{}).value||'',pw=(document.getElementById('pw')||{}).value||'';
+  AUI.email=em.trim();
+  if(!AUI.email||!pw){AUI.msg='Введи пошту й пароль.';fx.view=false;render();return;}
+  AUI.busy=true;AUI.msg='';fx.view=false;render();
+  try{
+    if(AUI.mode==='up'){
+      const j=await api('/auth/v1/signup',{method:'POST',body:JSON.stringify({email:AUI.email,password:pw})});
+      if(!takeSession(j)){AUI.busy=false;AUI.mode='in';AUI.msg='Майже готово! Відкрий лист від нас, підтверди пошту й увійди.';fx.view=false;render();return;}
+    }else{
+      const j=await api('/auth/v1/token?grant_type=password',{method:'POST',body:JSON.stringify({email:AUI.email,password:pw})});
+      takeSession(j);
+    }
+    AUI.busy=false;toast('Готово','Ти ввійшла. Прогрес зберігається в хмарі');
+    await cloudPull();
+  }catch(e){AUI.busy=false;AUI.msg=authErr(e.body);fx.view=false;render();}
+}
+function doSignOut(){
+  AUTH=null;authSave();AUI.sync='';AUI.msg='';
+  toast('Готово','Ти вийшла з акаунта');fx.view=false;render();
+}
+function accountCard(){
+  if(!CLOUD)return '';
+  let h='<section class="card"><h2>Акаунт</h2>';
+  if(AUTH){
+    const st={saving:'Зберігаю…',ok:'Прогрес збережено в хмарі',err:'Не вдалося синхронізувати. Спробуємо ще раз при наступній дії.',idle:'Підключено'}[AUI.sync]||'';
+    h+='<p class="desc">Ти ввійшла як <b>'+esc(AUTH.email)+'</b>. '+st+'</p><button class="btn ghost" style="margin-top:12px" data-act="signout">Вийти</button>';
+  }else{
+    h+='<p class="desc">Увійди, щоб прогрес зберігався в хмарі й був на всіх пристроях.</p>'
+      +seg('authmode',[{v:'in',t:'Вхід'},{v:'up',t:'Реєстрація'}],AUI.mode)
+      +'<input id="em" class="inp" type="email" autocomplete="email" placeholder="Пошта" value="'+esc(AUI.email)+'">'
+      +'<input id="pw" class="inp" type="password" autocomplete="'+(AUI.mode==='up'?'new-password':'current-password')+'" placeholder="Пароль (від 6 символів)">'
+      +(AUI.msg?'<p class="desc authmsg" role="status">'+esc(AUI.msg)+'</p>':'')
+      +'<button class="btn" style="margin-top:12px" data-act="auth"'+(AUI.busy?' disabled':'')+'>'+(AUI.busy?'Зачекай…':(AUI.mode==='up'?'Створити акаунт':'Увійти'))+'</button>';
+  }
+  return h+'</section>';
+}
+if(CLOUD&&AUTH)setTimeout(cloudPull,300);
 
 /* ---------- service worker (only on a real https site, never in the artifact viewer) ---------- */
 try{
