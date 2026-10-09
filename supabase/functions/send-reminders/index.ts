@@ -74,10 +74,15 @@ Deno.serve(async (req) => {
       const doneToday = d.last === now.date;
       const day = Math.floor(Date.parse(now.date) / 86400000);
       const idx = SLOTS.indexOf(slot);
+      const nv = typeof d.nv === "string" ? d.nv : "";
+      const male = d.sex === "m";
+      const pick = MSGS[(day * 6 + idx) % MSGS.length];
       let body: string;
-      if (idx % 3 === 2 && streak > 0 && !doneToday) body = `Серія ${streak} дн. під загрозою. Один урок, і лисичка спокійна.`;
-      else if (idx % 3 === 2 && doneToday) body = "Сьогодні ти вже займалась, молодець! Ще один урок для закріплення?";
-      else body = MSGS[(day * 6 + idx) % MSGS.length];
+      if (idx % 3 === 2 && streak > 0 && !doneToday) body = `${nv ? nv + ", с" : "С"}ерія ${streak} дн. під загрозою. Один урок, і лисичка спокійна.`;
+      else if (idx % 3 === 2 && doneToday) body = `${nv ? nv + ", т" : "Т"}и вже ${male ? "займався" : "займалась"} сьогодні, молодець! Ще один урок для закріплення?`;
+      else if (idx === 0 && nv) body = `Доброго ранку, ${nv}! ` + pick;
+      else if (idx === 5 && nv) body = `На добраніч, ${nv}! ` + pick;
+      else body = pick;
       await webpush.sendNotification(s.sub, JSON.stringify({ title: "Java Бариста", body, url: "./" }));
       await sb.from("push_subs").update({ last_sent: key }).eq("user_id", s.user_id);
       sent++;

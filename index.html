@@ -126,6 +126,10 @@ svg{display:block}
 .xpc.dip{animation:shake .5s}
 .xpc.up{animation:bump .6s cubic-bezier(.3,1.6,.5,1)}
 @keyframes xpfloat{0%{opacity:0;transform:translateY(-6px)}20%{opacity:1}100%{opacity:0;transform:translateY(16px)}}
+.seg{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:8px}
+.segb{padding:12px;border-radius:14px;border:2px solid var(--line);background:var(--surface);color:var(--ink);font:inherit;font-weight:700;cursor:pointer}
+.segb.on{border-color:var(--primary);box-shadow:0 0 0 2px var(--primary) inset}
+.hello{margin:10px 4px 0;font-size:16px;color:var(--muted)}.hello b{color:var(--ink);font-family:var(--display)}
 .hintnote{color:var(--bad);font-weight:700}
 .hrt.lost{color:var(--line)}
 .stage{display:grid;gap:18px;padding-top:10px}
@@ -1391,7 +1395,7 @@ const IC={
 
 /* ================= State ================= */
 const KEY='java-schodnya-v1';
-function fresh(){return {xp:0,streak:0,last:'',done:{},miss:{},day:{d:'',xp:0},goal:30,level:'normal',freeze:1,sound:true,big:false,calm:false,ach:{},srs:{},hist:{},us:{},story:{},fit:{hat:'',gl:'',sc:''},remind:'19:00',stats:{perfect:0,run:0,runBest:0,reviews:0,peeks:0,bugs:0,typed:0,hints:0,placement:0,lessons:0,goals:0}};}
+function fresh(){return {xp:0,streak:0,last:'',done:{},miss:{},day:{d:'',xp:0},goal:30,level:'normal',freeze:1,sound:true,big:false,calm:false,ach:{},srs:{},hist:{},us:{},story:{},fit:{hat:'',gl:'',sc:''},nm:'',nv:'',sex:'',remind:'19:00',stats:{perfect:0,run:0,runBest:0,reviews:0,peeks:0,bugs:0,typed:0,hints:0,placement:0,lessons:0,goals:0}};}
 function norm(s){
   const r=Object.assign(fresh(),s);
   r.stats=Object.assign(fresh().stats,s.stats||{});
@@ -1581,8 +1585,8 @@ const STALE=3*864e5;
 function isStale(d){return !!d&&!d.skip&&(Date.now()-(d.t||0))>STALE;}
 function staleCount(){return ALL.filter(l=>isStale(S.done[l.uid])).length;}
 
-const SAY=['Факт: Java створили в 1995 році, а назву взяли від кави з острова Ява.','Порада: пиши код руками, а не лише читай. Так він запам’ятовується швидше.','String у Java незмінний. Кожна «зміна» створює новий об’єкт.','== порівнює посилання, а equals() порівнює вміст.','Маленька перемога щодня краще, ніж великий ривок раз на тиждень.','Талісман Java звуть Дюк. Він досі махає рукою на конференціях.','Читай повідомлення про помилку з першого рядка: там майже завжди підказка.','У Java немає вказівників, зате є збирач сміття.','Слабкі теми чекають у «Повторенні». Заглянь туди!','Одна кава ☕ і один урок: ідеальний початок.'];
-function sayText(k){const d=Math.floor(Date.now()/86400000);return SAY[(d+k)%SAY.length];}
+const SAY=['Факт: Java створили в 1995 році, а назву взяли від кави з острова Ява.','Порада: пиши код руками, а не лише читай. Так він запам’ятовується швидше.','String у Java незмінний. Кожна «зміна» створює новий об’єкт.','== порівнює посилання, а equals() порівнює вміст.','Маленька перемога щодня краще, ніж великий ривок раз на тиждень.','Талісман Java звуть Дюк. Він досі махає рукою на конференціях.','Читай повідомлення про помилку з першого рядка: там майже завжди підказка.','У Java немає вказівників, зате є збирач сміття.','Слабкі теми чекають у «Повторенні». Заглянь туди!','Одна кава ☕ і один урок: ідеальний початок.','{v}, лисичка вже налила тобі каву ☕','Лисичка пишається {i}!','Лисичка вірить у {a}.','Сьогодні в лисички один пріоритет: успіхи {g}.','Лисичка вже розповіла Дюку про {a}.','Уся надія лисички тільки на {l}.','Лисичка записала в зошит: {d} належить місце в топі учнів.','Не зупиняйся, {v}: кожна помилка наближає до успіху.'];
+function sayText(k){const d=Math.floor(Date.now()/86400000);const t=SAY[(d+k)%SAY.length],c=NC();return t.replace(/\{(\w)\}/g,(m,x)=>x==='v'?nv():(c[x]||m));}
 let sayK=0;
 setInterval(()=>{try{if(screen!=='home')return;const p=document.getElementById('say');if(!p)return;p.classList.add('out');setTimeout(()=>{sayK++;p.textContent=sayText(sayK);p.classList.remove('out');},380);}catch(e){}},7000);
 function homeView(){
@@ -1592,12 +1596,13 @@ function homeView(){
   const li=lvlInfo(S.xp);
   const dxp=S.day.d===today()?S.day.xp:0,gpct=Math.min(100,dxp/S.goal*100);
   let h='<div class="view hastabs'+(fx.view?' enter':'')+'">'+topbar();
+  h+='<p class="hello">'+greetWord()+', <b>'+esc(nv())+'</b>!</p>';
   h+='<section class="me"><span class="bean b1"></span><span class="bean b2"></span><span class="bean b3"></span><span class="bean b4"></span><span class="bean b5"></span><span class="bean b6"></span><div class="me-m">'+mascot('idle',64)+'</div><div class="me-t"><p class="kicker">Рівень '+li.n+'</p><h2>'+esc(li.title)+'</h2>'
     +'<div class="meter slim"><div class="track" role="progressbar" aria-label="Прогрес до наступного рівня" aria-valuemin="0" aria-valuemax="100" aria-valuenow="'+Math.round(li.pct)+'"><div class="fill" style="width:'+barFrom('lvl',li.pct)+'%" data-to="'+li.pct+'"></div></div><span>'+(li.hi?S.xp+' / '+li.hi:'максимум')+'</span></div></div>'
     +'<div class="goal'+(dxp>=S.goal?' met':'')+'"><span class="gl">Ціль дня</span><div class="track" role="progressbar" aria-label="Ціль дня" aria-valuemin="0" aria-valuemax="'+S.goal+'" aria-valuenow="'+Math.min(dxp,S.goal)+'"><div class="fill g" style="width:'+barFrom('goal',gpct)+'%" data-to="'+gpct+'"></div></div><span class="gv">'+Math.min(dxp,S.goal)+' / '+S.goal+' XP</span></div></section>';
   if(S.streak>0&&S.last!==today()){
     if(S.last===dAgo(1))h+='<p class="note">Серія '+S.streak+' дн. Пройди урок сьогодні, щоб не втратити її.</p>';
-    else if(S.last===dAgo(2)&&S.freeze>0)h+='<p class="note">Ти пропустив день. Заморожування збереже серію, якщо пройдеш урок сьогодні.</p>';
+    else if(S.last===dAgo(2)&&S.freeze>0)h+='<p class="note">Ти '+G('пропустила','пропустив')+' день. Заморожування збереже серію, якщо пройдеш урок сьогодні.</p>';
   }
   if(isWeekend())h+='<p class="note good">Вихідні: за кожен урок подвійний досвід.</p>';
   {const dn=ALL.filter(l=>S.done[l.uid]&&!S.done[l.uid].skip).length;
@@ -1611,7 +1616,7 @@ function homeView(){
     h+='<p class="kicker">'+(doneN?'Продовжуй':'Починаємо')+'</p><h1>'+esc(cur.lesson.title)+'</h1><p class="sub">Розділ '+(cur.ui+1)+': '+esc(cur.unit.title)+'</p>';
     if(!doneN)h+='<p class="sub">Короткі уроки із завданнями. Спочатку теорія, потім тренування. Кожна помилка коштує одне життя.</p>';
   }else{
-    h+='<p class="kicker">Курс пройдено</p><h1>Ти закрив усі уроки</h1><p class="sub">Повертайся до будь-якого уроку, щоб повторити матеріал і підтримати серію.</p>';
+    h+='<p class="kicker">Курс пройдено</p><h1>Ти '+G('закрила','закрив')+' усі уроки</h1><p class="sub">Повертайся до будь-якого уроку, щоб повторити матеріал і підтримати серію.</p>';
   }
   h+='<div class="meter"><div class="track" role="progressbar" aria-label="Прогрес курсу" aria-valuemin="0" aria-valuemax="'+ALL.length+'" aria-valuenow="'+doneN+'"><div class="fill" style="width:'+barFrom('home',pct)+'%" data-to="'+pct+'"></div></div><span>'+doneN+' / '+ALL.length+'</span></div>';
   if(cur)h+='<button class="btn" data-act="start" data-uid="'+cur.uid+'">'+(doneN?'Продовжити':'Почати')+'</button>';
@@ -1620,7 +1625,7 @@ function homeView(){
   if(doneN-ALL.filter(l=>S.done[l.uid]&&S.done[l.uid].skip).length>0){
     const mc=reviewMissCount(),sc=staleCount(),dc=dueList().length;
     h+='<section class="review"><div class="rv-ico">'+IC.refresh+'</div><div class="rv-t"><h2>Повторення</h2><p>'
-      +(dc?'За графіком пора повторити завдань: '+dc+'.':mc?'Є завдання, де ти помилявся: '+mc+'. Повтори їх.':sc?'Давно не повторював уроків: '+sc+'. Освіжи їх.':'Закріпи пройдене змішаними завданнями.')
+      +(dc?'За графіком пора повторити завдань: '+dc+'.':mc?'Є завдання, де ти '+G('помилялась','помилявся')+': '+mc+'. Повтори їх.':sc?'Давно не '+G('повторювала','повторював')+' уроків: '+sc+'. Освіжи їх.':'Закріпи пройдене змішаними завданнями.')
       +'</p></div><button class="btn sm" data-act="start" data-uid="review">Повторити</button></section>';
   }
   h+='<section class="review"><div class="rv-ico">'+IC.code+'</div><div class="rv-t"><h2>Пісочниця</h2><p>Пиши Java і запускай прямо тут.</p></div><button class="btn sm" data-act="ide">Відкрити</button></section>';
@@ -1666,6 +1671,7 @@ function setView(){
   h+='<section class="card"><h2>Складність</h2>'+seg('setlevel',[{v:'easy',t:'Легкий'},{v:'normal',t:'Звичайний'},{v:'hard',t:'Складний'}],S.level)+'<p class="desc">'+esc(LEVELS[S.level].desc)+'</p></section>';
   h+='<section class="card"><h2>Ціль на день</h2>'+seg('setgoal',[{v:20,t:'20 XP'},{v:30,t:'30 XP'},{v:50,t:'50 XP'}],S.goal)+'</section>';
   h+='<section class="card">'+tog('sound','Звуки','Короткі сигнали правильної й неправильної відповіді.')+tog('big','Великий шрифт','Збільшує весь інтерфейс.')+tog('calm','Спокійний режим','Вимикає анімації.')+'</section>';
+  h+='<section class="card"><h2>Знайомство</h2><p class="desc">Лисичка звертається до тебе: <b>'+esc(S.nm||'без імені')+'</b>.</p><button class="btn ghost" data-act="rename">Змінити ім’я</button></section>';
   h+='<section class="card"><h2>Оновлення</h2><p class="desc">Застосунок сам перевіряє нову версію. Можна перевірити вручну: прогрес не втратиться.</p><button class="btn ghost" data-act="updchk">Перевірити оновлення</button></section>';
   h+='<section class="card"><h2>Нагадування</h2><p class="desc">Година для події в календарі. Сповіщення приходять окремо: щодня о 8, 11, 14, 17, 20 та 23.</p><input id="rtime" class="inp" type="time" value="'+esc(S.remind||'19:00')+'" aria-label="Година нагадування"><button class="btn ghost" style="margin-top:12px" data-act="ics">Додати в календар</button>'+pushCard()+'</section>';
   h+='<section class="card"><h2>Поділитись результатом</h2><textarea id="sharebox" class="area" rows="3" readonly>'+esc(shareText())+'</textarea><button class="btn ghost" data-act="copy" data-src="sharebox">Скопіювати</button></section>';
@@ -1830,14 +1836,14 @@ function lessonView(){
 function resultView(){
   if(res.placement){
     const all=res.known>=res.total;
-    let h='<div class="view enter"><div class="result"><div class="hero ok">'+mascot(res.known>0?'cheer':'happy',120)+'</div><h1>Тест пройдено</h1><p>'
+    let h='<div class="view enter"><div class="result"><div class="hero ok">'+mascot(res.known>0?'cheer':'happy',120)+'</div><h1>Тест пройдено, '+esc(nv())+'!</h1><p>'
       +(res.known===0?'Почнемо з самого початку: так буде найнадійніше.':all?'Ти впевнено знаєш усі основи. Лишилися розділи «'+esc(res.next||'Винятки')+'» і далі.':'Пропускаємо розділів: '+res.known+'. Починаємо з розділу «'+esc(res.next)+'».')+'</p>'
       +'<div class="tiles two"><div class="tile xp"><b data-count="'+res.right+'">'+res.right+'</b><span>Правильно</span></div><div class="tile"><b>'+res.total+'</b><span>Усього питань</span></div></div>'
       +'<div class="btns"><button class="btn" data-act="home">До уроків</button></div></div></div>';
     return h;
   }
   const next=res.review?null:ALL[res.info.n+1];
-  let h='<div class="view enter"><div class="result"><div class="hero ok">'+mascot('cheer',120)+'</div><h1>'+(res.review?'Повторення завершено':'Урок пройдено')+'</h1><p>'+esc(res.info.lesson.title)+'</p>'
+  let h='<div class="view enter"><div class="result"><div class="hero ok">'+mascot('cheer',120)+'</div><h1>'+(res.review?'Повторення завершено':'Урок пройдено')+', '+esc(nv())+'!</h1><p>'+esc(res.info.lesson.title)+'</p>'
    +'<div class="tiles"><div class="tile xp"><b data-count="'+res.gain+'" data-pre="+">+'+res.gain+'</b><span>Досвід</span></div>'
    +'<div class="tile"><b data-count="'+res.acc+'" data-suf="%">'+res.acc+'%</b><span>Точність</span></div>'
    +'<div class="tile"><b>'+res.hearts+'/'+res.max+'</b><span>Життя</span></div></div>';
@@ -1848,7 +1854,7 @@ function resultView(){
   return h+'</div></div></div>';
 }
 function failView(){
-  return '<div class="view enter"><div class="result"><div class="hero no">'+mascot('sad',120)+'</div><h1>Життя закінчились</h1><p>Нічого страшного. Перечитай пояснення під відповідями й спробуй ще раз.</p>'
+  return '<div class="view enter"><div class="result"><div class="hero no">'+mascot('sad',120)+'</div><h1>Життя закінчились</h1><p>Нічого страшного, '+esc(nv())+'. Перечитай пояснення під відповідями й спробуй ще раз.</p>'
    +'<div class="btns"><button class="btn" data-act="start" data-uid="'+L.info.uid+'">Спробувати знову</button><button class="btn ghost" data-act="home">На головну</button></div></div></div>';
 }
 
@@ -1889,6 +1895,7 @@ function render(){
   let h;
   let gated=false,lk=false;try{gated=CLOUD&&!AUTH;lk=LOCKED&&!!AUTH;}catch(e){}
   if(NEWVER)h=updView();
+  else if(!gated&&!lk&&needIntro())h=introView();
   else if(gated)h=gateView();
   else if(lk)h=lockView();
   else if(screen==='home')h=homeView();
@@ -2136,6 +2143,17 @@ $app.addEventListener('click',e=>{
   if(a==='storygo'){const info=ALL.find(l=>l.uid===pendingUid);if(info){S.story[info.ui]=1;save();const u=pendingUid;pendingUid=null;startLesson(u);}return;}
   if(a==='ics'){icsDownload();return;}
   if(a==='unlock'){bioUnlock();return;}
+  if(a==='onsex'){ONB.sex=el.dataset.v;ONB.name=(document.getElementById('onname')||{}).value||ONB.name;render();return;}
+  if(a==='onnext'){const v=((document.getElementById('onname')||{}).value||'').trim();ONB.name=v?v.charAt(0).toUpperCase()+v.slice(1):'';
+    if(!ONB.name){ONB.err='Напиши, як тебе звати.';render();return;}
+    if(!ONB.sex){ONB.err='Обери, як до тебе звертатись.';render();return;}
+    ONB.err='';ONB.nv='';ONB.step=2;render();return;}
+  if(a==='onback'){ONB.step=1;render();return;}
+  if(a==='oncancel'){ONB.force=false;render();return;}
+  if(a==='ondone'){const v=((document.getElementById('onnv')||{}).value||'').trim();
+    S.nm=ONB.name;S.sex=ONB.sex;S.nv=v||declName(ONB.name,ONB.sex).v;S.nv=S.nv.charAt(0).toUpperCase()+S.nv.slice(1);save();
+    ONB={step:1,name:'',sex:'',nv:'',force:false,err:''};fx.view=true;render();window.scrollTo(0,0);return;}
+  if(a==='rename'){ONB={step:1,name:S.nm,sex:S.sex||'',nv:'',force:true,err:''};fx.view=true;render();return;}
   if(a==='upd'){doUpdate();return;}
   if(a==='updchk'){checkUpdate().then(()=>{if(!NEWVER)toast('Оновлень немає','У тебе остання версія','ach');});return;}
   if(a==='bioon'){bioEnable();return;}
@@ -2186,6 +2204,8 @@ $app.addEventListener('click',e=>{
 });
 $app.addEventListener('input',e=>{
   const t=e.target;
+  if(t.id==='onname'){ONB.name=t.value;return;}
+  if(t.id==='onnv'){ONB.nv=t.value;return;}
   if(t.id==='rtime'){S.remind=t.value||'19:00';save();pushTime();return;}
   if(t.id==='ide-code'){IDE.code=t.value;return;}
   if(t.id==='ide-in'){IDE.stdin=t.value;return;}
@@ -2261,6 +2281,7 @@ function mergeProgress(a,b){ // a = local, b = cloud (both normalised)
     else if(y.skip&&!x.skip)o.done[k]=x;
     else if(!y.skip&&!x.skip)o.done[k]={a:Math.max(x.a||0,y.a||0),t:Math.max(x.t||0,y.t||0)};}
   for(const k in a.miss)if(!(k in o.miss))o.miss[k]=a.miss[k];
+  if(!o.nm&&a.nm){o.nm=a.nm;o.nv=a.nv;o.sex=a.sex;}
   o.xp=Math.max(a.xp,b.xp);
   if(a.last>b.last||(a.last===b.last&&a.streak>b.streak)){o.last=a.last;o.streak=a.streak;o.freeze=a.freeze;}
   if(a.day&&b.day){if(a.day.d>b.day.d||(a.day.d===b.day.d&&a.day.xp>b.day.xp))o.day=a.day;}
@@ -2279,6 +2300,7 @@ async function cloudPull(){
     if(rows&&rows[0]&&rows[0].data&&rows[0].data.done){S=mergeProgress(S,norm(rows[0].data));save(true);applyPrefs();resetShown();}
     await cloudPush();
   }catch(e){AUI.sync='err';}
+  PULLED=true;
   if(screen!=='lesson'){fx.view=false;render();}
 }
 async function cloudPush(){
@@ -2306,7 +2328,7 @@ async function doAuth(){
       const j=await api('/auth/v1/token?grant_type=password',{method:'POST',body:JSON.stringify({email:AUI.email,password:pw})});
       takeSession(j);
     }
-    AUI.busy=false;screen='home';toast('Готово','Ти ввійшла. Прогрес зберігається в хмарі');
+    AUI.busy=false;screen='home';toast('Готово','Ти '+G('ввійшла','ввійшов')+'. Прогрес зберігається в хмарі');
     await cloudPull();
   }catch(e){AUI.busy=false;AUI.msg=authErr(e.body);fx.view=false;render();}
 }
@@ -2331,7 +2353,7 @@ function accountCard(){
   let h='<section class="card"><h2>Акаунт</h2>';
   if(AUTH){
     const st={saving:'Зберігаю…',ok:'Прогрес збережено в хмарі',err:'Не вдалося синхронізувати. Спробуємо ще раз при наступній дії.',idle:'Підключено'}[AUI.sync]||'';
-    h+='<p class="desc">Ти ввійшла як <b>'+esc(AUTH.email)+'</b>. '+st+'</p><button class="btn ghost" style="margin-top:12px" data-act="signout">Вийти</button>';
+    h+='<p class="desc">Ти '+G('ввійшла','ввійшов')+' як <b>'+esc(AUTH.email)+'</b>. '+st+'</p><button class="btn ghost" style="margin-top:12px" data-act="signout">Вийти</button>';
   }else{
     h+='<p class="desc">Увійди, щоб прогрес зберігався в хмарі й був на всіх пристроях.</p>'+authForm();
   }
@@ -2413,8 +2435,74 @@ async function bioUnlock(){
     LOCKED=false;fx.view=true;render();
   }catch(e){toast('Не розблоковано','Спробуй ще раз або увійди з паролем');}
 }
+function declWord(w,sex){
+  const o={n:w,g:w,d:w,a:w,i:w,l:w,v:w};
+  if(w.length<2)return o;
+  const e=w.slice(-1),st=w.slice(0,-1),lc=st.slice(-1).toLowerCase(),low=w.toLowerCase();
+  const SIB='жчшщ';
+  if(e==='я'||e==='Я'){
+    if(lc==='і'){return {n:w,g:st+'ї',d:st+'ї',a:st+'ю',i:st+'єю',l:st+'ї',v:st+'є'};}
+    return {n:w,g:st+'і',d:st+'і',a:st+'ю',i:st+'ею',l:st+'і',v:st+'ю'};
+  }
+  if(e==='а'||e==='А'){
+    const lat=SIB.includes(lc);
+    const mut={'г':'з','к':'ц','х':'с'};
+    const sd=mut[lc]?st.slice(0,-1)+mut[lc]:st;
+    return {n:w,g:st+(lat?'і':'и'),d:sd+'і',a:st+'у',i:st+(lat?'ею':'ою'),l:sd+'і',v:st+'о'};
+  }
+  if(sex==='m'){
+    if(e==='й'){return {n:w,g:st+'я',d:st+'ю',a:st+'я',i:st+'єм',l:st+'ю',v:st+'ю'};}
+    if(e==='ь'){return {n:w,g:st+'я',d:st+'ю',a:st+'я',i:st+'ем',l:st+'ю',v:st+'ю'};}
+    if(e==='о'){return {n:w,g:st+'а',d:st+'у',a:st+'а',i:st+'ом',l:st+'у',v:st+'е'};}
+    if(!'аеєиіїоуюя'.includes(e)){
+      const vm={'г':'же','к':'че','х':'ше'};
+      const v=vm[e]?st+vm[e]:w+'е';
+      return {n:w,g:w+'а',d:w+'у',a:w+'а',i:w+'ом',l:w+'у',v:v};
+    }
+    return o;
+  }
+  if(low.endsWith('ов')&&low.startsWith('любов')){return {n:w,g:w+'і',d:w+'і',a:w,i:w+'’ю',l:w+'і',v:w+'е'};}
+  return o;
+}
+function declName(raw,sex){
+  const parts=String(raw||'').trim().split(/([\s-]+)/);
+  const r={n:'',g:'',d:'',a:'',i:'',l:'',v:''};
+  parts.forEach(p=>{
+    if(!p)return;
+    if(/^[\s-]+$/.test(p)){for(const k in r)r[k]+=p;return;}
+    const x=declWord(p,sex);for(const k in r)r[k]+=x[k];
+  });
+  return r;
+}
+
+const G=(f,m)=>S.sex==='m'?m:f;
+function NC(){return declName(S.nm||'',S.sex||'f');}
+function nv(){return S.nv||NC().v;}
+function greetWord(){const h=new Date().getHours();return h<5?'Доброї ночі':h<12?'Доброго ранку':h<18?'Доброго дня':'Добрий вечір';}
+/* ---------- introduction ---------- */
+let ONB={step:1,name:'',sex:'',nv:'',force:false,err:''};
+function needIntro(){return ONB.force||(!S.nm&&(!AUTH||PULLED));}
+function introView(){
+  let h='<div class="view enter"><div class="story"><div class="st-m">'+mascot('happy',120)+'</div>';
+  if(ONB.step===1){
+    h+='<h1 class="ide-t" style="text-align:center">Привіт! Я лисичка-бариста</h1><p class="desc" style="text-align:center">Давай познайомимось. Як тебе звати?</p>'
+     +'<input id="onname" class="inp" type="text" maxlength="24" autocomplete="given-name" placeholder="Твоє ім’я" value="'+esc(ONB.name)+'" aria-label="Твоє ім’я">'
+     +'<p class="desc" style="text-align:center;margin-top:14px">Як до тебе звертатись?</p>'
+     +'<div class="seg" role="group" aria-label="Звертання"><button class="segb'+(ONB.sex==='f'?' on':'')+'" data-act="onsex" data-v="f">Вона</button><button class="segb'+(ONB.sex==='m'?' on':'')+'" data-act="onsex" data-v="m">Він</button></div>';
+    if(ONB.err)h+='<p class="desc authmsg" role="alert" style="text-align:center">'+esc(ONB.err)+'</p>';
+    h+='<button class="btn" style="margin-top:16px" data-act="onnext">Далі</button>';
+    if(S.nm&&ONB.force)h+='<button class="btn ghost" style="margin-top:10px" data-act="oncancel">Скасувати</button>';
+  }else{
+    const c=declName(ONB.name,ONB.sex);
+    h+='<h1 class="ide-t" style="text-align:center">Приємно познайомитись, '+esc(ONB.nv||c.v)+'!</h1><p class="desc" style="text-align:center">Так до тебе й звертатимусь. Якщо форма неправильна, виправ її тут:</p>'
+     +'<input id="onnv" class="inp" type="text" maxlength="24" value="'+esc(ONB.nv||c.v)+'" aria-label="Звертання до тебе">'
+     +'<button class="btn" style="margin-top:16px" data-act="ondone">Почнімо</button><button class="btn ghost" style="margin-top:10px" data-act="onback">Назад</button>';
+  }
+  return h+'</div></div>';
+}
 /* ---------- mandatory update gate ---------- */
-const BUILD='1791561105';
+const BUILD='1791561906';
+let PULLED=false;
 let NEWVER=false,UPDBUSY=false;
 async function checkUpdate(){
   try{
@@ -2437,7 +2525,7 @@ function updView(){
   return '<div class="view enter"><div class="story"><div class="st-m">'+mascot('happy',120)+'</div><h1 class="ide-t" style="text-align:center">Є нова версія</h1><p class="desc" style="text-align:center">Щоб продовжити, онови застосунок. Твій прогрес збережеться.</p><button class="btn" data-act="upd"'+(UPDBUSY?' disabled':'')+'>'+(UPDBUSY?'Оновлюю…':'Оновити')+'</button></div></div>';
 }
 function lockView(){
-  return '<div class="view enter"><div class="story"><div class="st-m">'+mascot('happy',120)+'</div><h1 class="ide-t" style="text-align:center">З поверненням!</h1><p class="desc" style="text-align:center">Розблокуй застосунок за Face ID, відбитком або кодом пристрою.</p><button class="btn" data-act="unlock">Розблокувати</button><button class="btn ghost" data-act="signout">Увійти з іншим акаунтом</button></div></div>';
+  return '<div class="view enter"><div class="story"><div class="st-m">'+mascot('happy',120)+'</div><h1 class="ide-t" style="text-align:center">З поверненням, '+esc(nv())+'!</h1><p class="desc" style="text-align:center">Розблокуй застосунок за Face ID, відбитком або кодом пристрою.</p><button class="btn" data-act="unlock">Розблокувати</button><button class="btn ghost" data-act="signout">Увійти з іншим акаунтом</button></div></div>';
 }
 function bioCard(){
   if(!CLOUD||!AUTH||!BIOOK()||!BIO_AV)return '';
@@ -2674,7 +2762,7 @@ function statsView(){
   const secs=Object.values(S.hist).reduce((n,d)=>n+(d.sec||0),0),mins=Math.round(secs/60);
   const doneN=ALL.filter(l=>S.done[l.uid]&&!S.done[l.uid].skip).length;
   let h='<div class="view hastabs'+(fx.view?' enter':'')+'">'+topbar();
-  h+='<h1 class="pg-t">Прогрес</h1><div class="tiles">'
+  h+='<h1 class="pg-t">Прогрес: '+esc(NC().g)+'</h1><div class="tiles">'
     +'<div class="tile"><b>'+S.xp+'</b><span>Досвід</span></div><div class="tile"><b>'+doneN+'</b><span>Уроків</span></div>'
     +'<div class="tile"><b>'+(okN+badN?acc+'%':'0%')+'</b><span>Точність</span></div><div class="tile"><b>'+mins+'</b><span>Хвилин</span></div></div>';
   // week chart
