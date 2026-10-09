@@ -1,5 +1,5 @@
 // Простий офлайн-кеш: перший візит зберігає застосунок, далі він працює без мережі.
-const CACHE = 'java-barista-v14';
+const CACHE = 'java-barista-v15';
 const FILES = ['./', './index.html', './manifest.webmanifest', './config.js', './icon-192.png', './icon-512.png'];
 self.addEventListener('install', e => {
   e.waitUntil(caches.open(CACHE).then(c => c.addAll(FILES)).then(() => self.skipWaiting()));

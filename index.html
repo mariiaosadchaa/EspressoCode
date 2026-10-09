@@ -1719,7 +1719,7 @@ function skyUpdate(){
   if(tod==='night')for(let i=0;i<16;i++)t+='<span class="st" style="left:'+((i*37+11)%100)+'%;top:'+((i*23+7)%46)+'%;animation-delay:'+(i*.37).toFixed(2)+'s"></span>';
   const cols=['#D9822B','#B5472B','#C79A2E'];
   t+='<div class="sp">';
-  for(let i=0;i<9;i++)t+='<i style="--x:'+((i*11+5)%96)+'%;--d:'+(10+i%4*2.5)+'s;--dl:-'+(i*1.7).toFixed(1)+'s;--dx:'+((i%2?1:-1)*(30+i*6))+'px;--r:'+(180+i*40)+'deg;--c:'+cols[i%3]+'"></i>';
+  for(let i=0;i<9;i++)t+='<i style="--x:'+((i*11+5)%96)+'%;--d:'+(26+i%4*6)+'s;--dl:-'+(i*3.4).toFixed(1)+'s;--dx:'+((i%2?1:-1)*(30+i*6))+'px;--r:'+(180+i*40)+'deg;--c:'+cols[i%3]+'"></i>';
   t+='</div>';
   el.innerHTML=t;
 }
@@ -2667,7 +2667,7 @@ function introView(){
   return h+'</div></div>';
 }
 /* ---------- mandatory update gate ---------- */
-const BUILD='1791565981';
+const BUILD='1791566015';
 let PULLED=false;
 let NEWVER=false,UPDBUSY=false;
 async function checkUpdate(){
