@@ -36,11 +36,13 @@ Deno.serve(async (req) => {
       if (s.last_sent === now.date) continue;
       const { data: pr } = await sb.from("progress").select("data").eq("user_id", s.user_id).maybeSingle();
       const d = pr?.data ?? {};
-      if (d.last === now.date) continue; // вже займалась сьогодні
       const streak = Number(d.streak) || 0;
-      const body = streak > 0
-        ? `Серія ${streak} дн. під загрозою. Один урок, і лисичка спокійна.`
-        : "Лисичка чекає на тебе. Пройди один короткий урок.";
+      const doneToday = d.last === now.date;
+      const body = doneToday
+        ? "Сьогодні ти вже займалась, молодець! Ще один урок для закріплення?"
+        : streak > 0
+          ? `Серія ${streak} дн. під загрозою. Один урок, і лисичка спокійна.`
+          : "Лисичка чекає на тебе. Пройди один короткий урок.";
       await webpush.sendNotification(s.sub, JSON.stringify({ title: "Java Бариста", body, url: "./" }));
       await sb.from("push_subs").update({ last_sent: now.date }).eq("user_id", s.user_id);
       sent++;
