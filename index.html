@@ -596,6 +596,56 @@ input.inp::-webkit-date-and-time-value{text-align:left;min-width:0}
 .opt:active:not(:disabled),.chip:active:not(:disabled){transform:scale(.97)}
 .sheet-art{margin:2px 0 0}
 @media print{#sky,.cpy,.scene{display:none!important}}
+/* ---------- round 3 ---------- */
+.more{margin-top:10px;border-top:1px dashed color-mix(in srgb,currentColor 25%,transparent);padding-top:8px;text-align:left}
+.more summary{cursor:pointer;font-weight:800;font-size:13px;list-style:none;display:flex;align-items:center;gap:6px}
+.more summary::before{content:"";width:8px;height:8px;border-right:2.5px solid currentColor;border-bottom:2.5px solid currentColor;transform:rotate(-45deg);transition:transform .2s}
+.more[open] summary::before{transform:rotate(45deg)}
+.more-b{display:grid;gap:8px;margin-top:8px;max-height:46vh;overflow:auto;font-size:14px;min-width:0}
+.more-b h4{margin:6px 0 0;font-size:12px;letter-spacing:.06em;text-transform:uppercase;opacity:.75}
+.more-b p{margin:0}
+.more-c{background:color-mix(in srgb,var(--surface) 70%,transparent);border-radius:12px;padding:10px 12px;display:grid;gap:6px;min-width:0}
+.more-c .cw{min-width:0}
+.btn.sm{padding:8px 14px;font-size:13px}
+.intro{background:var(--surface);border:2px solid var(--line);border-radius:14px;padding:10px 12px;color:var(--ink)}
+.pg-s{margin:18px 4px 8px;font-family:var(--display);font-size:20px}
+.pjs{display:grid;gap:10px}
+.pj{background:var(--surface);border:2px solid var(--line);border-radius:16px;padding:12px 14px;display:grid;gap:8px}
+.pj-h b{font-family:var(--display);font-size:17px;display:block}.pj-h span{color:var(--muted);font-size:13px}
+.pj-s{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
+.pjn{display:grid;justify-items:center;gap:4px;padding:8px 4px;border-radius:12px;border:2px solid var(--line);background:var(--bg);color:var(--ink);font:inherit;font-size:11px;font-weight:700;cursor:pointer;text-align:center;line-height:1.2}
+.pjn i{font-style:normal;width:26px;height:26px;border-radius:50%;display:grid;place-items:center;background:var(--line);color:var(--muted);font-size:13px}
+.pjn.cur{border-color:var(--primary)}.pjn.cur i{background:var(--primary);color:var(--on-primary)}
+.pjn.done i{background:var(--good);color:var(--on-good)}
+.pjn:disabled{opacity:.5;cursor:not-allowed}
+.pjn span{overflow-wrap:anywhere}
+.wkbar{height:10px;border-radius:99px;background:var(--line);overflow:hidden;margin-top:6px}
+.wkbar i{display:block;height:100%;border-radius:99px;background:linear-gradient(90deg,var(--warm),var(--gold));transition:width .8s}
+.quote{margin:12px 4px 0;padding:10px 14px;border-left:3px solid var(--gold);color:var(--muted);font-style:italic;font-size:14px}
+.tcard-w{padding:6px 16px 0;display:grid;gap:14px}
+.tcard{min-height:230px;border-radius:20px;border:2px solid var(--line);background:var(--surface);color:var(--ink);font:inherit;padding:22px 18px;display:grid;align-content:center;justify-items:center;gap:12px;text-align:center;cursor:pointer;box-shadow:0 6px 0 var(--line-edge);animation:rise .4s}
+.tcard.flip{animation:flipin .4s}
+@keyframes flipin{from{transform:rotateX(70deg);opacity:.2}}
+.tc-t{font-family:var(--display);font-size:28px;font-weight:700}.tc-d{font-size:16px;line-height:1.45}.tc-h{color:var(--muted);font-size:13px}
+.tc-x{font:500 13px/1.5 var(--mono);background:var(--code-bg);padding:8px 12px;border-radius:10px;text-align:left;white-space:pre-wrap;max-width:100%;overflow-x:auto}
+.bm{position:absolute;right:44px;top:9px;z-index:2;width:30px;height:30px;border-radius:50%;border:0;background:none;color:var(--line-edge);font-size:20px;cursor:pointer;line-height:1}
+.bm.on{color:var(--gold)}
+.bm:active{transform:scale(.85)}
+.sh-c.acc{position:relative}
+.sh-h{padding-right:78px}
+.errline{margin-top:10px;padding:10px 12px;border-radius:12px;background:var(--bad-bg);color:var(--bad-ink);font-size:13px;display:grid;gap:6px}
+.errline code{font:600 12.5px var(--mono);overflow-x:auto;white-space:pre}
+.cert{margin:8px 16px;padding:10px;border-radius:20px;background:linear-gradient(135deg,#FBE6A0,#D9A93A 55%,#A97C1E)}
+.cert-in{background:#FFFCF6;color:#2A1B06;border-radius:14px;padding:26px 16px;text-align:center;display:grid;gap:8px;justify-items:center;border:2px solid rgba(169,124,30,.45)}
+.cert-in h1{font-family:var(--display);font-size:30px;margin:0;color:#8A5E10}
+.cert-in h2{font-family:var(--display);font-size:24px;margin:0}
+.cert-k{letter-spacing:.3em;text-transform:uppercase;font-size:13px;margin:0;font-weight:800;color:#8A5E10}
+.cert-t,.cert-s,.cert-d{margin:0;color:#5F4A2E;font-size:14px}.cert-d{font-weight:700}
+#net{position:fixed;left:50%;top:calc(8px + env(safe-area-inset-top,0px));transform:translateX(-50%);z-index:30;background:var(--primary);color:var(--on-primary);font-size:12px;font-weight:700;padding:6px 14px;border-radius:99px;box-shadow:0 4px 14px rgba(0,0,0,.25)}
+.selrow{display:flex;gap:10px;align-items:center;margin-top:10px;flex-wrap:wrap}
+.selrow select{padding:8px 10px;border-radius:10px;border:2px solid var(--line);background:var(--surface);color:var(--ink);font:inherit}
+.spk{flex:none}
+@media print{body *{visibility:hidden}.cert,.cert *{visibility:visible}.cert{position:absolute;left:0;top:0;width:100%;margin:0}#sky,.tabs,.noprint{display:none!important}}
 </style><style>*,*::before,*::after{box-sizing:border-box}html{-webkit-text-size-adjust:100%}body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--body)}</style>
 </head>
 <body>
@@ -1486,7 +1536,7 @@ const IC={
 
 /* ================= State ================= */
 const KEY='java-schodnya-v1';
-function fresh(){return {xp:0,streak:0,last:'',done:{},miss:{},day:{d:'',xp:0},goal:30,level:'normal',freeze:1,sound:true,big:false,calm:false,ach:{},srs:{},hist:{},us:{},story:{},fit:{hat:'',gl:'',sc:''},nm:'',nv:'',sex:'',theme:'auto',remind:'19:00',stats:{perfect:0,run:0,runBest:0,reviews:0,peeks:0,bugs:0,typed:0,hints:0,placement:0,lessons:0,goals:0}};}
+function fresh(){return {xp:0,streak:0,last:'',done:{},miss:{},day:{d:'',xp:0},goal:30,level:'normal',freeze:1,sound:true,big:false,calm:false,ach:{},srs:{},hist:{},us:{},story:{},fit:{hat:'',gl:'',sc:''},nm:'',nv:'',sex:'',theme:'auto',pj:{},terms:{},wk:null,daily:'',bm:{},rate:0.95,pause:'',vac:{m:'',n:0},quiet:{on:false,from:23,to:8},wkdLate:false,remind:'19:00',stats:{perfect:0,run:0,runBest:0,reviews:0,peeks:0,bugs:0,typed:0,hints:0,placement:0,lessons:0,goals:0,iv:0,wk:0}};}
 function norm(s){
   const r=Object.assign(fresh(),s);
   r.stats=Object.assign(fresh().stats,s.stats||{});
@@ -1508,8 +1558,11 @@ const dayStr=d=>d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+S
 const today=()=>dayStr(new Date());
 function dAgo(n){const d=new Date();d.setDate(d.getDate()-n);return dayStr(d);}
 const isWeekend=()=>{const g=new Date().getDay();return g===0||g===6;};
+function addDay(ds,n){const d=new Date(ds+'T12:00:00');d.setDate(d.getDate()+n);return dayStr(d);}
+const inPause=()=>!!(S.pause&&today()<=addDay(S.pause,1));
 function shownStreak(){
   if(S.last===today()||S.last===dAgo(1))return S.streak;
+  if(inPause()&&S.streak>0)return S.streak;
   if(S.last===dAgo(2)&&S.freeze>0)return S.streak;
   return 0;
 }
@@ -1518,6 +1571,7 @@ function bumpStreak(){
   if(S.last===today())return r;
   if(S.last===dAgo(1))S.streak++;
   else if(S.last===dAgo(2)&&S.freeze>0){S.freeze--;S.streak++;r.froze=true;}
+  else if(inPause()&&S.streak>0)S.streak++;
   else S.streak=1;
   S.last=today();
   if(S.streak%7===0&&S.freeze<2){S.freeze++;r.earned=true;}
@@ -1557,7 +1611,11 @@ const ACH=[
   {id:'theory',t:'Уважний читач',d:'Відкрий теорію під час тренування 5 разів',ok:()=>S.stats.peeks>=5},
   {id:'bug',t:'Мисливець на баги',d:'Знайди помилку в коді 5 разів',ok:()=>S.stats.bugs>=5},
   {id:'typed',t:'Пишу сам',d:'Правильно впиши код 10 разів',ok:()=>S.stats.typed>=10},
-  {id:'lvl5',t:'Шеф-бариста',d:'Досягни 5 рівня',ok:()=>lvlInfo(S.xp).n>=5}
+  {id:'lvl5',t:'Шеф-бариста',d:'Досягни 5 рівня',ok:()=>lvlInfo(S.xp).n>=5},
+  {id:'pj',t:'Проєктувальник',d:'Пройди крок проєкту',ok:()=>Object.values(S.pj||{}).some(v=>v>0)},
+  {id:'pjall',t:'Майстер проєктів',d:'Збери проєкт до кінця',ok:()=>Object.values(S.pj||{}).some(v=>v>=4)},
+  {id:'iv',t:'Готова до співбесіди',d:'Заверши пробну співбесіду',ok:()=>(S.stats.iv||0)>0},
+  {id:'week',t:'Тиждень виконано',d:'Виконай виклик тижня',ok:()=>(S.stats.wk||0)>0}
 ];
 function checkAch(){
   let any=false;
@@ -1677,6 +1735,634 @@ function isStale(d){return !!d&&!d.skip&&(Date.now()-(d.t||0))>STALE;}
 function staleCount(){return ALL.filter(l=>isStale(S.done[l.uid])).length;}
 
 
+const PROJECTS=[
+{id:'p1',title:'Калькулятор',sub:'Читаємо числа, рахуємо й повторюємо',steps:[
+ {title:'Читаємо два числа',intro:'Створюємо програму, яка просить ввести два числа й виводить їхню суму. Для читання з клавіатури використаємо Scanner.',ex:[
+  F('Допиши читання двох чисел з клавіатури.',`import java.util.Scanner;
+
+public class Calculator {
+    public static void main(String[] args) {
+        [[0]] sc = new Scanner(System.in);
+        System.out.print("Перше число: ");
+        double a = sc.[[1]]();
+        System.out.print("Друге число: ");
+        double b = sc.nextDouble();
+        System.out.println("Сума: " + (a + b));
+    }
+}`,['Scanner','nextDouble'],['Reader','readDouble','Input'],'Клас Scanner читає дані з клавіатури, а nextDouble() бере з вводу дробове число.'),
+  O(`import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner("7 3");
+        double a = sc.nextDouble();
+        double b = sc.nextDouble();
+        System.out.println(a + b);
+    }
+}`,['10.0','10','73.0','7.03'],'Обидва числа читаються як double, тому сума 10.0 має дробову частину.'),
+  R('Збери початок калькулятора в правильному порядку.',['import java.util.Scanner;','public class Calculator {','    public static void main(String[] args) {','        Scanner sc = new Scanner(System.in);','        double a = sc.nextDouble();','        double b = sc.nextDouble();','        System.out.println(a + b);','    }','}'],'Спершу імпорт і клас, потім у main створюємо Scanner, читаємо числа й друкуємо результат.')
+ ]},
+ {title:'Додаємо операції через switch',intro:'Тепер користувач вводить знак операції, а switch вирішує, що саме порахувати.',ex:[
+  O(`public class Main {
+    public static void main(String[] args) {
+        char op = '*';
+        int a = 6;
+        int b = 4;
+        int result;
+        switch (op) {
+            case '+':
+                result = a + b;
+                break;
+            case '*':
+                result = a * b;
+                break;
+            default:
+                result = 0;
+        }
+        System.out.println(result);
+    }
+}`,['24','10','0','Помилка компіляції'],'Значення op дорівнює \'*\', тому виконується відповідний case: 6 * 4 = 24.'),
+  F('Допиши switch для калькулятора.',`import java.util.Scanner;
+
+public class Calculator {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        double a = sc.nextDouble();
+        char op = sc.next().charAt(0);
+        double b = sc.nextDouble();
+        double result;
+        switch (op) {
+            [[0]] '+': result = a + b; break;
+            case '-': result = a - b; break;
+            case '*': result = a * b; [[1]];
+            [[2]]: result = 0;
+        }
+        System.out.println(result);
+    }
+}`,['case','break','default'],['else','stop'],'Кожна гілка починається зі слова case, break зупиняє switch, а default працює, коли жодна гілка не підійшла.'),
+  B('У якому рядку помилка компіляції?',['public class Main {','    public static void main(String[] args) {','        char op = \'-\';','        double a = 8;','        double b = 3;','        double result;','        switch (op) {','            case \'+\': result = a + b; break;','            case \'-\': result = a - b; break;','            default: result = 0','        }','        System.out.println(result);','    }','}'],9,'В рядку default: result = 0 бракує крапки з комою в кінці інструкції.')
+ ]},
+ {title:'Перевіряємо ділення на нуль',intro:'Додаємо операцію ділення. Перед нею перевіряємо, що друге число не дорівнює нулю.',ex:[
+  O(`public class Main {
+    public static void main(String[] args) {
+        System.out.println(5.0 / 0);
+        System.out.println(7 / 2);
+        System.out.println(7 / 2.0);
+    }
+}`,['Infinity\n3\n3.5','Помилка під час виконання','Infinity\n3.5\n3.5','Infinity\n3\n3'],'Ділення double на нуль дає Infinity. Цілі 7 / 2 дають 3, а якщо одне число дробове, то 3.5.'),
+  C('Що станеться, якщо виконати int x = 5 / 0;?',['Програма впаде з ArithmeticException: / by zero','x стане рівним 0','x стане рівним Infinity','Код не скомпілюється'],'Цілі числа на нуль ділити не можна, виникає виняток ArithmeticException. Дробові числа дають Infinity.',null,false),
+  T('Впиши оператор порівняння, щоб перевірити, що b дорівнює нулю.',`if (b ___ 0) {
+    System.out.println("На нуль ділити не можна");
+}`,['==','b == 0','b==0'],'Для порівняння на рівність у Java використовують два знаки ==. Один знак = це присвоєння.')
+ ]},
+ {title:'Повторюємо в циклі',intro:'Загортаємо калькулятор у цикл, щоб рахувати скільки завгодно разів. Вихід з програми по літері q.',ex:[
+  O(`import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner("+ - + q");
+        int count = 0;
+        while (true) {
+            String op = sc.next();
+            if (op.equals("q")) {
+                break;
+            }
+            count++;
+        }
+        System.out.println("Обчислень: " + count);
+    }
+}`,['Обчислень: 3','Обчислень: 4','Обчислень: 0','Помилка під час виконання'],'Цикл читає три операції, а на q виконується break. Літеру q ми не рахуємо.'),
+  R('Збери цикл калькулятора з виходом по q.',['import java.util.Scanner;','public class Calculator {','    public static void main(String[] args) {','        Scanner sc = new Scanner(System.in);','        while (true) {','            System.out.print("Операція (q для виходу): ");','            String op = sc.next();','            if (op.equals("q")) {','                break;','            }','            System.out.println("Ви ввели: " + op);','        }','        System.out.println("До побачення!");','    }','}'],'Цикл while (true) крутиться вічно, поки всередині не спрацює break. Повідомлення «До побачення» стоїть після циклу.'),
+  F('Допиши вихід з циклу.',`import java.util.Scanner;
+
+public class Calculator {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        while (true) {
+            String op = sc.next();
+            if (op.[[0]]("q")) {
+                [[1]];
+            }
+        }
+    }
+}`,['equals','break'],['==','continue','exit'],'Рядки порівнюють методом equals, а break негайно виходить із циклу.')
+ ]}
+]},
+{id:'p2',title:'Вгадай число',sub:'Випадкове число, підказки та спроби',steps:[
+ {title:'Загадуємо випадкове число',intro:'Програма має загадати число від 1 до 100. Для цього використаємо клас Random.',ex:[
+  F('Допиши загадування числа від 1 до 100.',`import java.util.Random;
+
+public class Game {
+    public static void main(String[] args) {
+        Random rnd = new Random();
+        int secret = rnd.[[0]](100) + [[1]];
+        System.out.println("Я загадав число від 1 до 100");
+    }
+}`,['nextInt','1'],['next','0','random'],'nextInt(100) дає число від 0 до 99, тому додаємо 1 і отримуємо діапазон від 1 до 100.'),
+  C('Які числа може повернути rnd.nextInt(10)?',['Від 0 до 9','Від 1 до 10','Від 0 до 10','Від 1 до 9'],'nextInt(n) повертає числа від 0 до n - 1. Верхня межа в діапазон не входить.'),
+  R('Збери початок гри в правильному порядку.',['import java.util.Random;','public class Game {','    public static void main(String[] args) {','        Random rnd = new Random();','        int secret = rnd.nextInt(100) + 1;','        System.out.println("Я загадав число!");','    }','}'],'Спочатку імпорт і клас, потім створюємо Random, загадуємо число й повідомляємо про це.')
+ ]},
+ {title:'Підказки: більше чи менше',intro:'Порівнюємо здогадку гравця із загаданим числом і даємо підказку.',ex:[
+  O(`public class Main {
+    public static void main(String[] args) {
+        int secret = 42;
+        int guess = 30;
+        if (guess < secret) {
+            System.out.println("Більше");
+        } else if (guess > secret) {
+            System.out.println("Менше");
+        } else {
+            System.out.println("Вгадав!");
+        }
+    }
+}`,['Більше','Менше','Вгадав!','Нічого не виведе'],'30 менше за 42, тому спрацьовує перша гілка: гравцеві треба вводити більше число.'),
+  F('Допиши підказки.',`public class Game {
+    public static void main(String[] args) {
+        int secret = 42;
+        int guess = 70;
+        if (guess [[0]] secret) {
+            System.out.println("Більше");
+        } else if (guess [[1]] secret) {
+            System.out.println("Менше");
+        } else {
+            System.out.println("Вгадав!");
+        }
+    }
+}`,['<','>'],['=','!='],'Якщо здогадка менша за загадане, треба більше. Якщо більша, то менше.'),
+  B('У якому рядку помилка компіляції?',['public class Main {','    public static void main(String[] args) {','        int secret = 42;','        int guess = 30;','        if (guess = secret) {','            System.out.println("Вгадав!");','        }','    }','}'],4,'Один знак = це присвоєння, а в умові if потрібне порівняння ==.')
+ ]},
+ {title:'Цикл і лічильник спроб',intro:'Гра має питати знову й знову, доки гравець не вгадає. Додаємо лічильник спроб.',ex:[
+  R('Збери цикл гри з лічильником.',['import java.util.*;','public class Game {','    public static void main(String[] args) {','        Scanner sc = new Scanner(System.in);','        int secret = new Random().nextInt(100) + 1;','        int attempts = 0;','        int guess = 0;','        while (guess != secret) {','            System.out.print("Твоя здогадка: ");','            guess = sc.nextInt();','            attempts++;','        }','        System.out.println("Вгадав за " + attempts + " спроб");','    }','}'],'Перед циклом створюємо змінні, у циклі читаємо здогадку й збільшуємо лічильник. Підсумок друкуємо після циклу.'),
+  O(`public class Main {
+    public static void main(String[] args) {
+        int secret = 42;
+        int[] guesses = {50, 25, 37, 42, 10};
+        int attempts = 0;
+        for (int i = 0; i < guesses.length; i++) {
+            attempts++;
+            if (guesses[i] == secret) {
+                break;
+            }
+        }
+        System.out.println("Спроб: " + attempts);
+    }
+}`,['Спроб: 4','Спроб: 5','Спроб: 3','Спроб: 42'],'Четверта здогадка дорівнює 42, лічильник уже дорахував до 4, і break зупиняє цикл.'),
+  C('Чому в грі «Вгадай число» зручно взяти while, а не for?',['Ми не знаємо заздалегідь, скільки спроб знадобиться','for не вміє працювати з числами','while завжди швидше за for','for не можна використовувати з Random'],'Цикл while підходить, коли кількість повторів невідома. Тут він крутиться, доки число не вгадане.')
+ ]},
+ {title:'Обмежуємо кількість спроб',intro:'Додаємо ліміт спроб. Якщо гравець не вгадав за ліміт, гра закінчується програшем.',ex:[
+  F('Допиши ліміт спроб.',`public class Game {
+    public static void main(String[] args) {
+        [[0]] int MAX = 3;
+        int secret = 42;
+        int attempts = 0;
+        int guess = 0;
+        while (attempts < MAX [[1]] guess != secret) {
+            guess = 10 * (attempts + 1);
+            attempts++;
+        }
+        System.out.println("Спроб: " + attempts);
+    }
+}`,['final','&&'],['static','||','and'],'final робить MAX константою. Оператор && вимагає, щоб обидві умови були істинними: спроби ще є і число не вгадане.'),
+  O(`public class Main {
+    public static void main(String[] args) {
+        final int MAX = 3;
+        int secret = 42;
+        int attempts = 0;
+        int guess = 0;
+        while (attempts < MAX && guess != secret) {
+            guess = 10 * (attempts + 1);
+            attempts++;
+        }
+        if (guess == secret) {
+            System.out.println("Вгадав!");
+        } else {
+            System.out.println("Спроби закінчились. Було число " + secret);
+        }
+    }
+}`,['Спроби закінчились. Було число 42','Вгадав!','Спроби закінчились. Було число 30','Нічого не виведе'],'Здогадки 10, 20, 30 не збігаються з 42, а після третьої спроби умова attempts < MAX стає хибною.'),
+  T('Впиши оператор «і», який поєднує дві умови: attempts < MAX ___ guess != secret.',`while (attempts < MAX ___ guess != secret) {
+    // спроба
+}`,['&&'],'Оператор && дає true, лише коли обидві умови істинні.')
+ ]}
+]},
+{id:'p3',title:'Список справ',sub:'ArrayList, меню та керування списком',steps:[
+ {title:'Створюємо список',intro:'Починаємо з порожнього списку справ і додаємо в нього кілька записів.',ex:[
+  F('Допиши створення списку справ.',`import java.util.*;
+
+public class Todo {
+    public static void main(String[] args) {
+        [[0]]<String> todo = new [[1]]<>();
+        todo.add("Купити хліб");
+        System.out.println(todo.size());
+    }
+}`,['List','ArrayList'],['Array','Map','Set'],'Змінну зручно оголосити як List, а створити звичайний динамічний список ArrayList.'),
+  O(`import java.util.*;
+
+public class Main {
+    public static void main(String[] args) {
+        List<String> todo = new ArrayList<>();
+        todo.add("Купити хліб");
+        todo.add("Зробити уроки");
+        todo.add("Прогулянка");
+        System.out.println(todo);
+        System.out.println(todo.size());
+    }
+}`,['[Купити хліб, Зробити уроки, Прогулянка]\n3','Купити хліб, Зробити уроки, Прогулянка\n3','[Купити хліб, Зробити уроки, Прогулянка]\n2','[Прогулянка, Зробити уроки, Купити хліб]\n3'],'Список друкується у квадратних дужках в порядку додавання, а size() повертає кількість елементів.'),
+  C('Навіщо на початку файлу пишуть import java.util.*;?',['Клас ArrayList лежить у пакеті java.util, без імпорту Java його не знайде','Щоб програма працювала швидше','Щоб можна було використовувати слово String','Це потрібно лише для коментарів'],'Класи колекцій живуть у пакеті java.util. Імпорт підказує компілятору, де їх шукати.')
+ ]},
+ {title:'Друкуємо справи з номерами',intro:'Показуємо список красиво: з номерами від одиниці, по одній справі в рядку.',ex:[
+  R('Збери програму, що друкує справи з номерами.',['import java.util.*;','public class Todo {','    public static void main(String[] args) {','        List<String> todo = new ArrayList<>();','        todo.add("Хліб");','        todo.add("Уроки");','        for (int i = 0; i < todo.size(); i++) {','            System.out.println((i + 1) + ". " + todo.get(i));','        }','    }','}'],'Спершу створюємо й наповнюємо список, а потім циклом проходимо по ньому. Номер елемента i + 1, бо індекси починаються з нуля.'),
+  O(`import java.util.*;
+
+public class Main {
+    public static void main(String[] args) {
+        List<String> todo = new ArrayList<>();
+        todo.add("Хліб");
+        todo.add("Уроки");
+        for (int i = 0; i < todo.size(); i++) {
+            System.out.println((i + 1) + ". " + todo.get(i));
+        }
+    }
+}`,['1. Хліб\n2. Уроки','0. Хліб\n1. Уроки','Хліб\nУроки','1. Уроки\n2. Хліб'],'Індекс i починається з 0, але ми друкуємо i + 1, тому номери йдуть 1, 2.'),
+  B('У якому рядку помилка компіляції?',['import java.util.*;','public class Main {','    public static void main(String[] args) {','        List<String> todo = new ArrayList<>();','        todo.add(5);','        System.out.println(todo);','    }','}'],4,'Список оголошено як List<String>, тому в нього можна додавати лише рядки, а число 5 не підходить.')
+ ]},
+ {title:'Видаляємо справу',intro:'Додаємо вміння видаляти виконану справу за її номером.',ex:[
+  O(`import java.util.*;
+
+public class Main {
+    public static void main(String[] args) {
+        List<String> todo = new ArrayList<>();
+        todo.add("Хліб");
+        todo.add("Уроки");
+        todo.add("Прогулянка");
+        todo.remove(1);
+        System.out.println(todo);
+    }
+}`,['[Хліб, Прогулянка]','[Уроки, Прогулянка]','[Хліб, Уроки]','[Хліб, Уроки, Прогулянка]'],'remove(1) видаляє елемент з індексом 1, тобто другий: «Уроки». Решта зсувається.'),
+  F('Допиши видалення першої справи й перевірку порожнього списку.',`import java.util.*;
+
+public class Todo {
+    public static void main(String[] args) {
+        List<String> todo = new ArrayList<>();
+        todo.add("Хліб");
+        todo.[[0]](0);
+        if (todo.[[1]]()) {
+            System.out.println("Справ немає");
+        }
+    }
+}`,['remove','isEmpty'],['delete','empty','clear'],'remove(0) прибирає перший елемент, а isEmpty() повертає true, якщо список порожній.'),
+  C('У списку 3 елементи. Що станеться після todo.remove(10)?',['Виняток IndexOutOfBoundsException: Index 10 out of bounds for length 3','Метод поверне false і нічого не зміниться','Видалиться останній елемент','Код не скомпілюється'],'Індекса 10 у списку немає, тому виникає виняток під час виконання. Номер треба перевіряти перед видаленням.')
+ ]},
+ {title:'Меню в циклі',intro:'Збираємо все разом: меню в нескінченному циклі, де користувач додає справи, дивиться список і виходить.',ex:[
+  R('Збери програму з меню.',['import java.util.*;','public class Todo {','    public static void main(String[] args) {','        Scanner sc = new Scanner(System.in);','        List<String> todo = new ArrayList<>();','        while (true) {','            System.out.println("1 - додати, 2 - показати, 0 - вийти");','            int choice = sc.nextInt();','            if (choice == 0) {','                break;','            }','            if (choice == 1) {','                todo.add(sc.next());','            } else if (choice == 2) {','                System.out.println(todo);','            }','        }','    }','}'],'Спершу готуємо Scanner і список. У циклі читаємо вибір: 0 виходить, 1 додає справу, 2 показує список.'),
+  O(`import java.util.*;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner("1 Молоко 1 Хліб 2 0");
+        List<String> todo = new ArrayList<>();
+        while (true) {
+            int choice = sc.nextInt();
+            if (choice == 0) {
+                break;
+            }
+            if (choice == 1) {
+                todo.add(sc.next());
+            } else if (choice == 2) {
+                System.out.println(todo);
+            }
+        }
+        System.out.println("Кінець");
+    }
+}`,['[Молоко, Хліб]\nКінець','[Молоко]\nКінець','Кінець','[Хліб, Молоко]\nКінець'],'Спершу двічі додаємо справу (1), потім друкуємо список (2), а число 0 виходить з циклу.'),
+  F('Допиши меню через switch.',`import java.util.*;
+
+public class Todo {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        List<String> todo = new ArrayList<>();
+        int choice = -1;
+        while (choice != 0) {
+            choice = sc.nextInt();
+            switch (choice) {
+                [[0]] 1:
+                    todo.add(sc.next());
+                    [[1]];
+                case 2:
+                    System.out.println(todo);
+                    break;
+                case 0:
+                    break;
+                [[2]]:
+                    System.out.println("Невідома команда");
+            }
+        }
+    }
+}`,['case','break','default'],['if','stop'],'Кожна команда має свій case, break завершує гілку, а default ловить усі інші числа.')
+ ]}
+]}
+];
+
+const COMPERR=[
+C(`Компілятор пише: «error: ';' expected». Що не так?`,['Наприкінці рядка int age = 15 забули крапку з комою','Змінну age не можна називати цим іменем','Число 15 потрібно взяти в лапки','Слово int треба писати з великої літери'],`Кожна інструкція в Java закінчується крапкою з комою. Компілятор показує рядок, де вона потрібна.`,`public class Main {
+    public static void main(String[] args) {
+        int age = 15
+        System.out.println(age);
+    }
+}`,false),
+C(`Компілятор пише: «error: cannot find symbol», «symbol: variable nmae». Що не так?`,['В імені змінної друкарська помилка: оголошена name, а написано nmae','Змінну name забули зробити static','Метод println не вміє друкувати змінні','Рядок "Оля" треба писати в одинарних лапках'],`Java не знає імені nmae, бо його ніхто не оголошував. Перевір, чи правильно написане ім'я.`,`public class Main {
+    public static void main(String[] args) {
+        String name = "Оля";
+        System.out.println(nmae);
+    }
+}`),
+C(`Компілятор пише: «error: incompatible types: String cannot be converted to int». Що не так?`,['У змінну типу int кладуть рядок "15", а це інший тип','Змінну age не можна оголошувати всередині main','Число 15 занадто велике для int','Після присвоєння потрібен знак питання'],`Тип int зберігає лише цілі числа, а текст у лапках має тип String. Приберіть лапки: int age = 15;`,`public class Main {
+    public static void main(String[] args) {
+        int age = "15";
+        System.out.println(age);
+    }
+}`),
+C(`Компілятор пише: «error: missing return statement». Що не так?`,['Метод оголошено з типом int, але він нічого не повертає','Метод twice не можна називати цим словом','Змінну r треба оголосити поза методом','У методі забули параметр String[] args'],`Якщо метод має тип int, він мусить виконати return зі значенням. Додайте рядок return r;`,`public class Main {
+    static int twice(int x) {
+        int r = x * 2;
+    }
+    public static void main(String[] args) {
+        System.out.println(twice(4));
+    }
+}`),
+C(`Компілятор пише: «error: unreachable statement». Що не так?`,['Після return код у методі ніколи не виконається, тому він зайвий','Метод five не можна викликати з main','println не можна використовувати в методах із типом int','Після return потрібна ще одна фігурна дужка'],`Після return метод одразу завершується. Рядок після нього не виконається ніколи, і компілятор це не дозволяє.`,`public class Main {
+    static int five() {
+        return 5;
+        System.out.println("Готово");
+    }
+}`),
+C(`Компілятор пише: «error: variable sum might not have been initialized». Що не так?`,['Змінній sum не дали значення, а її вже читають','Змінну sum не можна оголошувати без слова final','Тип int не підтримує друк на екран','Змінну sum треба оголосити після println'],`Локальна змінна не має значення за замовчуванням. Спершу присвойте щось: int sum = 0;`,`public class Main {
+    public static void main(String[] args) {
+        int sum;
+        System.out.println(sum);
+    }
+}`),
+C(`Компілятор пише: «error: non-static method hello() cannot be referenced from a static context». Що не так?`,['Метод main статичний, а hello() належить об\'єкту, тож потрібен new Main().hello() або static','Метод hello не можна викликати двічі','Метод hello має бути оголошений після main','У виклику hello() бракує аргументів'],`Статичний метод main працює без об'єкта, а звичайний метод потребує об'єкта. Зробіть hello статичним або створіть об'єкт.`,`public class Main {
+    void hello() {
+        System.out.println("Привіт");
+    }
+    public static void main(String[] args) {
+        hello();
+    }
+}`),
+C(`Компілятор пише: «error: reached end of file while parsing». Що не так?`,['Не вистачає закриваючої фігурної дужки }, файл закінчився раніше','Забули крапку з комою після println','Цикл for не можна писати в main','Забули імпортувати клас Scanner'],`Кожна відкрита дужка { потребує закриття }. Тут не закрито main і клас, тому компілятор дійшов до кінця файлу.`,`public class Main {
+    public static void main(String[] args) {
+        for (int i = 0; i < 3; i++) {
+            System.out.println(i);
+        }
+`),
+C(`Компілятор пише: «error: method add in class Main cannot be applied to given types;» і далі «required: int,int», «found: int». Що не так?`,['Метод add чекає два числа, а йому передали лише одне','Метод add має повертати String','Число 1 слід писати з десятковою крапкою','Метод add не можна викликати всередині println'],`Кількість аргументів у виклику має збігатися з параметрами методу. Напишіть add(1, 2).`,`public class Main {
+    static int add(int a, int b) {
+        return a + b;
+    }
+    public static void main(String[] args) {
+        System.out.println(add(1));
+    }
+}`),
+C(`Компілятор пише: «error: unreported exception FileNotFoundException; must be caught or declared to be thrown». Що не так?`,['Код може кинути перевірений виняток, його треба обробити в try/catch або оголосити throws','Файл a.txt не існує на диску, тому треба створити його','Клас FileReader не можна використовувати в main','Змінну r треба оголосити як final'],`FileReader може кинути FileNotFoundException. Це перевірений виняток: або обгорніть у try/catch, або додайте throws до методу.`,`import java.io.*;
+public class Main {
+    public static void main(String[] args) {
+        FileReader r = new FileReader("a.txt");
+    }
+}`),
+C(`Компілятор пише: «error: cannot assign a value to final variable max». Що не так?`,['Змінна max оголошена з final, її значення можна задати лише один раз','Число 20 більше за 10','Змінну max не можна оголошувати в main','Знак = у Java треба замінити на =='],`Слово final робить змінну константою. Нове значення їй присвоїти не можна.`,`public class Main {
+    public static void main(String[] args) {
+        final int max = 10;
+        max = 20;
+        System.out.println(max);
+    }
+}`),
+C(`Компілятор пише: «error: incompatible types: possible lossy conversion from double to int». Що не так?`,['Дробове число кладуть у int без явного приведення, (int) price, бо частина даних зникне','Змінну price не можна оголошувати як double','Число 9.99 треба писати з комою: 9,99','Змінна rounded має бути типу String'],`Java не перетворює double на int сама, бо втрачається дробова частина. Напишіть int rounded = (int) price;`,`public class Main {
+    public static void main(String[] args) {
+        double price = 9.99;
+        int rounded = price;
+        System.out.println(rounded);
+    }
+}`),
+C(`Компілятор пише: «error: balance has private access in Account». Що не так?`,['Поле balance приватне, з іншого класу напряму його читати не можна','Об\'єкт Account не можна створювати в main','Поле balance має бути типу String','Не можна використовувати крапку для доступу до поля'],`Модифікатор private ховає поле від інших класів. Додайте публічний геттер, наприклад getBalance().`,`class Account { private int balance = 100; }
+public class Main {
+    public static void main(String[] args) {
+        Account a = new Account();
+        System.out.println(a.balance);
+    }
+}`),
+C(`Компілятор пише: «error: Dog is not abstract and does not override abstract method speak() in Animal». Що не так?`,['Клас Dog реалізує інтерфейс Animal, але не написав метод speak()','Інтерфейс Animal не можна оголошувати без класу Main','Клас Dog має називатися Animal','Метод speak треба зробити private'],`Клас, що реалізує інтерфейс, мусить дати тіло кожному його методу. Додайте public void speak() { ... } у Dog.`,`interface Animal {
+    void speak();
+}
+class Dog implements Animal {
+}`),
+C(`Компілятор пише: «error: variable x is already defined in method main(String[])». Що не так?`,['Змінну x оголосили двічі з типом у тому самому методі','Змінна x має бути типу double','Число 2 не можна присвоювати змінній x','Ім\'я x занадто коротке'],`У межах одного методу ім'я змінної оголошують лише раз. Для нового значення пишіть без типу: x = 2;`,`public class Main {
+    public static void main(String[] args) {
+        int x = 1;
+        int x = 2;
+        System.out.println(x);
+    }
+}`),
+C(`Компілятор пише: «error: 'else' without 'if'». Що не так?`,['Перед else немає if, або між ними стоїть зайва інструкція чи дужка','Слово else треба писати з великої літери','else можна використовувати лише в циклах','Після else обов\'язково ставити крапку з комою'],`Else завжди належить до найближчого if. Тут перед ним стоїть звичайний рядок, тому пара не знаходиться.`,`public class Main {
+    public static void main(String[] args) {
+        System.out.println("Привіт");
+        else {
+            System.out.println("інакше");
+        }
+    }
+}`)
+];
+
+const TERMS=[
+{t:'Клас',d:'Шаблон, за яким створюють об\'єкти. Він описує, які дані й дії буде мати об\'єкт.',ex:'class Cat {\n    String name;\n}'},
+{t:'Об\'єкт',d:'Конкретний екземпляр класу, який живе в пам\'яті. Його створюють словом new.',ex:'Object o = new Object();'},
+{t:'Метод',d:'Іменований шматок коду, який виконує дію. Його можна викликати багато разів.',ex:'static int twice(int x) {\n    return x * 2;\n}'},
+{t:'Поле',d:'Змінна, яка належить класу або об\'єкту. Так об\'єкт зберігає свої дані.',ex:'class Dog {\n    int age;\n}'},
+{t:'Конструктор',d:'Спеціальний метод без типу результату, ім\'я якого збігається з іменем класу. Він запускається при створенні об\'єкта.',ex:'class Dog {\n    String name;\n    Dog(String name) {\n        this.name = name;\n    }\n}'},
+{t:'static',d:'Слово, яке робить поле чи метод спільним для всього класу. Для виклику не потрібен об\'єкт.',ex:'class Util {\n    static int one() {\n        return 1;\n    }\n}'},
+{t:'final',d:'Слово, яке забороняє змінювати значення змінної. Також final клас не можна наслідувати.',ex:'final int MAX = 10;'},
+{t:'Інтерфейс',d:'Список методів без реалізації, який клас обіцяє виконати. Клас підключає його словом implements.',ex:'interface Speaker {\n    void speak();\n}'},
+{t:'Абстрактний клас',d:'Клас, об\'єкт якого створити не можна. Він слугує основою для інших класів і може мати методи без тіла.',ex:'abstract class Shape {\n    abstract double area();\n}'},
+{t:'Наслідування',d:'Коли один клас бере поля й методи іншого. Це записують словом extends.',ex:'class Animal { }\nclass Cat extends Animal { }'},
+{t:'Поліморфізм',d:'Здатність одного виклику працювати по-різному залежно від справжнього типу об\'єкта.',ex:'class A { String hi() { return "A"; } }\nclass B extends A { String hi() { return "B"; } }'},
+{t:'Інкапсуляція',d:'Приховування даних усередині класу. Поля роблять private, а доступ дають через методи.',ex:'class Box {\n    private int size;\n    int getSize() {\n        return size;\n    }\n}'},
+{t:'Перевантаження',d:'Кілька методів з однаковим іменем, але з різними параметрами в одному класі.',ex:'static int sum(int a, int b) { return a + b; }\nstatic int sum(int a, int b, int c) { return a + b + c; }'},
+{t:'Перевизначення',d:'Коли дочірній клас пише власну версію методу батька з тим самим іменем і параметрами.',ex:'class A { String hi() { return "A"; } }\nclass B extends A {\n    @Override\n    String hi() { return "B"; }\n}'},
+{t:'Виняток',d:'Об\'єкт, який описує помилку під час роботи програми. Він перериває звичайний хід коду.',ex:'int x = 5 / 0;'},
+{t:'try/catch',d:'Конструкція для обробки винятків. У try пишуть небезпечний код, у catch реакцію на помилку.',ex:'try {\n    int x = 5 / 0;\n} catch (ArithmeticException e) {\n    System.out.println("Ділити на нуль не можна");\n}'},
+{t:'Колекція',d:'Об\'єкт, що зберігає групу інших об\'єктів. До колекцій належать списки, множини й мапи.',ex:'Collection<String> c = new ArrayList<>();'},
+{t:'Список (List)',d:'Колекція, де елементи йдуть по порядку й можуть повторюватись. До елемента звертаються за номером.',ex:'List<String> names = new ArrayList<>();\nnames.add("Оля");'},
+{t:'Множина (Set)',d:'Колекція унікальних елементів. Повторне додавання того самого значення нічого не змінює.',ex:'Set<Integer> s = new HashSet<>();\ns.add(1);\ns.add(1);'},
+{t:'Мапа (Map)',d:'Колекція пар «ключ і значення». За ключем швидко знаходять потрібне значення.',ex:'Map<String, Integer> ages = new HashMap<>();\nages.put("Оля", 15);'},
+{t:'Узагальнення (generic)',d:'Спосіб вказати в кутових дужках, з яким типом працює клас. Це захищає від помилок із типами.',ex:'List<String> list = new ArrayList<>();'},
+{t:'Потік (Stream)',d:'Ланцюжок операцій над колекцією: відфільтрувати, перетворити, зібрати. Сама колекція при цьому не змінюється.',ex:'List<Integer> nums = List.of(1, 2, 3, 4);\nlong even = nums.stream().filter(n -> n % 2 == 0).count();'},
+{t:'Лямбда',d:'Короткий запис функції без імені. Її зручно передавати в методи.',ex:'Function<Integer, Integer> twice = x -> x * 2;'},
+{t:'Потік виконання (Thread)',d:'Окремий шлях виконання коду. Кілька потоків можуть працювати одночасно.',ex:'Thread t = new Thread(() -> System.out.println("Привіт з потоку"));\nt.start();'},
+{t:'JVM',d:'Віртуальна машина Java. Вона запускає байт-код на будь-якому комп\'ютері.',ex:''},
+{t:'JDK',d:'Набір для розробника: компілятор javac, JVM та інші інструменти. Він потрібен, щоб писати й запускати програми.',ex:''},
+{t:'Байт-код',d:'Проміжний код у файлах .class, який створює компілятор. Його виконує JVM.',ex:''},
+{t:'Пакет (package)',d:'Папка для групування класів. Допомагає уникнути плутанини з однаковими іменами.',ex:'package com.example.shop;'},
+{t:'import',d:'Інструкція, що підключає клас з іншого пакета. Після неї клас можна писати за коротким іменем.',ex:'import java.util.ArrayList;'},
+{t:'Масив',d:'Набір елементів одного типу фіксованої довжини. Елементи нумеруються з нуля.',ex:'int[] nums = {10, 20, 30};\nSystem.out.println(nums[0]);'},
+{t:'Цикл',d:'Конструкція, яка повторює код. Найчастіше це for і while.',ex:'for (int i = 0; i < 3; i++) {\n    System.out.println(i);\n}'},
+{t:'Змінна',d:'Іменована комірка пам\'яті для значення. У Java в неї завжди є тип.',ex:'int age = 15;'},
+{t:'Тип даних',d:'Описує, які значення можна зберігати й що з ними робити. Наприклад, int це цілі числа, а String це текст.',ex:'double price = 9.99;'},
+{t:'boolean',d:'Тип, який має лише два значення: true або false. Його використовують в умовах.',ex:'boolean ready = true;'},
+{t:'null',d:'Значення, яке означає, що змінна нікуди не вказує. Виклик методу через null дає NullPointerException.',ex:'String s = null;'},
+{t:'Рядок (String)',d:'Клас для тексту. Рядок не можна змінити, будь-яка зміна створює новий рядок.',ex:'String hi = "Привіт";\nSystem.out.println(hi.length());'},
+{t:'Перелік (enum)',d:'Тип з фіксованим набором іменованих значень. Зручний для днів тижня, станів і рівнів.',ex:'enum Level { EASY, HARD }'},
+{t:'Запис (record)',d:'Короткий спосіб описати клас, що лише зберігає дані. Java сама створює конструктор і геттери.',ex:'record Point(int x, int y) { }'},
+{t:'Анотація',d:'Позначка, яка починається з @ і дає підказку компілятору чи інструментам. Наприклад, @Override.',ex:'@Override\npublic String toString() {\n    return "Привіт";\n}'},
+{t:'Збирач сміття (GC)',d:'Частина JVM, яка сама видаляє з пам\'яті об\'єкти, що більше не потрібні. Вручну пам\'ять звільняти не треба.',ex:''}
+];
+
+/* ---------- round 3: projects, interview, trainer, daily, weekly, terms ---------- */
+PROJECTS.forEach(p=>p.steps.forEach((st,si)=>st.ex.forEach((e,k)=>{e.id='pj:'+p.id+':'+si+':'+k;e.ui=100;})));
+COMPERR.forEach((e,k)=>{e.id='ce:'+k;e.ui=101;});
+const QUOTES=['Код читають частіше, ніж пишуть. Пиши для того, хто прочитає.','Спочатку зроби, щоб працювало. Потім зроби гарно.','Найкращий код це той, якого не довелося писати.','Назви змінних працюють краще за коментарі.','Не оптимізуй, поки не виміряв, що саме гальмує.','Маленька функція краще за велику, а зрозуміла краще за хитру.','Помилки це не провал, а підказки, куди дивитись.','Спершу зрозумій задачу, а вже потім відкривай редактор.','Хороший програміст нічого не пам’ятає напам’ять, зате вміє шукати.','Тест, написаний сьогодні, зекономить годину завтра.','Простота це вершина складності.','Якщо код складно пояснити, його варто спростити.','Один урок на день краще, ніж десять в неділю.','Жоден експерт не народжується експертом: усі колись писали Hello World.','Налагоджуй по одній зміні: так видно, що саме зламалось.','Дедлайни минають, а чистий код лишається.','Перерва допомагає знайти помилку швидше, ніж упертість.'];
+const quoteOfDay=()=>QUOTES[Math.floor(Date.now()/86400000)%QUOTES.length];
+function wkId(){const d=new Date();const t=new Date(Date.UTC(d.getFullYear(),d.getMonth(),d.getDate()));const day=(t.getUTCDay()+6)%7;t.setUTCDate(t.getUTCDate()-day+3);const y=t.getUTCFullYear();const j=new Date(Date.UTC(y,0,4));const w=1+Math.round(((t-j)/86400000-3+((j.getUTCDay()+6)%7))/7);return y+'-W'+w;}
+function wkState(){const id=wkId();if(!S.wk||S.wk.id!==id)S.wk={id,n:0,got:false};return S.wk;}
+const WK_GOAL=5;
+const hashStr=s=>{let h=0;for(let i=0;i<s.length;i++)h=(h*31+s.charCodeAt(i))|0;return Math.abs(h);};
+function dailyEx(){
+  const lessons=ALL.filter(l=>l.n<=Math.max(0,(ALL.find(x=>!S.done[x.uid])||{n:ALL.length}).n));
+  const pool=[];lessons.forEach(l=>l.lesson.ex.forEach(e=>{if(e.t!=='order')pool.push(e);}));
+  return pool.length?pool[hashStr(today())%pool.length]:null;
+}
+function startDaily(){
+  const e=dailyEx();if(!e)return;
+  newRun({uid:'daily',n:-1,lesson:{title:'Задача дня',ex:[]}},[e],{review:true,custom:'daily',ttl:'Задачу дня виконано',allEx:[e]});
+}
+function startProject(pid,si){
+  const p=PROJECTS.find(x=>x.id===pid);if(!p)return;const st=p.steps[si];if(!st)return;
+  if(si>(S.pj&&S.pj[pid]||0))return;
+  const q=st.ex.slice();
+  newRun({uid:'pj:'+pid+':'+si,n:-1,lesson:{title:p.title+': '+st.title,ex:[]}},q,{review:true,custom:'pj',pj:[pid,si],ttl:'Крок проєкту пройдено',intro:st.intro,allEx:q});
+}
+function startComp(){
+  const q=shuffle(COMPERR.slice()).slice(0,8);
+  newRun({uid:'ce',n:-1,lesson:{title:'Помилки компілятора',ex:[]}},q,{review:true,custom:'ce',ttl:'Тренування завершено',allEx:q});
+}
+function startInterview(){
+  const unl=ALL.filter(l=>isUnlocked(l.n)&&(S.done[l.uid]||l.n<=2));
+  const pool=[];unl.forEach(l=>l.lesson.ex.forEach(e=>{if(e.t==='mc'||e.t==='out'||e.t==='bug')pool.push(e);}));
+  const iv=ALL.filter(l=>l.ui===UNITS.length-1);
+  iv.forEach(l=>l.lesson.ex.forEach(e=>{if((e.t==='mc'||e.t==='out')&&!pool.includes(e))pool.push(e);}));
+  const q=shuffle(pool).slice(0,15);if(q.length<5){toast('Ще рано','Пройди кілька уроків і повертайся');return;}
+  newRun({uid:'iv',n:-1,lesson:{title:'Співбесіда',ex:[]}},q,{review:true,custom:'iv',iv:true,hearts:99,max:99,ttl:'Співбесіду завершено',allEx:q,t0:Date.now()});
+}
+const fmtTime=ms=>{const s=Math.round(ms/1000);return Math.floor(s/60)+':'+String(s%60).padStart(2,'0');};
+setInterval(()=>{try{if(L&&L.iv&&screen==='lesson'){const e=document.getElementById('ivt');if(e)e.textContent=fmtTime(Date.now()-L.t0);}}catch(e){}},1000);
+function pickVariant(ex){
+  try{
+    const maxN=L.info&&L.info.n>=0?L.info.n:1e9;
+    let src=[];
+    if(ex.ui===101)src=COMPERR;
+    else if(ex.ui===100)src=PROJECTS.flatMap(p=>p.steps.flatMap(s=>s.ex));
+    else if(UNITS[ex.ui])src=ALL.filter(l=>l.ui===ex.ui&&l.n<=maxN&&(maxN<1e9||S.done[l.uid])).flatMap(l=>l.lesson.ex);
+    const free=e=>e!==ex&&!L.queue.includes(e)&&!(L.asked&&L.asked.has(e));
+    let c=src.filter(e=>free(e)&&e.t===ex.t);
+    if(!c.length)c=src.filter(free);
+    if(!c.length&&UNITS[ex.ui]){
+      const wide=ALL.filter(l=>l.ui===ex.ui).flatMap(l=>l.lesson.ex).filter(free);
+      c=wide.filter(e=>e.t===ex.t);if(!c.length)c=wide;
+    }
+    if(!c.length)return ex;
+    const w=s=>new Set(String(s).toLowerCase().split(/[^a-zа-яіїєґ0-9]+/).filter(x=>x.length>3));
+    const wq=w(ex.q+' '+(ex.why||''));
+    c=shuffle(c).map(e=>({e,s:[...w(e.q+' '+(e.why||''))].filter(x=>wq.has(x)).length})).sort((a,b)=>b.s-a.s);
+    return c[0].e;
+  }catch(e){return ex;}
+}
+function pickChallenge(ex){
+  try{
+    const maxN=L.info&&L.info.n>=0?L.info.n:-1;if(maxN<0||L.review||L.placement)return null;
+    const c=ALL.filter(l=>l.ui===ex.ui&&l.n<=maxN).flatMap(l=>l.lesson.ex).filter(e=>['bug','type','fill','order'].includes(e.t)&&!L.queue.includes(e)&&!(L.asked&&L.asked.has(e)));
+    return c.length?shuffle(c)[0]:null;
+  }catch(e){return null;}
+}
+const ptsFor=n=>n<=0?10:n===1?5:n===2?3:1;
+function wrapJava(code){
+  if(!code)return null;
+  if(/\bclass\s+\w+/.test(code)&&/static\s+void\s+main/.test(code))return code;
+  if(/\bclass\s+\w+|\binterface\s+\w+|\brecord\s+\w+/.test(code))return null;
+  if(/\[\[\d\]\]/.test(code))return null;
+  const imp='import java.util.*;\nimport java.util.stream.*;\nimport java.util.function.*;\n';
+  return imp+'public class Main {\n    public static void main(String[] args) throws Exception {\n'+code.split('\n').map(l=>'        '+l).join('\n')+'\n    }\n}\n';
+}
+function exCode(ex,c){
+  try{
+    if(ex.t==='out'||ex.t==='mc')return ex.code||null;
+    if(ex.t==='fill'){let k=0;return ex.code.replace(/\[\[(\d)\]\]/g,(m,i)=>ex.ans[+i]);}
+    if(ex.t==='order')return ex.lines.join('\n');
+    if(ex.t==='type')return ex.code?ex.code.replace(/_{2,}|\[\[\d\]\]/,ex.acc[0]):null;
+  }catch(e){}
+  return null;
+}
+const HOWTO={
+  mc:'Прочитай питання повільно й відкинь варіанти, які точно не підходять. Потім порівняй два найімовірніші: чим вони відрізняються?',
+  out:'Виконуй код вручну, рядок за рядком, і записуй, яке значення має кожна змінна на кожному кроці. Лише потім дивись у варіанти відповіді.',
+  fill:'Прочитай рядок із пропуском цілком і подумай, яке слово там потрібне за змістом. Звір з тим, що стоїть навколо, наприклад типом змінної або назвою методу.',
+  order:'Подумай, що має статися першим: оголошення, потім дії, потім результат. Рядки йдуть так, як їх виконує Java: згори вниз.',
+  type:'Згадай точну форму запису. Якщо не виходить, подивись у теорію нижче й напиши відповідь іще раз своїми словами.',
+  bug:'Компілятор перевіряє кожен рядок. Знайди місце, де порушено правило: немає крапки з комою, неправильний тип, невідома змінна або метод.'
+};
+function moreHtml(ex,c){
+  let h='<details class="more"><summary>Докладніший розбір</summary><div class="more-b">';
+  h+='<h4>Як міркувати</h4><p>'+esc(HOWTO[ex.t]||'')+'</p>';
+  h+='<h4>Чому саме так</h4><p>'+esc(ex.why||'')+'</p>';
+  try{
+    const uid=String(ex.id).split(':')[0];
+    const li=ALL.find(l=>l.uid===uid);
+    const cards=(li&&li.lesson.learn)||[];
+    if(cards.length){
+      const wq=new Set(String(ex.q+' '+(ex.why||'')+' '+(ex.code||'')).toLowerCase().split(/[^a-zа-яіїєґ0-9.]+/).filter(x=>x.length>3));
+      const sc=cards.map((k,i)=>({k,i,s:[...new Set(String(k.h+' '+k.p).toLowerCase().split(/[^a-zа-яіїєґ0-9.]+/).filter(x=>x.length>3))].filter(x=>wq.has(x)).length}));
+      sc.sort((a,b)=>b.s-a.s||a.i-b.i);
+      h+='<h4>З теорії уроку</h4>';
+      sc.slice(0,2).forEach(x=>{h+='<div class="more-c"><b>'+esc(x.k.h)+'</b><p>'+fmt(x.k.p)+'</p>'+(x.k.code?codeBlock(x.k.code):'')+'</div>';});
+    }
+  }catch(e){}
+  const code=wrapJava(exCode(ex,c));
+  if(code){h+='<button class="btn ghost sm" data-act="runhere" data-id="'+esc(ex.id)+'">Запустити код і побачити самій</button><div class="console more-out" hidden><span class="con-l">Результат</span><pre></pre></div>';}
+  return h+'</div></details>';
+}
+/* terms */
+let TM={mode:'cards',i:0,show:false,q:''};
+function termOrder(){
+  const t=S.terms||{};
+  return TERMS.map((x,i)=>({x,i,s:t[x.t]||0})).sort((a,b)=>a.s-b.s||a.i-b.i).map(o=>o.x);
+}
+function termsView(){
+  let h='<div class="view hastabs'+(fx.view?' enter':'')+'"><header class="top"><div class="brand">Словник</div><div class="stats"><button class="stat" data-act="tab" data-tab="sheet" aria-label="До шпаргалок">'+IC.book+'<span>Шпаргалки</span></button></div></header>';
+  h+='<div class="seg" style="margin:6px 16px 0" role="group"><button class="segb'+(TM.mode==='cards'?' on':'')+'" data-act="tmode" data-v="cards">Картки</button><button class="segb'+(TM.mode==='list'?' on':'')+'" data-act="tmode" data-v="list">Список</button></div>';
+  if(TM.mode==='cards'){
+    const ord=termOrder(),t=ord[TM.i%ord.length],known=Object.values(S.terms||{}).filter(v=>v>=2).length;
+    h+='<div class="tcard-w"><p class="sh-n">Вивчено: '+known+' з '+TERMS.length+'</p><button class="tcard'+(TM.show?' flip':'')+'" data-act="tflip" aria-label="Перевернути картку"><span class="tc-t">'+esc(t.t)+'</span>'+(TM.show?'<span class="tc-d">'+esc(t.d)+'</span>'+(t.ex?'<span class="tc-x">'+esc(t.ex)+'</span>':''):'<span class="tc-h">Торкнись, щоб побачити пояснення</span>')+'</button>';
+    if(TM.show)h+='<div class="btnrow"><button class="btn ghost" data-act="tno">Ще раз</button><button class="btn good" data-act="tyes">Знаю</button></div>';
+    h+='</div>';
+  }else{
+    h+='<div class="sh-tools"><input id="tq" class="inp" type="search" placeholder="Пошук терміна" value="'+esc(TM.q)+'" aria-label="Пошук терміна" autocomplete="off"></div><div class="sheet" id="tlist">'+termsList()+'</div>';
+  }
+  return h+'</div>'+tabs('sheet');
+}
+function termsList(){
+  const q=TM.q.trim().toLowerCase();
+  const l=TERMS.filter(x=>!q||(x.t+' '+x.d).toLowerCase().includes(q));
+  if(!l.length)return '<p class="desc" style="text-align:center">Нічого не знайшлося.</p>';
+  return l.map(x=>'<article class="sh-c"><h3 style="padding:14px 16px 0">'+esc(x.t)+'</h3><div style="padding:6px 16px 14px;display:grid;gap:8px;min-width:0"><p>'+esc(x.d)+'</p>'+(x.ex?codeBlock(x.ex):'')+'</div></article>').join('');
+}
+/* certificate */
+function certView(){
+  const all=ALL.every(l=>S.done[l.uid]);
+  const n=doneReal();
+  if(!all)return '<div class="view enter hastabs"><header class="top"><div class="brand">Сертифікат</div></header><div class="sets"><section class="card"><h2>Ще не готовий</h2><p class="desc">Сертифікат з’явиться, коли ти пройдеш усі уроки. Зараз пройдено '+n+' з '+ALL.length+'.</p><div class="meter"><div class="track"><div class="fill" style="width:'+Math.round(n/ALL.length*100)+'%"></div></div></div></section></div></div>'+tabs('stats');
+  const d=new Date();const ds=String(d.getDate()).padStart(2,'0')+'.'+String(d.getMonth()+1).padStart(2,'0')+'.'+d.getFullYear();
+  const li=lvlInfo(S.xp);
+  return '<div class="view enter hastabs"><header class="top noprint"><div class="brand">Сертифікат</div></header><div class="cert" id="cert"><div class="cert-in"><div class="cert-m">'+mascot('happy',90)+'</div><p class="cert-k">Сертифікат</p><h1>'+esc(NC().g)+'</h1><p class="cert-t">'+G('успішно пройшла курс','успішно пройшов курс')+'</p><h2>Java Бариста</h2><p class="cert-s">Уроків: '+ALL.length+', розділів: '+UNITS.length+' · рівень '+li.n+' «'+esc(li.title)+'» · '+S.xp+' XP</p><p class="cert-d">'+ds+'</p></div></div><div class="sets noprint"><button class="btn" data-act="printcert">Роздрукувати або зберегти як PDF</button></div></div>'+tabs('stats');
+}
+
 const GLYPH=[
  '<path d="M-14 -6h24v10a12 12 0 0 1-24 0z"/><path d="M10 -3h4a5 5 0 0 1 0 10h-4"/><path d="M-8 -14q3 -4 0 -8M0 -14q3 -4 0 -8"/>',
  '<rect x="-24" y="-9" width="14" height="18" rx="3"/><rect x="-7" y="-9" width="14" height="18" rx="3"/><rect x="10" y="-9" width="14" height="18" rx="3"/>',
@@ -1762,7 +2448,7 @@ function homeView(){
    h+='<div class="chips"><div class="chip fl">'+IC.flame+'<b'+cn(S.streak)+'>'+S.streak+'</b><span>Серія, дн.</span></div>'
     +'<div class="chip">'+IC.layers+'<b'+cn(dn)+'>'+dn+'</b><span>Уроків пройдено</span></div>'
     +'<div class="chip">'+IC.bolt+'<b'+cn(dxp)+'>'+dxp+'</b><span>XP сьогодні</span></div></div>';
-   h+='<div class="say">'+IC.bulb+'<div><small>Лисичка каже</small><p id="say">'+esc(sayText(0))+'</p></div></div>';}
+   h+='<p class="quote">«'+esc(quoteOfDay())+'»</p><div class="say">'+IC.bulb+'<div><small>Лисичка каже</small><p id="say">'+esc(sayText(0))+'</p></div></div>';}
   h+='<section class="next">';
   if(cur){
     h+='<p class="kicker">'+(doneN?'Продовжуй':'Починаємо')+'</p><h1>'+esc(cur.lesson.title)+'</h1><p class="sub">Розділ '+(cur.ui+1)+': '+esc(cur.unit.title)+'</p>';
@@ -1781,6 +2467,14 @@ function homeView(){
       +'</p></div><button class="btn sm" data-act="start" data-uid="review">Повторити</button></section>';
   }
   h+='<section class="review"><div class="rv-ico">'+IC.code+'</div><div class="rv-t"><h2>Пісочниця</h2><p>Пиши Java і запускай прямо тут.</p></div><button class="btn sm" data-act="ide">Відкрити</button></section>';
+  {
+    const dx=dailyEx(),dd=S.daily===today(),w=wkState();
+    h+='<section class="review"><div class="rv-ico">'+IC.bolt+'</div><div class="rv-t"><h2>Задача дня</h2><p>'+(dd?'Сьогодні вже виконано. Завтра буде нова.':'Одне завдання й бонус +15 XP.')+'</p></div><button class="btn sm" data-act="daily"'+(dx&&!dd?'':' disabled')+'>'+(dd?'Готово':'Почати')+'</button></section>';
+    h+='<section class="review" style="display:block"><div style="display:flex;gap:12px;align-items:center"><div class="rv-ico">'+IC.star+'</div><div class="rv-t"><h2>Виклик тижня</h2><p>'+(w.got?'Виконано! Нагорода отримана.':'Заверши '+WK_GOAL+' занять до неділі, нагорода +50 XP.')+'</p></div></div><div class="wkbar"><i style="width:'+Math.min(100,w.n/WK_GOAL*100)+'%"></i></div><p class="desc" style="margin:6px 0 0">'+Math.min(w.n,WK_GOAL)+' з '+WK_GOAL+'</p></section>';
+    h+='<section class="review"><div class="rv-ico">'+IC.chart+'</div><div class="rv-t"><h2>Співбесіда на час</h2><p>15 питань підряд без підказок.</p></div><button class="btn sm" data-act="interview">Почати</button></section>';
+    h+='<section class="review"><div class="rv-ico">'+IC.cross+'</div><div class="rv-t"><h2>Помилки компілятора</h2><p>Читаємо повідомлення й знаходимо причину.</p></div><button class="btn sm" data-act="comp">Тренуватись</button></section>';
+    h+='<h2 class="pg-s">Проєкти</h2><div class="pjs">'+PROJECTS.map(p=>{const dn=(S.pj&&S.pj[p.id])||0;return '<section class="pj"><div class="pj-h"><b>'+esc(p.title)+'</b><span>'+esc(p.sub)+'</span></div><div class="pj-s">'+p.steps.map((st,si)=>'<button class="pjn'+(si<dn?' done':si===dn?' cur':'')+'" data-act="pj" data-p="'+p.id+'" data-s="'+si+'"'+(si>dn?' disabled':'')+'><i>'+(si<dn?'✓':si+1)+'</i><span>'+esc(st.title)+'</span></button>').join('')+'</div></section>';}).join('')+'</div>';
+  }
   UNITS.forEach((u,ui)=>{
     h+='<section style="--uc:var(--u'+((ui%6)+1)+')"><div class="unit"><p class="kicker">Розділ '+(ui+1)+'</p><h2>'+esc(u.title)+'</h2><p>'+esc(u.sub)+'</p></div>'+unitArt(ui)+'<div class="path">';
     ALL.filter(l=>l.ui===ui).forEach(l=>{
@@ -1822,8 +2516,16 @@ function setView(){
   h+=accountCard()+bioCard();
   h+='<section class="card"><h2>Складність</h2>'+seg('setlevel',[{v:'easy',t:'Легкий'},{v:'normal',t:'Звичайний'},{v:'hard',t:'Складний'}],S.level)+'<p class="desc">'+esc(LEVELS[S.level].desc)+'</p></section>';
   h+='<section class="card"><h2>Тема</h2>'+seg('settheme',[{v:'auto',t:'Авто'},{v:'light',t:'Світла'},{v:'dark',t:'Темна'}],S.theme||'auto')+'</section>';
+  h+='<section class="card"><h2>Озвучення</h2>'+seg('setrate',[{v:0.8,t:'Повільно'},{v:0.95,t:'Звичайно'},{v:1.1,t:'Швидко'}],S.rate||0.95)+'<p class="desc">Швидкість мовлення для кнопки «Прослухати».</p></section>';
   h+='<section class="card"><h2>Ціль на день</h2>'+seg('setgoal',[{v:20,t:'20 XP'},{v:30,t:'30 XP'},{v:50,t:'50 XP'}],S.goal)+'</section>';
   h+='<section class="card">'+tog('sound','Звуки','Короткі сигнали правильної й неправильної відповіді.')+tog('big','Великий шрифт','Збільшує весь інтерфейс.')+tog('calm','Спокійний режим','Вимикає анімації.')+'</section>';
+  {const q=S.quiet||{on:false,from:23,to:8},opt=(v,c)=>Array.from({length:24},(_,i)=>'<option value="'+i+'"'+(i===c?' selected':'')+'>'+String(i).padStart(2,'0')+':00</option>').join('');
+   const paused=inPause();
+   h+='<section class="card"><h2>Сповіщення: розклад</h2><p class="desc">Тиха година вимикає сповіщення в обраний проміжок. Зміни дійдуть до сервера після синхронізації.</p><button class="segb'+(q.on?' on':'')+'" style="width:100%;border:2px solid var(--line);border-radius:12px" data-act="quiet">'+(q.on?'Тиха година увімкнена':'Тиха година вимкнена')+'</button>'
+    +(q.on?'<div class="selrow">З <select id="qfrom" aria-label="Початок">'+opt(0,q.from)+'</select> до <select id="qto" aria-label="Кінець">'+opt(0,q.to)+'</select></div>':'')
+    +'<div style="margin-top:12px"><button class="segb'+(S.wkdLate?' on':'')+'" style="width:100%;border:2px solid var(--line);border-radius:12px" data-act="wkdlate">'+(S.wkdLate?'Вихідні: перше сповіщення о 11:00':'Вихідні: починати з 8:00')+'</button></div></section>';
+   h+='<section class="card"><h2>Пауза серії</h2><p class="desc">'+(paused?'Пауза діє до '+esc(S.pause)+'. Серія не згорить.':'Їдеш у відпустку чи хворієш? Серія збережеться на 3 дні. Можна двічі на місяць.')+'</p><button class="btn ghost" data-act="pause"'+(paused?' disabled':'')+'>Взяти паузу на 3 дні</button></section>';
+  }
   h+='<section class="card"><h2>Знайомство</h2><p class="desc">Лисичка звертається до тебе: <b>'+esc(S.nm||'без імені')+'</b>.</p><button class="btn ghost" data-act="rename">Змінити ім’я</button></section>';
   h+='<section class="card"><h2>Оновлення</h2><p class="desc">Застосунок сам перевіряє нову версію. Можна перевірити вручну: прогрес не втратиться.</p><button class="btn ghost" data-act="updchk">Перевірити оновлення</button></section>';
   h+='<section class="card"><h2>Нагадування</h2><p class="desc">Година для події в календарі. Сповіщення приходять окремо: щодня о 8, 11, 14, 17, 20 та 23.</p><input id="rtime" class="inp" type="time" value="'+esc(S.remind||'19:00')+'" aria-label="Година нагадування"><button class="btn ghost" style="margin-top:12px" data-act="ics">Додати в календар</button>'+pushCard()+'</section>';
@@ -1886,8 +2588,8 @@ function heartsHtml(){
 }
 function canHint(c){
   if(L.placement||S.level==='hard')return null;
-  const single=['mc','out','bug','type'].includes(c.ex.t);
-  return single?c.hints<1:true;
+  if(L.iv)return null;
+  return c.hints<3;
 }
 
 function studyView(){
@@ -1910,11 +2612,12 @@ function lessonView(){
   const idx=Math.min(L.total,L.total-L.queue.length+1);
   let h='<div class="view'+(fx.view?' enter':'')+'"><div class="lesson"><div class="lhead"><button class="x" data-act="leave" aria-label="Вийти з уроку">'+IC.cross+'</button>'
     +'<div class="track" role="progressbar" aria-valuemin="0" aria-valuemax="'+L.total+'" aria-valuenow="'+L.done+'"><div class="fill" style="width:'+from+'%" data-to="'+pct+'"></div></div>'
-    +(L.placement?'':heartsHtml()+xpChip())
+    +(L.placement?'':L.iv?'<div class="xpc" role="timer" aria-label="Час">⏱ <span id="ivt">'+fmtTime(Date.now()-L.t0)+'</span></div>'+xpChip():heartsHtml()+xpChip())
     +((L.info.lesson&&L.info.lesson.learn)?'<button class="x book" data-act="peek" aria-label="Переглянути теорію">'+IC.book+'</button>':'')+'</div>';
-  const kicker=L.placement?'Тест рівня · '+idx+' / '+L.total:L.review?'Повторення':'Тренуємось';
-  h+='<div class="stage'+(fx.stage?' enter':'')+'"><p class="kicker">'+kicker+'</p><h2 class="q">'+esc(ex.q)+'</h2><p class="how">'+HOW[ex.t]+'</p>';
-  if(S.level==='normal'&&L.hinted.has(ex)&&!c.checked)h+='<p class="hint hintnote">Підказку використано: за це завдання буде 5 XP замість 10.</p>';
+  const kicker=L.placement?'Тест рівня · '+idx+' / '+L.total:c.chal?'Виклик':c.var?'Схоже завдання':L.iv?'Співбесіда · '+idx+' / '+L.total:L.custom==='pj'?'Проєкт':L.custom==='ce'?'Помилки компілятора':L.custom==='daily'?'Задача дня':L.review?'Повторення':'Тренуємось';
+  h+='<div class="stage'+(fx.stage?' enter':'')+'"><p class="kicker">'+kicker+' <button class="x spk" data-act="sayq" aria-label="Прослухати питання" style="width:28px;height:28px;font-size:15px;vertical-align:middle">🔊</button></p><h2 class="q">'+esc(ex.q)+'</h2><p class="how">'+HOW[ex.t]+'</p>';
+  if(L.intro&&L.done===0&&L.queue.length===L.total&&!c.checked)h+='<p class="hint intro">'+esc(L.intro)+'</p>';
+  if(S.level==='normal'&&L.hinted.has(ex)&&c.hints>0&&!c.checked)h+='<p class="hint hintnote">Підказку використано: за це завдання буде '+ptsFor(c.hints)+' XP замість 10.</p>';
   if(ex.t==='mc'||ex.t==='out'){
     if(ex.code)h+=codeBlock(ex.code);
     h+='<div class="opts">';
@@ -1967,7 +2670,7 @@ function lessonView(){
   }else if(!c.checked){
     const ch=canHint(c);
     h+='<div class="bar"><div class="bar-in"><div class="btnrow'+(ch!==null?' hint':'')+'">'
-      +(ch!==null?'<button class="btn ghost hintbtn" data-act="hint"'+(ch?'':' disabled')+'>'+IC.bulb+'<span>Підказка</span>'+(S.level==='normal'?'<em>−5 XP</em>':'')+'</button>':'')
+      +(ch!==null?'<button class="btn ghost hintbtn" data-act="hint"'+(ch?'':' disabled')+'>'+IC.bulb+'<span>Підказка</span>'+(S.level==='normal'?'<em>'+['−5 XP','ще −2 XP','ще −2 XP'][c.hints||0]+'</em>':'')+'</button>':'')
       +'<button class="btn" data-act="check"'+(ready(c)?'':' disabled')+'>Перевірити</button></div></div></div>';
   }else{
     const ok=c.ok;
@@ -1986,7 +2689,7 @@ function lessonView(){
     const plus=(ok&&fx.res&&!L.placement)?'<span class="plus" aria-hidden="true">+'+gain+(fx.fast?' ⚡':'')+'</span>':'';
     h+='<div class="bar slide '+(ok?'good':'bad')+'"><div class="bar-in">'+plus+'<div class="fb"><div class="badge m">'+mascot(ok?'happy':'sad',48)+'</div><div class="fb-text"><h3>'+(ok?praise:'Не зовсім')+'</h3>'
       +(ok?'':'<p>Правильна відповідь:</p>'+ans+yours(ex,c))
-      +'<p>'+esc(ex.why)+'</p></div></div><button class="btn '+(ok?'good':'bad')+'" data-act="next">'+(!L.placement&&L.hearts<=0&&!ok?'Зрозуміло':'Далі')+'</button></div></div>';
+      +'<p>'+esc(ex.why)+'</p>'+(ok?'':((L.iv||L.hearts<=0)?'':'<p class="hint">Далі буде схоже завдання, щоб ти зрозуміла суть, а не завчила відповідь.</p>')+moreHtml(ex,c))+'</div></div><button class="btn '+(ok?'good':'bad')+'" data-act="next">'+(!L.placement&&L.hearts<=0&&!ok?'Зрозуміло':'Далі')+'</button></div></div>';
   }
   return h;
 }
@@ -2001,10 +2704,10 @@ function resultView(){
     return h;
   }
   const next=res.review?null:ALL[res.info.n+1];
-  let h='<div class="view enter"><div class="result"><div class="hero ok'+(res.lvl?' gold':'')+'">'+mascot('cheer',120)+'</div>'+(res.lvl?'<div class="lvlup"><b>Новий рівень '+res.lvl.n+'</b><span>«'+esc(res.lvl.title)+'»</span></div>':'')+'<h1>'+(res.review?'Повторення завершено':'Урок пройдено')+', '+esc(nv())+'!</h1><p>'+esc(res.info.lesson.title)+'</p>'
+  let h='<div class="view enter"><div class="result"><div class="hero ok'+(res.lvl?' gold':'')+'">'+mascot('cheer',120)+'</div>'+(res.lvl?'<div class="lvlup"><b>Новий рівень '+res.lvl.n+'</b><span>«'+esc(res.lvl.title)+'»</span></div>':'')+'<h1>'+(res.ttl||(res.review?'Повторення завершено':'Урок пройдено'))+', '+esc(nv())+'!</h1><p>'+esc(res.info.lesson.title)+(res.iv?' · '+res.iv.grade:'')+'</p>'
    +'<div class="tiles"><div class="tile xp"><b data-count="'+res.gain+'" data-pre="+">+'+res.gain+'</b><span>Досвід</span></div>'
    +'<div class="tile"><b data-count="'+res.acc+'" data-suf="%">'+res.acc+'%</b><span>Точність</span></div>'
-   +'<div class="tile"><b>'+res.hearts+'/'+res.max+'</b><span>Життя</span></div></div>';
+   +(res.iv?'<div class="tile"><b>'+res.iv.time+'</b><span>Час</span></div></div>':'<div class="tile"><b>'+res.hearts+'/'+res.max+'</b><span>Життя</span></div></div>');
   if(res.notes.length)h+='<ul class="notes">'+res.notes.map(n=>'<li>'+esc(n)+'</li>').join('')+'</ul>';
   h+='<div class="btns">';
   if(next)h+='<button class="btn" data-act="start" data-uid="'+next.uid+'">Наступний урок</button><button class="btn ghost" data-act="home">На головну</button>';
@@ -2061,6 +2764,8 @@ function render(){
   else if(screen==='sheet')h=sheetView();
   else if(screen==='story')h=storyScreen();
   else if(screen==='ide')h=ideView();
+  else if(screen==='terms')h=termsView();
+  else if(screen==='cert')h=certView();
   else if(screen==='set')h=setView();
   else if(screen==='lesson')h=L.mode==='study'?studyView():lessonView();
   else if(screen==='result')h=resultView();
@@ -2085,6 +2790,7 @@ function prep(){
   else if(ex.t==='order'){c.bank=shuffle(ex.lines.map((text,i)=>({id:i,text})),true);c.built=[];}
   else if(ex.t==='bug'){c.sel=null;}
   else{c.val='';c.hintTxt='';}
+  if(L.asked)L.asked.add(ex);c.var=!!(L.varSet&&L.varSet.has(ex));c.chal=!!(L.chalEx&&L.chalEx===ex);
   L.cur=c;fx.stage=true;
 }
 function reviewPick(){
@@ -2102,7 +2808,7 @@ function reviewPick(){
 }
 function newRun(info,queue,extra){
   const mx=LEVELS[S.level].hearts;
-  L=Object.assign({info,mode:'practice',queue,total:queue.length,done:0,first:0,earn:0,hearts:mx,max:mx,retried:new Set(),hinted:new Set(),leave:false,cur:null,si:0,peek:false,fast:0,review:false,placement:false},extra||{});
+  L=Object.assign({info,mode:'practice',queue,total:queue.length,done:0,first:0,earn:0,hearts:mx,max:mx,retried:new Set(),hinted:new Set(),asked:new Set(),varSet:new Set(),sok:0,chal:false,chalEx:null,leave:false,cur:null,si:0,peek:false,fast:0,review:false,placement:false},extra||{});
   delete barsMem.lesson;
   screen='lesson';fx.view=true;prep();render();window.scrollTo(0,0);
 }
@@ -2133,15 +2839,16 @@ function endStudy(){
 function hint(){
   const c=L.cur,ex=c.ex;
   if(!c||c.checked||canHint(c)!==true)return;
+  if(S.level==='normal')fx.xpPop='−'+(ptsFor(c.hints)-ptsFor(c.hints+1));
   c.hints++;S.stats.hints++;
-  if(S.level==='normal'&&!L.hinted.has(ex))fx.xpPop='−5';
   if(S.level!=='easy')L.hinted.add(ex);
   if(ex.t==='mc'||ex.t==='out'){
-    const wrong=c.opts.map((o,i)=>i).filter(i=>!c.opts[i].ok&&i!==c.sel);
-    shuffle(wrong).slice(0,2).forEach(i=>c.gone.push(i));
+    const wrong=c.opts.map((o,i)=>i).filter(i=>!c.opts[i].ok&&i!==c.sel&&!c.gone.includes(i));
+    shuffle(wrong).slice(0,1).forEach(i=>c.gone.push(i));
   }else if(ex.t==='bug'){
     const wrong=ex.lines.map((l,i)=>i).filter(i=>i!==ex.bad&&i!==c.sel&&ex.lines[i].trim());
-    shuffle(wrong).slice(0,Math.ceil(wrong.length/2)).forEach(i=>c.gone.push(i));
+    const rem=wrong.filter(i=>!c.gone.includes(i));
+    shuffle(rem).slice(0,[Math.ceil(rem.length/3),Math.ceil(rem.length/2),rem.length][c.hints-1]).forEach(i=>c.gone.push(i));
     if(c.gone.includes(c.sel))c.sel=null;
   }else if(ex.t==='fill'){
     const k=ex.ans.findIndex((w,i)=>{const id=c.slots[i];return id==null||c.words.find(x=>x.id===id).w!==w;});
@@ -2161,7 +2868,7 @@ function hint(){
     if(bi>=0){const b=c.bank.splice(bi,1)[0];c.built.push(b);fx.line=b.id;}
   }else{
     const a=ex.acc[0];
-    c.hintTxt=a.slice(0,Math.max(2,Math.ceil(a.length*0.35)))+'…';
+    c.hintTxt=a.slice(0,Math.max(2,Math.ceil(a.length*[.35,.65,.9][c.hints-1])))+'…';
   }
   render();
 }
@@ -2180,7 +2887,9 @@ function check(){
     L.done++;L.pl.push(ok);
   }else if(ok){
     L.done++;
-    {const g=(L.retried.has(ex)||L.hinted.has(ex))?5:10;L.earn=(L.earn||0)+g;fx.xpPop='+'+g;}
+    {let g=L.retried.has(ex)?5:10;if(S.level!=='easy'&&c.hints>0)g=Math.min(g,ptsFor(c.hints));L.earn=(L.earn||0)+g;fx.xpPop='+'+g;}
+    if(firstTry&&c.hints===0&&!L.review&&!L.placement)L.sok++;else if(!firstTry||c.hints>0)L.sok=0;
+    if(L.sok>=3&&!L.chal&&!L.review&&!L.placement){const ch=pickChallenge(ex);if(ch){L.chal=true;L.chalEx=ch;L.queue.splice(1,0,ch);L.total++;toast('Виклик','Складніше завдання за серію правильних відповідей','ach');}}
     if(firstTry&&!L.hinted.has(ex)){
       L.first++;
       const dt=(performance.now()-c.t0)/1000;
@@ -2194,7 +2903,8 @@ function check(){
   }else{
     L.hearts--;fx.hit=L.hearts;
     S.miss[ex.id]=Math.min(5,(S.miss[ex.id]||0)+1);
-    if(L.hearts>0){L.retried.add(ex);L.queue.push(ex);}
+    L.sok=0;
+    if(L.hearts>0&&!L.iv){const v=pickVariant(ex);L.retried.add(ex);if(v!==ex){L.retried.add(v);L.varSet.add(v);}L.queue.push(v);}
   }
   if(!L.placement){
     if(ok){S.stats.run++;S.stats.runBest=Math.max(S.stats.runBest,S.stats.run);}else S.stats.run=0;
@@ -2224,7 +2934,7 @@ function finish(){
   if(L.placement){finishPlacement();return;}
   const acc=Math.round(L.first/L.total*100);
   const mult=(S.level==='hard'?1.5:1)*(isWeekend()?2:1);
-  const gain=Math.round((L.first*10+(L.total-L.first)*5+5+L.fast*2)*mult);
+  const gain=Math.round(((L.earn||0)+5+L.fast*2)*mult);
   const notes=[];
   if(L.fast)notes.push('Бонус за швидкі відповіді: +'+L.fast*2);
   if(S.level==='hard')notes.push('Складний режим: досвід ×1,5');
@@ -2242,18 +2952,24 @@ function finish(){
   const st=bumpStreak();
   if(st.froze)notes.push('Заморожування врятувало серію');
   if(st.earned)notes.push('Нове заморожування серії за тиждень занять');
-  if(L.review){
+  if(L.review&&!L.custom){
     S.stats.reviews++;
     const seen={};L.allEx.forEach(e=>{seen[e.id.split(':')[0]]=1;});
     Object.keys(seen).forEach(uid=>{if(S.done[uid])S.done[uid].t=Date.now();});
+  }else if(L.custom){
+    if(L.custom==='daily'&&S.daily!==today()){S.daily=today();S.xp+=15;S.day={d:today(),xp:S.day.xp+15};notes.push('Бонус за задачу дня: +15 XP');}
+    if(L.custom==='pj'){const[pid,si]=L.pj;S.pj=S.pj||{};if((S.pj[pid]||0)<=si){S.pj[pid]=si+1;}if(S.pj[pid]>=4)notes.push('Проєкт зібрано повністю');}
+    if(L.custom==='iv')S.stats.iv=(S.stats.iv||0)+1;
   }else{
     const prev=S.done[L.info.uid];
     S.done[L.info.uid]={a:Math.max(prev&&!prev.skip?prev.a:0,acc),t:Date.now()};
     S.stats.lessons++;
     if(acc===100)S.stats.perfect++;
   }
+  {const w=wkState();w.n++;if(w.n>=WK_GOAL&&!w.got){w.got=true;S.xp+=50;S.stats.wk=(S.stats.wk||0)+1;notes.push('Виклик тижня виконано: +50 XP');}}
+  const ivr=L.iv?{time:fmtTime(Date.now()-L.t0),grade:acc>=90?'Відмінно':acc>=70?'Добре':acc>=50?'Непогано':'Потрібно ще потренуватись'}:null;
   save();
-  res={info:L.info,acc,gain,hearts:L.hearts,max:L.max,review:!!L.review,notes,lvl:li.n>lv0?{n:li.n,title:li.title}:null};
+  res={info:L.info,ttl:L.ttl||'',iv:ivr,acc,gain,hearts:L.hearts,max:L.max,review:!!L.review,notes,lvl:li.n>lv0?{n:li.n,title:li.title}:null};
   screen='result';fx.view=true;fx.confetti=true;fx.beans=!!res.lvl;
   snd('done');
   render();window.scrollTo(0,0);
@@ -2308,6 +3024,24 @@ $app.addEventListener('click',e=>{
   if(a==='storygo'){const info=ALL.find(l=>l.uid===pendingUid);if(info){S.story[info.ui]=1;save();const u=pendingUid;pendingUid=null;startLesson(u);}return;}
   if(a==='ics'){icsDownload();return;}
   if(a==='unlock'){bioUnlock();return;}
+  if(a==='daily'){startDaily();return;}
+  if(a==='interview'){startInterview();return;}
+  if(a==='comp'){startComp();return;}
+  if(a==='pj'){startProject(el.dataset.p,+el.dataset.s);return;}
+  if(a==='terms'){screen='terms';fx.view=true;render();window.scrollTo(0,0);return;}
+  if(a==='tmode'){TM.mode=el.dataset.v;TM.show=false;fx.view=false;render();return;}
+  if(a==='tflip'){TM.show=!TM.show;fx.view=false;render();return;}
+  if(a==='tyes'||a==='tno'){const ord=termOrder(),t=ord[TM.i%ord.length];S.terms=S.terms||{};S.terms[t.t]=a==='tyes'?Math.min(3,(S.terms[t.t]||0)+1):0;save();TM.i++;TM.show=false;fx.view=false;render();return;}
+  if(a==='cert'){screen='cert';fx.view=true;render();window.scrollTo(0,0);return;}
+  if(a==='printcert'){try{window.print();}catch(e){toast('Не вдалося','Спробуй на сайті, не в попередньому перегляді');}return;}
+  if(a==='bm'){S.bm=S.bm||{};const k=el.dataset.k;if(S.bm[k])delete S.bm[k];else S.bm[k]=1;save();el.classList.toggle('on',!!S.bm[k]);if(sheetUi===-1){const r=document.getElementById('shres');if(r)r.innerHTML=sheetBody();}return;}
+  if(a==='sayq'){speakText(L&&L.cur?L.cur.ex.q:'');return;}
+  if(a==='setrate'){S.rate=+el.dataset.v;save();render();return;}
+  if(a==='pause'){const m=new Date().toISOString().slice(0,7);S.vac=S.vac&&S.vac.m===m?S.vac:{m,n:0};if(S.vac.n>=2){toast('Ліміт','Паузу можна брати двічі на місяць');return;}S.vac.n++;S.pause=addDay(today(),3);save();render();toast('Пауза увімкнена','Серія збережеться до '+S.pause);return;}
+  if(a==='quiet'){S.quiet=S.quiet||{on:false,from:23,to:8};S.quiet.on=!S.quiet.on;save();render();return;}
+  if(a==='wkdlate'){S.wkdLate=!S.wkdLate;save();render();return;}
+  if(a==='runhere'){const ex=L&&L.cur&&L.cur.ex;if(!ex)return;const code=wrapJava(exCode(ex,L.cur));if(!code)return;const box=el.parentElement.querySelector('.more-out');if(!box)return;box.hidden=false;box.querySelector('pre').textContent='Запускаю…';execJava(code).then(o=>{box.querySelector('pre').textContent=o;});return;}
+  if(a==='gotoerr'){const ta=document.getElementById('ide-code');if(ta&&IDE.errLine){const ls=ta.value.split('\n');let st=0;for(let i=0;i<IDE.errLine-1&&i<ls.length;i++)st+=ls[i].length+1;ta.focus();ta.setSelectionRange(st,st+(ls[IDE.errLine-1]||'').length);}return;}
   if(a==='onsex'){ONB.sex=el.dataset.v;ONB.name=(document.getElementById('onname')||{}).value||ONB.name;render();return;}
   if(a==='onnext'){const v=((document.getElementById('onname')||{}).value||'').trim();ONB.name=v?v.charAt(0).toUpperCase()+v.slice(1):'';
     if(!ONB.name){ONB.err='Напиши, як тебе звати.';render();return;}
@@ -2367,9 +3101,14 @@ $app.addEventListener('click',e=>{
   else if(a==='unline'){const id=+el.dataset.id,i=c.built.findIndex(b=>b.id===id);if(i<0)return;c.bank.push(c.built.splice(i,1)[0]);}
   render();
 });
+$app.addEventListener('change',e=>{
+  const t=e.target;
+  if(t.id==='qfrom'||t.id==='qto'){S.quiet=S.quiet||{on:false,from:23,to:8};if(t.id==='qfrom')S.quiet.from=+t.value;else S.quiet.to=+t.value;save();}
+});
 $app.addEventListener('input',e=>{
   const t=e.target;
   if(t.id==='shq'){sheetQ=t.value;const r=document.getElementById('shres'),c=document.getElementById('shchips');if(r)r.innerHTML=sheetBody();if(c)c.hidden=!!sheetQ.trim();return;}
+  if(t.id==='tq'){TM.q=t.value;const r=document.getElementById('tlist');if(r)r.innerHTML=termsList();return;}
   if(t.id==='onname'){ONB.name=t.value;return;}
   if(t.id==='onnv'){ONB.nv=t.value;return;}
   if(t.id==='rtime'){S.remind=t.value||'19:00';save();pushTime();return;}
@@ -2448,6 +3187,12 @@ function mergeProgress(a,b){ // a = local, b = cloud (both normalised)
     else if(!y.skip&&!x.skip)o.done[k]={a:Math.max(x.a||0,y.a||0),t:Math.max(x.t||0,y.t||0)};}
   for(const k in a.miss)if(!(k in o.miss))o.miss[k]=a.miss[k];
   if(!o.nm&&a.nm){o.nm=a.nm;o.nv=a.nv;o.sex=a.sex;}
+  o.pj=Object.assign({},o.pj||{});for(const k in (a.pj||{}))o.pj[k]=Math.max(o.pj[k]||0,a.pj[k]||0);
+  o.terms=Object.assign({},o.terms||{});for(const k in (a.terms||{}))o.terms[k]=Math.max(o.terms[k]||0,a.terms[k]||0);
+  o.bm=Object.assign({},a.bm||{},o.bm||{});
+  if((a.wk&&a.wk.id)&&(!o.wk||a.wk.id>o.wk.id||(a.wk.id===o.wk.id&&a.wk.n>o.wk.n)))o.wk=a.wk;
+  if((a.daily||'')>(o.daily||''))o.daily=a.daily;
+  if((a.pause||'')>(o.pause||''))o.pause=a.pause;
   o.xp=Math.max(a.xp,b.xp);
   if(a.last>b.last||(a.last===b.last&&a.streak>b.streak)){o.last=a.last;o.streak=a.streak;o.freeze=a.freeze;}
   if(a.day&&b.day){if(a.day.d>b.day.d||(a.day.d===b.day.d&&a.day.xp>b.day.xp))o.day=a.day;}
@@ -2667,7 +3412,7 @@ function introView(){
   return h+'</div></div>';
 }
 /* ---------- mandatory update gate ---------- */
-const BUILD='1791566015';
+const BUILD='1791567481';
 let PULLED=false;
 let NEWVER=false,UPDBUSY=false;
 async function checkUpdate(){
@@ -2773,33 +3518,37 @@ function yours(ex,c){
 }
 /* ---- wardrobe ---- */
 const FIT={
-  hat:[{id:'',t:'Без капелюха',lv:1},{id:'cap',t:'Беретка',lv:2},{id:'top',t:'Циліндр',lv:5},{id:'crown',t:'Корона',lv:9}],
-  gl:[{id:'',t:'Без окулярів',lv:1},{id:'round',t:'Окуляри',lv:3},{id:'shades',t:'Сонцезахисні',lv:6}],
-  sc:[{id:'',t:'Метелик',lv:1},{id:'red',t:'Червоний шарф',lv:4},{id:'gold',t:'Золотий шарф',lv:7}]
+  hat:[{id:'',t:'Без капелюха',lv:1},{id:'chef',t:'Шапка шефа',lv:1,ac:'ten'},{id:'cap',t:'Беретка',lv:2},{id:'top',t:'Циліндр',lv:5},{id:'crown',t:'Корона',lv:9}],
+  gl:[{id:'',t:'Без окулярів',lv:1},{id:'star',t:'Зіркові окуляри',lv:1,ac:'perfect'},{id:'round',t:'Окуляри',lv:3},{id:'shades',t:'Сонцезахисні',lv:6}],
+  sc:[{id:'',t:'Метелик',lv:1},{id:'red',t:'Червоний шарф',lv:4},{id:'blue',t:'Синій шарф',lv:1,ac:'run10'},{id:'gold',t:'Золотий шарф',lv:7}]
 };
+const STAR=(cx,cy,R,r)=>{let d='';for(let i=0;i<10;i++){const a=-Math.PI/2+i*Math.PI/5,rr=i%2?r:R;d+=(i?'L':'M')+(cx+Math.cos(a)*rr).toFixed(1)+' '+(cy+Math.sin(a)*rr).toFixed(1);}return d+'z';};
 const FITSLOT={hat:'Капелюх',gl:'Окуляри',sc:'Шия'};
 const HATS={
+  chef:'<path d="M20 12Q17 4 24 3Q26 -3 32 -1Q38 -3 40 3Q47 4 44 12z" fill="#fff" stroke="#E2D8C6" stroke-width=".6"/><rect x="21" y="10.5" width="22" height="4" rx="1.2" fill="#fff" stroke="#E2D8C6" stroke-width=".6"/>',
   cap:'<path d="M19.5 12Q21 3.5 32 3.5Q43 3.5 44.5 12Q32 8.6 19.5 12z" fill="#8E1F2F"/><circle cx="32" cy="3" r="1.7" fill="#8E1F2F"/>',
   top:'<ellipse cx="32" cy="10.5" rx="13.5" ry="2.7" fill="#1B1411"/><rect x="24" y="-5" width="16" height="15.5" rx="1.6" fill="#1B1411"/><rect x="24" y="4.6" width="16" height="3.2" fill="url(#fxk)"/>',
   crown:'<path d="M23 11.5L21.6 -0.5L28 5.4L32 -2L36 5.4L42.4 -0.5L41 11.5z" fill="url(#fxk)" stroke="#A97C1E" stroke-width=".6"/><circle cx="32" cy="7.5" r="1.3" fill="#C73A4B"/><circle cx="26.6" cy="8.6" r="1" fill="#2E86C1"/><circle cx="37.4" cy="8.6" r="1" fill="#2E86C1"/>'
 };
 const GLS={
+  star:'<g fill="url(#fxk)" stroke="#A97C1E" stroke-width=".5"><path d="'+STAR(22,30,7.2,3.2)+'"/><path d="'+STAR(42,30,7.2,3.2)+'"/></g>',
   round:'<g fill="none" stroke="url(#fxk)" stroke-width="1.7"><circle cx="22" cy="30" r="5.8"/><circle cx="42" cy="30" r="5.8"/><path d="M27.8 29.6q4.2-2 8.4 0"/></g>',
   shades:'<g fill="#1B1411"><rect x="15" y="25.2" width="14" height="9.2" rx="3.8"/><rect x="35" y="25.2" width="14" height="9.2" rx="3.8"/><rect x="28.6" y="27.4" width="6.8" height="1.8"/></g><path d="M18 27.6l3-1M38 27.6l3-1" stroke="#fff" stroke-width="1" stroke-linecap="round" opacity=".5"/>'
 };
 const SCS={
+  blue:'<path d="M14.5 48.4Q32 57.4 49.5 48.4L51 54.4Q32 63 13 54.4z" fill="#2F5FA8"/><path d="M38.5 57l5.6 5 3.4-8.4z" fill="#2F5FA8"/>',
   red:'<path d="M14.5 48.4Q32 57.4 49.5 48.4L51 54.4Q32 63 13 54.4z" fill="#B5273A"/><path d="M38.5 57l5.6 5 3.4-8.4z" fill="#B5273A"/><path d="M20 52.2l-.4 4.4M27 54.4l-.3 4.6M35 54.4l.2 4.4M43 52.2l.6 4" stroke="#F3D6DA" stroke-width="1.1" stroke-linecap="round" opacity=".75"/>',
   gold:'<path d="M14.5 48.4Q32 57.4 49.5 48.4L51 54.4Q32 63 13 54.4z" fill="url(#fxk)"/><path d="M38.5 57l5.6 5 3.4-8.4z" fill="url(#fxk)"/><path d="M20 52.2l-.4 4.4M27 54.4l-.3 4.6M35 54.4l.2 4.4M43 52.2l.6 4" stroke="#7A5A14" stroke-width="1.1" stroke-linecap="round" opacity=".6"/>'
 };
 const TIE='<path class="fa-dark" d="M32 54l-7-3v6zM32 54l7-3v6z"/><path d="M32 54l-7-3v6zM32 54l7-3v6z" fill="none" stroke="url(#fxk)" stroke-width=".8"/><circle cx="32" cy="54" r="1.9" fill="url(#fxk)"/>';
-function fitUnlocked(it){return lvlInfo(S.xp).n>=it.lv;}
+function fitUnlocked(it){return lvlInfo(S.xp).n>=it.lv&&(!it.ac||!!S.ach[it.ac]);}
 function fitNow(slot){const f=(S.fit&&S.fit[slot])||'';const it=FIT[slot].find(x=>x.id===f);return it&&fitUnlocked(it)?f:'';}
 /* ---- cheat sheets ---- */
 let sheetUi=0;
 let sheetQ='';const SHO=new Set();
 function sheetCard(l,k,idx,tag){
   const key=l.uid+':'+idx,open=SHO.has(key)||!!sheetQ;
-  let h='<article class="sh-c acc'+(open?' open':'')+'" data-k="'+esc(key)+'"><button class="sh-h" data-act="shtoggle" data-k="'+esc(key)+'" aria-expanded="'+open+'"><span><b>'+esc(k.h)+'</b>'+(tag?'<small>'+esc(tag)+'</small>':'')+'</span><i class="chev" aria-hidden="true"></i></button><div class="sh-b"><p>'+fmt(k.p)+'</p>';
+  let h='<article class="sh-c acc'+(open?' open':'')+'" data-k="'+esc(key)+'"><button class="bm'+(S.bm&&S.bm[key]?' on':'')+'" data-act="bm" data-k="'+esc(key)+'" aria-label="Закладка">★</button><button class="sh-h" data-act="shtoggle" data-k="'+esc(key)+'" aria-expanded="'+open+'"><span><b>'+esc(k.h)+'</b>'+(tag?'<small>'+esc(tag)+'</small>':'')+'</span><i class="chev" aria-hidden="true"></i></button><div class="sh-b"><p>'+fmt(k.p)+'</p>';
   if(k.code)h+=codeBlock(k.code,true);
   if(k.out!=null)h+='<div class="console"><span class="con-l">Результат</span><pre>'+esc(k.out)+'</pre></div>';
   return h+'</div></article>';
@@ -2812,6 +3561,10 @@ function sheetBody(){
     });});
     return n?'<p class="sh-n">Знайдено тем: '+n+'</p>'+h:'<p class="desc" style="text-align:center;margin-top:24px">Нічого не знайшлося. Спробуй інше слово, наприклад «цикл» чи «String».</p>';
   }
+  if(sheetUi===-1){
+    let n=0;ALL.forEach(l=>(l.lesson.learn||[]).forEach((k,idx)=>{if(S.bm&&S.bm[l.uid+':'+idx]){n++;h+=sheetCard(l,k,idx,(l.ui+1)+'. '+UNITS[l.ui].title);}}));
+    return n?h:'<p class="desc" style="text-align:center;margin-top:24px">Закладок поки немає. Натисни зірочку біля теми, і вона з’явиться тут.</p>';
+  }
   const u=UNITS[sheetUi];
   h+='<div class="sheet-h" style="--uc:var(--u'+((sheetUi%6)+1)+')">'+unitArt(sheetUi)+'<h1>'+esc(u.title)+'</h1><p class="sub">'+esc(u.sub)+'</p></div>';
   ALL.filter(l=>l.ui===sheetUi).forEach(l=>{
@@ -2823,7 +3576,7 @@ function sheetBody(){
 function sheetView(){
   let h='<div class="view hastabs'+(fx.view?' enter':'')+'"><header class="top"><div class="brand">Шпаргалки</div><div class="stats"><button class="stat" data-act="print" aria-label="Роздрукувати">'+IC.book+'<span>Друк</span></button></div></header>';
   h+='<div class="sh-tools"><input id="shq" class="inp" type="search" placeholder="Пошук по всіх темах" value="'+esc(sheetQ)+'" aria-label="Пошук по шпаргалках" autocomplete="off"></div>';
-  h+='<div class="chips-row" id="shchips" role="tablist"'+(sheetQ.trim()?' hidden':'')+'>'+UNITS.map((u,i)=>'<button class="uchip'+(i===sheetUi?' on':'')+'" role="tab" aria-selected="'+(i===sheetUi)+'" data-act="sheetunit" data-i="'+i+'">'+(i+1)+'. '+esc(u.title)+'</button>').join('')+'</div>';
+  h+='<div class="chips-row" id="shchips" role="tablist"'+(sheetQ.trim()?' hidden':'')+'>'+'<button class="uchip" data-act="terms">Словник</button><button class="uchip'+(sheetUi===-1?' on':'')+'" role="tab" data-act="sheetunit" data-i="-1">★ Закладки</button>'+UNITS.map((u,i)=>'<button class="uchip'+(i===sheetUi?' on':'')+'" role="tab" aria-selected="'+(i===sheetUi)+'" data-act="sheetunit" data-i="'+i+'">'+(i+1)+'. '+esc(u.title)+'</button>').join('')+'</div>';
   h+='<div class="sheet" id="shres" style="--uc:var(--u'+((sheetUi%6)+1)+')">'+sheetBody()+'</div></div>'+tabs('sheet');
   return h;
 }
@@ -2835,7 +3588,12 @@ function speak(k){
   const u=new SpeechSynthesisUtterance(k.h+'. '+k.p.replace(/`/g,'')+(k.code?' Приклад коду показано на екрані.':''));
   const v=ss.getVoices().find(x=>/^uk/i.test(x.lang));
   if(v){u.voice=v;u.lang=v.lang;}else{u.lang='uk-UA';if(ss.getVoices().length)toast('Українського голосу немає','Прочитаю стандартним');}
-  u.rate=.95;ss.speak(u);
+  u.rate=S.rate||.95;ss.speak(u);
+}
+function speakText(t){
+  if(!t||!('speechSynthesis' in window)){toast('Немає озвучення','Цей браузер його не підтримує');return;}
+  const ss=window.speechSynthesis;if(ss.speaking){ss.cancel();return;}
+  const u=new SpeechSynthesisUtterance(t);const v=ss.getVoices().find(x=>/^uk/i.test(x.lang));if(v){u.voice=v;u.lang=v.lang;}else u.lang='uk-UA';u.rate=S.rate||.95;ss.speak(u);
 }
 function stopSpeak(){try{if('speechSynthesis' in window)window.speechSynthesis.cancel();}catch(e){}}
 /* ---- reminders ---- */
@@ -2904,9 +3662,20 @@ async function javaLang(){
   }catch(e){IDE.lang=62;}
   return IDE.lang;
 }
+async function execJava(code,stdin){
+  try{
+    const lang=await javaLang();const ctrl=new AbortController();const to=setTimeout(()=>ctrl.abort(),25000);
+    const r=await fetch(RUNNER+'/submissions?base64_encoded=true&wait=true',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({source_code:b64(code),language_id:lang,stdin:b64(stdin||'')}),signal:ctrl.signal});
+    clearTimeout(to);if(!r.ok)throw new Error('http');
+    const j=await r.json();const so=unb64(j.stdout),se=unb64(j.stderr),co=unb64(j.compile_output);
+    if(co)return 'Помилка компіляції:\n'+co;
+    if(se)return (so?so+'\n':'')+'Помилка виконання:\n'+se;
+    return so||'(програма нічого не вивела)';
+  }catch(e){return 'Не вдалося зв’язатися із сервером запуску коду. Перевір інтернет.';}
+}
 async function runCode(){
   if(IDE.busy)return;
-  IDE.busy=true;IDE.out='Запускаю…';IDE.kind='';
+  IDE.busy=true;IDE.out='Запускаю…';IDE.kind='';IDE.errLine=0;
   const ca=document.getElementById('ide-code'),si=document.getElementById('ide-in');
   if(ca)IDE.code=ca.value;if(si)IDE.stdin=si.value;
   render();
@@ -2918,7 +3687,7 @@ async function runCode(){
     if(!r.ok)throw new Error('http '+r.status);
     const j=await r.json();
     const so=unb64(j.stdout),se=unb64(j.stderr),co=unb64(j.compile_output);
-    if(co){IDE.kind='err';IDE.out='Помилка компіляції:\n'+co;}
+    if(co){IDE.kind='err';IDE.out='Помилка компіляції:\n'+co;IDE.errLine=+((co.match(/Main\.java:(\d+):/)||[])[1]||0);}
     else if(se){IDE.kind='err';IDE.out=(so?so+'\n':'')+'Помилка виконання:\n'+se;}
     else{IDE.kind='ok';IDE.out=so||'(програма нічого не вивела)';}
   }catch(e){
@@ -2933,7 +3702,9 @@ function ideView(){
   h+='<textarea id="ide-code" class="code-ta" spellcheck="false" autocapitalize="off" autocomplete="off" aria-label="Код Java">'+esc(IDE.code)+'</textarea>';
   h+='<label class="ide-l" for="ide-in">Ввід програми (для Scanner), якщо потрібен</label><textarea id="ide-in" class="area mono" rows="2" spellcheck="false">'+esc(IDE.stdin)+'</textarea>';
   h+='<button class="btn" data-act="run"'+(IDE.busy?' disabled':'')+'>'+(IDE.busy?'Виконується…':'Запустити')+'</button>';
-  h+='<div class="console'+(IDE.kind==='err'?' err':'')+'"><span class="con-l">Результат</span><pre>'+esc(IDE.out||'Натисни «Запустити».')+'</pre></div></div></div>';
+  h+='<div class="console'+(IDE.kind==='err'?' err':'')+'"><span class="con-l">Результат</span><pre>'+esc(IDE.out||'Натисни «Запустити».')+'</pre></div>';
+  if(IDE.errLine){const lt=(IDE.code.split('\n')[IDE.errLine-1]||'').trim();h+='<div class="errline"><span>Помилка в рядку '+IDE.errLine+':</span><code>'+esc(lt)+'</code><button class="btn ghost sm" data-act="gotoerr">Показати в коді</button></div>';}
+  h+='</div></div>';
   return h;
 }
 /* ---- stats ---- */
@@ -2960,6 +3731,7 @@ function statsView(){
   svg+='</svg>';
   h+='<section class="card"><h2>Досвід за тиждень</h2>'+svg+'<p class="desc">Пунктир це твоя денна ціль: '+S.goal+' XP.</p></section>';
   h+=heatCard();
+  h+='<section class="card"><h2>Сертифікат</h2><p class="desc">'+(ALL.every(l=>S.done[l.uid])?'Курс пройдено. Можна роздрукувати сертифікат.':'З’явиться, коли ти пройдеш усі уроки.')+'</p><button class="btn ghost" data-act="cert">Відкрити сертифікат</button></section>';
   // accuracy by unit
   const rows=Object.keys(S.us).map(k=>+k).filter(k=>UNITS[k]).sort((a,b)=>a-b);
   h+='<section class="card"><h2>Точність за розділами</h2>';
@@ -2976,7 +3748,7 @@ function statsView(){
   Object.keys(FIT).forEach(slot=>{
     h+='<p class="ward-s">'+FITSLOT[slot]+'</p><div class="ward-r">';
     FIT[slot].forEach(it=>{const un=fitUnlocked(it),on=fitNow(slot)===it.id;
-      h+='<button class="uchip'+(on?' on':'')+'" data-act="fit" data-slot="'+slot+'" data-v="'+it.id+'"'+(un?'':' disabled')+'>'+esc(it.t)+(un?'':' · рівень '+it.lv)+'</button>';});
+      h+='<button class="uchip'+(on?' on':'')+'" data-act="fit" data-slot="'+slot+'" data-v="'+it.id+'"'+(un?'':' disabled')+'>'+esc(it.t)+(un?'':(it.ac?' · '+ACH.find(a=>a.id===it.ac).t:' · рівень '+it.lv))+'</button>';});
     h+='</div>';
   });
   h+='</section>';
@@ -3000,6 +3772,10 @@ render();
 checkUpdate();
 document.addEventListener('visibilitychange',()=>{if(!document.hidden)checkUpdate();});
 setInterval(checkUpdate,600000);
+function netBanner(){const e=document.getElementById('net');if(!navigator.onLine){if(!e){const d=document.createElement('div');d.id='net';d.setAttribute('role','status');d.textContent='Без інтернету: прогрес зберігається на пристрої';document.body.appendChild(d);}}else if(e)e.remove();}
+window.addEventListener('offline',netBanner);
+window.addEventListener('online',()=>{netBanner();try{if(CLOUD&&AUTH)cloudPush();}catch(e){}});
+netBanner();
 setInterval(skyUpdate,600000);
 })();
 </script>

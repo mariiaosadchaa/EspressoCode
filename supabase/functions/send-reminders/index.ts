@@ -74,11 +74,25 @@ Deno.serve(async (req) => {
       const doneToday = d.last === now.date;
       const day = Math.floor(Date.parse(now.date) / 86400000);
       const idx = SLOTS.indexOf(slot);
+      const dow = new Date(now.date + "T12:00:00Z").getUTCDay();
+      const q = d.quiet && d.quiet.on ? d.quiet : null;
+      if (q && (q.from < q.to ? slot >= q.from && slot < q.to : slot >= q.from || slot < q.to)) continue;
+      if (d.wkdLate && (dow === 0 || dow === 6) && slot === 8) continue;
+      const paused = typeof d.pause === "string" && d.pause !== "" && now.date <= d.pause;
+
       const nv = typeof d.nv === "string" ? d.nv : "";
       const male = d.sex === "m";
       const pick = MSGS[(day * 6 + idx) % MSGS.length];
       let body: string;
-      if (idx % 3 === 2 && streak > 0 && !doneToday) body = `${nv ? nv + ", с" : "С"}ерія ${streak} дн. під загрозою. Один урок, і лисичка спокійна.`;
+      if (dow === 0 && slot === 20) {
+        let xp = 0, days = 0;
+        for (let i = 0; i < 7; i++) {
+          const k = new Date(Date.parse(now.date + "T12:00:00Z") - i * 86400000).toISOString().slice(0, 10);
+          const h = d.hist && d.hist[k];
+          if (h && h.xp) { xp += h.xp; days++; }
+        }
+        body = `Підсумок тижня${nv ? ", " + nv : ""}: ${xp} XP, ${days} дн. занять. ${days >= 5 ? "Чудовий тиждень!" : "Новий тиждень, нові перемоги."}`;
+      } else if (idx % 3 === 2 && streak > 0 && !doneToday && !paused) body = `${nv ? nv + ", с" : "С"}ерія ${streak} дн. під загрозою. Один урок, і лисичка спокійна.`;
       else if (idx % 3 === 2 && doneToday) body = `${nv ? nv + ", т" : "Т"}и вже ${male ? "займався" : "займалась"} сьогодні, молодець! Ще один урок для закріплення?`;
       else if (idx === 0 && nv) body = `Доброго ранку, ${nv}! ` + pick;
       else if (idx === 5 && nv) body = `На добраніч, ${nv}! ` + pick;
