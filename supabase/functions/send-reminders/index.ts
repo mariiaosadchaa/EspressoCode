@@ -1,4 +1,4 @@
-// Щоденні нагадування. Запускається кожні 15 хвилин планувальником (див. supabase-push.sql).
+// Обов’язкові сповіщення о 8, 11, 14, 17, 20, 23. Запускається кожні 15 хвилин планувальником (див. supabase-push.sql).
 import webpush from "npm:web-push@3.6.7";
 import { createClient } from "npm:@supabase/supabase-js@2";
 
@@ -8,6 +8,34 @@ webpush.setVapidDetails(
   Deno.env.get("VAPID_PUBLIC_KEY")!,
   Deno.env.get("VAPID_PRIVATE_KEY")!,
 );
+
+const SLOTS = [8, 11, 14, 17, 20, 23];
+const MSGS = [
+  "Ранкова кава ☕ і один урок Java: гарний початок дня.",
+  "Факт: Java створили в 1995 році, а назву взяли від кави з острова Ява.",
+  "String у Java незмінний. Кожна «зміна» створює новий об’єкт.",
+  "Жарт: чому Java-розробники носять окуляри? Бо вони не C#.",
+  "Мініурок: == порівнює посилання, equals() порівнює вміст. Не плутай!",
+  "Факт: талісман Java звуть Дюк, і він досі махає рукою на конференціях.",
+  "Порада: давай змінним зрозумілі імена. Через місяць ти скажеш собі дякую.",
+  "Спробуй згадати: чим ArrayList відрізняється від LinkedList?",
+  "Лисичка нагадує: 5 хвилин практики краще, ніж година завтра.",
+  "Факт: JVM дозволяє одному й тому ж коду працювати на будь-якій системі.",
+  "Жарт: у програміста 2 проблеми. Одна з них — NullPointerException.",
+  "Optional допомагає не боятися null. Хочеш подивитись, як він працює?",
+  "Час для короткого повторення: слабкі теми чекають у вкладці «Курс».",
+  "Порада: читай повідомлення про помилку з першого рядка, там майже завжди підказка.",
+  "Факт: у Java немає вказівників, зате є збирач сміття.",
+  "Ти вже далеко пройшла. Ще один маленький крок?",
+  "Мініквіз: який тип у Java зберігає true або false? (boolean)",
+  "Вечірній урок закріплює вивчене краще, ніж здається. Заходь!",
+  "Факт: switch у сучасній Java вміє повертати значення.",
+  "Лисичка вже налила тобі кави. Повертайся до Java ☕",
+  "Порада: пиши код руками, а не лише читай. Так він запам’ятовується.",
+  "Жарт: рекурсія — дивись «рекурсія».",
+  "Факт: слово final робить змінну, метод або клас незмінними.",
+  "Перед сном повтори одну тему. Мозок закріпить її за ніч.",
+];
 
 function localNow(tz: string) {
   const parts = new Intl.DateTimeFormat("en-CA", {
@@ -30,21 +58,22 @@ Deno.serve(async (req) => {
     try {
       const tz = s.tz || "UTC";
       const now = localNow(tz);
-      const [h, m] = String(s.remind || "19:00").split(":").map(Number);
-      const target = h * 60 + m;
-      if (now.min < target || now.min >= target + 15) continue;
-      if (s.last_sent === now.date) continue;
+      const slot = SLOTS.find((h) => now.min >= h * 60 && now.min < h * 60 + 15);
+      if (slot === undefined) continue;
+      const key = `${now.date}#${slot}`;
+      if (s.last_sent === key) continue;
       const { data: pr } = await sb.from("progress").select("data").eq("user_id", s.user_id).maybeSingle();
       const d = pr?.data ?? {};
       const streak = Number(d.streak) || 0;
       const doneToday = d.last === now.date;
-      const body = doneToday
-        ? "Сьогодні ти вже займалась, молодець! Ще один урок для закріплення?"
-        : streak > 0
-          ? `Серія ${streak} дн. під загрозою. Один урок, і лисичка спокійна.`
-          : "Лисичка чекає на тебе. Пройди один короткий урок.";
+      const day = Math.floor(Date.parse(now.date) / 86400000);
+      const idx = SLOTS.indexOf(slot);
+      let body: string;
+      if (idx % 3 === 2 && streak > 0 && !doneToday) body = `Серія ${streak} дн. під загрозою. Один урок, і лисичка спокійна.`;
+      else if (idx % 3 === 2 && doneToday) body = "Сьогодні ти вже займалась, молодець! Ще один урок для закріплення?";
+      else body = MSGS[(day * 6 + idx) % MSGS.length];
       await webpush.sendNotification(s.sub, JSON.stringify({ title: "Java Бариста", body, url: "./" }));
-      await sb.from("push_subs").update({ last_sent: now.date }).eq("user_id", s.user_id);
+      await sb.from("push_subs").update({ last_sent: key }).eq("user_id", s.user_id);
       sent++;
     } catch (e) {
       const code = (e as { statusCode?: number }).statusCode;
