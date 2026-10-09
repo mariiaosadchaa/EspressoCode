@@ -278,8 +278,6 @@ svg{display:block}
 .mascot .earin{fill:#FFD9B3}
 .mascot .nose{fill:#2B1A12}
 .mascot .wh{fill:none;stroke:var(--muted);stroke-width:1.6;stroke-linecap:round;opacity:.8}
-.m-idle .tail,.m-cheer .tail,.m-idle .ttip,.m-cheer .ttip{animation:wag 2.2s ease-in-out infinite}
-.m-sad .tail,.m-sad .ttip{transform:rotate(-12deg)}
 @keyframes wag{0%,100%{transform:rotate(0)}50%{transform:rotate(10deg)}}
 .mascot .steam{fill:none;stroke:var(--muted);stroke-width:2.5;stroke-linecap:round;opacity:.7}
 .mascot .eye{fill:#2B1A12}
@@ -295,9 +293,6 @@ svg{display:block}
 .m-idle .eye{transform-box:fill-box;transform-origin:center;animation:blink 4.2s infinite}
 .m-idle .steam,.m-cheer .steam{animation:steam 2.4s ease-in-out infinite}
 .m-idle .s2,.m-cheer .s2{animation-delay:1.1s}
-.m-cheer{animation:cheer 1.2s ease-in-out infinite}
-.m-happy{animation:hop .6s}
-.m-sad{animation:droop .8s}
 .hero{display:grid;place-items:center}
 .result>.hero{animation:markin .7s cubic-bezier(.3,1.6,.5,1) backwards}
 .fb .badge.m{background:none;width:auto;height:auto;border-radius:0;animation:none}
@@ -418,12 +413,14 @@ svg{display:block}
 .fa-blush{fill:#E5707A;opacity:.4}
 .fa-tear{fill:#6FB6FF}
 .fa-spark{fill:#F3D27A}
-.m-idle .fa-spark,.m-cheer .fa-spark{transform-box:fill-box;transform-origin:center;animation:twinkle 2.6s ease-in-out infinite}
-.m-idle .sp2,.m-cheer .sp2{animation-delay:1.2s}
-@keyframes twinkle{0%,100%{opacity:.25;transform:scale(.6)}50%{opacity:1;transform:scale(1.1)}}
-.m-idle .fa-tail,.m-cheer .fa-tail{transform-box:fill-box;transform-origin:100% 100%;animation:wag 2.2s ease-in-out infinite}
-.m-sad .fa-tail{transform-box:fill-box;transform-origin:100% 100%;transform:rotate(-12deg)}
 .m-idle .fa-eye{transform-box:fill-box;transform-origin:center;animation:blink 4.2s infinite}
+.mascot .fa-all{transform-box:fill-box;transform-origin:50% 100%}
+.m-idle .fa-all{animation:breathe 4s ease-in-out infinite}
+.m-cheer .fa-all{animation:bob 1.8s ease-in-out infinite}
+.m-happy .fa-all{animation:pop .5s ease-out}
+@keyframes breathe{0%,100%{transform:scale(1)}50%{transform:scale(1.025)}}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-3px)}}
+@keyframes pop{0%{transform:scale(.97)}60%{transform:scale(1.04)}100%{transform:scale(1)}}
 </style><style>*,*::before,*::after{box-sizing:border-box}html{-webkit-text-size-adjust:100%}body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--body)}</style>
 </head>
 <body>
@@ -1187,34 +1184,31 @@ function pumpToast(){
 
 /* ---------- mascot ---------- */
 function mascot(mood,px){
-  const E=(x)=>'<path class="fa-eye" d="M'+(x-4)+' 30.5q4-4 8 0q-4 3.4-8 0z"/><circle cx="'+(x+1)+'" cy="29.7" r=".9" fill="#fff"/>';
+  const E=(x)=>'<circle class="fa-eye" cx="'+x+'" cy="30" r="3.1"/><circle cx="'+(x+1)+'" cy="29" r=".95" fill="#fff"/>';
   const faces={
-    idle:E(22.5)+E(41.5)+'<path class="fa-mo" d="M29 43.6q3 2.6 6 0"/>',
-    happy:'<path class="fa-ln" d="M18 31q4.5-5 9 0M37 31q4.5-5 9 0"/><path class="fa-mo" d="M28.2 43q3.8 4 7.6 0"/>',
-    cheer:'<path class="fa-ln" d="M18 31q4.5-5 9 0M37 31q4.5-5 9 0"/><path class="fa-open" d="M28 42.8h8q0 6-4 6t-4-6z"/><circle class="fa-blush" cx="14" cy="37" r="3"/><circle class="fa-blush" cx="50" cy="37" r="3"/>',
-    sad:'<path class="fa-ln" d="M18 32q4.5 3.5 9 0M37 32q4.5 3.5 9 0"/><path class="fa-mo" d="M28.6 46q3.4-3.6 6.8 0"/><path class="fa-tear" d="M47 35q2.2 2.8 0 5q-2.2-2.2 0-5z"/>'
+    idle:E(22)+E(42)+'<path class="fa-mo" d="M28.6 43.4q3.4 3 6.8 0"/>',
+    happy:'<path class="fa-ln" d="M17.5 31q4.5-5 9 0M37.5 31q4.5-5 9 0"/><path class="fa-mo" d="M28 43q4 4.4 8 0"/>',
+    cheer:'<path class="fa-ln" d="M17.5 31q4.5-5 9 0M37.5 31q4.5-5 9 0"/><path class="fa-open" d="M28 42.6h8q0 6.2-4 6.2t-4-6.2z"/><circle class="fa-blush" cx="13" cy="37" r="3.2"/><circle class="fa-blush" cx="51" cy="37" r="3.2"/>',
+    sad:'<path class="fa-ln" d="M17.5 32q4.5 3.5 9 0M37.5 32q4.5 3.5 9 0"/><path class="fa-mo" d="M28.4 46q3.6-3.8 7.2 0"/><path class="fa-tear" d="M48 35q2.2 2.8 0 5q-2.2-2.2 0-5z"/>'
   };
-  const lux=(mood==='idle'||mood==='cheer');
-  const steam=lux?'<path class="steam s1" d="M50.5 46q-2.6-2.6 0-5.4"/><path class="steam s2" d="M54.5 46q-2.6-2.6 0-5.4"/>':'';
-  const spark=lux?'<path class="fa-spark" d="M55 4l1.2 3.1 3.1 1.2-3.1 1.2L55 12.6l-1.2-3.1-3.1-1.2 3.1-1.2z"/><path class="fa-spark sp2" d="M7 8l.8 2 2 .8-2 .8L7 13.6l-.8-2-2-.8 2-.8z"/>':'';
+  const steam=(mood==='idle'||mood==='cheer')?'<path class="steam s1" d="M50.5 46q-2.6-2.6 0-5.4"/><path class="steam s2" d="M54.5 46q-2.6-2.6 0-5.4"/>':'';
+  const HEAD='M6 31Q6 10 32 10Q58 10 58 31Q58 50 32 50Q6 50 6 31z';
   return '<svg class="mascot m-'+mood+'" viewBox="0 0 64 60" width="'+px+'" height="'+Math.round(px*60/64)+'" aria-hidden="true">'
-    +'<defs><linearGradient id="fxg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F7A04E"/><stop offset="1" stop-color="#C75B1A"/></linearGradient>'
+    +'<defs><linearGradient id="fxg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F7A04E"/><stop offset="1" stop-color="#CC601E"/></linearGradient>'
     +'<linearGradient id="fxk" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FBE6A0"/><stop offset=".55" stop-color="#D9A93A"/><stop offset="1" stop-color="#A97C1E"/></linearGradient>'
-    +'<clipPath id="fxh"><path d="M7 26Q32 7 57 26Q55 40 41 47Q32 53 23 47Q9 40 7 26z"/></clipPath></defs>'
-    +spark
-    +'<path class="fa-tail" d="M19 57Q2 56 5 38" fill="none" stroke="url(#fxg)" stroke-width="10" stroke-linecap="round"/><path class="fa-tail" d="M5.1 42Q4.8 40.2 5.3 38.6" fill="none" stroke="#FFF1DC" stroke-width="9" stroke-linecap="round"/>'
-    +'<path d="M9 31L10 1.5l17 16.5z" fill="url(#fxg)"/><path d="M55 31L54 1.5L37 18z" fill="url(#fxg)"/>'
-    +'<path class="fa-dark" d="M10 1.5l-.4 10.5 7.6-1.6z"/><path class="fa-dark" d="M54 1.5l.4 10.5-7.6-1.6z"/>'
-    +'<path d="M13.6 23l.7-9.5 6.6 5.4z" fill="#FFD7A8"/><path d="M50.4 23l-.7-9.5-6.6 5.4z" fill="#FFD7A8"/>'
-    +'<path d="M16 60Q17 51 32 51Q47 51 48 60z" fill="url(#fxg)"/><path d="M26 60Q27 54 32 54Q37 54 38 60z" fill="#FFF1DC"/>'
-    +'<path d="M7 26Q32 7 57 26Q55 40 41 47Q32 53 23 47Q9 40 7 26z" fill="url(#fxg)"/>'
-    +'<path clip-path="url(#fxh)" fill="#FFF1DC" d="M4 35Q19 33 32 45Q45 33 60 35V56H4z"/>'
-    +'<path d="M7 26Q32 7 57 26Q55 40 41 47Q32 53 23 47Q9 40 7 26z" fill="none" stroke="url(#fxk)" stroke-width=".9" opacity=".85"/>'
-    +'<path class="fa-dark" d="M32 51.6l-8.4-3.4v7.2zM32 51.6l8.4-3.4v7.2z"/><path d="M32 51.6l-8.4-3.4v7.2zM32 51.6l8.4-3.4v7.2z" fill="none" stroke="url(#fxk)" stroke-width=".8"/><circle cx="32" cy="51.8" r="2.1" fill="url(#fxk)"/>'
+    +'<clipPath id="fxh"><path d="'+HEAD+'"/></clipPath></defs>'
+    +'<g class="fa-all">'
+    +'<path d="M8 31L9 2l18 16z" fill="url(#fxg)"/><path d="M56 31L55 2L37 18z" fill="url(#fxg)"/>'
+    +'<path class="fa-dark" d="M9 2l-.4 10.6 8-1.8z"/><path class="fa-dark" d="M55 2l.4 10.6-8-1.8z"/>'
+    +'<path d="M13 23l.8-9 6.6 5.2z" fill="#FFD7A8"/><path d="M51 23l-.8-9-6.6 5.2z" fill="#FFD7A8"/>'
+    +'<path d="M13 60Q15 48 32 48Q49 48 51 60z" fill="url(#fxg)"/>'
+    +'<path d="'+HEAD+'" fill="url(#fxg)"/>'
+    +'<path clip-path="url(#fxh)" fill="#FFF1DC" d="M2 36Q19 33 32 46Q45 33 62 36V54H2z"/>'
+    +'<path class="fa-dark" d="M32 54l-7-3v6zM32 54l7-3v6z"/><path d="M32 54l-7-3v6zM32 54l7-3v6z" fill="none" stroke="url(#fxk)" stroke-width=".8"/><circle cx="32" cy="54" r="1.9" fill="url(#fxk)"/>'
     +steam
     +'<path d="M43 47h14v3.4a7 7 0 0 1-7 7h0a7 7 0 0 1-7-7z" fill="url(#fxk)"/><path d="M57 49h1.6a3 3 0 0 1 0 6H56" fill="none" stroke="url(#fxk)" stroke-width="2.1" stroke-linecap="round"/><ellipse cx="50" cy="47" rx="7" ry="1.6" fill="#3A2216" stroke="#FBE6A0" stroke-width=".8"/>'
-    +'<path class="fa-dark" d="M29.4 39.4h5.2L32 42.2z"/>'
-    +(faces[mood]||'')+'</svg>';
+    +'<path class="fa-dark" d="M28.8 38.4h6.4L32 41.8z"/>'
+    +(faces[mood]||'')+'</g></svg>';
 }
 
 let screen='home',L=null,confirmReset=false,res=null;
