@@ -51,6 +51,7 @@ Deno.serve(async (req) => {
   if (req.headers.get("x-cron-secret") !== Deno.env.get("CRON_SECRET")) {
     return new Response("forbidden", { status: 403 });
   }
+  const test = new URL(req.url).searchParams.get("test") === "1";
   const { data: subs, error } = await sb.from("push_subs").select("*");
   if (error) return new Response(error.message, { status: 500 });
   let sent = 0;
@@ -58,6 +59,11 @@ Deno.serve(async (req) => {
     try {
       const tz = s.tz || "UTC";
       const now = localNow(tz);
+      if (test) {
+        await webpush.sendNotification(s.sub, JSON.stringify({ title: "Java Бариста", body: "Тест: сповіщення працюють! ☕🦊", url: "./" }));
+        sent++;
+        continue;
+      }
       const slot = SLOTS.find((h) => now.min >= h * 60 && now.min < h * 60 + 15);
       if (slot === undefined) continue;
       const key = `${now.date}#${slot}`;
