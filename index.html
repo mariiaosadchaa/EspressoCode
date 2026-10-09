@@ -500,6 +500,8 @@ input.inp::-webkit-date-and-time-value{text-align:left;min-width:0}
 .chev{flex:none;width:10px;height:10px;border-right:2.5px solid var(--muted);border-bottom:2.5px solid var(--muted);transform:rotate(45deg) translate(-2px,-2px);transition:transform .25s}
 .sh-c.open .chev{transform:rotate(225deg) translate(-2px,-2px)}
 .sh-b{display:none;padding:0 16px 16px;gap:10px}
+.cw{min-width:0;max-width:100%}
+.sh-b{grid-template-columns:minmax(0,1fr)}
 .sh-c.open .sh-b{display:grid;animation:rise .3s ease}
 @media print{.sh-b{display:grid!important;padding-top:4px}.chev,.sh-tools{display:none!important}}
 .sh-c p{margin:0}
@@ -519,6 +521,81 @@ input.inp::-webkit-date-and-time-value{text-align:left;min-width:0}
 .ide-l{font-size:12px;color:var(--muted);font-weight:600}
 .console.err pre{color:#FFB0B3}
 @media print{.tabs,.top,.chips-row,.bar,.toast{display:none!important}body{background:#fff}.sh-c{break-inside:avoid;border:1px solid #bbb}}
+/* ---------- visual upgrade ---------- */
+.app{position:relative;z-index:1}
+#sky{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden;transition:background 2s}
+#sky.tod-dawn{background:linear-gradient(180deg,rgba(255,160,110,.10),rgba(255,210,150,.04) 40%,transparent 62%)}
+#sky.tod-day{background:radial-gradient(circle at 88% -4%,rgba(255,226,140,.16),transparent 46%)}
+#sky.tod-dusk{background:linear-gradient(180deg,rgba(150,80,150,.08),rgba(255,140,80,.06) 46%,transparent 70%)}
+#sky.tod-night{background:linear-gradient(180deg,rgba(25,32,92,.16),rgba(25,32,92,.05) 55%,transparent 80%)}
+#sky .st{position:absolute;width:3px;height:3px;border-radius:50%;background:#FFF3C4;opacity:.0;animation:twinkle 3.4s ease-in-out infinite}
+#sky .sp i{position:absolute;top:-24px;left:var(--x);display:block;animation:spfall var(--d) linear infinite;animation-delay:var(--dl);opacity:.0}
+#sky.se-autumn .sp i{width:12px;height:12px;border-radius:0 100% 0 100%;background:var(--c)}
+#sky.se-winter .sp i{width:7px;height:7px;border-radius:50%;background:#fff;box-shadow:0 0 5px rgba(255,255,255,.8)}
+#sky.se-spring .sp i{width:9px;height:12px;border-radius:70% 30% 70% 30%;background:#F7B6C8}
+#sky.se-summer .sp i{width:5px;height:5px;border-radius:50%;background:#FFD66B;box-shadow:0 0 8px #FFD66B}
+@keyframes twinkle{0%,100%{opacity:.0;transform:scale(.6)}50%{opacity:.85;transform:scale(1.2)}}
+@keyframes spfall{0%{opacity:0;transform:translate(0,0) rotate(0)}10%{opacity:.55}90%{opacity:.4}100%{opacity:0;transform:translate(var(--dx),108vh) rotate(var(--r))}}
+:root[data-calm="1"] #sky .sp,:root[data-calm="1"] #sky .st{display:none}
+@media (prefers-reduced-motion: reduce){#sky .sp,#sky .st{display:none}}
+.scene{display:block;width:100%;height:auto;border-radius:18px;margin:2px 0 4px}
+.scene .gl{transform-box:fill-box;transform-origin:center;animation:bob 4s ease-in-out infinite}
+.unit-art{margin-top:6px}
+.nodewrap{position:relative}
+.pfox{position:absolute;top:2px;width:46px;pointer-events:none;animation:bob 3s ease-in-out infinite}
+.pfox.r{left:calc(50% + 50px)}.pfox.l{right:calc(50% + 50px)}
+.pfox.run{animation:foxrun 1.1s cubic-bezier(.3,1.4,.5,1) both,bob 3s 1.1s ease-in-out infinite}
+@keyframes foxrun{0%{opacity:0;transform:translate(var(--rx,-90px),-110px) scale(.6)}60%{opacity:1}100%{opacity:1;transform:translate(0,0) scale(1)}}
+.cupm{position:absolute!important;right:14px;top:12px;z-index:1;width:40px}
+.cupm .cf{transform-box:fill-box;transform-origin:50% 100%;transform:scaleY(var(--p));animation:cupfill 1.2s cubic-bezier(.3,1.2,.5,1) backwards}
+@keyframes cupfill{from{transform:scaleY(0)}}
+.cupm .cup-s{animation:steam 2.4s ease-in-out infinite}
+.me-t{padding-right:44px}
+.lvlup{position:relative;margin:4px 0 8px;padding:14px 16px;border-radius:18px;text-align:center;color:#2A1B06;background:linear-gradient(135deg,#FBE6A0,#D9A93A 60%,#A97C1E);box-shadow:0 0 0 2px rgba(255,255,255,.35) inset,0 10px 30px rgba(217,169,58,.45);animation:markin .8s cubic-bezier(.3,1.6,.5,1) backwards,glow 2.4s ease-in-out infinite}
+.lvlup b{display:block;font-family:var(--display);font-size:22px}.lvlup span{font-weight:700;font-size:14px}
+@keyframes glow{50%{box-shadow:0 0 0 2px rgba(255,255,255,.5) inset,0 10px 44px rgba(255,205,90,.75)}}
+.hero.gold{filter:drop-shadow(0 0 18px rgba(240,190,70,.8))}
+.confetti i.bean{border-radius:50%;background:#6B3E1F!important}
+.stat.ms{position:relative;animation:bump .8s cubic-bezier(.3,1.6,.5,1)}
+.stat .spk{position:absolute;color:var(--gold);font-size:12px;font-style:normal;animation:sparkle 1.6s ease-in-out infinite}
+.stat .spk.a{left:-6px;top:-8px}.stat .spk.b{right:-4px;top:-10px;animation-delay:.5s}.stat .spk.c{right:6px;bottom:-10px;animation-delay:1s}
+@keyframes sparkle{0%,100%{opacity:0;transform:scale(.3) rotate(0)}50%{opacity:1;transform:scale(1.1) rotate(40deg)}}
+.heat{width:100%;height:auto;display:block}
+.heat rect{rx:4px;fill:var(--line)}
+.heat .h1{fill:color-mix(in srgb,var(--gold) 35%,var(--line))}.heat .h2{fill:color-mix(in srgb,var(--gold) 62%,var(--line))}.heat .h3{fill:var(--gold)}.heat .h4{fill:var(--warm)}
+.heat .now{stroke:var(--primary);stroke-width:2}
+.heat text{font:600 9px var(--body);fill:var(--muted)}
+.hleg{display:flex;align-items:center;gap:5px;justify-content:flex-end;font-size:11px;color:var(--muted);margin-top:6px}
+.hleg i{width:11px;height:11px;border-radius:3px;display:block;background:var(--line)}
+.hleg i.h1{background:color-mix(in srgb,var(--gold) 35%,var(--line))}.hleg i.h2{background:color-mix(in srgb,var(--gold) 62%,var(--line))}.hleg i.h3{background:var(--gold)}.hleg i.h4{background:var(--warm)}
+.code.ln code{counter-reset:ln}
+.code.ln .l::before{counter-increment:ln;content:counter(ln);display:inline-block;width:2.2ch;margin-right:1.4ch;text-align:right;color:var(--com);opacity:.55;user-select:none}
+.code{position:relative}
+.cprow{display:flex;justify-content:flex-end;margin-bottom:4px}
+.cpy{padding:4px 10px;border-radius:9px;border:1px solid var(--line);background:var(--surface);color:var(--muted);font:700 11px var(--body);cursor:pointer}
+.cpy:active{transform:scale(.94)}
+.agrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.medal{display:grid;justify-items:center;gap:6px;padding:12px 6px;border-radius:16px;background:var(--surface);border:2px solid var(--line);cursor:pointer;text-align:center;font:inherit;color:var(--ink);animation:rise .5s backwards;animation-delay:calc(var(--i,0)*40ms)}
+.medal .mc{width:54px;height:54px;border-radius:50%;display:grid;place-items:center;background:var(--line);color:var(--muted);font-size:22px}
+.medal.on .mc{background:linear-gradient(135deg,#FBE6A0,#D9A93A 60%,#A97C1E);color:#3A2406;box-shadow:0 4px 12px rgba(217,169,58,.45)}
+.medal b{font-size:12px;line-height:1.2}.medal small{font-size:10.5px;color:var(--muted)}
+.medal:not(.on){opacity:.65}
+.medal:active{transform:scale(.95)}
+.ward-m{position:relative;display:grid;place-items:center;padding:6px 0 14px;perspective:600px}
+.ward-m::after{content:"";position:absolute;bottom:6px;width:90px;height:12px;border-radius:50%;background:radial-gradient(rgba(0,0,0,.22),transparent 70%)}
+.ward-m.spin .mascot{animation:spin3d .9s cubic-bezier(.3,1.2,.5,1)}
+@keyframes spin3d{from{transform:rotateY(0)}to{transform:rotateY(360deg)}}
+.tt *{transition:background-color .5s,color .5s,border-color .5s,fill .5s!important}
+.tab{transition:transform .15s cubic-bezier(.3,1.6,.5,1),background-color .2s,color .2s}
+.tab:active{transform:scale(.9)}
+.tab.on .ico{animation:tabpop .45s cubic-bezier(.3,1.7,.5,1)}
+@keyframes tabpop{0%{transform:scale(.7) translateY(3px)}100%{transform:scale(1)}}
+.view.enter .card{animation:rise .5s cubic-bezier(.2,.9,.3,1) backwards}
+.view.enter .card:nth-child(2){animation-delay:.05s}.view.enter .card:nth-child(3){animation-delay:.1s}.view.enter .card:nth-child(4){animation-delay:.15s}.view.enter .card:nth-child(5){animation-delay:.2s}
+.opt,.chip,.line{transition:transform .15s cubic-bezier(.3,1.6,.5,1),box-shadow .15s,background-color .2s,border-color .2s}
+.opt:active:not(:disabled),.chip:active:not(:disabled){transform:scale(.97)}
+.sheet-art{margin:2px 0 0}
+@media print{#sky,.cpy,.scene{display:none!important}}
 </style><style>*,*::before,*::after{box-sizing:border-box}html{-webkit-text-size-adjust:100%}body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--body)}</style>
 </head>
 <body>
@@ -1409,7 +1486,7 @@ const IC={
 
 /* ================= State ================= */
 const KEY='java-schodnya-v1';
-function fresh(){return {xp:0,streak:0,last:'',done:{},miss:{},day:{d:'',xp:0},goal:30,level:'normal',freeze:1,sound:true,big:false,calm:false,ach:{},srs:{},hist:{},us:{},story:{},fit:{hat:'',gl:'',sc:''},nm:'',nv:'',sex:'',remind:'19:00',stats:{perfect:0,run:0,runBest:0,reviews:0,peeks:0,bugs:0,typed:0,hints:0,placement:0,lessons:0,goals:0}};}
+function fresh(){return {xp:0,streak:0,last:'',done:{},miss:{},day:{d:'',xp:0},goal:30,level:'normal',freeze:1,sound:true,big:false,calm:false,ach:{},srs:{},hist:{},us:{},story:{},fit:{hat:'',gl:'',sc:''},nm:'',nv:'',sex:'',theme:'auto',remind:'19:00',stats:{perfect:0,run:0,runBest:0,reviews:0,peeks:0,bugs:0,typed:0,hints:0,placement:0,lessons:0,goals:0}};}
 function norm(s){
   const r=Object.assign(fresh(),s);
   r.stats=Object.assign(fresh().stats,s.stats||{});
@@ -1424,7 +1501,7 @@ let S=load();
 
 const REDUCED=!!(window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches);
 const isReduced=()=>REDUCED||S.calm;
-function applyPrefs(){const r=document.documentElement;r.dataset.big=S.big?'1':'0';r.dataset.calm=S.calm?'1':'0';}
+function applyPrefs(){const r=document.documentElement;r.dataset.big=S.big?'1':'0';r.dataset.calm=S.calm?'1':'0';if(S.theme==='light'||S.theme==='dark')r.dataset.theme=S.theme;else r.removeAttribute('data-theme');}
 applyPrefs();
 
 const dayStr=d=>d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
@@ -1531,7 +1608,7 @@ function pumpToast(){
 
 /* ---------- mascot ---------- */
 function mascot(mood,px){
-  const fh=fitNow('hat'),fg=fitNow('gl'),fs=fitNow('sc');
+  const fh=fitNow('hat'),fg=fitNow('gl'),mo=new Date().getMonth(),fs=fitNow('sc')||((mo===11||mo<2)?'red':'');
   const E=(x)=>'<circle class="fa-eye" cx="'+x+'" cy="30" r="3.1"/><circle cx="'+(x+1)+'" cy="29" r=".95" fill="#fff"/>';
   const faces={
     idle:E(22)+E(42)+'<path class="fa-mo" d="M28.6 43.4q3.4 3 6.8 0"/>',
@@ -1582,7 +1659,7 @@ function topbar(){
   const s=shownStreak(),bump=s>shownStreakVal;
   const cnt=S.xp!==shownXp?' data-count="'+S.xp+'" data-from="'+shownXp+'"':'';
   return '<header class="top"><div class="brand">Java <span>Бариста</span></div><div class="stats">'
-   +'<div class="stat streak'+(s?'':' off')+(bump?' bump':'')+'" aria-label="Серія днів: '+s+'">'+IC.flame+'<span>'+s+'</span></div>'
+   +'<div class="stat streak'+(s?'':' off')+(bump?' bump':'')+(s>0&&s%7===0?' ms':'')+'" aria-label="Серія днів: '+s+'">'+(s>0&&s%7===0?'<i class="spk a">✦</i><i class="spk b">✦</i><i class="spk c">✦</i>':'')+IC.flame+'<span>'+s+'</span></div>'
    +'<div class="stat xp'+(cnt?' bump':'')+'" aria-label="Досвід: '+S.xp+'">'+IC.bolt+'<span'+cnt+'>'+S.xp+'</span></div></div></header>';
 }
 function tabs(cur){
@@ -1599,6 +1676,67 @@ const STALE=3*864e5;
 function isStale(d){return !!d&&!d.skip&&(Date.now()-(d.t||0))>STALE;}
 function staleCount(){return ALL.filter(l=>isStale(S.done[l.uid])).length;}
 
+
+const GLYPH=[
+ '<path d="M-14 -6h24v10a12 12 0 0 1-24 0z"/><path d="M10 -3h4a5 5 0 0 1 0 10h-4"/><path d="M-8 -14q3 -4 0 -8M0 -14q3 -4 0 -8"/>',
+ '<rect x="-24" y="-9" width="14" height="18" rx="3"/><rect x="-7" y="-9" width="14" height="18" rx="3"/><rect x="10" y="-9" width="14" height="18" rx="3"/>',
+ '<path d="M-20 0h14M-13 -7v14M6 -7l14 14M20 -7L6 7"/>',
+ '<path d="M0 -16v10M0 -6l-14 14M0 -6l14 14"/><circle cx="0" cy="-18" r="3"/><circle cx="-14" cy="10" r="3"/><circle cx="14" cy="10" r="3"/>',
+ '<path d="M16 -4a16 16 0 1 0 2 8"/><path d="M18 -14v10h-10"/>',
+ '<rect x="-26" y="-7" width="13" height="14"/><rect x="-13" y="-7" width="13" height="14"/><rect x="0" y="-7" width="13" height="14"/><rect x="13" y="-7" width="13" height="14"/>',
+ '<path d="M-18 -12h36M-18 0h36M-18 12h36"/><circle cx="-24" cy="-12" r="1.5"/><circle cx="-24" cy="0" r="1.5"/><circle cx="-24" cy="12" r="1.5"/>',
+ '<path d="M0 -17l16 6v10c0 10-8 16-16 19c-8 -3-16-9-16-19v-10z"/><path d="M0 -8v10M0 8v.5"/>',
+ '<path d="M-20 -12q-8 0-8 8v8h12v-8h-6q0-4 4-4zM8 -12q-8 0-8 8v8h12v-8h-6q0-4 4-4z"/>',
+ '<rect x="-9" y="-18" width="18" height="10" rx="3"/><path d="M0 -8v6M-14 -2h28M-14 -2v8M14 -2v8"/><rect x="-23" y="6" width="18" height="10" rx="3"/><rect x="5" y="6" width="18" height="10" rx="3"/>',
+ '<path d="M-26 -12q7 -8 13 0t13 0t13 0M-26 0q7-8 13 0t13 0t13 0M-26 12q7-8 13 0t13 0t13 0"/>',
+ '<path d="M-12 -18h16l10 10v26h-26z"/><path d="M4 -18v10h10M-6 0h14M-6 8h14"/>',
+ '<path d="M-12 18v-36M-12 -16h26l-6 8l6 8h-26"/>',
+ '<path d="M-6 -12l-14 12l14 12M6 -12l14 12l-14 12"/>',
+ '<path d="M-24 -10h30l8 8M-24 0h40M-24 10h30l8-8"/>',
+ '<circle r="16"/><path d="M-8 1l6 6l11 -13"/>',
+ '<ellipse cx="0" cy="-12" rx="16" ry="6"/><path d="M-16 -12v24c0 3 7 6 16 6s16-3 16-6v-24M-16 0c0 3 7 6 16 6s16-3 16-6"/>',
+ '<path d="M-16 14c0-18 10-28 30-28c0 18-10 28-30 28zM-16 14L4 -6"/>',
+ '<path d="M-24 -14h26v16h-14l-8 8v-8h-4z"/><path d="M10 -2h14v14h-4v7l-7-7h-3z"/>'
+];
+function unitArt(ui){
+  const HL=['M0 84V54Q60 26 130 52T260 46Q300 40 320 52V84z|M0 84V66Q70 44 140 64T290 58Q310 56 320 62V84z','M0 84V46Q80 70 160 46T320 56V84z|M0 84V62Q90 50 170 68T320 60V84z','M0 84V58Q50 30 110 50T230 36Q290 30 320 50V84z|M0 84V70Q80 54 160 70T320 64V84z'][ui%3].split('|');
+  return '<svg class="scene" viewBox="0 0 320 84" role="img" aria-label="Ілюстрація розділу" style="background:linear-gradient(180deg,color-mix(in srgb,var(--uc) 20%,var(--surface)),var(--surface))"><path d="'+HL[0]+'" fill="var(--uc)" opacity=".22"/><path d="'+HL[1]+'" fill="var(--uc)" opacity=".38"/><circle cx="254" cy="38" r="30" fill="var(--uc)" opacity=".14"/><g transform="translate(254 40)"><g class="gl" fill="none" stroke="var(--uc)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">'+GLYPH[ui%GLYPH.length]+'</g></g></svg>';
+}
+function cupSvg(p){
+  const pp=Math.max(.06,Math.min(1,p/100));
+  return '<div class="cupm" aria-hidden="true"><svg viewBox="0 0 40 46"><defs><clipPath id="cupc"><path d="M5 14h24v12a12 12 0 0 1-24 0z"/></clipPath></defs><path class="cup-s" d="M12 10q3-3 0-6M20 10q3-3 0-6" fill="none" stroke="var(--muted)" stroke-width="1.6" stroke-linecap="round"/><g clip-path="url(#cupc)"><rect x="5" y="14" width="24" height="24" fill="var(--line)"/><rect class="cf" style="--p:'+pp+'" x="5" y="14" width="24" height="24" fill="var(--warm)"/></g><path d="M5 14h24v12a12 12 0 0 1-24 0z" fill="none" stroke="var(--primary)" stroke-width="2.2"/><path d="M29 17h2.5a4.5 4.5 0 0 1 0 9H28" fill="none" stroke="var(--primary)" stroke-width="2.2"/></svg></div>';
+}
+let foxRun=false;
+function skyUpdate(){
+  let el=document.getElementById('sky');
+  if(!el){el=document.createElement('div');el.id='sky';el.setAttribute('aria-hidden','true');document.body.insertBefore(el,document.body.firstChild);}
+  const d=new Date(),h=d.getHours(),m=d.getMonth();
+  const tod=(h<5||h>=22)?'night':h<8?'dawn':h<17?'day':h<21?'dusk':'night';
+  const se=(m===11||m<2)?'winter':m<5?'spring':m<8?'summer':'autumn';
+  const key=tod+se;if(el.dataset.k===key)return;el.dataset.k=key;
+  el.className='tod-'+tod+' se-'+se;
+  let t='';
+  if(tod==='night')for(let i=0;i<16;i++)t+='<span class="st" style="left:'+((i*37+11)%100)+'%;top:'+((i*23+7)%46)+'%;animation-delay:'+(i*.37).toFixed(2)+'s"></span>';
+  const cols=['#D9822B','#B5472B','#C79A2E'];
+  t+='<div class="sp">';
+  for(let i=0;i<9;i++)t+='<i style="--x:'+((i*11+5)%96)+'%;--d:'+(10+i%4*2.5)+'s;--dl:-'+(i*1.7).toFixed(1)+'s;--dx:'+((i%2?1:-1)*(30+i*6))+'px;--r:'+(180+i*40)+'deg;--c:'+cols[i%3]+'"></i>';
+  t+='</div>';
+  el.innerHTML=t;
+}
+function heatCard(){
+  const W=12,cell=18,gap=4,x0=26,end=new Date(),dow=(end.getDay()+6)%7;
+  const start=new Date(end);start.setDate(start.getDate()-dow-(W-1)*7);
+  let svg='<svg class="heat" viewBox="0 0 '+(x0+W*(cell+gap))+' '+(7*(cell+gap)+14)+'" role="img" aria-label="Календар занять за 12 тижнів">';
+  ['пн','','ср','','пт','',''].forEach((t,i)=>{if(t)svg+='<text x="0" y="'+(14+i*(cell+gap)+cell*.7)+'">'+t+'</text>';});
+  const tk=today();
+  for(let w=0;w<W;w++)for(let d=0;d<7;d++){
+    const dt=new Date(start);dt.setDate(start.getDate()+w*7+d);if(dt>end)continue;
+    const k=dayStr(dt),xp=(S.hist[k]&&S.hist[k].xp)||0;
+    const lv=!xp?0:xp<=S.goal/2?1:xp<=S.goal?2:xp<=S.goal*2?3:4;
+    svg+='<rect class="h'+lv+(k===tk?' now':'')+'" rx="4" x="'+(x0+w*(cell+gap))+'" y="'+(14+d*(cell+gap))+'" width="'+cell+'" height="'+cell+'"><title>'+k+': '+xp+' XP</title></rect>';
+  }
+  return '<section class="card"><h2>Календар занять</h2>'+svg+'<div class="hleg">менше <i></i><i class="h1"></i><i class="h2"></i><i class="h3"></i><i class="h4"></i> більше</div></section>';
+}
 const SAY=['Факт: Java створили в 1995 році, а назву взяли від кави з острова Ява.','Порада: пиши код руками, а не лише читай. Так він запам’ятовується швидше.','String у Java незмінний. Кожна «зміна» створює новий об’єкт.','== порівнює посилання, а equals() порівнює вміст.','Маленька перемога щодня краще, ніж великий ривок раз на тиждень.','Талісман Java звуть Дюк. Він досі махає рукою на конференціях.','Читай повідомлення про помилку з першого рядка: там майже завжди підказка.','У Java немає вказівників, зате є збирач сміття.','Слабкі теми чекають у «Повторенні». Заглянь туди!','Одна кава ☕ і один урок: ідеальний початок.','{v}, лисичка вже налила тобі каву ☕','Лисичка пишається {i}!','Лисичка вірить у {a}.','Сьогодні в лисички один пріоритет: успіхи {g}.','Лисичка вже розповіла Дюку про {a}.','Уся надія лисички тільки на {l}.','Лисичка записала в зошит: {d} належить місце в топі учнів.','Не зупиняйся, {v}: кожна помилка наближає до успіху.'];
 function sayText(k){const d=Math.floor(Date.now()/86400000);const t=SAY[(d+k)%SAY.length],c=NC();return t.replace(/\{(\w)\}/g,(m,x)=>x==='v'?nv():(c[x]||m));}
 let sayK=0;
@@ -1611,7 +1749,7 @@ function homeView(){
   const dxp=S.day.d===today()?S.day.xp:0,gpct=Math.min(100,dxp/S.goal*100);
   let h='<div class="view hastabs'+(fx.view?' enter':'')+'">'+topbar();
   h+='<p class="hello">'+greetWord()+', <b>'+esc(nv())+'</b>!</p>';
-  h+='<section class="me"><span class="bean b1"></span><span class="bean b2"></span><span class="bean b3"></span><span class="bean b4"></span><span class="bean b5"></span><span class="bean b6"></span><div class="me-m">'+mascot('idle',64)+'</div><div class="me-t"><p class="kicker">Рівень '+li.n+'</p><h2>'+esc(li.title)+'</h2>'
+  h+='<section class="me"><span class="bean b1"></span><span class="bean b2"></span><span class="bean b3"></span><span class="bean b4"></span><span class="bean b5"></span><span class="bean b6"></span>'+cupSvg(li.pct)+'<div class="me-m">'+mascot('idle',64)+'</div><div class="me-t"><p class="kicker">Рівень '+li.n+'</p><h2>'+esc(li.title)+'</h2>'
     +'<div class="meter slim"><div class="track" role="progressbar" aria-label="Прогрес до наступного рівня" aria-valuemin="0" aria-valuemax="100" aria-valuenow="'+Math.round(li.pct)+'"><div class="fill" style="width:'+barFrom('lvl',li.pct)+'%" data-to="'+li.pct+'"></div></div><span>'+(li.hi?S.xp+' / '+li.hi:'максимум')+'</span></div></div>'
     +'<div class="goal'+(dxp>=S.goal?' met':'')+'"><span class="gl">Ціль дня</span><div class="track" role="progressbar" aria-label="Ціль дня" aria-valuemin="0" aria-valuemax="'+S.goal+'" aria-valuenow="'+Math.min(dxp,S.goal)+'"><div class="fill g" style="width:'+barFrom('goal',gpct)+'%" data-to="'+gpct+'"></div></div><span class="gv">'+Math.min(dxp,S.goal)+' / '+S.goal+' XP</span></div></section>';
   if(S.streak>0&&S.last!==today()){
@@ -1644,11 +1782,11 @@ function homeView(){
   }
   h+='<section class="review"><div class="rv-ico">'+IC.code+'</div><div class="rv-t"><h2>Пісочниця</h2><p>Пиши Java і запускай прямо тут.</p></div><button class="btn sm" data-act="ide">Відкрити</button></section>';
   UNITS.forEach((u,ui)=>{
-    h+='<section style="--uc:var(--u'+((ui%6)+1)+')"><div class="unit"><p class="kicker">Розділ '+(ui+1)+'</p><h2>'+esc(u.title)+'</h2><p>'+esc(u.sub)+'</p></div><div class="path">';
+    h+='<section style="--uc:var(--u'+((ui%6)+1)+')"><div class="unit"><p class="kicker">Розділ '+(ui+1)+'</p><h2>'+esc(u.title)+'</h2><p>'+esc(u.sub)+'</p></div>'+unitArt(ui)+'<div class="path">';
     ALL.filter(l=>l.ui===ui).forEach(l=>{
       const d=S.done[l.uid],un=isUnlocked(l.n),isCur=cur&&cur.uid===l.uid,st=isStale(d);
       h+='<div class="nodewrap'+(fx.view?' enter':'')+'" style="--k:'+OFF[l.n%8]+';--d:'+(Math.min(l.n,14)*45)+'ms">';
-      if(isCur)h+='<span class="bubble">Почати</span>';
+      if(isCur)h+='<span class="bubble">Почати</span><span class="pfox '+(OFF[l.n%8]>0?'l':'r')+(foxRun?' run':'')+'" style="--rx:'+(OFF[l.n%8]>0?'90px':'-90px')+'">'+mascot('idle',46)+'</span>';
       h+='<button class="node'+(isCur?' current':'')+(st?' stale':'')+'" '+(un?'':'disabled ')+'data-act="start" data-uid="'+l.uid+'" aria-label="'+esc(l.lesson.title)+(d?(d.skip?', пропущено':', пройдено'):un?'':', закрито')+'">'+(d?IC.check:un?IC.play:IC.lock)+(st?'<i class="stale-b">'+IC.refresh+'</i>':'')+'</button>';
       h+='<span class="nlabel">'+esc(l.lesson.title)+(d?(d.skip?'<small>Пропущено після тесту</small>':'<small>'+(st?'Пора повторити':'Точність '+d.a+'%')+'</small>'):'')+'</span></div>';
     });
@@ -1683,6 +1821,7 @@ function setView(){
   let h='<div class="view hastabs'+(fx.view?' enter':'')+'"><header class="top"><div class="brand">Налаштування</div></header><div class="sets">';
   h+=accountCard()+bioCard();
   h+='<section class="card"><h2>Складність</h2>'+seg('setlevel',[{v:'easy',t:'Легкий'},{v:'normal',t:'Звичайний'},{v:'hard',t:'Складний'}],S.level)+'<p class="desc">'+esc(LEVELS[S.level].desc)+'</p></section>';
+  h+='<section class="card"><h2>Тема</h2>'+seg('settheme',[{v:'auto',t:'Авто'},{v:'light',t:'Світла'},{v:'dark',t:'Темна'}],S.theme||'auto')+'</section>';
   h+='<section class="card"><h2>Ціль на день</h2>'+seg('setgoal',[{v:20,t:'20 XP'},{v:30,t:'30 XP'},{v:50,t:'50 XP'}],S.goal)+'</section>';
   h+='<section class="card">'+tog('sound','Звуки','Короткі сигнали правильної й неправильної відповіді.')+tog('big','Великий шрифт','Збільшує весь інтерфейс.')+tog('calm','Спокійний режим','Вимикає анімації.')+'</section>';
   h+='<section class="card"><h2>Знайомство</h2><p class="desc">Лисичка звертається до тебе: <b>'+esc(S.nm||'без імені')+'</b>.</p><button class="btn ghost" data-act="rename">Змінити ім’я</button></section>';
@@ -1699,7 +1838,12 @@ function setView(){
   return h;
 }
 
-function codeBlock(code){return '<pre class="code"><code>'+hl(code)+'</code></pre>';}
+function codeBlock(code,cp){
+  let carry='';
+  const lines=hl(code).split('\n').map(l=>{let t=carry+l;const o=(t.match(/<span /g)||[]).length,c=(t.match(/<\/span>/g)||[]).length;
+    if(o>c){const m=t.match(/<span class="t-\w+">/g);carry=m[m.length-1];t+='</span>'.repeat(o-c);}else carry='';return '<span class="l">'+t+'</span>';});
+  return '<div class="cw">'+(cp?'<div class="cprow"><button class="cpy" data-act="cpy" aria-label="Копіювати код">Копіювати</button></div>':'')+'<pre class="code ln"><code>'+lines.join('\n')+'</code></pre></div>';
+}
 function fmt(s){return esc(s).replace(/`([^`]+)`/g,'<code>$1</code>');}
 function fillCode(ex,c){
   const parts=ex.code.split(/\[\[(\d)\]\]/);let h='';
@@ -1753,7 +1897,7 @@ function studyView(){
   let h='<div class="view'+(fx.view?' enter':'')+'"><div class="lesson"><div class="lhead"><button class="x" data-act="leave" aria-label="'+(L.peek?'Закрити теорію':'Вийти з уроку')+'">'+IC.cross+'</button><div class="dots" role="img" aria-label="Картка '+(L.si+1)+' з '+cards.length+'">'+dots+'</div></div>'
     +'<div class="stage'+(fx.stage?' enter':'')+'"><p class="kicker">Вивчаємо · '+(L.si+1)+' / '+cards.length+'</p><h2 class="q">'+esc(k.h)+'</h2><p class="txt">'+fmt(k.p)+'</p>';
   if('speechSynthesis' in window)h+='<div class="speakrow"><button class="btn ghost sm speak" data-act="speak">'+IC.speaker+'<span>Прослухати</span></button></div>';
-  if(k.code)h+=codeBlock(k.code);
+  if(k.code)h+=codeBlock(k.code,true);
   if(k.out!=null)h+='<div class="console"><span class="con-l">Результат</span><pre>'+esc(k.out)+'</pre></div>';
   h+='</div></div></div>';
   h+='<div class="bar"><div class="bar-in"><div class="btnrow">'+(L.si>0?'<button class="btn ghost" data-act="sback">Назад</button>':'')
@@ -1857,7 +2001,7 @@ function resultView(){
     return h;
   }
   const next=res.review?null:ALL[res.info.n+1];
-  let h='<div class="view enter"><div class="result"><div class="hero ok">'+mascot('cheer',120)+'</div><h1>'+(res.review?'Повторення завершено':'Урок пройдено')+', '+esc(nv())+'!</h1><p>'+esc(res.info.lesson.title)+'</p>'
+  let h='<div class="view enter"><div class="result"><div class="hero ok'+(res.lvl?' gold':'')+'">'+mascot('cheer',120)+'</div>'+(res.lvl?'<div class="lvlup"><b>Новий рівень '+res.lvl.n+'</b><span>«'+esc(res.lvl.title)+'»</span></div>':'')+'<h1>'+(res.review?'Повторення завершено':'Урок пройдено')+', '+esc(nv())+'!</h1><p>'+esc(res.info.lesson.title)+'</p>'
    +'<div class="tiles"><div class="tile xp"><b data-count="'+res.gain+'" data-pre="+">+'+res.gain+'</b><span>Досвід</span></div>'
    +'<div class="tile"><b data-count="'+res.acc+'" data-suf="%">'+res.acc+'%</b><span>Точність</span></div>'
    +'<div class="tile"><b>'+res.hearts+'/'+res.max+'</b><span>Життя</span></div></div>';
@@ -1897,9 +2041,9 @@ function confetti(){
   const box=document.createElement('div');
   box.className='confetti';box.setAttribute('aria-hidden','true');
   let s='';
-  for(let i=0;i<46;i++){
+  for(let i=0;i<(fx.beans?80:46);i++){
     const w=6+Math.random()*7;
-    s+='<i style="left:'+(Math.random()*100).toFixed(1)+'%;width:'+w.toFixed(1)+'px;height:'+(w*1.6).toFixed(1)+'px;background:var(--u'+(1+i%6)+');animation-duration:'+(1.9+Math.random()*1.5).toFixed(2)+'s;animation-delay:'+(Math.random()*0.6).toFixed(2)+'s;--r:'+Math.round(Math.random()*720-360)+'deg;--dx:'+Math.round((Math.random()*2-1)*90)+'px"></i>';
+    s+='<i'+(fx.beans?' class="bean"':'')+' style="left:'+(Math.random()*100).toFixed(1)+'%;width:'+w.toFixed(1)+'px;height:'+(w*1.6).toFixed(1)+'px;background:var(--u'+(1+i%6)+');animation-duration:'+(1.9+Math.random()*1.5).toFixed(2)+'s;animation-delay:'+(Math.random()*0.6).toFixed(2)+'s;--r:'+Math.round(Math.random()*720-360)+'deg;--dx:'+Math.round((Math.random()*2-1)*90)+'px"></i>';
   }
   box.innerHTML=s;
   document.body.appendChild(box);
@@ -1923,6 +2067,8 @@ function render(){
   else h=failView();
   document.querySelectorAll('.confetti').forEach(n=>n.remove());
   $app.innerHTML=h;
+  if(screen==='home')foxRun=false;
+  skyUpdate();
   animateBars();
   runCounters();
   if(screen==='home'){shownXp=S.xp;shownStreakVal=shownStreak();}
@@ -2086,6 +2232,7 @@ function finish(){
   const lv0=lvlInfo(S.xp).n;
   S.xp+=gain;
   const li=lvlInfo(S.xp);
+  foxRun=true;
   if(li.n>lv0)notes.push('Новий рівень: '+li.n+' («'+li.title+'»)');
   const dxp=S.day.d===today()?S.day.xp:0;
   const goalHit=dxp<S.goal&&dxp+gain>=S.goal;
@@ -2106,8 +2253,8 @@ function finish(){
     if(acc===100)S.stats.perfect++;
   }
   save();
-  res={info:L.info,acc,gain,hearts:L.hearts,max:L.max,review:!!L.review,notes};
-  screen='result';fx.view=true;fx.confetti=true;
+  res={info:L.info,acc,gain,hearts:L.hearts,max:L.max,review:!!L.review,notes,lvl:li.n>lv0?{n:li.n,title:li.title}:null};
+  screen='result';fx.view=true;fx.confetti=true;fx.beans=!!res.lvl;
   snd('done');
   render();window.scrollTo(0,0);
   if(li.n>lv0)toast('Новий рівень',li.n+' · '+li.title,'ach');
@@ -2150,7 +2297,10 @@ $app.addEventListener('click',e=>{
   if(a==='shtoggle'){const k=el.dataset.k,art=el.closest('.sh-c');const on=!art.classList.contains('open');art.classList.toggle('open',on);el.setAttribute('aria-expanded',on);if(on)SHO.add(k);else SHO.delete(k);return;}
   if(a==='sheetunit'){sheetUi=+el.dataset.i;fx.view=false;render();window.scrollTo(0,0);return;}
   if(a==='print'){try{window.print();}catch(e){}return;}
-  if(a==='fit'){S.fit[el.dataset.slot]=el.dataset.v;save();fx.view=false;render();return;}
+  if(a==='fit'){S.fit[el.dataset.slot]=el.dataset.v;save();fx.view=false;fx.spin=true;render();return;}
+  if(a==='medal'){const x=ACH[+el.dataset.i];toast(x.t,x.d,'ach');return;}
+  if(a==='cpy'){const t=el.closest('.cw').querySelector('code').textContent;const done=()=>toast('Скопійовано','Код у буфері обміну');try{navigator.clipboard.writeText(t).then(done,()=>{});}catch(e){const ta=document.createElement('textarea');ta.value=t;document.body.appendChild(ta);ta.select();try{document.execCommand('copy');done();}catch(_){}ta.remove();}return;}
+  if(a==='settheme'){S.theme=el.dataset.v;const r=document.documentElement;r.classList.add('tt');applyPrefs();save();fx.view=false;render();setTimeout(()=>r.classList.remove('tt'),800);return;}
   if(a==='weak'){startWeak();return;}
   if(a==='ide'){screen='ide';fx.view=true;render();window.scrollTo(0,0);return;}
   if(a==='sample'){const sm=SAMPLES[+el.dataset.i];IDE.code=sm[1];IDE.stdin=sm[2];IDE.out='';IDE.kind='';fx.view=false;render();return;}
@@ -2517,7 +2667,7 @@ function introView(){
   return h+'</div></div>';
 }
 /* ---------- mandatory update gate ---------- */
-const BUILD='1791562216';
+const BUILD='1791564410';
 let PULLED=false;
 let NEWVER=false,UPDBUSY=false;
 async function checkUpdate(){
@@ -2650,7 +2800,7 @@ let sheetQ='';const SHO=new Set();
 function sheetCard(l,k,idx,tag){
   const key=l.uid+':'+idx,open=SHO.has(key)||!!sheetQ;
   let h='<article class="sh-c acc'+(open?' open':'')+'" data-k="'+esc(key)+'"><button class="sh-h" data-act="shtoggle" data-k="'+esc(key)+'" aria-expanded="'+open+'"><span><b>'+esc(k.h)+'</b>'+(tag?'<small>'+esc(tag)+'</small>':'')+'</span><i class="chev" aria-hidden="true"></i></button><div class="sh-b"><p>'+fmt(k.p)+'</p>';
-  if(k.code)h+=codeBlock(k.code);
+  if(k.code)h+=codeBlock(k.code,true);
   if(k.out!=null)h+='<div class="console"><span class="con-l">Результат</span><pre>'+esc(k.out)+'</pre></div>';
   return h+'</div></article>';
 }
@@ -2663,7 +2813,7 @@ function sheetBody(){
     return n?'<p class="sh-n">Знайдено тем: '+n+'</p>'+h:'<p class="desc" style="text-align:center;margin-top:24px">Нічого не знайшлося. Спробуй інше слово, наприклад «цикл» чи «String».</p>';
   }
   const u=UNITS[sheetUi];
-  h+='<div class="sheet-h" style="--uc:var(--u'+((sheetUi%6)+1)+')"><h1>'+esc(u.title)+'</h1><p class="sub">'+esc(u.sub)+'</p></div>';
+  h+='<div class="sheet-h" style="--uc:var(--u'+((sheetUi%6)+1)+')">'+unitArt(sheetUi)+'<h1>'+esc(u.title)+'</h1><p class="sub">'+esc(u.sub)+'</p></div>';
   ALL.filter(l=>l.ui===sheetUi).forEach(l=>{
     h+='<h2 class="sh-l">'+esc(l.lesson.title)+'</h2>';
     (l.lesson.learn||[]).forEach((k,idx)=>{h+=sheetCard(l,k,idx,'');});
@@ -2809,6 +2959,7 @@ function statsView(){
       +'<text x="'+(x+15)+'" y="138" text-anchor="middle" class="bar-n">'+d.n+'</text>';});
   svg+='</svg>';
   h+='<section class="card"><h2>Досвід за тиждень</h2>'+svg+'<p class="desc">Пунктир це твоя денна ціль: '+S.goal+' XP.</p></section>';
+  h+=heatCard();
   // accuracy by unit
   const rows=Object.keys(S.us).map(k=>+k).filter(k=>UNITS[k]).sort((a,b)=>a-b);
   h+='<section class="card"><h2>Точність за розділами</h2>';
@@ -2821,7 +2972,7 @@ function statsView(){
   h+='</section>';
   // wardrobe
   const lv=lvlInfo(S.xp).n;
-  h+='<section class="card"><h2>Гардероб лисички</h2><div class="ward-m">'+mascot('happy',120)+'</div><p class="desc">Нові речі відкриваються з рівнями. Зараз у тебе рівень '+lv+'.</p>';
+  h+='<section class="card"><h2>Гардероб лисички</h2><div class="ward-m'+(fx.spin?' spin':'')+'">'+mascot('happy',150)+'</div><p class="desc">Нові речі відкриваються з рівнями. Зараз у тебе рівень '+lv+'.</p>';
   Object.keys(FIT).forEach(slot=>{
     h+='<p class="ward-s">'+FITSLOT[slot]+'</p><div class="ward-r">';
     FIT[slot].forEach(it=>{const un=fitUnlocked(it),on=fitNow(slot)===it.id;
@@ -2831,9 +2982,9 @@ function statsView(){
   h+='</section>';
   // achievements
   const got=ACH.filter(a=>S.ach[a.id]).length;
-  h+='<h2 class="pg-s">Досягнення · '+got+' / '+ACH.length+'</h2><div class="alist">';
-  ACH.forEach((a,i)=>{const on=!!S.ach[a.id];
-    h+='<div class="ach'+(on?' on':'')+'" style="--i:'+i+'"><div class="ach-i">'+(on?IC.star:IC.lock)+'</div><div class="ach-t"><h3>'+esc(a.t)+'</h3><p>'+esc(a.d)+'</p></div></div>';});
+  h+='<h2 class="pg-s">Досягнення · '+got+' / '+ACH.length+'</h2><div class="agrid">';
+  ACH.forEach((a,i)=>{const on=!!S.ach[a.id],dt=on?new Date(S.ach[a.id]):null;
+    h+='<button class="medal'+(on?' on':'')+'" style="--i:'+i+'" data-act="medal" data-i="'+i+'" aria-label="'+esc(a.t+'. '+a.d)+'"><span class="mc">'+(on?IC.star:IC.lock)+'</span><b>'+esc(a.t)+'</b><small>'+(on?String(dt.getDate()).padStart(2,'0')+'.'+String(dt.getMonth()+1).padStart(2,'0'):'закрито')+'</small></button>';});
   h+='</div></div>'+tabs('stats');
   return h;
 }
@@ -2849,6 +3000,7 @@ render();
 checkUpdate();
 document.addEventListener('visibilitychange',()=>{if(!document.hidden)checkUpdate();});
 setInterval(checkUpdate,600000);
+setInterval(skyUpdate,600000);
 })();
 </script>
 
