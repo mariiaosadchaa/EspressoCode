@@ -389,6 +389,10 @@ svg{display:block}
 .inp{width:100%;margin:10px 0 0;padding:12px 14px;border:2px solid var(--line);border-radius:14px;background:var(--surface);color:var(--ink);font:inherit;font-size:16px}
 .inp:focus{outline:none;border-color:var(--primary)}
 .authmsg{margin:10px 0 0;color:var(--bad-ink)}
+.gate{max-width:420px;margin:0 auto;padding:max(28px,env(safe-area-inset-top)) 20px 40px;display:flex;flex-direction:column;gap:6px;min-height:100vh;justify-content:center}
+.gate h1{font-family:var(--display);font-size:26px;margin:0}
+.gate-m{display:flex;justify-content:center;margin-bottom:8px}
+.gate .desc{margin:4px 0 14px;color:var(--muted)}
 </style><style>*,*::before,*::after{box-sizing:border-box}html{-webkit-text-size-adjust:100%}body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--body)}</style>
 </head>
 <body>
@@ -1492,7 +1496,9 @@ function confetti(){
 }
 function render(){
   let h;
-  if(screen==='home')h=homeView();
+  let gated=false;try{gated=CLOUD&&!AUTH;}catch(e){}
+  if(gated)h=gateView();
+  else if(screen==='home')h=homeView();
   else if(screen==='ach')h=achView();
   else if(screen==='set')h=setView();
   else if(screen==='lesson')h=L.mode==='study'?studyView():lessonView();
@@ -1865,13 +1871,25 @@ async function doAuth(){
       const j=await api('/auth/v1/token?grant_type=password',{method:'POST',body:JSON.stringify({email:AUI.email,password:pw})});
       takeSession(j);
     }
-    AUI.busy=false;toast('Готово','Ти ввійшла. Прогрес зберігається в хмарі');
+    AUI.busy=false;screen='home';toast('Готово','Ти ввійшла. Прогрес зберігається в хмарі');
     await cloudPull();
   }catch(e){AUI.busy=false;AUI.msg=authErr(e.body);fx.view=false;render();}
 }
-function doSignOut(){
-  AUTH=null;authSave();AUI.sync='';AUI.msg='';
-  toast('Готово','Ти вийшла з акаунта');fx.view=false;render();
+async function doSignOut(){
+  try{await cloudPush();}catch(e){}
+  AUTH=null;authSave();AUI.sync='';AUI.msg='';AUI.email='';
+  S=fresh();save(true);applyPrefs();resetShown();screen='home';
+  fx.view=true;render();
+}
+function authForm(){
+  return seg('authmode',[{v:'in',t:'Вхід'},{v:'up',t:'Реєстрація'}],AUI.mode)
+      +'<input id="em" class="inp" type="email" autocomplete="email" placeholder="Пошта" value="'+esc(AUI.email)+'">'
+      +'<input id="pw" class="inp" type="password" autocomplete="'+(AUI.mode==='up'?'new-password':'current-password')+'" placeholder="Пароль (від 6 символів)">'
+      +(AUI.msg?'<p class="desc authmsg" role="status">'+esc(AUI.msg)+'</p>':'')
+      +'<button class="btn" style="margin-top:12px" data-act="auth"'+(AUI.busy?' disabled':'')+'>'+(AUI.busy?'Зачекай…':(AUI.mode==='up'?'Створити акаунт':'Увійти'))+'</button>';
+}
+function gateView(){
+  return '<div class="view enter"><div class="gate"><div class="gate-m">'+mascot('cheer',96)+'</div><h1>Java Бариста</h1><p class="desc">Увійди або створи акаунт, щоб почати вчитись. Прогрес збережеться в хмарі й буде на всіх твоїх пристроях.</p>'+authForm()+'</div></div>';
 }
 function accountCard(){
   if(!CLOUD)return '';
@@ -1880,12 +1898,7 @@ function accountCard(){
     const st={saving:'Зберігаю…',ok:'Прогрес збережено в хмарі',err:'Не вдалося синхронізувати. Спробуємо ще раз при наступній дії.',idle:'Підключено'}[AUI.sync]||'';
     h+='<p class="desc">Ти ввійшла як <b>'+esc(AUTH.email)+'</b>. '+st+'</p><button class="btn ghost" style="margin-top:12px" data-act="signout">Вийти</button>';
   }else{
-    h+='<p class="desc">Увійди, щоб прогрес зберігався в хмарі й був на всіх пристроях.</p>'
-      +seg('authmode',[{v:'in',t:'Вхід'},{v:'up',t:'Реєстрація'}],AUI.mode)
-      +'<input id="em" class="inp" type="email" autocomplete="email" placeholder="Пошта" value="'+esc(AUI.email)+'">'
-      +'<input id="pw" class="inp" type="password" autocomplete="'+(AUI.mode==='up'?'new-password':'current-password')+'" placeholder="Пароль (від 6 символів)">'
-      +(AUI.msg?'<p class="desc authmsg" role="status">'+esc(AUI.msg)+'</p>':'')
-      +'<button class="btn" style="margin-top:12px" data-act="auth"'+(AUI.busy?' disabled':'')+'>'+(AUI.busy?'Зачекай…':(AUI.mode==='up'?'Створити акаунт':'Увійти'))+'</button>';
+    h+='<p class="desc">Увійди, щоб прогрес зберігався в хмарі й був на всіх пристроях.</p>'+authForm();
   }
   return h+'</section>';
 }
