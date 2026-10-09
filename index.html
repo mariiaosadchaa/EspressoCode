@@ -1,0 +1,900 @@
+<title>Java Бариста</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700&family=Unbounded:wght@600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+/* Layout: one phone-width column. Home = summary card + zigzag lesson path; lesson = full-screen exercise with a fixed action bar. */
+:root{
+  --display:'Unbounded','Onest',system-ui,sans-serif;
+  --body:'Onest',system-ui,-apple-system,'Segoe UI',sans-serif;
+  --mono:'JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+
+  --bg:#ECEFF4; --surface:#FFFFFF; --ink:#142033; --muted:#566377; --line:#D3DAE6; --line-edge:#BAC3D2;
+  --primary:#2556D8; --primary-edge:#173C9E; --on-primary:#FFFFFF;
+  --good:#169B66; --good-edge:#0F7A50; --good-bg:#DDF5E9; --on-good:#FFFFFF; --good-ink:#0B5C3B;
+  --bad:#D63A41; --bad-edge:#A32A30; --bad-bg:#FDE4E5; --on-bad:#FFFFFF; --bad-ink:#8E2227;
+  --warm:#D98200;
+  --code-bg:#F2F5FA; --code-ink:#1B2740; --con-bg:#162033; --con-ink:#DCE6F7;
+  --kw:#A1308F; --str:#1A7F4B; --num:#B85600; --com:#76839A; --ty:#1B5FC4;
+  --u1:#2556D8; --u2:#0B7F8A; --u3:#6A3FCF; --u4:#B35F00; --u5:#C23A60; --u6:#1F8A4C; --on-u:#FFFFFF;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0E141D; --surface:#171F2C; --ink:#E7ECF4; --muted:#93A0B4; --line:#29344A; --line-edge:#1F2838;
+    --primary:#6D98FF; --primary-edge:#3E67CF; --on-primary:#0B1220;
+    --good:#3DCB8C; --good-edge:#23996A; --good-bg:#12362A; --on-good:#062015; --good-ink:#8FE8BF;
+    --bad:#FF7479; --bad-edge:#C94950; --bad-bg:#3A1A1E; --on-bad:#2A0A0C; --bad-ink:#FFA5A8;
+    --warm:#FFB32E;
+    --code-bg:#0B1019; --code-ink:#DCE4F2; --con-bg:#05080E; --con-ink:#DCE6F7;
+    --kw:#E58BDD; --str:#7FDDA6; --num:#FFB066; --com:#7D8BA3; --ty:#7DB2FF;
+    --u1:#7BA0FF; --u2:#4CC9D6; --u3:#A98BFF; --u4:#FFB347; --u5:#FF8FAA; --u6:#5FD38E; --on-u:#0B1220;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0E141D; --surface:#171F2C; --ink:#E7ECF4; --muted:#93A0B4; --line:#29344A; --line-edge:#1F2838;
+  --primary:#6D98FF; --primary-edge:#3E67CF; --on-primary:#0B1220;
+  --good:#3DCB8C; --good-edge:#23996A; --good-bg:#12362A; --on-good:#062015; --good-ink:#8FE8BF;
+  --bad:#FF7479; --bad-edge:#C94950; --bad-bg:#3A1A1E; --on-bad:#2A0A0C; --bad-ink:#FFA5A8;
+  --warm:#FFB32E;
+  --code-bg:#0B1019; --code-ink:#DCE4F2; --con-bg:#05080E; --con-ink:#DCE6F7;
+  --kw:#E58BDD; --str:#7FDDA6; --num:#FFB066; --com:#7D8BA3; --ty:#7DB2FF;
+  --u1:#7BA0FF; --u2:#4CC9D6; --u3:#A98BFF; --u4:#FFB347; --u5:#FF8FAA; --u6:#5FD38E; --on-u:#0B1220;
+  color-scheme:dark;
+}
+
+html,body{height:100%}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5;-webkit-tap-highlight-color:transparent}
+*,*::before,*::after{box-sizing:border-box}
+button{font-family:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--primary);outline-offset:2px}
+svg{display:block}
+.ico{width:1.2em;height:1.2em;fill:currentColor}
+.ico.stroke{fill:none;stroke:currentColor;stroke-width:3;stroke-linecap:round;stroke-linejoin:round}
+
+.app{max-width:560px;margin:0 auto;padding-inline:16px;min-height:100%}
+.app > *{min-width:0}
+
+/* ---------- header ---------- */
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);display:flex;align-items:center;justify-content:space-between;gap:12px;padding-block:12px}
+.brand{font-family:var(--display);font-weight:700;font-size:18px;letter-spacing:-.01em}
+.brand span{color:var(--primary)}
+.stats{display:flex;gap:8px}
+.stat{display:flex;align-items:center;gap:6px;font-weight:700;font-size:15px;padding:6px 12px;border-radius:999px;background:var(--surface);border:2px solid var(--line);font-variant-numeric:tabular-nums}
+.stat.streak .ico{color:var(--warm)}
+.stat.xp .ico{color:var(--primary)}
+.stat.off .ico{color:var(--muted)}
+
+/* ---------- home ---------- */
+.next{background:var(--surface);border:2px solid var(--line);border-radius:18px;padding:18px;display:grid;gap:14px;margin-top:4px}
+.kicker{margin:0;font-size:12px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--muted)}
+.next h1{margin:0;font-family:var(--display);font-weight:700;font-size:20px;line-height:1.25;text-wrap:balance}
+.next .sub{margin:0;color:var(--muted);font-size:14px}
+.meter{display:flex;align-items:center;gap:12px;font-size:13px;font-weight:600;color:var(--muted);font-variant-numeric:tabular-nums}
+.track{flex:1;height:12px;border-radius:999px;background:var(--line);overflow:hidden}
+.fill{height:100%;border-radius:999px;background:var(--primary);transition:width .75s cubic-bezier(.2,.8,.2,1)}
+.unit{margin-top:28px;background:var(--uc);color:var(--on-u);border-radius:16px;padding:14px 16px;box-shadow:0 4px 0 color-mix(in srgb,var(--uc) 70%,#000);display:grid;gap:2px}
+.unit .kicker{color:inherit;opacity:.85}
+.unit h2{margin:0;font-family:var(--display);font-weight:700;font-size:16px;line-height:1.3}
+.unit p{margin:0;font-size:13px;opacity:.9}
+.path{display:flex;flex-direction:column;align-items:center;gap:20px;padding-block:22px 4px}
+.nodewrap{display:flex;flex-direction:column;align-items:center;gap:10px;translate:calc(var(--k) * min(1vw,5.2px)) 0}
+.bubble{background:var(--surface);border:2px solid var(--line);border-radius:12px;padding:4px 12px;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--uc);position:relative}
+.bubble::after{content:"";position:absolute;left:50%;bottom:-7px;width:10px;height:10px;background:var(--surface);border-right:2px solid var(--line);border-bottom:2px solid var(--line);transform:translateX(-50%) rotate(45deg)}
+.node{width:76px;height:76px;border-radius:50%;border:0;background:var(--uc);color:var(--on-u);display:grid;place-items:center;cursor:pointer;box-shadow:0 6px 0 color-mix(in srgb,var(--uc) 70%,#000);font-size:28px}
+.node:active:not(:disabled){transform:translateY(4px);box-shadow:0 2px 0 color-mix(in srgb,var(--uc) 70%,#000)}
+.node:disabled{background:var(--line);color:var(--muted);box-shadow:0 6px 0 var(--line-edge);cursor:not-allowed}
+.nlabel{font-weight:600;font-size:14px;text-align:center;max-width:180px;line-height:1.3}
+.nlabel small{display:block;font-weight:500;color:var(--muted);font-size:12px;font-variant-numeric:tabular-nums}
+.foot{margin-block:36px 24px;display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between;color:var(--muted);font-size:13px}
+.linkbtn{background:none;border:0;padding:6px 0;font-size:13px;font-weight:600;color:var(--muted);text-decoration:underline;cursor:pointer}
+.linkbtn.danger{color:var(--bad)}
+
+/* ---------- buttons ---------- */
+.btn{display:block;width:100%;font-weight:700;font-size:15px;letter-spacing:.05em;text-transform:uppercase;border:0;border-radius:14px;padding:15px 20px;cursor:pointer;background:var(--primary);color:var(--on-primary);box-shadow:0 4px 0 var(--primary-edge);text-align:center}
+.btn:active:not(:disabled){transform:translateY(3px);box-shadow:0 1px 0 var(--primary-edge)}
+.btn:disabled{background:var(--line);color:var(--muted);box-shadow:0 4px 0 var(--line-edge);cursor:not-allowed}
+.btn.good{background:var(--good);color:var(--on-good);box-shadow:0 4px 0 var(--good-edge)}
+.btn.bad{background:var(--bad);color:var(--on-bad);box-shadow:0 4px 0 var(--bad-edge)}
+.btn.ghost{background:transparent;color:var(--primary);border:2px solid var(--line);box-shadow:0 3px 0 var(--line)}
+
+/* ---------- lesson ---------- */
+.lesson{display:flex;flex-direction:column;min-height:100%;padding-bottom:230px}
+.lhead{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);display:flex;align-items:center;gap:14px;padding-block:14px}
+.x{flex:none;width:36px;height:36px;border-radius:10px;border:0;background:transparent;color:var(--muted);display:grid;place-items:center;cursor:pointer;font-size:22px}
+.x:hover{background:var(--line)}
+.lives{flex:none;display:flex;align-items:center;gap:1px;color:var(--bad);font-size:17px}
+.hrt{display:grid}
+.hrt.lost{color:var(--line)}
+.stage{display:grid;gap:18px;padding-top:10px}
+.q{margin:0;font-family:var(--display);font-weight:600;font-size:19px;line-height:1.35;text-wrap:balance}
+.code{margin:0;background:var(--code-bg);color:var(--code-ink);border:1px solid var(--line);border-radius:14px;padding:14px 16px;font:400 13.5px/1.7 var(--mono);overflow-x:auto;white-space:pre;tab-size:4}
+.t-kw{color:var(--kw);font-weight:500}.t-str{color:var(--str)}.t-num{color:var(--num)}.t-com{color:var(--com);font-style:italic}.t-ty{color:var(--ty)}
+.opts{display:grid;gap:12px}
+.opt{display:block;width:100%;text-align:left;font-size:16px;padding:14px 16px;border:2px solid var(--line);border-radius:14px;background:var(--surface);color:var(--ink);box-shadow:0 3px 0 var(--line);cursor:pointer;min-width:0;overflow-wrap:anywhere}
+.opt.mono{font-family:var(--mono);font-size:13.5px;white-space:pre-wrap}
+.opt:active:not(:disabled){transform:translateY(2px);box-shadow:0 1px 0 var(--line)}
+.opt.sel{border-color:var(--primary);box-shadow:0 3px 0 var(--primary);background:color-mix(in srgb,var(--primary) 10%,var(--surface))}
+.opt.good{border-color:var(--good);box-shadow:0 3px 0 var(--good);background:var(--good-bg);color:var(--good-ink)}
+.opt.bad{border-color:var(--bad);box-shadow:0 3px 0 var(--bad);background:var(--bad-bg);color:var(--bad-ink)}
+.opt:disabled{cursor:default}
+.blank{display:inline-block;min-width:6ch;padding:0 8px;margin:0 2px;border:0;border-bottom:2px solid var(--primary);border-radius:6px 6px 0 0;background:color-mix(in srgb,var(--primary) 12%,transparent);color:var(--code-ink);font:inherit;line-height:1.45;cursor:pointer;text-align:center;vertical-align:baseline}
+.blank.good{border-color:var(--good);background:var(--good-bg);color:var(--good-ink)}
+.blank.bad{border-color:var(--bad);background:var(--bad-bg);color:var(--bad-ink)}
+.bank{display:flex;flex-wrap:wrap;gap:10px}
+.chip{font:600 14px var(--mono);padding:10px 14px;border:2px solid var(--line);border-radius:12px;background:var(--surface);color:var(--ink);box-shadow:0 3px 0 var(--line);cursor:pointer}
+.chip:active:not(:disabled){transform:translateY(2px);box-shadow:0 1px 0 var(--line)}
+.chip:disabled{opacity:.3;box-shadow:none;cursor:default}
+.build{min-height:64px;border:2px dashed var(--line);border-radius:14px;padding:10px;display:grid;gap:8px;background:var(--surface);align-content:start}
+.build.good{border:2px solid var(--good);background:var(--good-bg)}
+.build.bad{border:2px solid var(--bad);background:var(--bad-bg)}
+.hint{margin:0;color:var(--muted);font-size:14px;padding:6px 4px}
+.lines{display:grid;gap:8px}
+.line{width:100%;text-align:left;font:500 13px/1.5 var(--mono);white-space:pre-wrap;overflow-wrap:anywhere;padding:10px 12px;border:2px solid var(--line);border-radius:12px;background:var(--code-bg);color:var(--code-ink);box-shadow:0 3px 0 var(--line);cursor:pointer;min-width:0}
+.line:disabled{cursor:default}
+.line:active:not(:disabled){transform:translateY(2px);box-shadow:0 1px 0 var(--line)}
+.line.ghost{opacity:.3;box-shadow:none}
+
+.bar{position:fixed;left:0;right:0;bottom:0;z-index:10;background:var(--surface);border-top:2px solid var(--line);padding:14px 16px calc(14px + env(safe-area-inset-bottom,0px))}
+.bar.good{background:var(--good-bg);border-top-color:var(--good)}
+.bar.bad{background:var(--bad-bg);border-top-color:var(--bad)}
+.bar-in{max-width:560px;margin:0 auto;display:grid;gap:12px}
+.fb{display:flex;gap:12px;align-items:flex-start}
+.fb .badge{flex:none;width:36px;height:36px;border-radius:50%;display:grid;place-items:center;font-size:20px}
+.good .badge{background:var(--good);color:var(--on-good)}
+.bad .badge{background:var(--bad);color:var(--on-bad)}
+.fb h3{margin:0;font-family:var(--display);font-weight:700;font-size:16px}
+.good .fb h3{color:var(--good-ink)}.bad .fb h3{color:var(--bad-ink)}
+.fb p{margin:4px 0 0;font-size:14.5px;line-height:1.45;overflow-wrap:anywhere}
+.good .fb p{color:var(--good-ink)}.bad .fb p{color:var(--bad-ink)}
+.fb .ans{display:block;margin-top:6px;font:500 13px/1.5 var(--mono);white-space:pre-wrap;overflow-wrap:anywhere}
+.fb-text{min-width:0;max-height:36vh;overflow-y:auto}
+
+/* ---------- result ---------- */
+.result{display:grid;gap:22px;padding-block:48px 32px;text-align:center;justify-items:center}
+.result h1{margin:0;font-family:var(--display);font-weight:700;font-size:26px;line-height:1.2;text-wrap:balance}
+.result p{margin:0;color:var(--muted);max-width:34ch}
+.tiles{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;width:100%}
+.tile{border:2px solid var(--line);background:var(--surface);border-radius:14px;padding:12px 6px;display:grid;gap:2px}
+.tile b{font-family:var(--display);font-size:22px;font-variant-numeric:tabular-nums}
+.tile span{font-size:12px;font-weight:600;color:var(--muted);letter-spacing:.06em;text-transform:uppercase}
+.tile.xp b{color:var(--primary)}
+.btns{display:grid;gap:12px;width:100%}
+.mark{width:84px;height:84px;border-radius:50%;display:grid;place-items:center;font-size:40px}
+.mark.ok{background:var(--good);color:var(--on-good);box-shadow:0 6px 0 var(--good-edge)}
+.mark.no{background:var(--bad);color:var(--on-bad);box-shadow:0 6px 0 var(--bad-edge)}
+
+.how{margin:-8px 0 0;color:var(--muted);font-size:14.5px}
+@media (hover:hover){
+  .opt:hover:not(:disabled),.chip:hover:not(:disabled),.line:hover:not(:disabled){border-color:var(--primary)}
+  .btn:hover:not(:disabled){filter:brightness(1.07)}
+  .node:hover:not(:disabled){filter:brightness(1.07)}
+}
+
+/* ---------- motion ---------- */
+@keyframes rise{from{opacity:0;transform:translateY(14px)}}
+@keyframes viewin{from{opacity:0;transform:translateY(16px)}}
+@keyframes stagein{from{opacity:0;transform:translateX(18px)}}
+@keyframes nodein{from{opacity:0;transform:scale(.3)}}
+@keyframes ping{from{opacity:.7;transform:scale(1)}to{opacity:0;transform:scale(1.4)}}
+@keyframes bob{50%{transform:translateY(-5px)}}
+@keyframes bump{40%{transform:scale(1.25)}}
+@keyframes flicker{0%,100%{transform:scale(1) rotate(0)}30%{transform:scale(1.1,1.2) rotate(-4deg)}60%{transform:scale(.94,1.05) rotate(3deg)}}
+@keyframes tap{40%{transform:scale(.97)}}
+@keyframes pop{40%{transform:scale(1.07)}}
+@keyframes shake{20%{transform:translateX(-9px)}40%{transform:translateX(8px)}60%{transform:translateX(-5px)}80%{transform:translateX(3px)}}
+@keyframes setin{from{opacity:.2;transform:scale(.6)}}
+@keyframes hbreak{0%{color:var(--bad);transform:scale(1)}25%{transform:scale(1.7) rotate(-12deg)}50%{transform:scale(1.35) rotate(10deg)}100%{color:var(--line);transform:scale(1)}}
+@keyframes barin{from{transform:translateY(100%)}}
+@keyframes floatup{from{opacity:0;transform:translateY(14px) scale(.8)}20%{opacity:1;transform:translateY(0) scale(1.1)}to{opacity:0;transform:translateY(-34px)}}
+@keyframes draw{to{stroke-dashoffset:0}}
+@keyframes markin{from{transform:scale(0) rotate(-25deg)}}
+@keyframes fall{to{transform:translate(var(--dx),110vh) rotate(var(--r))}}
+
+.view.enter{animation:viewin .4s cubic-bezier(.2,.8,.2,1) backwards}
+.nodewrap.enter{animation:nodein .5s cubic-bezier(.3,1.5,.5,1) backwards;animation-delay:var(--d,0ms)}
+.node{position:relative}
+.node.current::after{content:"";position:absolute;inset:-5px;border-radius:50%;border:4px solid var(--uc);pointer-events:none;animation:ping 1.8s ease-out infinite}
+.bubble{animation:bob 1.6s ease-in-out infinite}
+.stat.bump{animation:bump .6s cubic-bezier(.3,1.6,.5,1)}
+.stat.streak:not(.off) .ico{transform-origin:50% 90%;animation:flicker 1.8s ease-in-out infinite}
+
+.stage.enter{animation:stagein .35s cubic-bezier(.2,.8,.2,1) backwards}
+.stage.enter .opt,.stage.enter .chip,.stage.enter .line,.stage.enter .code{animation:rise .4s cubic-bezier(.2,.8,.2,1) backwards;animation-delay:calc(var(--i,0) * 55ms + 120ms)}
+.opt.tap{animation:tap .25s ease-out}
+.opt.pop,.blank.pop,.build.pop{animation:pop .5s cubic-bezier(.3,1.6,.5,1)}
+.opt.shake,.blank.shake,.build.shake{animation:shake .45s}
+.opt.reveal{animation:pop .5s .35s cubic-bezier(.3,1.6,.5,1) backwards}
+.blank.set,.line.in{animation:setin .25s cubic-bezier(.3,1.6,.5,1)}
+.hrt.hit{animation:hbreak .7s}
+
+.bar.slide{animation:barin .45s cubic-bezier(.2,1.1,.3,1)}
+.bar-in{position:relative}
+.plus{position:absolute;right:2px;top:-40px;font:700 18px var(--display);color:var(--good-ink);pointer-events:none;animation:floatup 1.1s ease-out forwards}
+.badge{animation:pop .5s .1s cubic-bezier(.3,1.6,.5,1) backwards}
+.badge .ico path,.mark .ico path{stroke-dasharray:40;stroke-dashoffset:40;animation:draw .45s .2s ease-out forwards}
+
+.result>*{animation:rise .55s cubic-bezier(.2,.8,.2,1) backwards}
+.result>:nth-child(2){animation-delay:.15s}
+.result>:nth-child(3){animation-delay:.22s}
+.result>:nth-child(4){animation-delay:.32s}
+.result>:nth-child(5){animation-delay:.45s}
+.result>:nth-child(6){animation-delay:.55s}
+.result>.mark{animation:markin .7s cubic-bezier(.3,1.6,.5,1) backwards}
+.result>.mark.no{animation:markin .7s cubic-bezier(.3,1.6,.5,1) backwards,shake .5s .75s}
+.confetti{position:fixed;inset:0;z-index:60;pointer-events:none;overflow:hidden}
+.confetti i{position:absolute;top:-24px;border-radius:2px;animation:fall linear forwards}
+
+
+/* ---------- study & review ---------- */
+.review{margin-top:16px;background:var(--surface);border:2px solid var(--line);border-radius:18px;padding:14px 16px;display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.rv-ico{flex:none;width:44px;height:44px;border-radius:12px;background:color-mix(in srgb,var(--primary) 14%,var(--surface));color:var(--primary);display:grid;place-items:center;font-size:22px}
+.rv-t{flex:1;min-width:150px}
+.rv-t h2{margin:0;font-family:var(--display);font-weight:700;font-size:16px}
+.rv-t p{margin:2px 0 0;color:var(--muted);font-size:13.5px;line-height:1.4}
+.btn.sm{width:auto;padding:12px 18px;font-size:13px}
+.review .btn.sm{flex:1 1 100%;background:transparent;color:var(--primary);border:2px solid var(--line);box-shadow:0 3px 0 var(--line)}
+.dots{flex:1;display:flex;gap:6px}
+.dot{flex:1;height:10px;border-radius:999px;background:var(--line);transition:background .3s}
+.dot.on{background:var(--primary)}
+.txt{margin:0;font-size:17px;line-height:1.65;max-width:62ch}
+.txt code{font:500 .88em var(--mono);background:var(--code-bg);border:1px solid var(--line);border-radius:6px;padding:1px 6px;overflow-wrap:anywhere}
+.console{background:var(--con-bg);color:var(--con-ink);border:1px solid var(--line);border-radius:14px;padding:12px 16px;display:grid;gap:6px}
+.con-l{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;opacity:.6}
+.console pre{margin:0;font:500 13.5px/1.6 var(--mono);white-space:pre-wrap;overflow-wrap:anywhere}
+.btnrow{display:grid;grid-auto-flow:column;grid-auto-columns:1fr;gap:12px}
+.stage.enter .txt{animation:rise .4s .1s cubic-bezier(.2,.8,.2,1) backwards}
+.stage.enter .console{animation:rise .4s .4s cubic-bezier(.2,.8,.2,1) backwards}
+
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  .btn:active,.opt:active,.chip:active,.line:active,.node:active{transform:none}
+}
+</style>
+
+<div class="app" id="app"></div>
+
+<script>
+(function(){
+'use strict';
+
+/* ================= Course content ================= */
+const C=(q,opts,why,code,mono)=>({t:'mc',q,opts,why,code:code||null,mono:!!mono});
+const O=(code,opts,why,q)=>({t:'out',q:q||'Що виведе цей код?',code,opts,why,mono:true});
+const F=(q,code,ans,extra,why)=>({t:'fill',q,code,ans,extra,why});
+const R=(q,lines,why)=>({t:'order',q,lines,why});
+
+const UNITS=[
+{title:'Перші кроки',sub:'Структура програми та вивід тексту',lessons:[
+ {title:'Привіт, світе',ex:[
+  C('Який рядок виводить текст у консоль?',['System.out.println("Hi");','print("Hi");','console.log("Hi");','echo "Hi";'],'У Java вивід у консоль виконує System.out.println.',null,true),
+  F('Встав пропущене слово, щоб програма вивела привітання.','public class Main {\n    public static void main(String[] args) {\n        System.out.[[0]]("Привіт!");\n    }\n}',['println'],['printn','echo','write'],'println виводить текст і переходить на новий рядок.'),
+  R('Склади програму, яка виводить Hello.',['public class Main {','    public static void main(String[] args) {','        System.out.println("Hello");','    }','}'],'Клас містить метод main, а main містить інструкцію виводу. Кожен блок закривається своєю дужкою }.'),
+  O('System.out.println("Java");\nSystem.out.println("rocks");',['Java\nrocks','Javarocks','Java rocks','Помилка компіляції'],'println після виводу переходить на новий рядок, тому слова опиняються в різних рядках.'),
+  C('З якого методу починається виконання програми?',['main','start','run','init'],'Java завжди запускає метод main. Це точка входу в програму.',null,true),
+  C('Чим закінчується більшість інструкцій у Java?',['Крапкою з комою ;','Крапкою .','Двокрапкою :','Нічим, достатньо нового рядка'],'Кожна інструкція завершується символом ;. Без нього компілятор видасть помилку.')
+ ]},
+ {title:'Вивід і коментарі',ex:[
+  O('System.out.print("A");\nSystem.out.print("B");\nSystem.out.println("C");',['ABC','A\nB\nC','A B C','CBA'],'print не переходить на новий рядок, тому літери виводяться поруч.'),
+  C('Який запис є коментарем в один рядок?',['// це коментар','# це коментар','-- це коментар','<!-- це коментар -->'],'Коментар у Java починається з //. Компілятор його ігнорує.',null,true),
+  O('System.out.println("2 + 3");',['2 + 3','5','23','Помилка компіляції'],'Усе в лапках є текстом, тому Java виводить його як є, без обчислення.'),
+  F('Текст у Java береться у подвійні лапки. Заповни пропуски.','System.out.println([[0]]Java[[1]]);',['"','"'],["'",'(','/'],'Рядки (String) пишуться у подвійних лапках: "Java".'),
+  C('Що станеться, якщо забути закрити лапку в рядку?',['Помилка компіляції','Програма виведе порожній рядок','Java сама додасть лапку','Програма запуститься, але зламається пізніше'],'Це синтаксична помилка. Компілятор помітить її ще до запуску і не збере програму.'),
+  R('Склади код: спочатку коментар, потім слово Привіт, потім Java.',['// Привітання','System.out.println("Привіт");','System.out.println("Java");'],'Рядки виконуються зверху вниз, а коментар ніяк не впливає на результат.')
+ ]}
+]},
+{title:'Змінні й типи',sub:'Де Java зберігає числа, текст і логіку',lessons:[
+ {title:'Змінні',ex:[
+  C('Який рядок оголошує змінну для цілого числа?',['int age = 25;','String age = 25;','age int = 25;','integer age = 25;'],'Спочатку пишемо тип (int), потім ім\'я, потім значення.',null,true),
+  F('Вкажи тип для текстової змінної.','[[0]] name = "Оля";',['String'],['string','int','char'],'Текст зберігається в типі String. Він пишеться з великої літери, бо Java чутлива до регістру.'),
+  O('int a = 5;\nint b = 7;\nSystem.out.println(a + b);',['12','57','a + b','35'],'Змінні a і b є числами, тому + додає їх.'),
+  C('Який тип зберігає значення true або false?',['boolean','int','String','char'],'boolean має лише два значення: true і false.',null,true),
+  R('Збери код, який збільшує x на 5 і виводить результат.',['int x = 10;','x = x + 5;','System.out.println(x);'],'Спочатку змінну оголошують, потім змінюють, потім виводять нове значення: 15.'),
+  C('Яке ім\'я змінної допустиме в Java?',['myAge','2age','my-age','class'],'Ім\'я не може починатися з цифри, містити дефіс чи збігатися зі службовим словом (як class).',null,true),
+  O('String s = "Java";\nSystem.out.println(s + 8);',['Java8','Java 8','8Java','Помилка компіляції'],'Якщо один з операндів + є рядком, Java склеює їх у текст: "Java8".')
+ ]},
+ {title:'Типи даних',ex:[
+  C('Який тип найкраще підходить для числа 3.14?',['double','int','char','boolean'],'double зберігає дробові числа, а int лише цілі.',null,true),
+  O('int x = 7 / 2;\nSystem.out.println(x);',['3','3.5','4','2'],'Ділення двох цілих чисел дає ціле: дробова частина відкидається.'),
+  O('double d = 7 / 2.0;\nSystem.out.println(d);',['3.5','3','4.0','3.0'],'Один з операндів дробовий, тому ділення дробове: 3.5.'),
+  F('Символ зберігається в типі…','[[0]] letter = \'A\';',['char'],['String','int','boolean'],'char містить один символ в одинарних лапках. String містить текст у подвійних.'),
+  C('Який запис правильний?',['char c = \'A\';','char c = "A";','String s = \'A\';','int n = "5";'],'Символ беруть в одинарні лапки, рядок у подвійні. Типи й лапки мають збігатися.',null,true),
+  F('Щоб значення змінної не можна було змінити, додай слово…','[[0]] double PI = 3.14;',['final'],['const','static','lock'],'final робить змінну константою. Слова const для цього в Java немає.'),
+  O('int n = (int) 9.99;\nSystem.out.println(n);',['9','10','9.99','Помилка компіляції'],'Приведення (int) відкидає дробову частину, а не округлює.')
+ ]}
+]},
+{title:'Оператори',sub:'Арифметика, порівняння й логіка',lessons:[
+ {title:'Арифметика',ex:[
+  O('System.out.println(10 % 3);',['1','3','0','3.33'],'Оператор % повертає залишок від ділення: 10 = 3·3 + 1.'),
+  O('int i = 5;\ni++;\nSystem.out.println(i);',['6','5','7','Помилка компіляції'],'i++ збільшує змінну на 1.'),
+  O('System.out.println(2 + 3 * 4);',['14','20','24','9'],'Множення виконується раніше за додавання: 2 + 12.'),
+  F('Додай 5 до x коротким записом.','int x = 10;\nx [[0]] 5; // тепер x дорівнює 15',['+='],['=+','++','=='],'x += 5 є скороченням від x = x + 5.'),
+  C('Що робить оператор % ?',['Повертає залишок від ділення','Обчислює відсотки','Ділить числа націло','Підносить до степеня'],'Це залишок від ділення: 7 % 2 дорівнює 1. Зручно перевіряти парність числа.'),
+  O('System.out.println(1 + 2 + "3");',['33','6','123','Помилка компіляції'],'Спочатку 1 + 2 = 3, а потім число склеюється з рядком "3": виходить "33".'),
+  O('System.out.println("1" + 2 + 3);',['123','15','6','Помилка компіляції'],'Вираз читається зліва направо: "1" + 2 дає рядок "12", далі додається 3.')
+ ]},
+ {title:'Порівняння і логіка',ex:[
+  C('Який оператор перевіряє, чи два числа рівні?',['==','=','===',':='],'Один знак = присвоює значення, а == порівнює. Оператора === у Java немає.',null,true),
+  O('System.out.println(5 > 3 && 2 > 4);',['false','true','5','Помилка компіляції'],'&& (І) дає true, лише коли обидві частини істинні, а 2 > 4 хибне.'),
+  O('System.out.println(5 > 3 || 2 > 4);',['true','false','5','Помилка компіляції'],'|| (АБО) дає true, коли істинна хоча б одна частина.'),
+  O('System.out.println(!(3 == 3));',['false','true','3','Помилка компіляції'],'! змінює значення на протилежне: !(true) дає false.'),
+  F('Рядки порівнюють методом…','String a = "hi";\nSystem.out.println(a.[[0]]("hi"));',['equals'],['equal','same','isEqual'],'Рядки є об\'єктами, тому їхній вміст порівнюють через equals, а не через ==.'),
+  C('Який результат виразу 10 != 10 ?',['false','true','0','Помилка компіляції'],'!= означає «не дорівнює». 10 дорівнює 10, тож вираз хибний.',null,true),
+  R('Збери код, що перевіряє повноліття.',['int age = 20;','boolean adult = age >= 18;','System.out.println(adult);'],'Порівняння повертає boolean, який можна зберегти у змінну й вивести: true.')
+ ]}
+]},
+{title:'Умови',sub:'Як програма вирішує, що робити',lessons:[
+ {title:'if / else',ex:[
+  F('Встав слово, щоб код виводив «Спека» при температурі вище 25.','int t = 30;\n[[0]] (t > 25) {\n    System.out.println("Спека");\n}',['if'],['when','check','whether'],'Блок if виконується, лише коли умова в дужках істинна.'),
+  O('int n = 5;\nif (n > 3) {\n    System.out.println("A");\n} else {\n    System.out.println("B");\n}',['A','B','AB','Нічого не виведе'],'5 > 3 істинне, тому виконується гілка if, а else пропускається.'),
+  R('Збери перевірку оцінки.',['if (score >= 50) {','    System.out.println("Склав");','} else {','    System.out.println("Не склав");','}'],'Після if іде блок для істини, а після else блок для всіх інших випадків.'),
+  C('Який тип має бути в дужках після if?',['boolean (true або false)','int','String','Будь-який тип'],'Умова в if обов\'язково має давати true або false.'),
+  O('int x = 10;\nif (x > 20) {\n    System.out.println("A");\n} else if (x > 5) {\n    System.out.println("B");\n} else {\n    System.out.println("C");\n}',['B','A','C','BC'],'Перша умова хибна, друга (10 > 5) істинна. Виконується B, решта гілок пропускається.'),
+  F('Перевір, чи a дорівнює п\'яти.','int a = 5;\nif (a [[0]] 5) {\n    System.out.println("П\'ять");\n}',['=='],['=','!=','==='],'Для порівняння потрібен ==. Одинарне = присвоює значення.')
+ ]},
+ {title:'switch',ex:[
+  C('Що робить break у switch?',['Завершує switch і виходить з нього','Зупиняє всю програму','Пропускає лише поточний case','Повертається до початку switch'],'Без break виконання «провалюється» в наступний case.'),
+  O('int d = 2;\nswitch (d) {\n    case 1:\n        System.out.println("Пн");\n        break;\n    case 2:\n        System.out.println("Вт");\n        break;\n    default:\n        System.out.println("?");\n}',['Вт','Пн','?','Пн\nВт'],'Значення d дорівнює 2, тому виконується case 2.'),
+  O('int d = 1;\nswitch (d) {\n    case 1:\n        System.out.println("A");\n    case 2:\n        System.out.println("B");\n        break;\n    case 3:\n        System.out.println("C");\n}',['A\nB','A','A\nB\nC','B'],'У case 1 немає break, тому виконання йде далі в case 2 і зупиняється на його break.'),
+  F('Гілка для всіх інших значень називається…','switch (x) {\n    case 1:\n        System.out.println("Один");\n        break;\n    [[0]]:\n        System.out.println("Інше");\n}',['default'],['else','other','otherwise'],'default спрацьовує, якщо жоден case не підійшов.'),
+  C('Яке значення не можна використати у класичному switch?',['double','int','String','char'],'switch працює з цілими, символами, рядками та enum, але не з дробовими числами.',null,true),
+  R('Збери switch для світлофора.',['switch (color) {','    case "red":','        System.out.println("Стоп");','        break;','    default:','        System.out.println("Їдь");','}'],'Кожен case закінчується break, а default стоїть в кінці.')
+ ]}
+]},
+{title:'Цикли',sub:'Повторюємо дії без копіювання коду',lessons:[
+ {title:'Цикл for',ex:[
+  O('for (int i = 0; i < 3; i++) {\n    System.out.println(i);\n}',['0\n1\n2','1\n2\n3','0\n1\n2\n3','3'],'i починається з 0 і зростає, доки i < 3, тож виводяться 0, 1, 2.'),
+  F('Цикл має виконатися 5 разів.','for (int i = 0; i [[0]] 5; i++) {\n    System.out.println("Hi");\n}',['<'],['>','==','='],'Цикл працює, поки умова істинна. Значення від 0 до 4 дають рівно п\'ять кроків.'),
+  C('Що робить i++ у заголовку циклу for?',['Збільшує i на 1 після кожного кроку','Зменшує i на 1','Запускає цикл спочатку','Завершує цикл'],'Це крок циклу. Він виконується після кожного проходу тіла.'),
+  O('int sum = 0;\nfor (int i = 1; i <= 4; i++) {\n    sum += i;\n}\nSystem.out.println(sum);',['10','4','24','6'],'1 + 2 + 3 + 4 = 10.'),
+  R('Збери цикл, який виводить «Крок 1», «Крок 2», «Крок 3».',['for (int i = 1; i <= 3; i++) {','    System.out.println("Крок " + i);','}'],'Заголовок задає старт, умову і крок, а тіло циклу стоїть у фігурних дужках.'),
+  C('Скільки разів виконається цикл for (int i = 0; i < 10; i++) ?',['10','9','11','Нескінченно'],'Змінна i приймає значення 0–9, тобто десять значень.',null,true),
+  O('for (int i = 3; i > 0; i--) {\n    System.out.println(i);\n}',['3\n2\n1','1\n2\n3','3\n2\n1\n0','0'],'i зменшується: 3, 2, 1. Коли i стає 0, умова i > 0 хибна.')
+ ]},
+ {title:'Цикл while',ex:[
+  F('Заверши цикл, що рахує вниз.','int n = 3;\n[[0]] (n > 0) {\n    System.out.println(n);\n    n--;\n}',['while'],['for','loop','until'],'while повторює блок, поки умова істинна.'),
+  O('int n = 1;\nwhile (n < 4) {\n    n *= 2;\n}\nSystem.out.println(n);',['4','8','2','3'],'n змінюється так: 1, 2, 4. Коли n дорівнює 4, умова n < 4 хибна, і цикл закінчується.'),
+  C('Що станеться, якщо умова в while завжди true?',['Цикл стане нескінченним','Цикл виконається один раз','Помилка компіляції','Java зупинить цикл сама'],'Якщо тіло нічого не змінює в умові, програма «зависне» в нескінченному циклі.'),
+  C('Який цикл виконується хоча б один раз, навіть якщо умова хибна?',['do-while','while','for','for-each'],'У do-while умова перевіряється після тіла.',null,true),
+  O('int i = 0;\ndo {\n    System.out.println("Hi");\n    i++;\n} while (i < 0);',['Hi','(нічого)','Hi\nHi','Помилка компіляції'],'Тіло виконується до перевірки умови, тому «Hi» виводиться один раз.'),
+  O('for (int i = 1; i <= 5; i++) {\n    if (i == 3) continue;\n    System.out.println(i);\n}',['1\n2\n4\n5','1\n2','1\n2\n3\n4\n5','1\n2\n3'],'continue пропускає решту тіла для i = 3 і переходить до наступного кроку.'),
+  O('for (int i = 1; i <= 5; i++) {\n    if (i == 3) break;\n    System.out.println(i);\n}',['1\n2','1\n2\n4\n5','1\n2\n3','1\n2\n3\n4\n5'],'break повністю виходить з циклу, коли i дорівнює 3.')
+ ]}
+]},
+{title:'Масиви та методи',sub:'Колекції значень і повторно використаний код',lessons:[
+ {title:'Масиви',ex:[
+  C('Який запис створює масив із чисел 1, 2, 3?',['int[] nums = {1, 2, 3};','int nums = [1, 2, 3];','array nums = (1, 2, 3);','int nums = {1, 2, 3};'],'Масив оголошують із квадратними дужками після типу, а значення беруть у фігурні дужки.',null,true),
+  O('int[] a = {10, 20, 30};\nSystem.out.println(a[0]);',['10','20','30','0'],'Індекси починаються з нуля, тому a[0] є першим елементом.'),
+  O('int[] a = {5, 6, 7, 8};\nSystem.out.println(a.length);',['4','3','8','5'],'length показує кількість елементів у масиві.'),
+  C('Який індекс має останній елемент масиву з 5 елементів?',['4','5','6','0'],'Індекси такі: 0, 1, 2, 3, 4. Останній на 1 менший за довжину.',null,true),
+  F('Пройди по всьому масиву.','int[] a = {3, 6, 9};\nfor (int i = 0; i < a.[[0]]; i++) {\n    System.out.println(a[i]);\n}',['length'],['length()','size','count'],'У масивів length є полем, без дужок. length() є методом рядків.'),
+  C('Що станеться при зверненні a[5] до масиву з 5 елементів?',['Помилка під час виконання (ArrayIndexOutOfBoundsException)','Поверне 0','Поверне null','Помилка компіляції'],'Допустимі індекси 0–4. Вихід за межі масиву зупиняє програму з винятком.'),
+  R('Збери код, що підсумовує елементи масиву. Спочатку масив.',['int[] a = {1, 2, 3};','int sum = 0;','for (int x : a) {','    sum += x;','}','System.out.println(sum);'],'Цикл for-each бере кожен елемент по черзі. Результат: 6.')
+ ]},
+ {title:'Методи',ex:[
+  F('Метод повертає ціле число. Вкажи тип.','public static [[0]] add(int a, int b) {\n    return a + b;\n}',['int'],['void','String','add'],'Тип перед іменем методу є типом значення, яке він повертає.'),
+  O('static int twice(int x) {\n    return x * 2;\n}\n\n// у main:\nSystem.out.println(twice(4));',['8','4','6','twice'],'Метод множить аргумент 4 на 2 і повертає 8.'),
+  C('Що означає void перед іменем методу?',['Метод нічого не повертає','Метод повертає число','Метод приватний','Метод не можна викликати'],'void використовують для методів, які щось роблять (наприклад, виводять текст), але не повертають результат.'),
+  C('Що робить return?',['Повертає значення й завершує метод','Виводить значення в консоль','Запускає метод ще раз','Оголошує змінну'],'Після return метод одразу закінчується, а значення йде туди, де його викликали.'),
+  R('Збери метод, що вітає за іменем.',['static void greet(String name) {','    System.out.println("Привіт, " + name);','}'],'Заголовок містить тип результату, ім\'я та параметри, а тіло стоїть у фігурних дужках.'),
+  O('static void hi() {\n    System.out.println("Hi");\n}\n\n// у main:\nhi();\nhi();',['Hi\nHi','Hi','(нічого)','Помилка компіляції'],'Метод можна викликати скільки завгодно разів. Кожен виклик виводить Hi.'),
+  F('Виклич метод add з аргументами 2 і 3.','static int add(int a, int b) {\n    return a + b;\n}\n\n// у main:\nint r = [[0]](2, 3);\nSystem.out.println(r);',['add'],['int add','call add','add:'],'Метод викликають за іменем і передають аргументи в дужках.')
+ ]}
+]}
+];
+
+/* ================= Theory cards (shown before practice) ================= */
+const K=(h,p,code,out)=>({h,p,code:code||null,out:out==null?null:out});
+const LEARN={
+'0-0':[
+ K("З чого складається програма","Програма на Java живе всередині класу. У класі є метод `main`: саме з нього Java починає виконання. Усе, що ти напишеш між фігурними дужками `{ }` методу main, запуститься.",
+   'public class Main {\n    public static void main(String[] args) {\n        // тут твій код\n    }\n}'),
+ K("Виводимо текст","`System.out.println(\"текст\");` показує текст у консолі й переходить на новий рядок. Текст завжди пишуть у подвійних лапках. Кожна інструкція закінчується крапкою з комою `;`.",
+   'System.out.println("Привіт, світе!");','Привіт, світе!'),
+ K("Рядки виконуються по черзі","Java читає код зверху вниз і виконує інструкції одну за одною. Кожен `println` друкує окремий рядок.",
+   'System.out.println("Java");\nSystem.out.println("rocks");','Java\nrocks')
+],
+'0-1':[
+ K("print і println","`println` після тексту переходить на новий рядок, а `print` залишається в тому самому рядку. Тому кілька `print` підряд склеюються.",
+   'System.out.print("A");\nSystem.out.print("B");\nSystem.out.println("C");\nSystem.out.println("D");','ABC\nD'),
+ K("Коментарі","Усе після `//` до кінця рядка Java ігнорує. Коментарі потрібні людям: вони пояснюють, що робить код.",
+   '// Це коментар, він нічого не виводить\nSystem.out.println("Видно мене");','Видно мене'),
+ K("Лапки і обчислення","Те, що в лапках, Java виводить як текст, без обчислень. Без лапок вона спочатку обчислює вираз. Якщо забути закрити лапку, програма не збереться.",
+   'System.out.println("2 + 3");\nSystem.out.println(2 + 3);','2 + 3\n5')
+],
+'1-0':[
+ K("Що таке змінна","Змінна це коробка з назвою, де лежить значення. Запис складається з типу, імені та значення: `int age = 25;`. Для цілих чисел тип `int`, для тексту `String`.",
+   'int age = 25;\nString name = "Оля";\nSystem.out.println(name);','Оля'),
+ K("Змінюємо значення","Змінній можна присвоїти нове значення. Праворуч від `=` Java спочатку обчислює вираз, а потім кладе результат у змінну.",
+   'int x = 10;\nx = x + 5;\nSystem.out.println(x);','15'),
+ K("Імена змінних","Ім'я починається з літери, без пробілів і дефісів, і не збігається зі службовими словами на кшталт `class`. Прийнято писати так: `myAge`. Регістр важливий: `age` і `Age` це різні змінні.",
+   'int myAge = 20;      // добре\n// int 2age = 20;    // не можна\n// int my-age = 20;  // не можна'),
+ K("Текст + число","Якщо один з операндів `+` є текстом, Java склеює все в текст. Якщо обидва числа, вона їх додає.",
+   'String s = "Java";\nSystem.out.println(s + 8);\nSystem.out.println(5 + 3);','Java8\n8')
+],
+'1-1':[
+ K("Основні типи","`int` для цілих, `double` для дробових, `boolean` для true або false, `char` для одного символу в одинарних лапках, `String` для тексту в подвійних.",
+   'int count = 7;\ndouble price = 3.14;\nboolean ok = true;\nchar letter = \'A\';\nString word = "Java";'),
+ K("Ділення чисел","Якщо ділити ціле на ціле, результат теж ціле: дробова частина відкидається. Щоб отримати дріб, зроби один з операндів дробовим.",
+   'System.out.println(7 / 2);\nSystem.out.println(7 / 2.0);','3\n3.5'),
+ K("Приведення типу і константи","`(int)` перед числом відкидає дробову частину, а не округлює. Слово `final` робить змінну константою: змінити її потім не вийде.",
+   'int n = (int) 9.99;\nSystem.out.println(n);\nfinal double PI = 3.14;','9')
+],
+'2-0':[
+ K("Арифметичні оператори","`+`, `-`, `*`, `/` працюють як у математиці, множення й ділення йдуть раніше за додавання. Оператор `%` дає залишок від ділення.",
+   'System.out.println(10 % 3);\nSystem.out.println(2 + 3 * 4);','1\n14'),
+ K("Скорочені записи","`i++` збільшує змінну на 1. `x += 5` це те саме, що `x = x + 5`. Так само працюють `-=`, `*=` та `/=`.",
+   'int i = 5;\ni++;\ni += 3;\nSystem.out.println(i);','9'),
+ K("Текст у виразах","Java рахує зліва направо. Поки перед `+` лише числа, вона їх додає. Як тільки зустрічається текст, далі все склеюється.",
+   'System.out.println(1 + 2 + "3");\nSystem.out.println("1" + 2 + 3);','33\n123')
+],
+'2-1':[
+ K("Порівняння","`==` рівно, `!=` не рівно, також `>`, `<`, `>=`, `<=`. Результат завжди `true` або `false`. Одинарний `=` присвоює значення, а не порівнює.",
+   'System.out.println(5 > 3);\nSystem.out.println(10 != 10);','true\nfalse'),
+ K("Логічні оператори","`&&` означає «і»: треба, щоб обидві частини були істинні. `||` означає «або»: досить однієї. `!` змінює значення на протилежне.",
+   'System.out.println(5 > 3 && 2 > 4);\nSystem.out.println(5 > 3 || 2 > 4);\nSystem.out.println(!(3 == 3));','false\ntrue\nfalse'),
+ K("Порівняння рядків","Рядки це об'єкти, тому їхній вміст порівнюють методом `equals`, а не через `==`.",
+   'String a = "hi";\nSystem.out.println(a.equals("hi"));','true')
+],
+'3-0':[
+ K("Умова if","Блок після `if` виконується, лише коли умова в дужках істинна. Умова завжди має давати `true` або `false`.",
+   'int t = 30;\nif (t > 25) {\n    System.out.println("Спека");\n}','Спека'),
+ K("Гілка else","`else` виконується, коли умова if хибна. Завжди спрацює рівно одна з двох гілок.",
+   'int n = 2;\nif (n > 3) {\n    System.out.println("A");\n} else {\n    System.out.println("B");\n}','B'),
+ K("Ланцюжок else if","Умови перевіряються зверху вниз. Спрацьовує перша істинна, решта пропускається. Остання гілка `else` ловить усі інші випадки.",
+   'int x = 10;\nif (x > 20) {\n    System.out.println("A");\n} else if (x > 5) {\n    System.out.println("B");\n} else {\n    System.out.println("C");\n}','B')
+],
+'3-1':[
+ K("Конструкція switch","`switch` вибирає гілку за значенням. Кожна гілка починається з `case`, закінчується `break`, а `default` спрацьовує, якщо жоден case не підійшов.",
+   'int d = 2;\nswitch (d) {\n    case 1:\n        System.out.println("Пн");\n        break;\n    case 2:\n        System.out.println("Вт");\n        break;\n    default:\n        System.out.println("?");\n}','Вт'),
+ K("Навіщо break","Без `break` виконання «провалюється» в наступний case і йде далі, поки не зустріне break або кінець switch.",
+   'int d = 1;\nswitch (d) {\n    case 1:\n        System.out.println("A");\n    case 2:\n        System.out.println("B");\n        break;\n    case 3:\n        System.out.println("C");\n}','A\nB'),
+ K("Що можна в switch","`switch` працює з цілими числами, символами, рядками та enum. Дробові числа (`double`) у ньому використовувати не можна.",
+   'String color = "green";\nswitch (color) {\n    case "red":\n        System.out.println("Стоп");\n        break;\n    default:\n        System.out.println("Їдь");\n}','Їдь')
+],
+'4-0':[
+ K("Цикл for","Цикл повторює код. У дужках три частини: старт, умова і крок. Поки умова істинна, тіло виконується знову й знову.",
+   'for (int i = 0; i < 3; i++) {\n    System.out.println(i);\n}','0\n1\n2'),
+ K("Рахуємо суму","Цикл, що стартує з 0 і має умову `i < 10`, виконається 10 разів: i приймає значення від 0 до 9. Часто в циклі накопичують результат у змінну. Тут ми додаємо числа від 1 до 4.",
+   'int sum = 0;\nfor (int i = 1; i <= 4; i++) {\n    sum += i;\n}\nSystem.out.println(sum);','10'),
+ K("Рахуємо вниз","Крок може бути й від'ємним. З `i--` змінна зменшується, а умова має бути такою, щоб цикл колись закінчився.",
+   'for (int i = 3; i > 0; i--) {\n    System.out.println(i);\n}','3\n2\n1')
+],
+'4-1':[
+ K("Цикл while","`while` повторює блок, поки умова істинна. Змінну для умови треба підготувати до циклу й змінювати всередині, інакше цикл буде нескінченним.",
+   'int n = 3;\nwhile (n > 0) {\n    System.out.println(n);\n    n--;\n}','3\n2\n1'),
+ K("Цикл do-while","У `do-while` умова перевіряється після тіла. Тому тіло виконається хоча б один раз, навіть якщо умова одразу хибна.",
+   'int i = 0;\ndo {\n    System.out.println("Hi");\n    i++;\n} while (i < 0);','Hi'),
+ K("break і continue","`break` повністю виходить з циклу. `continue` пропускає решту поточного кроку й переходить до наступного.",
+   'for (int i = 1; i <= 5; i++) {\n    if (i == 3) continue;\n    System.out.println(i);\n}','1\n2\n4\n5')
+],
+'5-0':[
+ K("Що таке масив","Масив зберігає кілька значень одного типу під одним іменем. Значення беруть у фігурні дужки. Нумерація елементів, їхніх індексів, починається з нуля.",
+   'int[] a = {10, 20, 30};\nSystem.out.println(a[0]);\nSystem.out.println(a.length);','10\n3'),
+ K("Обхід масиву","Щоб пройти по всіх елементах, використовують цикл. `a.length` це кількість елементів (без дужок). Цикл for-each бере елементи по черзі.",
+   'int[] a = {1, 2, 3};\nint sum = 0;\nfor (int x : a) {\n    sum += x;\n}\nSystem.out.println(sum);','6'),
+ K("Межі масиву","Допустимі індекси від 0 до `length - 1`. Звернення за межі масиву зупиняє програму з помилкою.",
+   'int[] a = {1, 2, 3};\nSystem.out.println(a[3]);','Помилка: ArrayIndexOutOfBoundsException')
+],
+'5-1':[
+ K("Що таке метод","Метод це іменований шматок коду, який можна викликати скільки завгодно разів. `void` означає, що метод нічого не повертає.",
+   'static void hi() {\n    System.out.println("Hi");\n}\n\n// у main:\nhi();\nhi();','Hi\nHi'),
+ K("Параметри і return","У дужках методу перелічують параметри: тип і ім'я. Тип перед іменем методу показує, що він повертає. Слово `return` повертає значення й одразу завершує метод.",
+   'static int add(int a, int b) {\n    return a + b;\n}\n\n// у main:\nSystem.out.println(add(2, 3));','5'),
+ K("Виклик методу","Метод викликають за іменем, у дужках передають аргументи. Результат можна зберегти у змінну або одразу вивести.",
+   'static int twice(int x) {\n    return x * 2;\n}\n\n// у main:\nint r = twice(4);\nSystem.out.println(r);','8')
+]
+};
+
+const ALL=[];
+UNITS.forEach((u,ui)=>u.lessons.forEach((l,li)=>{
+  const uid=ui+'-'+li;
+  l.learn=LEARN[uid];
+  l.ex.forEach((e,k)=>{e.id=uid+':'+k;});
+  ALL.push({uid,ui,li,unit:u,lesson:l,n:ALL.length});
+}));
+
+/* ================= Helpers ================= */
+const $app=document.getElementById('app');
+const esc=s=>String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+const KW='public|private|protected|static|void|class|int|double|float|long|boolean|char|String|final|if|else|switch|case|default|break|continue|for|while|do|return|new|true|false|null|import|package|this';
+const RX=new RegExp('(\\/\\/[^\\n]*)|("(?:\\\\.|[^"\\\\\\n])*")|(\'(?:\\\\.|[^\'\\\\\\n])\')|\\b('+KW+')\\b|\\b(\\d+(?:\\.\\d+)?)\\b|\\b([A-Z][A-Za-z0-9_]*)\\b','g');
+function hl(src){
+  let out='',last=0,m;RX.lastIndex=0;
+  while((m=RX.exec(src))){
+    out+=esc(src.slice(last,m.index));
+    const t=m[1]?'com':(m[2]||m[3])?'str':m[4]?'kw':m[5]?'num':'ty';
+    out+='<span class="t-'+t+'">'+esc(m[0])+'</span>';
+    last=m.index+m[0].length;
+  }
+  return out+esc(src.slice(last));
+}
+function shuffle(a,avoidSame){
+  const orig=a.slice();let r;let tries=0;
+  do{r=orig.slice();for(let i=r.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[r[i],r[j]]=[r[j],r[i]];}tries++;}
+  while(avoidSame&&r.length>1&&tries<12&&r.every((x,i)=>x===orig[i]));
+  return r;
+}
+const IC={
+  flame:'<svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2c1 3.5 5 5.5 5 10.5A5 5 0 0 1 12 22a5 5 0 0 1-5-5c0-2 1-3.5 2.5-5 .3 1.8 1.2 2.7 2 3 .5-3-.5-5.5-.5-8.5z"/></svg>',
+  bolt:'<svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M13 2 4 14h6l-1 8 9-12h-6z"/></svg>',
+  heart:'<svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-8-5.2-8-11a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 20 10c0 5.8-8 11-8 11z"/></svg>',
+  check:'<svg class="ico stroke" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>',
+  cross:'<svg class="ico stroke" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>',
+  lock:'<svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 10V8a5 5 0 0 1 10 0v2h1a1 1 0 0 1 1 1v9a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1v-9a1 1 0 0 1 1-1zm2 0h6V8a3 3 0 0 0-6 0z"/></svg>',
+  book:'<svg class="ico stroke" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v14H6.5A2.5 2.5 0 0 0 4 19.5zM4 19.5A2.5 2.5 0 0 0 6.5 22H20v-5"/></svg>',
+  refresh:'<svg class="ico stroke" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 11a8 8 0 1 0-2.3 6.3M20 4v7h-7"/></svg>',
+  play:'<svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>'
+};
+
+/* ================= State ================= */
+const KEY='java-schodnya-v1';
+function fresh(){return {xp:0,streak:0,last:'',done:{},miss:{}};}
+function load(){try{const s=JSON.parse(localStorage.getItem(KEY));if(s&&typeof s==='object'&&s.done)return Object.assign(fresh(),s);}catch(e){}return fresh();}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(S));}catch(e){}}
+let S=load();
+const dayStr=d=>d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
+function shownStreak(){
+  const t=new Date(),y=new Date();y.setDate(t.getDate()-1);
+  return (S.last===dayStr(t)||S.last===dayStr(y))?S.streak:0;
+}
+function bumpStreak(){
+  const t=new Date(),y=new Date();y.setDate(t.getDate()-1);
+  if(S.last===dayStr(t))return;
+  S.streak=(S.last===dayStr(y))?S.streak+1:1;
+  S.last=dayStr(t);
+}
+const isUnlocked=n=>n===0||!!S.done[ALL[n-1].uid];
+
+let screen='home',L=null,confirmReset=false,res=null;
+
+/* ================= Rendering ================= */
+const OFF=[0,9,14,9,0,-9,-14,-9];
+const REDUCED=!!(window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+const HOW={
+  mc:"Вибери правильну відповідь.",
+  out:"Подумай, що з'явиться на екрані, і вибери відповідь.",
+  fill:"Торкнись слова внизу, щоб вставити його в пропуск.",
+  order:"Торкайся рядків внизу по черзі, щоб скласти код зверху вниз."
+};
+/* fx = one-shot animation flags, consumed by the next render */
+let fx={view:true};
+let shownXp=S.xp,shownStreakVal=shownStreak(),homePct=null;
+
+function topbar(){
+  const s=shownStreak(),bump=s>shownStreakVal;
+  const cnt=S.xp!==shownXp?' data-count="'+S.xp+'" data-from="'+shownXp+'"':'';
+  return '<header class="top"><div class="brand">Java <span>Бариста</span></div><div class="stats">'
+   +'<div class="stat streak'+(s?'':' off')+(bump?' bump':'')+'" aria-label="Серія днів: '+s+'">'+IC.flame+'<span>'+s+'</span></div>'
+   +'<div class="stat xp'+(cnt?' bump':'')+'" aria-label="Досвід: '+S.xp+'">'+IC.bolt+'<span'+cnt+'>'+S.xp+'</span></div></div></header>';
+}
+function homeView(){
+  const cur=ALL.find(l=>!S.done[l.uid]);
+  const doneN=ALL.filter(l=>S.done[l.uid]).length;
+  const pct=doneN/ALL.length*100,from=homePct==null?pct:homePct;homePct=pct;
+  let h='<div class="view'+(fx.view?' enter':'')+'">'+topbar();
+  h+='<section class="next">';
+  if(cur){
+    h+='<p class="kicker">'+(doneN?'Продовжуй':'Починаємо')+'</p><h1>'+esc(cur.lesson.title)+'</h1><p class="sub">Розділ '+(cur.ui+1)+': '+esc(cur.unit.title)+'</p>';
+    if(!doneN)h+='<p class="sub">Короткі уроки із завданнями. Відповідай, заробляй досвід і вивчай Java крок за кроком. Кожна помилка коштує одне життя з п\'яти.</p>';
+  }else{
+    h+='<p class="kicker">Курс пройдено</p><h1>Ти закрив усі уроки</h1><p class="sub">Повертайся до будь-якого уроку, щоб повторити матеріал і підтримати серію.</p>';
+  }
+  h+='<div class="meter"><div class="track" role="progressbar" aria-valuemin="0" aria-valuemax="'+ALL.length+'" aria-valuenow="'+doneN+'"><div class="fill" style="width:'+from+'%" data-to="'+pct+'"></div></div><span>'+doneN+' / '+ALL.length+'</span></div>';
+  if(cur)h+='<button class="btn" data-act="start" data-uid="'+cur.uid+'">'+(doneN?'Продовжити':'Почати')+'</button>';
+  h+='</section>';
+  if(doneN>0){
+    const mc=reviewMissCount();
+    h+='<section class="review"><div class="rv-ico">'+IC.refresh+'</div><div class="rv-t"><h2>Повторення</h2><p>'
+      +(mc?'Є завдання, де ти помилявся: '+mc+'. Повтори їх.':'Закріпи пройдене змішаними завданнями.')
+      +'</p></div><button class="btn sm" data-act="start" data-uid="review">Повторити</button></section>';
+  }
+  UNITS.forEach((u,ui)=>{
+    h+='<section style="--uc:var(--u'+(ui+1)+')"><div class="unit"><p class="kicker">Розділ '+(ui+1)+'</p><h2>'+esc(u.title)+'</h2><p>'+esc(u.sub)+'</p></div><div class="path">';
+    ALL.filter(l=>l.ui===ui).forEach(l=>{
+      const d=S.done[l.uid],un=isUnlocked(l.n),isCur=cur&&cur.uid===l.uid;
+      h+='<div class="nodewrap'+(fx.view?' enter':'')+'" style="--k:'+OFF[l.n%8]+';--d:'+(l.n*45)+'ms">';
+      if(isCur)h+='<span class="bubble">Почати</span>';
+      h+='<button class="node'+(isCur?' current':'')+'" '+(un?'':'disabled ')+'data-act="start" data-uid="'+l.uid+'" aria-label="'+esc(l.lesson.title)+(d?', пройдено':un?'':', закрито')+'">'+(d?IC.check:un?IC.play:IC.lock)+'</button>';
+      h+='<span class="nlabel">'+esc(l.lesson.title)+(d?'<small>Точність '+d.a+'%</small>':'')+'</span></div>';
+    });
+    h+='</div></section>';
+  });
+  h+='<footer class="foot"><span>Прогрес зберігається в цьому браузері.</span>';
+  h+=confirmReset
+    ?'<span><button class="linkbtn danger" data-act="reset-yes">Так, скинути все</button> &nbsp; <button class="linkbtn" data-act="reset-no">Скасувати</button></span>'
+    :'<button class="linkbtn" data-act="reset">Скинути прогрес</button>';
+  h+='</footer></div>';
+  return h;
+}
+
+function codeBlock(code){return '<pre class="code"><code>'+hl(code)+'</code></pre>';}
+function fillCode(ex,c){
+  const parts=ex.code.split(/\[\[(\d)\]\]/);let h='';
+  parts.forEach((p,i)=>{
+    if(i%2===0){h+=hl(p);}
+    else{
+      const k=+p,id=c.slots[k],w=id==null?null:c.words.find(x=>x.id===id).w;
+      let cls='blank';
+      if(c.checked&&w!=null){
+        const ok=w===ex.ans[k];
+        cls+=ok?' good':' bad';
+        if(fx.res)cls+=ok?' pop':' shake';
+      }else if(fx.slot===k)cls+=' set';
+      h+='<button class="'+cls+'" data-act="unslot" data-i="'+k+'"'+(c.checked?' disabled':'')+' aria-label="Пропуск '+(k+1)+'">'+(w==null?'&nbsp;':esc(w))+'</button>';
+    }
+  });
+  return '<pre class="code"><code>'+h+'</code></pre>';
+}
+function ready(c){
+  const ex=c.ex;
+  if(ex.t==='mc'||ex.t==='out')return c.sel!=null;
+  if(ex.t==='fill')return c.slots.every(x=>x!=null);
+  return c.bank.length===0;
+}
+function heartsHtml(){
+  let s='';
+  for(let i=0;i<5;i++)s+='<span class="hrt'+(i>=L.hearts?' lost':'')+(fx.hit===i?' hit':'')+'">'+IC.heart+'</span>';
+  return '<div class="lives" role="img" aria-label="Життя: '+L.hearts+' з 5">'+s+'</div>';
+}
+function lessonView(){
+  const c=L.cur,ex=c.ex,pct=L.done/L.total*100,from=L.drawn==null?pct:L.drawn;L.drawn=pct;
+  let h='<div class="view'+(fx.view?' enter':'')+'"><div class="lesson"><div class="lhead"><button class="x" data-act="leave" aria-label="Вийти з уроку">'+IC.cross+'</button>'
+    +'<div class="track" role="progressbar" aria-valuemin="0" aria-valuemax="'+L.total+'" aria-valuenow="'+L.done+'"><div class="fill" style="width:'+from+'%" data-to="'+pct+'"></div></div>'
+    +heartsHtml()
+    +(L.info.lesson.learn?'<button class="x book" data-act="peek" aria-label="Переглянути теорію">'+IC.book+'</button>':'')+'</div>';
+  h+='<div class="stage'+(fx.stage?' enter':'')+'"><p class="kicker">'+(L.review?'Повторення':'Тренуємось')+'</p><h2 class="q">'+esc(ex.q)+'</h2><p class="how">'+HOW[ex.t]+'</p>';
+  if(ex.t==='mc'||ex.t==='out'){
+    if(ex.code)h+=codeBlock(ex.code);
+    h+='<div class="opts">';
+    c.opts.forEach((o,i)=>{
+      let cls='opt'+(ex.mono?' mono':'');
+      if(c.checked){
+        if(o.ok)cls+=' good'+(fx.res==='pop'?' pop':fx.res==='shake'?' reveal':'');
+        else if(c.sel===i)cls+=' bad'+(fx.res==='shake'?' shake':'');
+      }else if(c.sel===i)cls+=' sel'+(fx.sel===i?' tap':'');
+      h+='<button class="'+cls+'" style="--i:'+i+'" data-act="pick" data-i="'+i+'"'+(c.checked?' disabled':'')+'>'+esc(o.text)+'</button>';
+    });
+    h+='</div>';
+  }else if(ex.t==='fill'){
+    h+=fillCode(ex,c)+'<div class="bank">';
+    c.words.forEach((w,i)=>{
+      const used=c.slots.includes(w.id);
+      h+='<button class="chip" style="--i:'+i+'" data-act="word" data-id="'+w.id+'"'+(used||c.checked?' disabled':'')+'>'+esc(w.w)+'</button>';
+    });
+    h+='</div>';
+  }else{
+    h+='<div class="build'+(c.checked?(c.ok?' good':' bad'):'')+(fx.res?(c.ok?' pop':' shake'):'')+'">';
+    if(!c.built.length)h+='<p class="hint">Тут з\'явиться твій код.</p>';
+    c.built.forEach(b=>{h+='<button class="line'+(fx.line===b.id?' in':'')+'" data-act="unline" data-id="'+b.id+'"'+(c.checked?' disabled':'')+'>'+esc(b.text)+'</button>';});
+    h+='</div><div class="lines">';
+    c.bank.forEach((b,i)=>{h+='<button class="line" style="--i:'+i+'" data-act="line" data-id="'+b.id+'">'+esc(b.text)+'</button>';});
+    h+='</div>';
+  }
+  h+='</div></div></div>';
+  /* action bar (outside .view so position:fixed is never affected by the enter animation) */
+  if(L.leave){
+    h+='<div class="bar slide"><div class="bar-in"><div class="fb"><div class="fb-text"><h3>Вийти з уроку?</h3><p>Прогрес цього уроку не збережеться.</p></div></div><button class="btn" data-act="stay">Залишитись</button><button class="btn ghost" data-act="quit">Вийти</button></div></div>';
+  }else if(!c.checked){
+    h+='<div class="bar"><div class="bar-in"><button class="btn" data-act="check"'+(ready(c)?'':' disabled')+'>Перевірити</button></div></div>';
+  }else{
+    const ok=c.ok;
+    let ans='';
+    if(!ok){
+      let a;
+      if(ex.t==='mc'||ex.t==='out')a=c.opts.find(o=>o.ok).text;
+      else if(ex.t==='fill')a=ex.ans.join('  ,  ');
+      else a=ex.lines.join('\n');
+      ans='<span class="ans">'+esc(a)+'</span>';
+    }
+    const praise=['Правильно!','Чудово!','Так тримати!','Точно!'][L.done%4];
+    const plus=(ok&&fx.res)?'<span class="plus" aria-hidden="true">+'+(L.retried.has(ex)?5:10)+'</span>':'';
+    h+='<div class="bar slide '+(ok?'good':'bad')+'"><div class="bar-in">'+plus+'<div class="fb"><div class="badge">'+(ok?IC.check:IC.cross)+'</div><div class="fb-text"><h3>'+(ok?praise:'Не зовсім')+'</h3>'
+      +(ok?'':'<p>Правильна відповідь:</p>'+ans)
+      +'<p>'+esc(ex.why)+'</p></div></div><button class="btn '+(ok?'good':'bad')+'" data-act="next">'+(L.hearts<=0&&!ok?'Зрозуміло':'Далі')+'</button></div></div>';
+  }
+  return h;
+}
+function fmt(s){return esc(s).replace(/`([^`]+)`/g,'<code>$1</code>');}
+function studyView(){
+  const cards=L.info.lesson.learn,k=cards[L.si],last=L.si===cards.length-1;
+  let dots='';
+  cards.forEach((_,i)=>{dots+='<span class="dot'+(i<=L.si?' on':'')+'"></span>';});
+  let h='<div class="view'+(fx.view?' enter':'')+'"><div class="lesson"><div class="lhead"><button class="x" data-act="leave" aria-label="'+(L.peek?'Закрити теорію':'Вийти з уроку')+'">'+IC.cross+'</button><div class="dots" role="img" aria-label="Картка '+(L.si+1)+' з '+cards.length+'">'+dots+'</div></div>'
+    +'<div class="stage'+(fx.stage?' enter':'')+'"><p class="kicker">Вивчаємо · '+(L.si+1)+' / '+cards.length+'</p><h2 class="q">'+esc(k.h)+'</h2><p class="txt">'+fmt(k.p)+'</p>';
+  if(k.code)h+=codeBlock(k.code);
+  if(k.out!=null)h+='<div class="console"><span class="con-l">Результат</span><pre>'+esc(k.out)+'</pre></div>';
+  h+='</div></div></div>';
+  h+='<div class="bar"><div class="bar-in"><div class="btnrow">'+(L.si>0?'<button class="btn ghost" data-act="sback">Назад</button>':'')
+    +'<button class="btn" data-act="snext">'+(last?(L.peek?'Назад до завдань':'До завдань'):'Далі')+'</button></div></div></div>';
+  return h;
+}
+function resultView(){
+  const next=res.review?null:ALL[res.info.n+1];
+  let h='<div class="view enter"><div class="result"><div class="mark ok">'+IC.check+'</div><h1>'+(res.review?'Повторення завершено':'Урок пройдено')+'</h1><p>'+esc(res.info.lesson.title)+'</p>'
+   +'<div class="tiles"><div class="tile xp"><b data-count="'+res.gain+'" data-pre="+">+'+res.gain+'</b><span>Досвід</span></div>'
+   +'<div class="tile"><b data-count="'+res.acc+'" data-suf="%">'+res.acc+'%</b><span>Точність</span></div>'
+   +'<div class="tile"><b>'+res.hearts+'/5</b><span>Життя</span></div></div>'
+   +'<div class="btns">';
+  if(next)h+='<button class="btn" data-act="start" data-uid="'+next.uid+'">Наступний урок</button><button class="btn ghost" data-act="home">На головну</button>';
+  else h+=(res.review?'':'<p>Це був останній урок курсу.</p>')+'<button class="btn" data-act="home">На головну</button>';
+  return h+'</div></div></div>';
+}
+function failView(){
+  return '<div class="view enter"><div class="result"><div class="mark no">'+IC.heart+'</div><h1>Життя закінчились</h1><p>Нічого страшного. Перечитай пояснення під відповідями й спробуй ще раз.</p>'
+   +'<div class="btns"><button class="btn" data-act="start" data-uid="'+L.info.uid+'">Спробувати знову</button><button class="btn ghost" data-act="home">На головну</button></div></div></div>';
+}
+
+/* ---------- motion helpers ---------- */
+function animateBars(){
+  const bars=$app.querySelectorAll('.fill[data-to]');
+  if(!bars.length)return;
+  void $app.offsetWidth;
+  requestAnimationFrame(()=>{bars.forEach(b=>{b.style.width=b.dataset.to+'%';});});
+}
+function runCounters(){
+  if(REDUCED)return;
+  $app.querySelectorAll('[data-count]').forEach(el=>{
+    const to=+el.dataset.count,from=+(el.dataset.from||0),pre=el.dataset.pre||'',suf=el.dataset.suf||'';
+    if(from===to)return;
+    const t0=performance.now(),dur=900;
+    (function step(now){
+      const p=Math.min(1,Math.max(0,(now-t0)/dur)),e=1-Math.pow(1-p,3);
+      el.textContent=pre+Math.round(from+(to-from)*e)+suf;
+      if(p<1)requestAnimationFrame(step);
+    })(t0);
+  });
+}
+function confetti(){
+  if(REDUCED)return;
+  const box=document.createElement('div');
+  box.className='confetti';box.setAttribute('aria-hidden','true');
+  let s='';
+  for(let i=0;i<46;i++){
+    const w=6+Math.random()*7;
+    s+='<i style="left:'+(Math.random()*100).toFixed(1)+'%;width:'+w.toFixed(1)+'px;height:'+(w*1.6).toFixed(1)+'px;background:var(--u'+(1+i%6)+');animation-duration:'+(1.9+Math.random()*1.5).toFixed(2)+'s;animation-delay:'+(Math.random()*0.6).toFixed(2)+'s;--r:'+Math.round(Math.random()*720-360)+'deg;--dx:'+Math.round((Math.random()*2-1)*90)+'px"></i>';
+  }
+  box.innerHTML=s;
+  document.body.appendChild(box);
+  setTimeout(()=>{if(box.parentNode)box.parentNode.removeChild(box);},4500);
+}
+function render(){
+  let h;
+  if(screen==='home')h=homeView();
+  else if(screen==='lesson')h=L.mode==='study'?studyView():lessonView();
+  else if(screen==='result')h=resultView();
+  else h=failView();
+  document.querySelectorAll('.confetti').forEach(n=>n.remove());
+  $app.innerHTML=h;
+  animateBars();
+  runCounters();
+  if(screen==='home'){shownXp=S.xp;shownStreakVal=shownStreak();}
+  if(fx.confetti)confetti();
+  if(screen==='lesson'&&L.mode!=='study'&&L.cur.checked&&!L.leave){const b=$app.querySelector('[data-act="next"]');if(b)b.focus({preventScroll:true});}
+  fx={};
+}
+
+/* ================= Lesson logic ================= */
+function prep(){
+  const ex=L.queue[0],c={ex,checked:false,ok:null};
+  if(ex.t==='mc'||ex.t==='out'){c.opts=shuffle(ex.opts.map((text,i)=>({text,ok:i===0})));c.sel=null;}
+  else if(ex.t==='fill'){c.words=shuffle(ex.ans.concat(ex.extra).map((w,i)=>({id:i,w})));c.slots=ex.ans.map(()=>null);}
+  else{c.bank=shuffle(ex.lines.map((text,i)=>({id:i,text})),true);c.built=[];}
+  L.cur=c;fx.stage=true;
+}
+function reviewPool(){
+  const pool=[];
+  ALL.forEach(l=>{if(S.done[l.uid])l.lesson.ex.forEach(e=>pool.push(e));});
+  return pool;
+}
+function reviewMissCount(){return reviewPool().filter(e=>S.miss[e.id]>0).length;}
+function pickReview(){
+  const pool=reviewPool();
+  const missed=pool.filter(e=>S.miss[e.id]>0).sort((a,b)=>S.miss[b.id]-S.miss[a.id]).slice(0,5);
+  const rest=shuffle(pool.filter(e=>!missed.includes(e)));
+  return shuffle(missed.concat(rest.slice(0,Math.min(8,pool.length)-missed.length)));
+}
+function startReview(){
+  const q=pickReview();if(!q.length)return;
+  const info={uid:'review',n:-1,lesson:{title:'Змішані завдання з пройдених уроків',ex:[]}};
+  L={info,review:true,mode:'practice',queue:q,total:q.length,done:0,first:0,hearts:5,retried:new Set(),leave:false,cur:null,drawn:null,si:0,peek:false};
+  screen='lesson';fx.view=true;prep();render();window.scrollTo(0,0);
+}
+function startLesson(uid){
+  if(uid==='review'){startReview();return;}
+  const info=ALL.find(l=>l.uid===uid);if(!info||!isUnlocked(info.n))return;
+  L={info,review:false,mode:'study',queue:info.lesson.ex.slice(),total:info.lesson.ex.length,done:0,first:0,hearts:5,retried:new Set(),leave:false,cur:null,drawn:null,si:0,peek:false};
+  screen='lesson';fx.view=true;fx.stage=true;prep();render();window.scrollTo(0,0);
+}
+function endStudy(){
+  const wasPeek=L.peek;
+  L.mode='practice';L.peek=false;L.si=0;
+  if(wasPeek){fx.view=true;}else{fx.view=true;fx.stage=true;}
+  render();window.scrollTo(0,0);
+}
+function check(){
+  const c=L.cur,ex=c.ex;if(c.checked||!ready(c))return;
+  let ok;
+  if(ex.t==='mc'||ex.t==='out')ok=c.opts[c.sel].ok;
+  else if(ex.t==='fill')ok=c.slots.every((id,k)=>c.words.find(w=>w.id===id).w===ex.ans[k]);
+  else ok=c.built.map(b=>b.text).join('\n')===ex.lines.join('\n');
+  c.checked=true;c.ok=ok;fx.res=ok?'pop':'shake';
+  if(ok){
+    L.done++;
+    if(!L.retried.has(ex)){
+      L.first++;
+      if(S.miss[ex.id]>0){S.miss[ex.id]--;if(!S.miss[ex.id])delete S.miss[ex.id];save();}
+    }
+  }else{
+    L.hearts--;fx.hit=L.hearts;
+    S.miss[ex.id]=Math.min(5,(S.miss[ex.id]||0)+1);save();
+    if(L.hearts>0){L.retried.add(ex);L.queue.push(ex);}
+  }
+  render();
+}
+function next(){
+  const c=L.cur;if(!c.checked)return;
+  L.queue.shift();
+  if(L.hearts<=0&&!c.ok){screen='fail';fx.view=true;render();window.scrollTo(0,0);return;}
+  if(!L.queue.length){finish();return;}
+  prep();render();window.scrollTo(0,0);
+}
+function finish(){
+  const acc=Math.round(L.first/L.total*100);
+  const gain=L.first*10+(L.total-L.first)*5+5;
+  S.xp+=gain;
+  if(!L.review){
+    const prev=S.done[L.info.uid];
+    S.done[L.info.uid]={a:Math.max(prev?prev.a:0,acc)};
+  }
+  bumpStreak();save();
+  res={info:L.info,acc,gain,hearts:L.hearts,review:!!L.review};
+  screen='result';fx.view=true;fx.confetti=true;render();window.scrollTo(0,0);
+}
+
+/* ================= Events ================= */
+function goHome(){screen='home';L=null;fx.view=true;render();window.scrollTo(0,0);}
+$app.addEventListener('click',e=>{
+  const el=e.target.closest('[data-act]');if(!el||el.disabled)return;
+  const a=el.dataset.act;
+  if(a==='start'){startLesson(el.dataset.uid);return;}
+  if(a==='home'){goHome();return;}
+  if(a==='reset'){confirmReset=true;render();return;}
+  if(a==='reset-no'){confirmReset=false;render();return;}
+  if(a==='reset-yes'){S=fresh();save();confirmReset=false;shownXp=0;shownStreakVal=0;homePct=0;render();return;}
+  if(screen!=='lesson')return;
+  const c=L.cur;
+  if(L.mode==='study'){
+    if(a==='leave'){if(L.peek){endStudy();}else{goHome();}return;}
+    if(a==='snext'){
+      if(L.si<L.info.lesson.learn.length-1){L.si++;fx.stage=true;render();window.scrollTo(0,0);}
+      else endStudy();
+      return;
+    }
+    if(a==='sback'){if(L.si>0){L.si--;fx.stage=true;render();window.scrollTo(0,0);}return;}
+    return;
+  }
+  if(a==='peek'){L.mode='study';L.peek=true;L.si=0;L.leave=false;fx.view=true;fx.stage=true;render();window.scrollTo(0,0);return;}
+  if(a==='leave'){L.leave=true;render();return;}
+  if(a==='stay'){L.leave=false;render();return;}
+  if(a==='quit'){goHome();return;}
+  if(a==='check'){check();return;}
+  if(a==='next'){next();return;}
+  if(c.checked)return;
+  if(a==='pick'){c.sel=+el.dataset.i;fx.sel=c.sel;}
+  else if(a==='word'){const k=c.slots.indexOf(null);if(k<0)return;c.slots[k]=+el.dataset.id;fx.slot=k;}
+  else if(a==='unslot'){c.slots[+el.dataset.i]=null;}
+  else if(a==='line'){const id=+el.dataset.id,i=c.bank.findIndex(b=>b.id===id);if(i<0)return;c.built.push(c.bank.splice(i,1)[0]);fx.line=id;}
+  else if(a==='unline'){const id=+el.dataset.id,i=c.built.findIndex(b=>b.id===id);if(i<0)return;c.bank.push(c.built.splice(i,1)[0]);}
+  render();
+});
+document.addEventListener('keydown',e=>{
+  if(e.key!=='Enter'||screen!=='lesson'||!L||L.leave)return;
+  if(document.activeElement&&document.activeElement!==document.body)return;
+  const b=$app.querySelector('[data-act="check"]:not([disabled]),[data-act="next"],[data-act="snext"]');
+  if(b){e.preventDefault();b.click();}
+});
+
+render();
+})();
+</script>
