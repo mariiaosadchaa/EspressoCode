@@ -1,5 +1,5 @@
 // Простий офлайн-кеш: перший візит зберігає застосунок, далі він працює без мережі.
-const CACHE = 'java-barista-v7';
+const CACHE = 'java-barista-v8';
 const FILES = ['./', './index.html', './manifest.webmanifest', './config.js', './icon-192.png', './icon-512.png'];
 self.addEventListener('install', e => {
   e.waitUntil(caches.open(CACHE).then(c => c.addAll(FILES)).then(() => self.skipWaiting()));
@@ -18,4 +18,24 @@ self.addEventListener('fetch', e => {
       return res;
     }).catch(() => caches.match(r).then(m => m || caches.match('./index.html')))
   );
+});
+
+self.addEventListener('push', e => {
+  let d = {};
+  try { d = e.data.json(); } catch (_) {}
+  e.waitUntil(self.registration.showNotification(d.title || 'Java Бариста', {
+    body: d.body || 'Час на урок!',
+    icon: 'icon-192.png',
+    badge: 'icon-192.png',
+    tag: 'daily',
+    data: { url: d.url || './' }
+  }));
+});
+self.addEventListener('notificationclick', e => {
+  e.notification.close();
+  const url = (e.notification.data && e.notification.data.url) || './';
+  e.waitUntil(self.clients.matchAll({ type: 'window', includeUncontrolled: true }).then(list => {
+    for (const c of list) { if ('focus' in c) return c.focus(); }
+    return self.clients.openWindow(url);
+  }));
 });

@@ -1627,7 +1627,7 @@ function setView(){
   h+='<section class="card"><h2>Складність</h2>'+seg('setlevel',[{v:'easy',t:'Легкий'},{v:'normal',t:'Звичайний'},{v:'hard',t:'Складний'}],S.level)+'<p class="desc">'+esc(LEVELS[S.level].desc)+'</p></section>';
   h+='<section class="card"><h2>Ціль на день</h2>'+seg('setgoal',[{v:20,t:'20 XP'},{v:30,t:'30 XP'},{v:50,t:'50 XP'}],S.goal)+'</section>';
   h+='<section class="card">'+tog('sound','Звуки','Короткі сигнали правильної й неправильної відповіді.')+tog('big','Великий шрифт','Збільшує весь інтерфейс.')+tog('calm','Спокійний режим','Вимикає анімації.')+'</section>';
-  h+='<section class="card"><h2>Нагадування</h2><p class="desc">Додай щоденне нагадування в календар на телефоні чи комп’ютері.</p><input id="rtime" class="inp" type="time" value="'+esc(S.remind||'19:00')+'" aria-label="Година нагадування"><button class="btn ghost" style="margin-top:12px" data-act="ics">Додати в календар</button></section>';
+  h+='<section class="card"><h2>Нагадування</h2><p class="desc">Обери годину. Нагадування приходить сповіщенням або подією в календарі.</p><input id="rtime" class="inp" type="time" value="'+esc(S.remind||'19:00')+'" aria-label="Година нагадування"><button class="btn ghost" style="margin-top:12px" data-act="ics">Додати в календар</button>'+pushCard()+'</section>';
   h+='<section class="card"><h2>Поділитись результатом</h2><textarea id="sharebox" class="area" rows="3" readonly>'+esc(shareText())+'</textarea><button class="btn ghost" data-act="copy" data-src="sharebox">Скопіювати</button></section>';
   h+='<section class="card"><h2>Резервний код прогресу</h2><p class="desc">Збережи код, щоб перенести прогрес на інший пристрій чи браузер.</p><textarea id="bkp" class="area mono" rows="3" readonly>'+esc(backupCode())+'</textarea><button class="btn ghost" data-act="copy" data-src="bkp">Скопіювати код</button>'
     +'<textarea id="imp" class="area mono" rows="3" placeholder="Встав сюди код, щоб відновити прогрес"></textarea><button class="btn ghost" data-act="import">Відновити з коду</button></section>';
@@ -2086,6 +2086,8 @@ $app.addEventListener('click',e=>{
   if(a==='run'){runCode();return;}
   if(a==='storygo'){const info=ALL.find(l=>l.uid===pendingUid);if(info){S.story[info.ui]=1;save();const u=pendingUid;pendingUid=null;startLesson(u);}return;}
   if(a==='ics'){icsDownload();return;}
+  if(a==='pushon'){pushEnable();return;}
+  if(a==='pushoff'){pushDisable();return;}
   if(a==='auth'){doAuth();return;}
   if(a==='signout'){doSignOut();return;}
   if(a==='authmode'){AUI.mode=el.dataset.v;AUI.msg='';AUI.email=((document.getElementById('em')||{}).value||AUI.email);fx.view=false;render();return;}
@@ -2130,7 +2132,7 @@ $app.addEventListener('click',e=>{
 });
 $app.addEventListener('input',e=>{
   const t=e.target;
-  if(t.id==='rtime'){S.remind=t.value||'19:00';save(true);return;}
+  if(t.id==='rtime'){S.remind=t.value||'19:00';save();pushTime();return;}
   if(t.id==='ide-code'){IDE.code=t.value;return;}
   if(t.id==='ide-in'){IDE.stdin=t.value;return;}
   if(t.id==='ans'&&screen==='lesson'&&L&&L.cur&&!L.cur.checked){
@@ -2282,6 +2284,56 @@ function accountCard(){
   return h+'</section>';
 }
 if(CLOUD&&AUTH)setTimeout(cloudPull,300);
+/* ---------- push reminders (Web Push through Supabase) ---------- */
+const VAPID=CFG.vapid||'';
+const PUSHOK=CLOUD&&!!VAPID&&('serviceWorker' in navigator)&&('PushManager' in window)&&('Notification' in window);
+const PUSH={on:false,busy:false,msg:''};
+let pTimer=0;
+function u8(b){const p='='.repeat((4-b.length%4)%4);const r=atob((b+p).replace(/-/g,'+').replace(/_/g,'/'));return Uint8Array.from(Array.from(r).map(c=>c.charCodeAt(0)));}
+async function pushSave(sub){
+  await api('/rest/v1/push_subs?on_conflict=user_id',{method:'POST',headers:{Prefer:'resolution=merge-duplicates,return=minimal'},body:JSON.stringify({user_id:AUTH.uid,sub:sub.toJSON(),remind:S.remind||'19:00',tz:(Intl.DateTimeFormat().resolvedOptions().timeZone)||'UTC',updated_at:new Date().toISOString()})},true);
+}
+async function pushState(){
+  if(!PUSHOK||!AUTH)return;
+  try{const reg=await navigator.serviceWorker.getRegistration();const sub=reg&&await reg.pushManager.getSubscription();PUSH.on=!!sub&&Notification.permission==='granted';}catch(e){}
+  if(screen==='set'){fx.view=false;render();}
+}
+async function pushEnable(){
+  PUSH.busy=true;PUSH.msg='';fx.view=false;render();
+  try{
+    const perm=await Notification.requestPermission();
+    if(perm!=='granted'){PUSH.msg='Сповіщення заблоковано. Дозволь їх для цього сайту в налаштуваннях браузера.';throw new Error('perm');}
+    const reg=await Promise.race([navigator.serviceWorker.ready,new Promise((_,rj)=>setTimeout(()=>rj(new Error('sw')),8000))]);
+    let sub=await reg.pushManager.getSubscription();
+    if(!sub)sub=await reg.pushManager.subscribe({userVisibleOnly:true,applicationServerKey:u8(VAPID)});
+    await pushSave(sub);PUSH.on=true;toast('Готово','Щоденне нагадування увімкнено');
+  }catch(e){if(!PUSH.msg)PUSH.msg='Не вдалося увімкнути нагадування. Спробуй ще раз.';}
+  PUSH.busy=false;fx.view=false;render();
+}
+async function pushDisable(){
+  try{
+    const reg=await navigator.serviceWorker.getRegistration();const sub=reg&&await reg.pushManager.getSubscription();
+    if(sub)await sub.unsubscribe();
+    await api('/rest/v1/push_subs?user_id=eq.'+encodeURIComponent(AUTH.uid),{method:'DELETE'},true);
+  }catch(e){}
+  PUSH.on=false;PUSH.msg='';toast('Готово','Нагадування вимкнено');fx.view=false;render();
+}
+function pushTime(){
+  if(!PUSH.on)return;clearTimeout(pushTimer);
+  pushTimer=setTimeout(async()=>{try{const reg=await navigator.serviceWorker.getRegistration();const sub=reg&&await reg.pushManager.getSubscription();if(sub)await pushSave(sub);}catch(e){}},900);
+}
+function pushCard(){
+  if(!PUSHOK||!AUTH)return '';
+  const ios=/iphone|ipad|ipod/i.test(navigator.userAgent),standalone=!!(navigator.standalone||(window.matchMedia&&matchMedia('(display-mode: standalone)').matches));
+  let h='<p class="desc">Сповіщення приходять щодня в цей час, якщо ти ще не займалась.</p>';
+  if(ios&&!standalone)h+='<p class="desc">На iPhone спершу додай застосунок на екран «Додому»: у Safari натисни «Поділитися», потім «На екран Додому». Відкрий його з іконки й увімкни нагадування тут.</p>';
+  else if(PUSH.on)h+='<button class="btn ghost" style="margin-top:12px" data-act="pushoff">Вимкнути сповіщення</button>';
+  else h+='<button class="btn" style="margin-top:12px" data-act="pushon"'+(PUSH.busy?' disabled':'')+'>'+(PUSH.busy?'Зачекай…':'Увімкнути сповіщення')+'</button>';
+  if(PUSH.msg)h+='<p class="desc authmsg" role="status">'+esc(PUSH.msg)+'</p>';
+  return h;
+}
+if(PUSHOK&&AUTH)setTimeout(pushState,800);
+
 
 /* ---------- v13 features: SRS, weak spots, stats, wardrobe, cheat sheets, voice, reminders, stories, sandbox ---------- */
 IC.chart='<svg class="ico stroke" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg>';
@@ -2549,7 +2601,7 @@ function statsView(){
 
 /* ---------- service worker (only on a real https site, never in the artifact viewer) ---------- */
 try{
-  if('serviceWorker' in navigator&&location.protocol==='https:'&&/github\.io$/.test(location.hostname)){
+  if('serviceWorker' in navigator&&location.protocol==='https:'&&(window.BARISTA_CONFIG||/github\.io$/.test(location.hostname))){
     navigator.serviceWorker.register('sw.js').catch(()=>{});
   }
 }catch(e){}

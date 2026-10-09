@@ -23,7 +23,7 @@
 - Пісочниця: пишеш Java і запускаєш код прямо в застосунку (через публічний сервіс Judge0).
 - Лисичка-бариста з гардеробом: капелюхи, окуляри й шарфи відкриваються з рівнями. Кожен розділ починається з маленької історії.
 - Денна ціль, серія днів із «заморозкою», подвійний досвід на вихідних, звуки, світла й темна теми, великий шрифт і спокійний режим.
-- Нагадування: файл календаря з щоденною подією.
+- Нагадування: щоденні push-сповіщення (якщо ти ще не займалась) або файл календаря з подією.
 - Акаунт і хмарне збереження прогресу (Supabase), синхронізація між пристроями.
 - Працює офлайн і встановлюється як застосунок (PWA).
 
@@ -71,3 +71,11 @@
 3. У Project Settings → API скопіюй Project URL і anon public key у `config.js`.
 4. На [vercel.com](https://vercel.com): Add New → Project → імпортуй цей репозиторій → Deploy. Налаштування збірки не потрібні.
 5. Після деплою додай адресу сайту в Supabase: Authentication → URL Configuration → Site URL.
+
+## Щоденні сповіщення
+
+1. Supabase → SQL Editor: виконай «Крок 1» з `supabase-push.sql`.
+2. Supabase → Edge Functions → Deploy a new function → Via Editor. Назва `send-reminders`, встав код із `supabase/functions/send-reminders/index.ts`, вимкни «Verify JWT», Deploy.
+3. Edge Functions → Secrets: додай `VAPID_PUBLIC_KEY`, `VAPID_PRIVATE_KEY`, `VAPID_SUBJECT` (наприклад `mailto:ти@пошта.com`) і `CRON_SECRET` (будь-який довгий випадковий рядок).
+4. SQL Editor: виконай «Крок 2» з `supabase-push.sql`, розкоментувавши його й підставивши свій `CRON_SECRET`.
+5. На сайті: Опції → Нагадування → «Увімкнути сповіщення». На iPhone спершу додай сайт на екран «Додому».
