@@ -361,7 +361,7 @@ const UNITS=[
   O('for (int i = 1; i <= 5; i++) {\n    if (i == 3) break;\n    System.out.println(i);\n}',['1\n2','1\n2\n4\n5','1\n2\n3','1\n2\n3\n4\n5'],'break повністю виходить з циклу, коли i дорівнює 3.')
  ]}
 ]},
-{title:'Масиви та методи',sub:'Колекції значень і повторно використаний код',lessons:[
+{title:'Масиви та методи',sub:'Набори значень і код, який можна використовувати знову',lessons:[
  {title:'Масиви',ex:[
   C('Який запис створює масив із чисел 1, 2, 3?',['int[] nums = {1, 2, 3};','int nums = [1, 2, 3];','array nums = (1, 2, 3);','int nums = {1, 2, 3};'],'Масив оголошують із квадратними дужками після типу, а значення беруть у фігурні дужки.',null,true),
   O('int[] a = {10, 20, 30};\nSystem.out.println(a[0]);',['10','20','30','0'],'Індекси починаються з нуля, тому a[0] є першим елементом.'),
@@ -379,6 +379,73 @@ const UNITS=[
   R('Збери метод, що вітає за іменем.',['static void greet(String name) {','    System.out.println("Привіт, " + name);','}'],'Заголовок містить тип результату, ім\'я та параметри, а тіло стоїть у фігурних дужках.'),
   O('static void hi() {\n    System.out.println("Hi");\n}\n\n// у main:\nhi();\nhi();',['Hi\nHi','Hi','(нічого)','Помилка компіляції'],'Метод можна викликати скільки завгодно разів. Кожен виклик виводить Hi.'),
   F('Виклич метод add з аргументами 2 і 3.','static int add(int a, int b) {\n    return a + b;\n}\n\n// у main:\nint r = [[0]](2, 3);\nSystem.out.println(r);',['add'],['int add','call add','add:'],'Метод викликають за іменем і передають аргументи в дужках.')
+ ]}
+]}
+,
+{title:"Класи та об'єкти",sub:'Описуємо речі з реального світу в коді',lessons:[
+ {title:"Клас і об'єкт",ex:[
+  C("Що описує клас?",["Креслення: які поля й методи матимуть об'єкти","Одну конкретну змінну","Лише текст для виводу","Файл на диску"],"Клас це шаблон. За ним створюють скільки завгодно об'єктів."),
+  C("Яке слово створює новий об'єкт?",['new','create','make','object'],'Об\'єкт створює оператор new: Dog d = new Dog();',null,true),
+  O('class Cat {\n    String name;\n}\n\n// у main:\nCat c = new Cat();\nc.name = "Мурка";\nSystem.out.println(c.name);',['Мурка','Cat','name','null'],'Ми записали в поле name значення "Мурка" й вивели його через крапку.'),
+  F("Створи об'єкт класу Dog.",'Dog d = [[0]] Dog();',['new'],['create','make','Dog'],'Після new йде ім\'я класу й дужки: new Dog().'),
+  C("Як звернутися до поля name об'єкта d?",['d.name','d->name','d::name','name.d'],'У Java до полів і методів звертаються через крапку: d.name.',null,true),
+  O('class Cat {\n    String name;\n}\n\n// у main:\nCat c = new Cat();\nSystem.out.println(c.name);',['null','0','Порожній рядок','Помилка компіляції'],'Поле типу String без значення дорівнює null. println виведе слово null.'),
+  O('class Dog {\n    String name;\n}\n\n// у main:\nDog a = new Dog();\na.name = "Рекс";\nDog b = new Dog();\nb.name = "Бім";\nSystem.out.println(a.name);',['Рекс','Бім','РексБім','null'],'Кожен об\'єкт має власні значення полів. У a записано "Рекс".'),
+  R("Збери клас Dog із полем і методом.",['class Dog {','    String name;','    void bark() {','        System.out.println("Гав!");','    }','}'],'Спочатку поле, потім метод. Кожен блок закривається своєю дужкою }.')
+ ]},
+ {title:'Конструктори',ex:[
+  C("Яке ім'я має конструктор?",["Те саме, що й клас",'construct','init','new'],'Конструктор називається так само, як клас, і не має типу результату.'),
+  F("Заповни конструктор.",'class Dog {\n    String name;\n    [[0]](String n) {\n        name = n;\n    }\n}',['Dog'],['void','new','constructor'],'Ім\'я конструктора збігається з іменем класу.'),
+  O('class Dog {\n    String name;\n    Dog(String n) {\n        name = n;\n    }\n}\n\n// у main:\nDog d = new Dog("Бім");\nSystem.out.println(d.name);',['Бім','n','null','Помилка компіляції'],'new Dog("Бім") викликає конструктор, і він записує "Бім" у поле name.'),
+  C("Що означає this?",["Поточний об'єкт","Батьківський клас","Новий клас","Останній створений об'єкт"],'this посилається на об\'єкт, у якому виконується код.'),
+  F("Присвой параметр полю.",'class Dog {\n    String name;\n    Dog(String name) {\n        [[0]].name = name;\n    }\n}',['this'],['self','super','Dog'],'this.name це поле об\'єкта, а name без this це параметр.'),
+  C("Навіщо поле роблять private?",["Щоб змінювати його можна було лише через методи класу","Щоб воно працювало швидше","Щоб клас не можна було створити","Щоб поле зникало з пам'яті"],'Це інкапсуляція: клас сам вирішує, як змінюються його дані.'),
+  O('class Account {\n    private int balance;\n    void deposit(int sum) {\n        balance += sum;\n    }\n    int getBalance() {\n        return balance;\n    }\n}\n\n// у main:\nAccount a = new Account();\na.deposit(50);\nSystem.out.println(a.getBalance());',['50','0','balance','Помилка компіляції'],'Поле balance спочатку 0. deposit додає 50, getBalance повертає результат.'),
+  R("Збери геттер для поля balance.",['int getBalance() {','    return balance;','}'],'Геттер повертає значення приватного поля через return.')
+ ]}
+]},
+{title:'Колекції',sub:'Списки й словники для багатьох значень',lessons:[
+ {title:'ArrayList',ex:[
+  C("Який клас є списком, що може змінювати розмір?",['ArrayList','int[]','String','Math'],'ArrayList росте й зменшується, на відміну від масиву з фіксованою довжиною.'),
+  C("Як додати елемент до списку names?",['names.add("Оля");','names.push("Оля");','names.append("Оля");','names += "Оля";'],'У ArrayList елемент додає метод add.',null,true),
+  O('ArrayList<String> a = new ArrayList<>();\na.add("A");\na.add("B");\nSystem.out.println(a.size());',['2','1','0','A'],'size() повертає кількість елементів. Ми додали два.'),
+  O('ArrayList<Integer> a = new ArrayList<>();\na.add(10);\na.add(20);\nSystem.out.println(a.get(0));',['10','20','0','1'],'get(0) бере перший елемент, бо нумерація йде з нуля.'),
+  F("Вкажи тип елементів у кутових дужках.",'ArrayList<[[0]]> words = new ArrayList<>();',['String'],['string','int','Words'],'У <> пишуть тип елементів. Для тексту це String з великої літери.'),
+  O('ArrayList<Integer> a = new ArrayList<>();\na.add(5);\na.add(6);\na.add(7);\na.remove(0);\nSystem.out.println(a);',['[6, 7]','[5, 6]','[5, 7]','[7]'],'remove(0) видаляє елемент з індексом 0, тобто число 5. Решта зсувається.'),
+  R("Збери цикл, що виводить усі елементи списку names.",['for (String n : names) {','    System.out.println(n);','}'],'Цикл for-each бере елементи списку по черзі.'),
+  C("Чим ArrayList відрізняється від масиву?",['Розмір може змінюватися','Індекси починаються з 1','Зберігає лише текст','Не має методів'],'Масив має фіксовану довжину, а ArrayList додає й видаляє елементи.')
+ ]},
+ {title:'HashMap',ex:[
+  C("Що зберігає HashMap?",['Пари «ключ — значення»','Лише числа','Лише унікальний текст','Рядки таблиці'],'За ключем швидко знаходять значення, як слово в словнику.'),
+  C("Яким методом додають пару в HashMap?",['put','add','insert','set'],'Пару додає put(ключ, значення). Метод get(ключ) повертає значення.',null,true),
+  O('HashMap<String, Integer> m = new HashMap<>();\nm.put("a", 1);\nm.put("b", 2);\nSystem.out.println(m.get("b"));',['2','1','b','null'],'get("b") повертає значення, що лежить під ключем "b".'),
+  O('HashMap<String, Integer> m = new HashMap<>();\nm.put("a", 1);\nm.put("a", 5);\nSystem.out.println(m.get("a"));',['5','1','6','Помилка компіляції'],'Ключ "a" уже є, тому put замінює старе значення новим.'),
+  O('HashMap<String, Integer> m = new HashMap<>();\nm.put("a", 1);\nm.put("b", 2);\nm.put("a", 3);\nSystem.out.println(m.size());',['2','3','1','0'],'Ключі в словнику унікальні. Третій put лише замінив значення, тому пар дві.'),
+  O('HashMap<String, Integer> m = new HashMap<>();\nm.put("x", 10);\nSystem.out.println(m.get("y"));',['null','0','-1','Помилка компіляції'],'Якщо ключа немає, get повертає null.'),
+  F("Перевір, чи є ключ у словнику.",'HashMap<String, Integer> m = new HashMap<>();\nSystem.out.println(m.[[0]]("a"));',['containsKey'],['hasKey','contains','exists'],'containsKey повертає true, якщо ключ є, і false, якщо ні.'),
+  R("Збери код, що створює словник і додає пару.",['HashMap<String, Integer> m = new HashMap<>();','m.put("Оля", 20);','System.out.println(m.get("Оля"));'],'Спочатку створюємо словник, потім додаємо пару, потім читаємо значення.')
+ ]}
+]},
+{title:'Винятки',sub:'Що робити, коли щось пішло не так',lessons:[
+ {title:'try і catch',ex:[
+  C("Що таке виняток (exception)?",['Помилка, яка виникає під час виконання програми','Помилка в написанні слова, яку знаходить компілятор','Різновид коментаря','Спеціальний цикл'],'Виняток виникає, коли програма вже працює, наприклад при діленні на нуль. Без обробки програма зупиняється.'),
+  O('try {\n    System.out.println(10 / 2);\n} catch (ArithmeticException e) {\n    System.out.println("Помилка");\n}',['5','Помилка','2','Помилка компіляції'],'Помилки немає, тому виконується лише try. 10 / 2 = 5.'),
+  O('try {\n    System.out.println("Старт");\n    System.out.println(10 / 0);\n    System.out.println("Кінець");\n} catch (ArithmeticException e) {\n    System.out.println("Помилка");\n}',['Старт\nПомилка','Старт\nКінець','Помилка','Старт\nПомилка\nКінець'],'Після винятку решта try пропускається. Виводиться «Старт», і одразу спрацьовує catch.'),
+  F("Встав слово, щоб перехопити виняток.",'try {\n    int x = 5 / 0;\n} [[0]] (ArithmeticException e) {\n    System.out.println("Ой");\n}',['catch'],['except','handle','error'],'Блок catch ловить виняток зазначеного типу.'),
+  C("Що робить блок finally?",['Виконується завжди: і з помилкою, і без неї','Виконується лише при помилці','Виконується лише без помилок','Завершує програму'],'У finally зазвичай роблять прибирання, яке потрібне за будь-яких обставин.'),
+  O('try {\n    System.out.println("A");\n} catch (Exception e) {\n    System.out.println("B");\n} finally {\n    System.out.println("C");\n}',['A\nC','A\nB\nC','A','A\nB'],'Помилки не було, тож catch пропущено, а finally виконався.'),
+  R("Збери обробку помилки.",['try {','    int x = 10 / 0;','} catch (ArithmeticException e) {','    System.out.println("Помилка");','}'],'Спочатку try з небезпечним кодом, потім catch з обробкою.'),
+  C("Який виняток виникне при зверненні до a[5] у масиві з 3 елементів?",['ArrayIndexOutOfBoundsException','ArithmeticException','NullPointerException','NumberFormatException'],'Індекс виходить за межі масиву, тому й виняток із такою назвою.',null,true)
+ ]},
+ {title:'throw і перевірка',ex:[
+  C("Яке слово викликає виняток вручну?",['throw','throws','raise','error'],'throw кидає виняток. Слово throws стоїть в оголошенні методу й лише попереджає про можливий виняток.',null,true),
+  O('try {\n    int n = Integer.parseInt("abc");\n    System.out.println(n);\n} catch (NumberFormatException e) {\n    System.out.println("Не число");\n}',['Не число','abc','0','Помилка компіляції'],'"abc" не можна перетворити на число, тому parseInt кидає NumberFormatException.'),
+  O('try {\n    int n = Integer.parseInt("42");\n    System.out.println(n + 1);\n} catch (NumberFormatException e) {\n    System.out.println("Не число");\n}',['43','Не число','421','42'],'"42" успішно стає числом 42, і ми додаємо 1.'),
+  F("Створи виняток.",'throw [[0]] IllegalArgumentException("Помилка");',['new'],['create','make','throw'],'Виняток це об\'єкт, тому його створюють через new.'),
+  O('try {\n    String s = null;\n    System.out.println(s.length());\n} catch (NullPointerException e) {\n    System.out.println("A");\n} catch (Exception e) {\n    System.out.println("B");\n}',['A','B','A\nB','Помилка компіляції'],'Звернення до null дає NullPointerException. Спрацьовує перший підходящий catch.'),
+  C("Що повертає метод getMessage() винятку?",['Текст повідомлення про помилку','Назву файлу','Номер рядка','Нічого'],'У повідомленні зазвичай пояснено, що пішло не так.'),
+  R("Збери метод, що кидає виняток для від'ємного віку.",['static void setAge(int age) {','    if (age < 0) {','        throw new IllegalArgumentException("Вік має бути додатним");','    }','}'],'Перевіряємо умову й кидаємо виняток через throw new.'),
+  C("Який catch слід ставити останнім?",['catch (Exception e), найзагальніший','catch (NullPointerException e)','catch (ArithmeticException e)','Порядок не важливий'],'Спочатку йдуть конкретні винятки, потім загальний Exception. Інакше код не скомпілюється.')
  ]}
 ]}
 ];
@@ -483,6 +550,58 @@ const LEARN={
    'static int add(int a, int b) {\n    return a + b;\n}\n\n// у main:\nSystem.out.println(add(2, 3));','5'),
  K("Виклик методу","Метод викликають за іменем, у дужках передають аргументи. Результат можна зберегти у змінну або одразу вивести.",
    'static int twice(int x) {\n    return x * 2;\n}\n\n// у main:\nint r = twice(4);\nSystem.out.println(r);','8')
+],
+'6-0':[
+ K("Клас це креслення","Клас описує, які дані (поля) і дії (методи) будуть у речі. Об'єкт це конкретна річ, створена за цим кресленням.",
+   'class Dog {\n    String name;\n    int age;\n}'),
+ K("Створюємо об'єкт","Слово `new` створює об'єкт. До полів і методів звертаються через крапку.",
+   'Dog d = new Dog();\nd.name = "Рекс";\nd.age = 3;\nSystem.out.println(d.name);','Рекс'),
+ K("Методи в класі","Метод описує поведінку об'єкта. Усередині методу можна використовувати поля цього самого об'єкта.",
+   'class Dog {\n    String name;\n    void bark() {\n        System.out.println(name + " гав!");\n    }\n}\n\n// у main:\nDog d = new Dog();\nd.name = "Рекс";\nd.bark();','Рекс гав!'),
+ K("Багато об'єктів з одного класу","З одного класу можна створити скільки завгодно об'єктів. Кожен має власні значення полів.",
+   'Dog a = new Dog();\na.name = "Рекс";\nDog b = new Dog();\nb.name = "Бім";\nSystem.out.println(a.name);\nSystem.out.println(b.name);','Рекс\nБім')
+],
+'6-1':[
+ K("Конструктор","Конструктор це спеціальний метод, який запускається при `new`. Він називається так само, як клас і не має типу результату. Через нього зручно одразу задати значення полів.",
+   'class Dog {\n    String name;\n    Dog(String n) {\n        name = n;\n    }\n}\n\n// у main:\nDog d = new Dog("Рекс");\nSystem.out.println(d.name);','Рекс'),
+ K("Слово this","`this` це поточний об'єкт. Воно потрібне, коли параметр називається так само, як поле: `this.name` це поле, а `name` це параметр.",
+   'class Dog {\n    String name;\n    Dog(String name) {\n        this.name = name;\n    }\n}'),
+ K("Приватні поля","`private` ховає поле від прямого доступу ззовні. Зі значенням працюють через методи: так клас сам контролює свої дані. Це називають інкапсуляцією.",
+   'class Account {\n    private int balance;\n    void deposit(int sum) {\n        balance += sum;\n    }\n    int getBalance() {\n        return balance;\n    }\n}\n\n// у main:\nAccount a = new Account();\na.deposit(50);\nSystem.out.println(a.getBalance());','50')
+],
+'7-0':[
+ K("Список замість масиву","`ArrayList` це список, який може рости й зменшуватись. Тип елементів пишуть у кутових дужках. Вгорі файлу потрібен імпорт `java.util.ArrayList`.",
+   'import java.util.ArrayList;\n\nArrayList<String> names = new ArrayList<>();\nnames.add("Оля");\nnames.add("Максим");\nSystem.out.println(names);','[Оля, Максим]'),
+ K("Основні методи","`add` додає елемент, `get(i)` читає за індексом, `size()` повертає кількість. Індекси, як і в масиві, починаються з нуля.",
+   'ArrayList<Integer> nums = new ArrayList<>();\nnums.add(10);\nnums.add(20);\nSystem.out.println(nums.get(1));\nSystem.out.println(nums.size());','20\n2'),
+ K("Обхід списку","Список проходять циклом for-each, так само як масив.",
+   'ArrayList<String> names = new ArrayList<>();\nnames.add("Оля");\nnames.add("Макс");\nfor (String n : names) {\n    System.out.println(n);\n}','Оля\nМакс'),
+ K("Видалення","`remove(0)` видаляє елемент за індексом, а наступні елементи зсуваються на одне місце вліво.",
+   'ArrayList<Integer> nums = new ArrayList<>();\nnums.add(5);\nnums.add(6);\nnums.add(7);\nnums.remove(0);\nSystem.out.println(nums);','[6, 7]')
+],
+'7-1':[
+ K("Пари ключ і значення","`HashMap` зберігає пари: ключ і значення. За ключем значення знаходиться швидко, як слово в словнику. Потрібен імпорт `java.util.HashMap`.",
+   'import java.util.HashMap;\n\nHashMap<String, Integer> ages = new HashMap<>();\nages.put("Оля", 20);\nages.put("Макс", 25);\nSystem.out.println(ages.get("Оля"));','20'),
+ K("Ключі унікальні","Якщо покласти значення під ключ, який уже є, старе значення замінюється. Тому кількість пар не збільшується.",
+   'HashMap<String, Integer> ages = new HashMap<>();\nages.put("Оля", 20);\nages.put("Оля", 21);\nSystem.out.println(ages.get("Оля"));\nSystem.out.println(ages.size());','21\n1'),
+ K("Немає ключа","Якщо ключа немає, `get` повертає `null`. Наявність ключа перевіряє `containsKey`.",
+   'HashMap<String, Integer> ages = new HashMap<>();\nages.put("Оля", 20);\nSystem.out.println(ages.get("Іра"));\nSystem.out.println(ages.containsKey("Оля"));','null\ntrue')
+],
+'8-0':[
+ K("Що таке виняток","Виняток це помилка, що виникає, коли програма вже працює. Якщо її не обробити, програма зупиняється.",
+   'int x = 10;\nint y = 0;\nSystem.out.println(x / y);','Помилка: ArithmeticException (ділення на нуль)'),
+ K("try і catch","У `try` пишуть код, який може впасти. Якщо виникає виняток, решта `try` пропускається, і керування переходить у `catch`.",
+   'try {\n    int r = 10 / 0;\n    System.out.println(r);\n} catch (ArithmeticException e) {\n    System.out.println("Ділити на нуль не можна");\n}','Ділити на нуль не можна'),
+ K("finally","Блок `finally` виконується завжди: і коли помилка була, і коли її не було. У ньому роблять те, що треба зробити за будь-яких обставин.",
+   'try {\n    System.out.println("Крок 1");\n    int r = 5 / 0;\n    System.out.println("Крок 2");\n} catch (ArithmeticException e) {\n    System.out.println("Помилка");\n} finally {\n    System.out.println("Кінець");\n}','Крок 1\nПомилка\nКінець')
+],
+'8-1':[
+ K("Кілька catch","Після одного `try` можна поставити кілька `catch` для різних винятків. Спрацює перший підходящий. Загальний `Exception` завжди ставлять останнім.",
+   'try {\n    String s = null;\n    System.out.println(s.length());\n} catch (NullPointerException e) {\n    System.out.println("Порожнє значення");\n} catch (Exception e) {\n    System.out.println("Щось інше");\n}','Порожнє значення'),
+ K("Перетворення тексту на число","`Integer.parseInt` перетворює текст на число. Якщо в тексті не число, він кидає `NumberFormatException`.",
+   'try {\n    int n = Integer.parseInt("abc");\n} catch (NumberFormatException e) {\n    System.out.println("Це не число");\n}','Це не число'),
+ K("Кидаємо виняток самі","Слово `throw` викликає виняток вручну. Його створюють через `new`. Метод `getMessage()` повертає текст, який ми передали.",
+   'static void setAge(int age) {\n    if (age < 0) {\n        throw new IllegalArgumentException("Вік має бути додатним");\n    }\n}\n\n// у main:\ntry {\n    setAge(-5);\n} catch (IllegalArgumentException e) {\n    System.out.println(e.getMessage());\n}','Вік має бути додатним')
 ]
 };
 
@@ -590,7 +709,7 @@ function homeView(){
       +'</p></div><button class="btn sm" data-act="start" data-uid="review">Повторити</button></section>';
   }
   UNITS.forEach((u,ui)=>{
-    h+='<section style="--uc:var(--u'+(ui+1)+')"><div class="unit"><p class="kicker">Розділ '+(ui+1)+'</p><h2>'+esc(u.title)+'</h2><p>'+esc(u.sub)+'</p></div><div class="path">';
+    h+='<section style="--uc:var(--u'+((ui%6)+1)+')"><div class="unit"><p class="kicker">Розділ '+(ui+1)+'</p><h2>'+esc(u.title)+'</h2><p>'+esc(u.sub)+'</p></div><div class="path">';
     ALL.filter(l=>l.ui===ui).forEach(l=>{
       const d=S.done[l.uid],un=isUnlocked(l.n),isCur=cur&&cur.uid===l.uid;
       h+='<div class="nodewrap'+(fx.view?' enter':'')+'" style="--k:'+OFF[l.n%8]+';--d:'+(l.n*45)+'ms">';
