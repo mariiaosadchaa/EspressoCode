@@ -421,6 +421,57 @@ svg{display:block}
 @keyframes breathe{0%,100%{transform:scale(1)}50%{transform:scale(1.025)}}
 @keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-3px)}}
 @keyframes pop{0%{transform:scale(.97)}60%{transform:scale(1.04)}100%{transform:scale(1)}}
+.yours{margin:6px 0 0;font-size:14px;color:var(--bad-ink)}
+.yours b{font-family:var(--mono);font-weight:600;overflow-wrap:anywhere}
+.pg-t{font-family:var(--display);font-size:24px;margin:8px 16px 4px}
+.pg-s{font-family:var(--display);font-size:18px;margin:22px 16px 8px}
+.tiles{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;padding:8px 16px}
+.tile{background:var(--surface);border:2px solid var(--line);border-radius:14px;padding:10px 4px;text-align:center;display:grid;gap:2px}
+.tile b{font-family:var(--display);font-size:18px}
+.tile span{font-size:11px;color:var(--muted);font-weight:600}
+.chart{width:100%;height:auto;display:block}
+.chart .bar-r{fill:var(--line-edge)}
+.chart .bar-r.now{fill:var(--primary)}
+.chart .bar-v{font:700 11px var(--body);fill:var(--ink)}
+.chart .bar-n{font:600 11px var(--body);fill:var(--muted)}
+.chart .goal-l{stroke:var(--warm);stroke-width:1.5;stroke-dasharray:4 4}
+.urow{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr) 40px;gap:10px;align-items:center;margin:8px 0}
+.urow .un{font-size:13px;font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.urow .track{height:10px;background:var(--line);border-radius:6px;overflow:hidden}
+.urow .fill{height:100%;background:var(--good);border-radius:6px}
+.urow .fill.low{background:var(--warm)}
+.urow .up{font-size:12px;font-weight:700;text-align:right}
+.ward-m{display:flex;justify-content:center;padding:14px 0 6px}
+.ward-s{margin:12px 0 6px;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.ward-r{display:flex;flex-wrap:wrap;gap:8px}
+.chips-row{display:flex;gap:8px;overflow-x:auto;padding:10px 16px;scrollbar-width:none}
+.chips-row::-webkit-scrollbar{display:none}
+.uchip{flex:0 0 auto;border:2px solid var(--line);background:var(--surface);color:var(--ink);border-radius:999px;padding:8px 14px;font:600 13px var(--body);cursor:pointer;white-space:nowrap}
+.uchip.on{background:var(--primary);color:var(--on-primary);border-color:var(--primary)}
+.uchip:disabled{opacity:.45;cursor:not-allowed}
+.sheet{padding:4px 16px 24px;max-width:720px;margin:0 auto}
+.sheet h1{font-family:var(--display);font-size:24px;margin:8px 0 2px;color:var(--uc)}
+.sheet .sub{margin:0 0 8px;color:var(--muted)}
+.sh-l{font-size:13px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin:22px 0 8px}
+.sh-c{background:var(--surface);border:2px solid var(--line);border-radius:16px;padding:14px 16px;margin:10px 0;display:grid;gap:10px}
+.sh-c h3{margin:0;font-size:16px}
+.sh-c p{margin:0}
+.speakrow{margin-top:12px}
+.btn.sm.speak{display:inline-flex;align-items:center;gap:8px;width:auto;padding:9px 14px}
+.story{max-width:460px;margin:0 auto;padding:max(24px,env(safe-area-inset-top)) 22px 40px;display:flex;flex-direction:column;gap:14px;min-height:100vh;justify-content:center}
+.st-m{display:flex;justify-content:center}
+.st-b{background:var(--surface);border:2px solid var(--line);border-radius:20px;padding:16px 18px;display:grid;gap:8px;position:relative}
+.st-b p{margin:0;font-size:17px;animation:rise .6s ease both;animation-delay:calc(.3s + var(--i)*1s)}
+@keyframes rise{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.ide{max-width:720px;margin:0 auto;padding:0 16px 40px;display:grid;gap:12px}
+.ide .lhead{padding:12px 0 0}
+.ide-t{font-family:var(--display);font-size:20px;margin:0}
+.ide .chips-row{padding:0}
+.code-ta{width:100%;min-height:260px;resize:vertical;font:500 14px/1.55 var(--mono);background:var(--code-bg);color:var(--code-ink);border:2px solid var(--line);border-radius:14px;padding:12px 14px;tab-size:4;white-space:pre;overflow:auto}
+.code-ta:focus,.area:focus{outline:none;border-color:var(--primary)}
+.ide-l{font-size:12px;color:var(--muted);font-weight:600}
+.console.err pre{color:#FFB0B3}
+@media print{.tabs,.top,.chips-row,.bar,.toast{display:none!important}body{background:#fff}.sh-c{break-inside:avoid;border:1px solid #bbb}}
 </style><style>*,*::before,*::after{box-sizing:border-box}html{-webkit-text-size-adjust:100%}body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--body)}</style>
 </head>
 <body>
@@ -734,6 +785,161 @@ const UNITS=[
   T('Допиши цикл, що проходить по всіх справах списку t.','for ([[0]]) {\n    System.out.println(s);\n}',['String s : t'],'for-each: тип, ім\'я змінної, двокрапка й колекція.'),
   C('Як дізнатися кількість справ у списку?',['t.size()','t.length','t.count()','t.len()'],'У колекцій кількість елементів повертає size().',null,true)
  ]}
+]},
+{title:'Узагальнення',sub:'Generics: безпечні типи',lessons:[
+ {title:'Generic-класи',ex:[
+  C('Чому generics кращі за Object?',['Помилку типу компілятор помітить ще до запуску','Програма завжди працює вдвічі швидше','Не треба створювати класи','Можна зберігати лише числа'],'З generics компілятор знає тип даних і не пропустить неправильний. З Object помилка вилізе лише під час роботи програми.'),
+  O('class Box<T> {\n    T value;\n    Box(T v) {\n        value = v;\n    }\n}\n\n// у main:\nBox<Integer> b = new Box<>(5);\nSystem.out.println(b.value + 1);',['6','51','5','Помилка компіляції'],'T тут Integer, тому b.value це число 5, і додавання дає 6.'),
+  O('class Pair<A, B> {\n    A first;\n    B second;\n    Pair(A first, B second) {\n        this.first = first;\n        this.second = second;\n    }\n}\n\n// у main:\nPair<String, Integer> p = new Pair<>("age", 20);\nSystem.out.println(p.first + " " + p.second);',['age 20','20 age','age','first second'],'first це "age", second це 20. Між ними виводиться пробіл.'),
+  F('Допиши оголошення generic-класу.','class Box[[0]] {\n    T value;\n}',['<T>'],['(T)','[T]','{T}'],'Тип-заповнювач пишуть у кутових дужках одразу після імені класу.'),
+  O('List<String> list = new ArrayList<>();\nlist.add("a");\nlist.add("b");\nSystem.out.println(list.get(1));',['b','a','1','Помилка компіляції'],'Індекс 1 це другий елемент, тобто "b".'),
+  R('Збери generic-клас Box.',['class Box<T> {','    T value;','    T get() {','        return value;','    }','}'],'Спочатку заголовок з <T>, потім поле, потім метод, який повертає T.'),
+  T('Допиши створення коробки з числом 5.','class Box<T> {\n    T value;\n    Box(T value) {\n        this.value = value;\n    }\n}\n\n// у main:\nBox<Integer> b = [[0]];',['new Box<>(5)','new Box<Integer>(5)'],'Після new пишемо Box і ромб <>, компілятор сам підставить Integer.'),
+  T('Допиши створення порожнього списку рядків.','List<String> names = [[0]];',['new ArrayList<>()','new ArrayList<String>()'],'Ромб <> дозволяє не повторювати тип: new ArrayList<>().'),
+  B(null,['List<String> a = new ArrayList<>();','a.add("Java");','a.add(5);','System.out.println(a.size());'],2,'Список призначений для рядків, а 5 це число. Компілятор не дозволить його додати.')
+ ]},
+ {title:'Generic-методи і обмеження',ex:[
+  O('static <T> T same(T x) {\n    return x;\n}\n\n// у main:\nSystem.out.println(same(2) + same(3));',['5','23','2','Помилка компіляції'],'Метод повертає те, що отримав. Тут T це Integer, тому 2 + 3 = 5.'),
+  O('static <T extends Comparable<T>> T max(T a, T b) {\n    return a.compareTo(b) > 0 ? a : b;\n}\n\n// у main:\nSystem.out.println(max("kiwi", "apple"));',['kiwi','apple','1','Помилка компіляції'],'Слово "kiwi" стоїть після "apple" за алфавітом, тому воно більше.'),
+  C('Що означає <T extends Number>?',['T може бути лише числовим типом, наприклад Integer або Double','T може бути будь-яким типом','T обов\'язково дорівнює 0','T це змінна типу Number'],'extends у кутових дужках обмежує типи. Так у методі можна викликати методи Number.'),
+  F('Обмеж тип T так, щоб він був числом.','static <T [[0]] Number> double twice(T x) {\n    return x.doubleValue() * 2;\n}',['extends'],['implements','is','super'],'Для обмеження типу в кутових дужках використовують слово extends.'),
+  O('static <T extends Number> double twice(T x) {\n    return x.doubleValue() * 2;\n}\n\n// у main:\nSystem.out.println(twice(4));',['8.0','8','4.0','Помилка компіляції'],'doubleValue() дає 4.0, множимо на 2 і отримуємо 8.0.'),
+  R('Збери generic-метод, що повертає перший елемент списку.',['static <T> T first(List<T> list) {','    return list.get(0);','}'],'Перед типом результату пишемо <T>, далі звичайний метод.'),
+  T('Допиши тип-заповнювач методу.','static [[0]] void show(T x) {\n    System.out.println(x);\n}',['<T>'],'Generic-метод оголошує свій <T> перед типом результату.'),
+  T('Допиши знак «будь-який тип» у параметрі списку.','static void printAll(List<[[0]]> list) {\n    for (Object o : list) {\n        System.out.println(o);\n    }\n}',['?'],'Знак питання ? це wildcard: список з будь-яким типом елементів.'),
+  B(null,['List<Integer> a = new ArrayList<>();','List<Number> b = a;','List<?> c = a;'],1,'List<Integer> не є List<Number>, хоча Integer це Number. А List<?> підходить для будь-якого списку.')
+ ]}
+]},
+{title:'Багатопоточність',sub:'Робимо кілька справ одночасно',lessons:[
+ {title:'Потоки Thread',ex:[
+  O('Thread t = new Thread(() -> System.out.println("A"));\nt.start();\nt.join();\nSystem.out.println("B");',['A\nB','B\nA','A','B'],'join() змушує main чекати, поки потік допише. Тому спочатку A, потім B.'),
+  C('Чим start() відрізняється від run()?',['start() запускає новий потік, а run() просто виконує код у поточному','Нічим, це одне й те саме','run() швидший, бо запускає кілька потоків','start() можна викликати лише в main'],'Лише start() створює новий потік. Виклик run() виконується в тому потоці, де ти його викликав.'),
+  O('Thread t = new Thread(() -> System.out.println(Thread.currentThread().getName()));\nt.run();',['main','Thread-0','t','Нічого не виведе'],'run() викликали напряму, тому код виконався в потоці main.'),
+  F('Допиши слово, щоб клас можна було віддати в потік.','class Task [[0]] Runnable {\n    public void run() {\n        System.out.println("Робота");\n    }\n}',['implements'],['extends','uses','inherits'],'Runnable це інтерфейс, тому його підключають через implements.'),
+  O('int[] r = new int[1];\nThread t = new Thread(() -> {\n    for (int i = 1; i <= 4; i++) {\n        r[0] += i;\n    }\n});\nt.start();\nt.join();\nSystem.out.println(r[0]);',['10','4','0','24'],'Потік додає 1 + 2 + 3 + 4 = 10. Після join() main бачить готовий результат.'),
+  R('Запусти потік і дочекайся його.',['Thread t = new Thread(() -> System.out.println("Hi"));','t.start();','t.join();','System.out.println("Done");'],'Спочатку створюємо потік, запускаємо, чекаємо через join, і лише потім пишемо Done.'),
+  T('Допиши виклик, що запускає потік t.','Thread t = new Thread(() -> System.out.println("Hi"));\n[[0]];\nt.join();',['t.start()'],'Щоб код працював в окремому потоці, викликаємо start().'),
+  T('Допиши виклик, що чекає завершення потоку t.','Thread t = new Thread(() -> System.out.println("Hi"));\nt.start();\n[[0]];\nSystem.out.println("Done");',['t.join()'],'join() зупиняє поточний потік, доки t не завершиться.'),
+  B(null,['Runnable r = () -> System.out.println("Hi");','Thread t = new Thread(r);','t.begin();'],2,'У Thread немає методу begin(). Потік запускається методом start().')
+ ]},
+ {title:'Синхронізація і ExecutorService',ex:[
+  O('AtomicInteger a = new AtomicInteger(5);\na.incrementAndGet();\na.addAndGet(10);\nSystem.out.println(a.get());',['16','15','6','5'],'Спочатку 5 стає 6, потім додаємо 10 і отримуємо 16.'),
+  C('Що робить ключове слово synchronized у методі?',['Пускає в метод лише один потік за раз','Робить метод швидшим','Запускає метод в окремому потоці','Забороняє змінювати поля класу'],'Поки один потік виконує synchronized-метод, інші чекають своєї черги. Так немає гонки даних.'),
+  O('ExecutorService pool = Executors.newFixedThreadPool(2);\nFuture<String> f = pool.submit(() -> "Hi");\nSystem.out.println(f.get() + "!");\npool.shutdown();',['Hi!','Hi','!','Помилка компіляції'],'f.get() чекає і повертає результат задачі, тобто "Hi". Далі додається "!".'),
+  F('Створи пул з двох потоків.','ExecutorService pool = Executors.[[0]](2);',['newFixedThreadPool'],['newPool','createThreads','fixedPool'],'Executors.newFixedThreadPool(n) створює пул із n потоків.'),
+  O('AtomicInteger n = new AtomicInteger();\nRunnable r = () -> {\n    for (int i = 0; i < 500; i++) {\n        n.incrementAndGet();\n    }\n};\nThread a = new Thread(r);\nThread b = new Thread(r);\na.start();\nb.start();\na.join();\nb.join();\nSystem.out.println(n.get());',['1000','500','0','Результат щоразу різний'],'AtomicInteger збільшується безпечно, жодне додавання не губиться. 500 + 500 = 1000.'),
+  R('Віддай задачу в пул, отримай результат і зупини пул.',['ExecutorService pool = Executors.newFixedThreadPool(2);','Future<Integer> f = pool.submit(() -> 7);','System.out.println(f.get());','pool.shutdown();'],'Створюємо пул, надсилаємо задачу, читаємо результат з Future, а в кінці зупиняємо пул.'),
+  T('Допиши виклик, що збільшує лічильник n на 1.','AtomicInteger n = new AtomicInteger();\n[[0]];\nSystem.out.println(n.get());',['n.incrementAndGet()','n.getAndIncrement()','n.addAndGet(1)','n.getAndAdd(1)'],'У AtomicInteger є безпечні методи, наприклад incrementAndGet().'),
+  T('Допиши слово, щоб у метод заходив лише один потік.','class Counter {\n    int n = 0;\n    [[0]] void inc() {\n        n++;\n    }\n}',['synchronized'],'Слово synchronized перед методом ставить його під «замок».'),
+  B(null,['ExecutorService pool = Executors.newFixedThreadPool(2);','Future<int> f = pool.submit(() -> 5);','pool.shutdown();'],1,'У кутових дужках не можна писати примітив int. Треба Future<Integer>.')
+ ]}
+]},
+{title:'Тести JUnit',sub:'Перевіряємо, що код працює',lessons:[
+ {title:'Перший тест',ex:[
+  C('Навіщо потрібні автоматичні тести?',['Щоб швидко перевіряти, що код працює, і помічати поломки після змін','Щоб програма виконувалась швидше','Щоб не потрібно було компілювати код','Щоб зменшити розмір програми'],'Тест запускається за секунди й одразу показує, чи щось зламалось після змін у коді.'),
+  C('Яка анотація позначає тестовий метод у JUnit 5?',['@Test','@Check','@Run','@Verify'],'Метод з анотацією @Test JUnit запускає як тест.',null,true),
+  C('Звідки в JUnit 5 імпортують анотацію @Test?',['org.junit.jupiter.api.Test','org.junit.Test','junit.api.Test','java.util.Test'],'У JUnit 5 пакет називається org.junit.jupiter.api. Пакет org.junit.Test належить старому JUnit 4.',null,true),
+  C('У виклику assertEquals(5, calc.add(2, 3)) що є очікуваним значенням?',['5','calc.add(2, 3)','2','3'],'Перший аргумент assertEquals це очікуване значення, другий це фактичний результат коду.'),
+  C('Як за звичаєм називають тестовий клас для класу Calculator?',['CalculatorTest','CalculatorMain','TestOnly','Calculator2'],'До імені класу додають слово Test, тоді одразу видно, що саме він перевіряє.'),
+  R('Збери тест, який перевіряє метод add.',['@Test','void addsTwoNumbers() {','    Calculator calc = new Calculator();','    int result = calc.add(2, 3);','    assertEquals(5, result);','}'],'Спочатку анотація й метод, далі створюємо об\'єкт, викликаємо код і перевіряємо результат.'),
+  F('Допиши тест на порожній список.','[[0]]\nvoid isEmptyAtStart() {\n    List<String> list = new ArrayList<>();\n    [[1]](list.isEmpty());\n}',['@Test','assertTrue'],['@Run','assertEquals','assertOk'],'@Test робить метод тестом, а assertTrue перевіряє, що вираз дорівнює true.'),
+  T('Допиши перевірку, що result дорівнює 10.','int result = calc.multiply(2, 5);\n[[0]];',['assertEquals(10, result)','Assertions.assertEquals(10, result)'],'Спершу очікуване значення 10, потім фактичне result.'),
+  C('Що означає схема Arrange, Act, Assert?',['Підготувати дані, виконати дію, перевірити результат','Запустити, зупинити, видалити','Створити клас, успадкувати, перевизначити','Прочитати файл, обробити, записати'],'У тесті ми спершу готуємо об\'єкти, потім викликаємо метод, а в кінці перевіряємо результат.')
+ ]},
+ {title:'Корисні перевірки',ex:[
+  C('Який метод перевіряє, що код кидає виняток?',['assertThrows','assertError','assertCatch','assertFail'],'assertThrows приймає клас винятку й код, який цей виняток має кинути.',null,true),
+  C('Коли пройде цей тест?',['Коли divide(1, 0) кине IllegalArgumentException','Коли divide(1, 0) поверне 0','Коли divide(1, 0) не кине жодного винятку','Тест проходить завжди'],'assertThrows проходить тільки тоді, коли код справді кидає вказаний виняток.','assertThrows(IllegalArgumentException.class,\n    () -> calc.divide(1, 0));'),
+  C('Що робить анотація @BeforeEach?',['Виконується перед кожним тестом у класі','Виконується один раз після всіх тестів','Пропускає тест','Запускає тести паралельно'],'Метод з @BeforeEach запускається перед кожним тестом, тому кожен тест починає з чистих даних.',null,true),
+  C('Метод isAdult(age) повертає true від 18 років. Які значення віку варто перевірити особливо?',['17 і 18','Лише 30','Лише 100','Лише 5'],'Помилки найчастіше ховаються на межі. Тому перевіряємо число перед межею й саму межу.'),
+  C('Скільки ідей має перевіряти один тест?',['Одну, щоб було зрозуміло, що зламалось','Якомога більше, щоб економити код','Рівно п\'ять','Скільки завгодно, без назви'],'Якщо тест перевіряє одну ідею і падає, ти одразу знаєш причину.'),
+  C('Метод isAdult(10) має повернути false. Яку перевірку написати?',['assertFalse(isAdult(10))','assertTrue(isAdult(10))','assertEquals(isAdult(10))','assertNull(isAdult(10))'],'assertFalse проходить, коли вираз дорівнює false.',null,true),
+  R('Збери тестовий клас з @BeforeEach.',['class CalculatorTest {','    private Calculator calc;','    @BeforeEach','    void setUp() {','        calc = new Calculator();','    }','}'],'Поле оголошуємо в класі, а новий об\'єкт створюємо в методі з @BeforeEach.'),
+  F('Допиши тест на ділення на нуль.','@Test\nvoid divideByZero() {\n    [[0]](ArithmeticException.class, () -> calc.divide(5, 0));\n}',['assertThrows'],['assertEquals','assertTrue','assertError'],'assertThrows перевіряє, що код кинув очікуваний виняток.'),
+  T('Допиши анотацію, яка запускає метод перед кожним тестом.','[[0]]\nvoid setUp() {\n    calc = new Calculator();\n}',['@BeforeEach'],'@BeforeEach із JUnit 5 виконується перед кожним тестовим методом.')
+ ]}
+]},
+{title:'Бази даних і JDBC',sub:'Зберігаємо дані назавжди',lessons:[
+ {title:'Основи SQL',ex:[
+  C('Що таке рядок (row) у таблиці бази даних?',['Один запис, наприклад один користувач','Назва стовпця','Уся база даних','Тип даних'],'Таблиця складається зі стовпців і рядків. Один рядок це один запис.'),
+  C('Який запит правильно додає нового користувача?',['INSERT INTO users (name, age) VALUES (\'Петро\', 30);','INSERT users SET \'Петро\', 30;','ADD INTO users VALUES (\'Петро\', 30);','INSERT (\'Петро\', 30) TO users;'],'Запис має вигляд INSERT INTO таблиця (стовпці) VALUES (значення).',null,true),
+  O('-- Таблиця users:\n-- id | name  | age\n-- 1  | Оля   | 20\n-- 2  | Іван  | 17\n-- 3  | Марія | 25\n\nSELECT name FROM users WHERE age >= 18;',['Оля, Марія','Оля, Іван, Марія','Іван','Марія'],'WHERE залишає лише рядки з age від 18. Іванові 17, тому його немає.','Що поверне цей запит?'),
+  O('-- Таблиця users:\n-- id | name  | age\n-- 1  | Оля   | 20\n-- 2  | Іван  | 17\n-- 3  | Марія | 25\n\nSELECT name FROM users ORDER BY age DESC;',['Марія, Оля, Іван','Іван, Оля, Марія','Оля, Іван, Марія','Марія, Іван, Оля'],'DESC означає від більшого до меншого: 25, 20, 17.','Що поверне цей запит?'),
+  O('-- Таблиця users:\n-- id | name  | age\n-- 1  | Оля   | 20\n-- 2  | Іван  | 17\n-- 3  | Марія | 25\n\nUPDATE users SET age = 18 WHERE name = \'Іван\';\nSELECT age FROM users WHERE id = 2;',['18','17','2','Порожній результат'],'UPDATE змінив вік Івана (id 2) з 17 на 18, а SELECT його прочитав.','Що поверне останній запит?'),
+  C('Що станеться, якщо виконати DELETE FROM users; без WHERE?',['Видаляться всі рядки таблиці','Нічого не видалиться','Видалиться лише перший рядок','Видалиться сама таблиця'],'Без WHERE команда діє на всі рядки. Таблиця залишиться, але стане порожньою.',null,true),
+  C('Що таке первинний ключ (primary key)?',['Стовпець, значення якого унікальне для кожного рядка, наприклад id','Пароль до бази даних','Перший стовпець будь-якої таблиці','Назва таблиці'],'Первинний ключ однозначно визначає рядок, тому два рядки не можуть мати однаковий id.'),
+  F('Допиши запит, який вибирає користувачів старше 20 років.','SELECT * [[0]] users [[1]] age > 20;',['FROM','WHERE'],['IN','HAVING','TO'],'FROM каже, з якої таблиці брати дані, а WHERE фільтрує рядки.'),
+  T('Допиши частину запиту, щоб видалити лише користувача з id 3.','DELETE FROM users [[0]];',['WHERE id = 3'],'Умова WHERE id = 3 обмежує видалення одним рядком.')
+ ]},
+ {title:'JDBC у Java',ex:[
+  C('Який об\'єкт у JDBC представляє з\'єднання з базою даних?',['Connection','ResultSet','Session','Database'],'Connection відкривається через DriverManager.getConnection і потрібен для всіх запитів.',null,true),
+  C('Який об\'єкт зберігає рядки, які повернув SELECT?',['ResultSet','Connection','DriverManager','PreparedStatement'],'ResultSet дає читати результат запиту рядок за рядком.',null,true),
+  C('Що означає знак ? в SQL-запиті для PreparedStatement?',['Місце, куди пізніше підставляється значення','Помилку в запиті','Коментар','Імʼя таблиці'],'Знак ? це заповнювач. Значення ми передаємо окремо, методами setInt, setString та іншими.'),
+  C('Чому небезпечно складати запит так?',['Користувач може вписати в name шматок SQL-команди','Запит буде виконуватись повільніше','Java забороняє плюс у рядках','Запит поверне зайві стовпці'],'Це SQL-ін\'єкція. Якщо в name прийде текст із командою, вона виконається разом із запитом. PreparedStatement від цього захищає.','String sql = "SELECT * FROM users WHERE name = \'"\n    + name + "\'";'),
+  C('Навіщо використовують try-with-resources з Connection?',['Ресурси закриваються автоматично, навіть якщо сталась помилка','Запит виконується швидше','Помилки стають попередженнями','Створюється нова таблиця'],'Блок try (...) сам закриває Connection і PreparedStatement після завершення.'),
+  C('Який метод PreparedStatement виконує INSERT, UPDATE або DELETE?',['executeUpdate','executeQuery','next','getString'],'executeUpdate змінює дані й повертає кількість змінених рядків. executeQuery призначений для SELECT.',null,true),
+  R('Збери код, що читає імена за id.',['try (Connection con = DriverManager.getConnection(url, user, pass);','     PreparedStatement ps = con.prepareStatement("SELECT name FROM users WHERE id = ?")) {','    ps.setInt(1, 5);','    ResultSet rs = ps.executeQuery();','    while (rs.next()) {','        System.out.println(rs.getString("name"));','    }','}'],'Відкриваємо ресурси, підставляємо значення, виконуємо запит і читаємо рядки циклом.'),
+  F('Допиши код читання результату.','ps.[[0]](1, 5);\nResultSet rs = ps.[[1]]();\nwhile (rs.[[2]]()) {\n    System.out.println(rs.getString("name"));\n}',['setInt','executeQuery','next'],['setNumber','executeUpdate','hasNext','getInt'],'setInt підставляє число в перший ?, executeQuery виконує SELECT, а next переходить до наступного рядка.'),
+  T('Допиши виклик, який підставляє name замість першого знака ?.','PreparedStatement ps = con.prepareStatement(\n    "SELECT * FROM users WHERE name = ?");\n[[0]];',['ps.setString(1, name)'],'Нумерація знаків ? починається з 1, а для тексту є метод setString.')
+ ]}
+]},
+{title:'Spring для початківців',sub:'Каркас для сучасних застосунків',lessons:[
+ {title:'Ідея Spring',ex:[
+  C('Що таке залежність (dependency) класу?',['Інший об\'єкт, який потрібен класу для роботи','Помилка в коді','Файл налаштувань','Змінна типу int'],'Наприклад, OrderService потрібен PaymentService, щоб приймати оплату. Це і є залежність.'),
+  C('Що робить dependency injection у Spring?',['Spring сам створює й передає класу потрібні об\'єкти','Видаляє зайві класи','Перетворює клас на інтерфейс','Підключає базу даних без налаштувань'],'Ми не пишемо new для залежностей. Spring створює їх і підставляє сам.'),
+  C('Що таке bean у Spring?',['Об\'єкт, яким керує Spring','Тип змінної','Файл налаштувань','Метод контролера'],'Spring створює beans, зберігає їх і передає туди, де вони потрібні.'),
+  C('Яка анотація робить клас bean-ом, який знайде Spring?',['@Component','@Object','@Make','@Spring'],'@Component каже Spring створити об\'єкт цього класу. Анотації @Service і @Repository працюють так само.',null,true),
+  C('Як Spring передасть PaymentService у цей клас?',['Через параметр конструктора','Через статичний метод','Він не передасть, треба писати new','Через текстовий файл'],'Spring бачить конструктор з параметром PaymentService і підставляє bean цього типу.','@Service\nclass OrderService {\n    private final PaymentService payment;\n\n    OrderService(PaymentService payment) {\n        this.payment = payment;\n    }\n}'),
+  C('Що робить анотація @Autowired?',['Просить Spring підставити залежність','Створює новий потік','Перевіряє тип даних','Запускає тест'],'@Autowired позначає місце, куди Spring має підставити bean. Якщо в класі один конструктор, анотація не обов\'язкова.',null,true),
+  C('Що таке Spring Boot starter?',['Готовий набір залежностей для певної задачі, наприклад spring-boot-starter-web','Кнопка запуску в IDE','Окрема мова програмування','Генератор SQL'],'Один starter підключає всі потрібні бібліотеки, і ти не збираєш їх вручну.'),
+  R('Збери сервіс з впровадженням через конструктор.',['@Service','class OrderService {','    private final PaymentService payment;','    OrderService(PaymentService payment) {','        this.payment = payment;','    }','}'],'Спершу анотація класу, потім поле, далі конструктор, що приймає залежність.'),
+  F('Допиши клас, який отримує EmailSender від Spring.','[[0]]\nclass MailService {\n    private final EmailSender sender;\n\n    MailService([[1]] sender) {\n        this.sender = sender;\n    }\n}',['@Service','EmailSender'],['@Test','String','@Autowired'],'@Service робить клас bean-ом, а тип параметра конструктора підказує Spring, який bean підставити.')
+ ]},
+ {title:'REST-контролер',ex:[
+  C('Що означає анотація @RestController?',['Клас приймає HTTP-запити й повертає дані, часто у форматі JSON','Клас малює HTML-сторінку','Клас підключає базу даних','Клас запускає тести'],'@RestController робить із класу веб-контролер, методи якого відповідають на запити.'),
+  C('Яка анотація обробляє GET-запит за адресою /hello?',['@GetMapping("/hello")','@Get("/hello")','@HttpGet("/hello")','@Read("/hello")'],'@GetMapping прив\'язує метод до GET-запиту за вказаною адресою.',null,true),
+  C('Звідки візьметься id для запиту GET /users/7?',['Зі шляху адреси, id дорівнюватиме 7','З тіла запиту','З рядка ?id=','З окремого файлу'],'@PathVariable бере значення з частини шляху в фігурних дужках {id}.','@GetMapping("/users/{id}")\nUser find(@PathVariable int id) {\n    return service.find(id);\n}'),
+  C('Який запит передасть name = "Оля" у цей метод?',['/search?name=Оля','/search/Оля','/search{name=Оля}','/search#name'],'@RequestParam бере значення з рядка запиту після знака питання.','@GetMapping("/search")\nList<User> find(@RequestParam String name) {\n    return service.findByName(name);\n}'),
+  C('Яка анотація перетворює JSON з тіла запиту на Java-об\'єкт?',['@RequestBody','@JsonBody','@Body','@FromJson'],'@RequestBody бере тіло запиту, наприклад JSON, і створює з нього об\'єкт.',null,true),
+  C('Що означає HTTP-статус 404?',['Ресурс не знайдено','Запит виконано успішно','Помилка на сервері','Недостатньо прав'],'404 Not Found повертають, коли за такою адресою або id нічого немає. 200 означає успіх, 500 це помилка сервера.'),
+  R('Збери метод, що створює користувача через POST.',['@PostMapping("/users")','User create(@RequestBody User user) {','    return service.save(user);','}'],'Анотація задає адресу й тип запиту, а @RequestBody перед параметром бере об\'єкт із JSON.'),
+  F('Допиши контролер.','[[0]]\nclass HelloController {\n    [[1]]("/hello")\n    String hello() {\n        return "Привіт";\n    }\n}',['@RestController','@GetMapping'],['@Component','@PostMapping','@Rest'],'@RestController робить клас контролером, а @GetMapping відкриває адресу /hello.'),
+  T('Допиши анотацію, що бере id зі шляху.','@GetMapping("/users/{id}")\nUser find([[0]] int id) {\n    return service.find(id);\n}',['@PathVariable'],'@PathVariable звʼязує параметр метода з частиною шляху {id}.')
+ ]}
+]},
+{title:'Співбесіда',sub:'Типові питання для Java-розробника',lessons:[
+ {title:'Основи і ООП',ex:[
+  C('Чим == відрізняється від equals для об\'єктів?',['== порівнює посилання, а equals можна перевизначити, щоб порівнювати вміст','== порівнює вміст, а equals посилання','Різниці немає','== працює лише з числами'],'Оператор == перевіряє, чи це той самий об\'єкт у пам\'яті. Метод equals у своїх класах пишуть так, щоб він порівнював зміст.'),
+  O('String a = new String("hi");\nString b = new String("hi");\nSystem.out.println(a == b);',['false','true','hi','Помилка компіляції'],'Оператор new створює два різні об\'єкти, тому посилання не збігаються.'),
+  C('Яке правило діє для equals і hashCode?',['Якщо два об\'єкти рівні за equals, їхні hashCode мають бути однаковими','Якщо hashCode однакові, об\'єкти завжди рівні за equals','equals і hashCode ніяк не повʼязані','hashCode має завжди повертати 0'],'Це контракт. Без нього HashMap і HashSet не знайдуть рівні об\'єкти. Обернене твердження неправильне, бо різні об\'єкти можуть мати однаковий hashCode.'),
+  F('Допиши класичну пару методів.','class User {\n    String name;\n\n    @Override\n    public boolean [[0]](Object o) {\n        if (!(o instanceof User)) return false;\n        User u = (User) o;\n        return name.equals(u.name);\n    }\n\n    @Override\n    public int [[1]]() {\n        return name.hashCode();\n    }\n}',['equals','hashCode'],['equal','compare','toString'],'equals порівнює вміст, а hashCode рахується з тих самих полів.'),
+  C('Яка відмінність абстрактного класу від інтерфейсу?',['Клас успадковує лише один клас, але реалізує багато інтерфейсів. Абстрактний клас може мати поля зі станом і конструктор','Інтерфейс можна створити через new, а абстрактний клас ні','Абстрактний клас не може мати методів з тілом','Інтерфейс не може містити жодних методів'],'Інтерфейс описує що вміє об\'єкт і не має стану. Абстрактний клас це заготовка із спільним станом і кодом.'),
+  B('У якому рядку помилка компіляції?',['abstract class Shape {','}','class Test {','    void run() {','        Shape s = new Shape();','    }','}'],4,'Абстрактний клас не можна створити через new. Потрібно створити об\'єкт дочірнього класу.'),
+  T('Допиши слово, яке забороняє змінювати змінну після присвоєння.','[[0]] int MAX = 10;',['final'],'final для змінної робить її константою. Для класу забороняє успадкування, для методу перевизначення.'),
+  C('Чим перевірені (checked) винятки відрізняються від неперевірених (unchecked)?',['Перевірені треба обробити або оголосити через throws, а неперевірені ні','Перевірені виникають лише в циклах','Неперевірені треба завжди ловити','Різниці немає'],'Exception (наприклад IOException) компілятор змушує обробляти. RuntimeException, як NullPointerException, обробляти не змушує.'),
+  O('class Util {\n    static int f() {\n        try {\n            return 1;\n        } finally {\n            System.out.print("F");\n        }\n    }\n}\n\n// у main:\nSystem.out.print(Util.f());',['F1','1F','1','F'],'Блок finally виконується навіть після return. Тому спочатку друкується F, а потім main друкує 1.')
+ ]},
+ {title:'Колекції та рядки',ex:[
+  C('Що означає, що String незмінний (immutable)?',['Після створення вміст рядка не змінюється, а методи повертають новий рядок','Рядок не можна передати в метод','Рядок завжди порожній','Рядок не можна порівнювати'],'Тому s.toUpperCase() не змінює s, а повертає новий рядок. Через це рядки безпечні для ключів у HashMap.'),
+  O('String a = "hi";\nString b = "hi";\nString c = new String("hi");\nSystem.out.println((a == b) + " " + (a == c));',['true false','true true','false false','false true'],'Однакові літерали живуть у пулі рядків, тому a і b це один об\'єкт. new створює окремий об\'єкт.'),
+  B('У якому рядку помилка компіляції?',['import java.util.*;','class Box {','    void run() {','        List<int> nums = new ArrayList<>();','    }','}'],3,'У колекціях не можна використовувати примітив int. Потрібен клас-обгортка: List<Integer>.'),
+  C('Чому в циклі краще StringBuilder, ніж +=?',['+= щоразу створює новий рядок, а StringBuilder змінюється на місці','StringBuilder працює лише з числами','+= не працює з рядками','StringBuilder зберігає текст у файл'],'Рядки незмінні, тому кожне += копіює весь текст. StringBuilder просто дописує в кінець.'),
+  C('Коли ArrayList кращий за LinkedList?',['Коли потрібен швидкий доступ за індексом, get(i)','Коли треба часто вставляти на початок списку','Коли треба зберігати лише унікальні елементи','Коли треба зберігати пари ключ і значення'],'ArrayList зберігає елементи в масиві, тому get(i) миттєвий. LinkedList краще лише для специфічних випадків.'),
+  C('Як HashMap знаходить значення за ключем?',['Рахує hashCode ключа, знаходить кошик, а там порівнює ключі через equals','Перебирає всі елементи по черзі','Сортує ключі за алфавітом','Використовує порядковий номер елемента'],'Саме тому для ключів потрібні правильні hashCode і equals.'),
+  F('Допиши код, що додає пару в HashMap і читає її.','Map<String, Integer> ages = new [[0]]<>();\nages.[[1]]("Оля", 20);\nint a = ages.[[2]]("Оля");',['HashMap','put','get'],['ArrayList','add','set'],'put додає пару ключ і значення, get повертає значення за ключем.'),
+  O('Map<String, Integer> m = new HashMap<>();\nm.put("a", 1);\nm.put("a", 2);\nSystem.out.println(m.get("a") + " " + m.size());',['2 1','1 2','2 2','1 1'],'Ключі в HashMap унікальні. Другий put замінив значення, а розмір залишився 1.'),
+  O('List<Integer> list = new ArrayList<>(List.of(10, 20, 30));\nlist.remove(1);\nSystem.out.println(list);',['[10, 30]','[20, 30]','[10, 20]','[10, 20, 30]'],'У списку Integer число 1 тут сприймається як індекс, тому видалився елемент 20.')
+ ]},
+ {title:'Пам\'ять і багатопоточність',ex:[
+  C('Яке твердження про stack і heap правильне?',['У стеку лежать локальні змінні та виклики методів, а об\'єкти створюються в купі (heap)','Усе зберігається лише в стеку','Усі змінні лежать у купі, а стек це файл','Стек зберігає лише рядки'],'Локальна змінна, наприклад посилання, лежить у стеку, а сам об\'єкт з new у купі.'),
+  O('class Demo {\n    static void change(String s) {\n        s = "new";\n    }\n}\n\n// у main:\nString text = "old";\nDemo.change(text);\nSystem.out.println(text);',['old','new','null','Помилка компіляції'],'Java передає в метод копію посилання. Нове присвоєння всередині методу не змінює змінну ззовні.'),
+  O('class Demo {\n    static void add(StringBuilder sb) {\n        sb.append("b");\n    }\n}\n\n// у main:\nStringBuilder sb = new StringBuilder("a");\nDemo.add(sb);\nSystem.out.println(sb);',['ab','a','b','Помилка компіляції'],'Копія посилання вказує на той самий об\'єкт, тому append змінює його і ззовні.'),
+  C('Що робить збирач сміття (garbage collector)?',['Автоматично звільняє пам\'ять об\'єктів, на які вже немає посилань','Видаляє невикористані імпорти','Стискає файли .class','Закриває файли та мережеві з\'єднання'],'Тобі не потрібно видаляти об\'єкти вручну. Збирач сам чистить купу. Файли й з\'єднання треба закривати самому.'),
+  C('Що таке finalize()?',['Застарілий метод, який мав викликатись перед видаленням об\'єкта, ним не користуються','Модифікатор, що створює константу','Блок, що виконується після try','Метод, що завершує потік'],'Не плутай: final це модифікатор, finally це блок, а finalize це застарілий метод. Для звільнення ресурсів є try-with-resources.'),
+  T('Допиши слово, яке дозволяє лише одному потоку виконувати метод у цей момент.','public [[0]] void increment() {\n    count++;\n}',['synchronized'],'Метод synchronized захищає count++ від одночасного виконання двома потоками.'),
+  C('Що гарантує volatile?',['Зміни змінної одразу видимі всім потокам, але count++ не стає атомарним','Змінна стає константою','Змінна зберігається у файлі','Потік не можна перервати'],'volatile вирішує проблему видимості. Для операцій на кшталт count++ потрібен synchronized або AtomicInteger.'),
+  O('// main оголошено з throws InterruptedException\nThread t = new Thread(() -> System.out.print("T"));\nt.start();\nt.join();\nSystem.out.print("M");',['TM','MT','T','M'],'join чекає, поки потік t завершиться, тож спочатку друкується T.'),
+  B('У якому рядку помилка компіляції?',['class Pause {','    void run() {','        Thread.sleep(100);','    }','}'],2,'sleep кидає перевірений виняток InterruptedException. Його треба обробити через try-catch або оголосити через throws.')
+ ]}
 ]}
 ];
 
@@ -976,6 +1182,100 @@ const LEARN={
    'ArrayList<String> tasks = new ArrayList<>();\ntasks.add("Купити каву");\ntasks.add("Вивчити Java");\nfor (int i = 0; i < tasks.size(); i++) {\n    System.out.println((i + 1) + ". " + tasks.get(i));\n}','1. Купити каву\n2. Вивчити Java'),
  K("Видалення справи","Виконану справу видаляємо за індексом. Решта справ зсувається, тому нумерація оновлюється сама.",
    'ArrayList<String> tasks = new ArrayList<>();\ntasks.add("Купити каву");\ntasks.add("Вивчити Java");\ntasks.remove(0);\ntasks.add("Написати код");\nfor (int i = 0; i < tasks.size(); i++) {\n    System.out.println((i + 1) + ". " + tasks.get(i));\n}','1. Вивчити Java\n2. Написати код')
+],
+'14-0':[
+ K("Проблема з Object","Раніше колекції зберігали все як `Object`. Тоді з них треба дістати значення і вручну вказати тип. Якщо помилитися, програма впаде вже під час роботи.",
+   'List<Object> list = new ArrayList<>();\nlist.add("Java");\nString s = (String) list.get(0);\nSystem.out.println(s);','Java'),
+ K("Клас Box<T>","Generics дозволяють написати клас один раз для будь-якого типу. Літера `T` це тип-заповнювач. Справжній тип ми вибираємо, коли створюємо об\'єкт. Ромб `<>` просить компілятор підставити тип самому.",
+   'class Box<T> {\n    T value;\n    Box(T value) {\n        this.value = value;\n    }\n    T get() {\n        return value;\n    }\n}\n\n// у main:\nBox<String> b = new Box<>("Java");\nSystem.out.println(b.get());','Java'),
+ K("Один клас, різні типи","Той самий `Box` може тримати і число, і рядок. Компілятор знає тип і не потребує приведення. Примітиви в `<>` писати не можна: замість `int` беремо `Integer`.",
+   'class Box<T> {\n    T value;\n    Box(T value) {\n        this.value = value;\n    }\n}\n\n// у main:\nBox<Integer> a = new Box<>(10);\nBox<String> b = new Box<>("Java");\nSystem.out.println(a.value + 5);\nSystem.out.println(b.value.length());','15\n4'),
+ K("Два типи: Pair<A, B>","У generic-класу може бути кілька заповнювачів через кому. Зручно, коли треба зберегти дві різні речі разом.",
+   'class Pair<A, B> {\n    A first;\n    B second;\n    Pair(A first, B second) {\n        this.first = first;\n        this.second = second;\n    }\n}\n\n// у main:\nPair<String, Integer> p = new Pair<>("age", 20);\nSystem.out.println(p.first + " " + p.second);','age 20')
+],
+'14-1':[
+ K("Generic-метод","Метод теж може мати свій тип `<T>`. Його пишуть перед типом результату. Тоді метод працює з будь-яким типом, а компілятор сам здогадується, який саме.",
+   'static <T> void show(T x) {\n    System.out.println("Значення: " + x);\n}\n\n// у main:\nshow(5);\nshow("Java");','Значення: 5\nЗначення: Java'),
+ K("Повертаємо T","Метод може повертати той самий тип, з яким працює. Тоді результат не треба приводити вручну.",
+   'static <T> T first(List<T> list) {\n    return list.get(0);\n}\n\n// у main:\nString s = first(List.of("a", "b"));\nInteger n = first(List.of(10, 20));\nSystem.out.println(s);\nSystem.out.println(n + 1);','a\n11'),
+ K("Обмеження extends","Іноді T не може бути будь-яким. Запис `<T extends Number>` дозволяє лише числові типи, і тоді можна викликати методи `Number`. Запис `<T extends Comparable<T>>` дозволяє лише типи, які вміють порівнюватися.",
+   'static <T extends Number> double twice(T x) {\n    return x.doubleValue() * 2;\n}\n\nstatic <T extends Comparable<T>> T max(T a, T b) {\n    return a.compareTo(b) > 0 ? a : b;\n}\n\n// у main:\nSystem.out.println(twice(3));\nSystem.out.println(max(3, 7));\nSystem.out.println(max("apple", "pear"));','6.0\n7\npear'),
+ K("Wildcard ?","Знак `?` означає «будь-який тип». `List<? extends Number>` це список чисел будь-якого виду. Зверни увагу: `List<Integer>` не можна покласти в `List<Number>`, а от в `List<? extends Number>` можна.",
+   'static double sum(List<? extends Number> list) {\n    double s = 0;\n    for (Number n : list) {\n        s += n.doubleValue();\n    }\n    return s;\n}\n\n// у main:\nSystem.out.println(sum(List.of(1, 2, 3)));\nSystem.out.println(sum(List.of(1.5, 2.5)));','6.0\n4.0')
+],
+'15-0':[
+ K("Що таке потік","Потік (thread) це окремий ланцюжок виконання. Звичайна програма працює в одному потоці `main`. У `Thread` ми передаємо код, а `start()` запускає його окремо. Метод `join()` змушує чекати, поки потік завершиться. Він може кинути виняток, тому в прикладах main має `throws Exception`.",
+   'Thread t = new Thread(() -> System.out.println("Привіт з потоку"));\nt.start();\nt.join();\nSystem.out.println("Кінець");','Привіт з потоку\nКінець'),
+ K("start і run","Лише `start()` створює новий потік. Якщо викликати `run()` напряму, код виконається у вашому поточному потоці, наче звичайний метод.",
+   'Thread t = new Thread(() -> System.out.println(Thread.currentThread().getName()));\nt.setName("worker");\nt.start();\nt.join();\nt.run();','worker\nmain'),
+ K("Runnable","Код для потоку можна оформити як клас з інтерфейсом `Runnable` і методом `run()`. Потім віддаємо його в `Thread`.",
+   'class Task implements Runnable {\n    public void run() {\n        System.out.println("Робота");\n    }\n}\n\n// у main:\nThread t = new Thread(new Task());\nt.start();\nt.join();','Робота'),
+ K("join дає порядок","Потоки працюють одночасно, і порядок їхніх повідомлень не гарантований. Щоб порядок був чітким, дочекайся першого потоку через `join()` і лише потім запускай другий.",
+   'Thread a = new Thread(() -> System.out.println("A"));\nThread b = new Thread(() -> System.out.println("B"));\na.start();\na.join();\nb.start();\nb.join();','A\nB')
+],
+'15-1':[
+ K("Гонка даних","Запис `n++` це три кроки: прочитати, додати, записати. Якщо два потоки роблять це одночасно, вони можуть перезаписати результат один одного, і частина додавань загубиться. Це називається гонкою даних (race condition). Результат стає непередбачуваним.",
+   'int n = 0;\nn++;\nSystem.out.println(n);','1'),
+ K("synchronized","Слово `synchronized` ставить метод під «замок». Поки один потік у методі, інші чекають. Тоді лічильник завжди правильний.",
+   'class Counter {\n    private int n = 0;\n    synchronized void inc() {\n        n++;\n    }\n    int get() {\n        return n;\n    }\n}\n\n// у main:\nCounter c = new Counter();\nRunnable r = () -> {\n    for (int i = 0; i < 1000; i++) {\n        c.inc();\n    }\n};\nThread a = new Thread(r);\nThread b = new Thread(r);\na.start();\nb.start();\na.join();\nb.join();\nSystem.out.println(c.get());','2000'),
+ K("AtomicInteger","Для простих лічильників є готовий безпечний клас `AtomicInteger`. Його методи, як-от `incrementAndGet()`, не гублять жодного додавання і не потребують `synchronized`.",
+   'AtomicInteger n = new AtomicInteger();\nn.incrementAndGet();\nn.incrementAndGet();\nn.addAndGet(5);\nSystem.out.println(n.get());','7'),
+ K("ExecutorService і Future","Створювати потоки вручну незручно. `ExecutorService` це пул готових потоків. Ми віддаємо йому задачу через `submit`, а в обмін отримуємо `Future`. Метод `get()` чекає і повертає результат. В кінці пул треба зупинити через `shutdown()`.",
+   'ExecutorService pool = Executors.newFixedThreadPool(2);\nFuture<Integer> f = pool.submit(() -> 2 + 3);\nSystem.out.println(f.get());\npool.shutdown();','5')
+],
+'16-0':[
+ K('Навіщо потрібні тести','Тест це маленька програма, яка сама перевіряє твій код. Ти запускаєш усі тести за секунди й одразу бачиш, чи щось зламалось після змін. Без тестів доводиться перевіряти все руками.','class Calculator {\n    int add(int a, int b) {\n        return a + b;\n    }\n}'),
+ K('Перший тест у JUnit 5','JUnit це бібліотека для тестів. Метод з анотацією `@Test` стає тестом. Імпорт беруть із пакета `org.junit.jupiter.api`. Клас називають за звичаєм `CalculatorTest`, тобто імʼя класу плюс слово Test.','import org.junit.jupiter.api.Test;\nimport static org.junit.jupiter.api.Assertions.assertEquals;\n\nclass CalculatorTest {\n    @Test\n    void addsTwoNumbers() {\n        Calculator calc = new Calculator();\n        assertEquals(5, calc.add(2, 3));\n    }\n}'),
+ K('assertEquals і assertTrue','`assertEquals(очікуване, фактичне)` перевіряє, що два значення рівні. Очікуване значення завжди перше. `assertTrue(умова)` перевіряє, що умова true, а `assertFalse` що false. Якщо перевірка не пройшла, тест стає червоним.','assertEquals(10, calc.multiply(2, 5));\nassertTrue(list.isEmpty());\nassertFalse(isAdult(10));'),
+ K('Arrange, Act, Assert','Добрий тест має три частини. Arrange: готуємо дані. Act: викликаємо код, який перевіряємо. Assert: перевіряємо результат. Так тест легко читати, а назва метода описує, що саме він перевіряє.','@Test\nvoid addsTwoNumbers() {\n    // Arrange\n    Calculator calc = new Calculator();\n    // Act\n    int result = calc.add(2, 3);\n    // Assert\n    assertEquals(5, result);\n}')
+],
+'16-1':[
+ K('Перевіряємо винятки','Іноді код має кинути помилку, наприклад при діленні на нуль. Для цього є `assertThrows`. Ти вказуєш клас винятку й код у лямбді. Тест пройде, лише якщо виняток справді буде кинуто.','@Test\nvoid divideByZero() {\n    assertThrows(ArithmeticException.class,\n        () -> calc.divide(5, 0));\n}'),
+ K('@BeforeEach','Метод з `@BeforeEach` JUnit запускає перед кожним тестом. Там зручно створювати свіжий об\'єкт. Тоді тести не впливають один на одного, і порядок їхнього запуску не має значення.','class CalculatorTest {\n    private Calculator calc;\n\n    @BeforeEach\n    void setUp() {\n        calc = new Calculator();\n    }\n\n    @Test\n    void adds() {\n        assertEquals(5, calc.add(2, 3));\n    }\n}'),
+ K('Одна ідея в одному тесті','Краще написати кілька маленьких тестів, ніж один великий. Якщо тест падає, ти одразу знаєш, що саме зламалось. Дай тесту назву, яка описує поведінку, наприклад `adultFrom18Years`.','@Test\nvoid adultFrom18Years() {\n    assertTrue(isAdult(18));\n}\n\n@Test\nvoid notAdultAt17() {\n    assertFalse(isAdult(17));\n}'),
+ K('Крайні випадки','Помилки найчастіше ховаються на межах. Перевіряй нуль, від\'ємні числа, порожній рядок, порожній список і межові значення. Для isAdult це 17 і 18, а не лише 30.','@Test\nvoid emptyListHasSizeZero() {\n    List<String> list = new ArrayList<>();\n    assertEquals(0, list.size());\n}')
+],
+'17-0':[
+ K('Таблиці, рядки і стовпці','База даних зберігає дані в таблицях. Стовпець це властивість (name, age), а рядок це один запис. Первинний ключ (primary key) це стовпець, значення якого унікальне для кожного рядка, зазвичай `id`.','-- Таблиця users:\n-- id | name  | age\n-- 1  | Оля   | 20\n-- 2  | Іван  | 17\n-- 3  | Марія | 25'),
+ K('SELECT, WHERE, ORDER BY','`SELECT` читає дані. `FROM` вказує таблицю. `WHERE` залишає лише потрібні рядки. `ORDER BY` сортує: `ASC` від меншого до більшого, `DESC` навпаки.','SELECT name FROM users WHERE age >= 18;\nSELECT * FROM users ORDER BY age DESC;'),
+ K('INSERT: додаємо рядок','`INSERT INTO` додає новий рядок. Спочатку в дужках стовпці, потім після `VALUES` значення в тому самому порядку. Текст пишемо в одинарних лапках.','INSERT INTO users (name, age)\nVALUES (\'Петро\', 30);'),
+ K('UPDATE і DELETE','`UPDATE` змінює існуючі рядки, а `DELETE` видаляє їх. Завжди пиши `WHERE`. Без нього команда зачепить усі рядки таблиці.','UPDATE users SET age = 18 WHERE id = 2;\nDELETE FROM users WHERE id = 3;')
+],
+'17-1':[
+ K('Connection','JDBC це спосіб працювати з базою з Java. Спочатку відкриваємо з\'єднання `Connection` через `DriverManager.getConnection`. Йому потрібні адреса бази, імʼя користувача й пароль.','Connection con = DriverManager.getConnection(\n    "jdbc:postgresql://localhost:5432/shop",\n    "user", "password");'),
+ K('PreparedStatement і ?','У запиті замість значень ставимо знак `?`. Потім підставляємо значення методами `setString`, `setInt` та іншими. Нумерація починається з 1. Так значення йдуть окремо від SQL-команди, і це захищає від SQL-ін\'єкції. Складати запит через `+` небезпечно.','PreparedStatement ps = con.prepareStatement(\n    "SELECT * FROM users WHERE name = ?");\nps.setString(1, name);'),
+ K('ResultSet','`executeQuery()` виконує SELECT і повертає `ResultSet`. Метод `next()` переходить до наступного рядка й повертає false, коли рядки закінчились. Значення беремо через `getString`, `getInt` за назвою стовпця. Для INSERT, UPDATE і DELETE є `executeUpdate()`.','ResultSet rs = ps.executeQuery();\nwhile (rs.next()) {\n    System.out.println(rs.getString("name"));\n}'),
+ K('try-with-resources','З\'єднання та запити треба закривати. Якщо відкрити їх у дужках після `try`, Java закриє їх сама, навіть коли станеться помилка. Тому не потрібно писати close() вручну.','try (Connection con = DriverManager.getConnection(url, user, pass);\n     PreparedStatement ps = con.prepareStatement(\n         "DELETE FROM users WHERE id = ?")) {\n    ps.setInt(1, 3);\n    ps.executeUpdate();\n}')
+],
+'18-0':[
+ K('Хто створює об\'єкти','Великий застосунок складається з багатьох класів, які потребують один одного. Якщо кожен клас сам пише `new`, їх важко замінити й тестувати. Spring бере створення об\'єктів на себе.','class OrderService {\n    // клас сам створює залежність\n    private PaymentService payment = new PaymentService();\n}'),
+ K('Dependency injection','Залежність це об\'єкт, який потрібен класу для роботи. У Spring ми просто просимо його в конструкторі, а Spring створює й передає його сам. Це і є dependency injection. Так легко підставити інший клас, наприклад у тесті.','@Service\nclass OrderService {\n    private final PaymentService payment;\n\n    OrderService(PaymentService payment) {\n        this.payment = payment;\n    }\n}'),
+ K('Bean і @Component','Об\'єкт, яким керує Spring, називається bean. Щоб клас став bean-ом, познач його `@Component` (або `@Service`, `@Repository`). Анотація `@Autowired` просить Spring підставити залежність. Якщо в класі один конструктор, її можна не писати.','@Component\nclass PaymentService {\n    boolean pay(int sum) {\n        return true;\n    }\n}'),
+ K('Spring Boot і starter','Spring Boot прибирає зайві налаштування. Starter це готовий набір бібліотек для певної задачі. Наприклад, `spring-boot-starter-web` дає все для веб-застосунку. Клас з `@SpringBootApplication` запускає програму, а Spring сам знаходить твої bean-и.','@SpringBootApplication\npublic class ShopApp {\n    public static void main(String[] args) {\n        SpringApplication.run(ShopApp.class, args);\n    }\n}')
+],
+'18-1':[
+ K('@RestController і @GetMapping','Клас з `@RestController` приймає HTTP-запити й повертає дані. `@GetMapping("/hello")` звʼязує метод із GET-запитом за адресою /hello. Те, що повертає метод, Spring відправляє у відповідь.','@RestController\nclass HelloController {\n    @GetMapping("/hello")\n    String hello() {\n        return "Привіт";\n    }\n}'),
+ K('@PathVariable і @RequestParam','`@PathVariable` бере значення зі шляху, наприклад /users/7. `@RequestParam` бере значення з рядка запиту після знака питання, наприклад /search?name=Оля.','@GetMapping("/users/{id}")\nUser find(@PathVariable int id) {\n    return service.find(id);\n}\n\n@GetMapping("/search")\nList<User> search(@RequestParam String name) {\n    return service.findByName(name);\n}'),
+ K('POST, @RequestBody і JSON','Щоб створити новий запис, використовують POST. JSON це текстовий формат даних. `@RequestBody` перетворює JSON із тіла запиту на Java-об\'єкт, а відповідь Spring сам перетворює назад на JSON.','// запит: POST /users\n// тіло: {"name": "Оля", "age": 20}\n@PostMapping("/users")\nUser create(@RequestBody User user) {\n    return service.save(user);\n}'),
+ K('HTTP-статуси','Відповідь має код статусу. 200 означає успіх, 201 створено, 400 поганий запит, 404 не знайдено, 500 помилка сервера. Керувати статусом можна через `ResponseEntity`.','@GetMapping("/users/{id}")\nResponseEntity<User> find(@PathVariable int id) {\n    User user = service.find(id);\n    if (user == null) {\n        return ResponseEntity.notFound().build();\n    }\n    return ResponseEntity.ok(user);\n}')
+],
+'19-0':[
+ K('== чи equals','Відповідь для співбесіди: оператор `==` порівнює посилання, тобто чи це той самий об\'єкт. Метод `equals` за замовчуванням робить те саме, але в String та інших класах його перевизначено, щоб порівнювати вміст. Для рядків і об\'єктів зміст перевіряють через `equals`.','String a = new String("hi");\nString b = new String("hi");\nSystem.out.println(a == b);\nSystem.out.println(a.equals(b));','false\ntrue'),
+ K('Контракт equals і hashCode','Відповідь: якщо два об\'єкти рівні за `equals`, їхні `hashCode` мають збігатися. Обернене не обов\'язкове. Якщо перевизначити лише equals, об\'єкти не працюватимуть правильно в HashMap і HashSet. Тому ці методи завжди перевизначають разом.','class User {\n    String name;\n\n    User(String name) {\n        this.name = name;\n    }\n\n    @Override\n    public boolean equals(Object o) {\n        if (!(o instanceof User)) return false;\n        User u = (User) o;\n        return name.equals(u.name);\n    }\n\n    @Override\n    public int hashCode() {\n        return name.hashCode();\n    }\n}\n\n// у main:\nUser a = new User("Оля");\nUser b = new User("Оля");\nSystem.out.println(a.equals(b));\nSystem.out.println(a.hashCode() == b.hashCode());','true\ntrue'),
+ K('Абстрактний клас чи інтерфейс','Відповідь: клас може успадкувати лише один клас, але реалізувати багато інтерфейсів. Абстрактний клас може мати поля зі станом, конструктор і готові методи. Інтерфейс описує, що об\'єкт уміє. Створити об\'єкт через new для обох неможливо. `final` для змінної робить її константою, для класу забороняє успадкування.','abstract class Animal {\n    String name;\n    abstract void sound();\n}\n\ninterface Swimmer {\n    void swim();\n}\n\nclass Duck extends Animal implements Swimmer {\n    void sound() {}\n    public void swim() {}\n}'),
+ K('Винятки і finally','Відповідь: перевірені (checked) винятки, як IOException, треба обробити або оголосити через `throws`. Неперевірені (unchecked), як NullPointerException, наслідують RuntimeException і обробляти їх не змушують. Блок `finally` виконується завжди, і його використовують для очищення.','try {\n    System.out.println("try");\n    throw new IllegalStateException();\n} catch (IllegalStateException e) {\n    System.out.println("catch");\n} finally {\n    System.out.println("finally");\n}','try\ncatch\nfinally')
+],
+'19-1':[
+ K('Чому String незмінний','Відповідь: об\'єкт String після створення не змінюється. Методи на кшталт `concat` чи `toUpperCase` повертають новий рядок. Це робить рядки безпечними для потоків, дозволяє кешувати hashCode і використовувати рядки як ключі в HashMap.','String s = "Java";\ns.concat("!");\nSystem.out.println(s);\ns = s.concat("!");\nSystem.out.println(s);','Java\nJava!'),
+ K('Пул рядків','Відповідь: літерали з однаковим текстом Java зберігає в пулі рядків і використовує один об\'єкт. Це економить пам\'ять. Оператор `new String(...)` створює окремий об\'єкт поза пулом. Метод `intern()` повертає версію з пулу. У циклі для склеювання тексту беруть `StringBuilder`.','String a = "hi";\nString b = "hi";\nString c = new String("hi");\nSystem.out.println(a == b);\nSystem.out.println(a == c);\nSystem.out.println(a.equals(c));\nSystem.out.println(a == c.intern());','true\nfalse\ntrue\ntrue'),
+ K('ArrayList чи LinkedList','Відповідь: ArrayList зберігає дані в масиві, тому `get(i)` швидкий, а вставка в середину повільніша. LinkedList складається з вузлів, вставка по вузлу швидка, але доступ за індексом повільний. У більшості випадків обирають ArrayList.','List<String> list = new ArrayList<>();\nlist.add("a");\nlist.add("b");\nSystem.out.println(list.get(1));','b'),
+ K('HashMap і HashSet','Відповідь: HashMap зберігає пари ключ і значення. Він рахує `hashCode` ключа, знаходить кошик і порівнює ключі через `equals`. Ключі унікальні, повторний `put` замінює значення. HashSet зберігає унікальні елементи і всередині працює так само.','Map<String, Integer> m = new HashMap<>();\nm.put("a", 1);\nm.put("a", 2);\nSystem.out.println(m.get("a"));\nSet<Integer> set = new HashSet<>(List.of(1, 2, 2));\nSystem.out.println(set.size());','2\n2')
+],
+'19-2':[
+ K('Stack і heap','Відповідь: у стеку (stack) лежать локальні змінні й виклики методів, кожен потік має свій стек. У купі (heap) лежать усі об\'єкти, створені через new. Java передає аргументи за значенням: для обʼєктів копіюється посилання. Тому метод може змінити вміст об\'єкта, але не саму змінну ззовні.','class Demo {\n    static void change(int n, StringBuilder sb) {\n        n = 99;\n        sb.append("!");\n    }\n}\n\n// у main:\nint x = 1;\nStringBuilder s = new StringBuilder("hi");\nDemo.change(x, s);\nSystem.out.println(x);\nSystem.out.println(s);','1\nhi!'),
+ K('Збирач сміття','Відповідь: garbage collector автоматично видаляє об\'єкти в купі, на які більше немає посилань. Програмісту не потрібно звільняти пам\'ять вручну. Файли та з\'єднання збирач не закриває, їх закривають через try-with-resources.','String s = new String("data");\ns = null;\n// на об\'єкт "data" більше немає посилань,\n// тепер його може прибрати збирач сміття'),
+ K('final, finally, finalize','Відповідь: це три різні речі. `final` це модифікатор: змінну не можна перепризначити, метод перевизначити, клас успадкувати. `finally` це блок після try, що виконується завжди. `finalize()` це застарілий метод, яким не користуються.','final int max = 10;\ntry {\n    System.out.println(max);\n} finally {\n    System.out.println("finally");\n}','10\nfinally'),
+ K('synchronized і volatile','Відповідь: `synchronized` пускає в метод або блок лише один потік одночасно. Це захищає від гонки даних, коли потоки псують спільну змінну. `volatile` гарантує, що зміну побачать усі потоки, але не робить `count++` атомарним.','class Counter {\n    private int count = 0;\n\n    synchronized void inc() {\n        count++;\n    }\n\n    int get() {\n        return count;\n    }\n}\n\n// у main (main має throws InterruptedException):\nCounter c = new Counter();\nThread t1 = new Thread(() -> { for (int i = 0; i < 1000; i++) c.inc(); });\nThread t2 = new Thread(() -> { for (int i = 0; i < 1000; i++) c.inc(); });\nt1.start();\nt2.start();\nt1.join();\nt2.join();\nSystem.out.println(c.get());','2000')
 ]
 };
 
@@ -1062,12 +1362,12 @@ const IC={
 
 /* ================= State ================= */
 const KEY='java-schodnya-v1';
-function fresh(){return {xp:0,streak:0,last:'',done:{},miss:{},day:{d:'',xp:0},goal:30,level:'normal',freeze:1,sound:true,big:false,calm:false,ach:{},stats:{perfect:0,run:0,runBest:0,reviews:0,peeks:0,bugs:0,typed:0,hints:0,placement:0,lessons:0,goals:0}};}
+function fresh(){return {xp:0,streak:0,last:'',done:{},miss:{},day:{d:'',xp:0},goal:30,level:'normal',freeze:1,sound:true,big:false,calm:false,ach:{},srs:{},hist:{},us:{},story:{},fit:{hat:'',gl:'',sc:''},remind:'19:00',stats:{perfect:0,run:0,runBest:0,reviews:0,peeks:0,bugs:0,typed:0,hints:0,placement:0,lessons:0,goals:0}};}
 function norm(s){
   const r=Object.assign(fresh(),s);
   r.stats=Object.assign(fresh().stats,s.stats||{});
   r.day=Object.assign(fresh().day,s.day||{});
-  r.ach=s.ach||{};r.miss=s.miss||{};r.done=s.done||{};
+  r.ach=s.ach||{};r.miss=s.miss||{};r.done=s.done||{};r.srs=s.srs||{};r.hist=s.hist||{};r.us=s.us||{};r.story=s.story||{};r.fit=Object.assign({hat:'',gl:'',sc:''},s.fit||{});
   Object.keys(r.done).forEach(k=>{if(!r.done[k].t)r.done[k].t=Date.now();});
   return r;
 }
@@ -1184,6 +1484,7 @@ function pumpToast(){
 
 /* ---------- mascot ---------- */
 function mascot(mood,px){
+  const fh=fitNow('hat'),fg=fitNow('gl'),fs=fitNow('sc');
   const E=(x)=>'<circle class="fa-eye" cx="'+x+'" cy="30" r="3.1"/><circle cx="'+(x+1)+'" cy="29" r=".95" fill="#fff"/>';
   const faces={
     idle:E(22)+E(42)+'<path class="fa-mo" d="M28.6 43.4q3.4 3 6.8 0"/>',
@@ -1204,11 +1505,11 @@ function mascot(mood,px){
     +'<path d="M13 60Q15 48 32 48Q49 48 51 60z" fill="url(#fxg)"/>'
     +'<path d="'+HEAD+'" fill="url(#fxg)"/>'
     +'<path clip-path="url(#fxh)" fill="#FFF1DC" d="M2 36Q19 33 32 46Q45 33 62 36V54H2z"/>'
-    +'<path class="fa-dark" d="M32 54l-7-3v6zM32 54l7-3v6z"/><path d="M32 54l-7-3v6zM32 54l7-3v6z" fill="none" stroke="url(#fxk)" stroke-width=".8"/><circle cx="32" cy="54" r="1.9" fill="url(#fxk)"/>'
+    +(fs?SCS[fs]:TIE)
     +steam
     +'<path d="M43 47h14v3.4a7 7 0 0 1-7 7h0a7 7 0 0 1-7-7z" fill="url(#fxk)"/><path d="M57 49h1.6a3 3 0 0 1 0 6H56" fill="none" stroke="url(#fxk)" stroke-width="2.1" stroke-linecap="round"/><ellipse cx="50" cy="47" rx="7" ry="1.6" fill="#3A2216" stroke="#FBE6A0" stroke-width=".8"/>'
     +'<path class="fa-dark" d="M28.8 38.4h6.4L32 41.8z"/>'
-    +(faces[mood]||'')+'</g></svg>';
+    +(faces[mood]||'')+(fg?GLS[fg]:'')+(fh?HATS[fh]:'')+'</g></svg>';
 }
 
 let screen='home',L=null,confirmReset=false,res=null;
@@ -1238,7 +1539,7 @@ function topbar(){
    +'<div class="stat xp'+(cnt?' bump':'')+'" aria-label="Досвід: '+S.xp+'">'+IC.bolt+'<span'+cnt+'>'+S.xp+'</span></div></div></header>';
 }
 function tabs(cur){
-  const t=[['home','Курс',IC.layers],['ach','Досягнення',IC.trophy],['set','Налаштування',IC.sliders]];
+  const t=[['home','Курс',IC.layers],['sheet','Шпаргалки',IC.book],['stats','Прогрес',IC.chart],['set','Опції',IC.sliders]];
   return '<nav class="tabs" aria-label="Розділи">'+t.map(x=>'<button class="tab'+(x[0]===cur?' on':'')+'" data-act="tab" data-tab="'+x[0]+'"'+(x[0]===cur?' aria-current="page"':'')+'>'+x[2]+'<span>'+x[1]+'</span></button>').join('')+'</nav>';
 }
 function reviewPool(){
@@ -1278,11 +1579,12 @@ function homeView(){
   if(!doneN&&!S.stats.placement)h+='<button class="btn ghost" data-act="placement">Я вже знаю основи: пройти тест рівня</button>';
   h+='</section>';
   if(doneN-ALL.filter(l=>S.done[l.uid]&&S.done[l.uid].skip).length>0){
-    const mc=reviewMissCount(),sc=staleCount();
+    const mc=reviewMissCount(),sc=staleCount(),dc=dueList().length;
     h+='<section class="review"><div class="rv-ico">'+IC.refresh+'</div><div class="rv-t"><h2>Повторення</h2><p>'
-      +(mc?'Є завдання, де ти помилявся: '+mc+'. Повтори їх.':sc?'Давно не повторював уроків: '+sc+'. Освіжи їх.':'Закріпи пройдене змішаними завданнями.')
+      +(dc?'За графіком пора повторити завдань: '+dc+'.':mc?'Є завдання, де ти помилявся: '+mc+'. Повтори їх.':sc?'Давно не повторював уроків: '+sc+'. Освіжи їх.':'Закріпи пройдене змішаними завданнями.')
       +'</p></div><button class="btn sm" data-act="start" data-uid="review">Повторити</button></section>';
   }
+  h+='<section class="review"><div class="rv-ico">'+IC.code+'</div><div class="rv-t"><h2>Пісочниця</h2><p>Пиши Java і запускай прямо тут.</p></div><button class="btn sm" data-act="ide">Відкрити</button></section>';
   UNITS.forEach((u,ui)=>{
     h+='<section style="--uc:var(--u'+((ui%6)+1)+')"><div class="unit"><p class="kicker">Розділ '+(ui+1)+'</p><h2>'+esc(u.title)+'</h2><p>'+esc(u.sub)+'</p></div><div class="path">';
     ALL.filter(l=>l.ui===ui).forEach(l=>{
@@ -1325,6 +1627,7 @@ function setView(){
   h+='<section class="card"><h2>Складність</h2>'+seg('setlevel',[{v:'easy',t:'Легкий'},{v:'normal',t:'Звичайний'},{v:'hard',t:'Складний'}],S.level)+'<p class="desc">'+esc(LEVELS[S.level].desc)+'</p></section>';
   h+='<section class="card"><h2>Ціль на день</h2>'+seg('setgoal',[{v:20,t:'20 XP'},{v:30,t:'30 XP'},{v:50,t:'50 XP'}],S.goal)+'</section>';
   h+='<section class="card">'+tog('sound','Звуки','Короткі сигнали правильної й неправильної відповіді.')+tog('big','Великий шрифт','Збільшує весь інтерфейс.')+tog('calm','Спокійний режим','Вимикає анімації.')+'</section>';
+  h+='<section class="card"><h2>Нагадування</h2><p class="desc">Додай щоденне нагадування в календар на телефоні чи комп’ютері.</p><input id="rtime" class="inp" type="time" value="'+esc(S.remind||'19:00')+'" aria-label="Година нагадування"><button class="btn ghost" style="margin-top:12px" data-act="ics">Додати в календар</button></section>';
   h+='<section class="card"><h2>Поділитись результатом</h2><textarea id="sharebox" class="area" rows="3" readonly>'+esc(shareText())+'</textarea><button class="btn ghost" data-act="copy" data-src="sharebox">Скопіювати</button></section>';
   h+='<section class="card"><h2>Резервний код прогресу</h2><p class="desc">Збережи код, щоб перенести прогрес на інший пристрій чи браузер.</p><textarea id="bkp" class="area mono" rows="3" readonly>'+esc(backupCode())+'</textarea><button class="btn ghost" data-act="copy" data-src="bkp">Скопіювати код</button>'
     +'<textarea id="imp" class="area mono" rows="3" placeholder="Встав сюди код, щоб відновити прогрес"></textarea><button class="btn ghost" data-act="import">Відновити з коду</button></section>';
@@ -1385,6 +1688,7 @@ function studyView(){
   cards.forEach((_,i)=>{dots+='<span class="dot'+(i<=L.si?' on':'')+'"></span>';});
   let h='<div class="view'+(fx.view?' enter':'')+'"><div class="lesson"><div class="lhead"><button class="x" data-act="leave" aria-label="'+(L.peek?'Закрити теорію':'Вийти з уроку')+'">'+IC.cross+'</button><div class="dots" role="img" aria-label="Картка '+(L.si+1)+' з '+cards.length+'">'+dots+'</div></div>'
     +'<div class="stage'+(fx.stage?' enter':'')+'"><p class="kicker">Вивчаємо · '+(L.si+1)+' / '+cards.length+'</p><h2 class="q">'+esc(k.h)+'</h2><p class="txt">'+fmt(k.p)+'</p>';
+  if('speechSynthesis' in window)h+='<div class="speakrow"><button class="btn ghost sm speak" data-act="speak">'+IC.speaker+'<span>Прослухати</span></button></div>';
   if(k.code)h+=codeBlock(k.code);
   if(k.out!=null)h+='<div class="console"><span class="con-l">Результат</span><pre>'+esc(k.out)+'</pre></div>';
   h+='</div></div></div>';
@@ -1472,7 +1776,7 @@ function lessonView(){
     const gain=L.retried.has(ex)||L.hinted.has(ex)?5:10;
     const plus=(ok&&fx.res&&!L.placement)?'<span class="plus" aria-hidden="true">+'+gain+(fx.fast?' ⚡':'')+'</span>':'';
     h+='<div class="bar slide '+(ok?'good':'bad')+'"><div class="bar-in">'+plus+'<div class="fb"><div class="badge m">'+mascot(ok?'happy':'sad',48)+'</div><div class="fb-text"><h3>'+(ok?praise:'Не зовсім')+'</h3>'
-      +(ok?'':'<p>Правильна відповідь:</p>'+ans)
+      +(ok?'':'<p>Правильна відповідь:</p>'+ans+yours(ex,c))
       +'<p>'+esc(ex.why)+'</p></div></div><button class="btn '+(ok?'good':'bad')+'" data-act="next">'+(!L.placement&&L.hearts<=0&&!ok?'Зрозуміло':'Далі')+'</button></div></div>';
   }
   return h;
@@ -1541,7 +1845,10 @@ function render(){
   let gated=false;try{gated=CLOUD&&!AUTH;}catch(e){}
   if(gated)h=gateView();
   else if(screen==='home')h=homeView();
-  else if(screen==='ach')h=achView();
+  else if(screen==='ach'||screen==='stats')h=statsView();
+  else if(screen==='sheet')h=sheetView();
+  else if(screen==='story')h=storyScreen();
+  else if(screen==='ide')h=ideView();
   else if(screen==='set')h=setView();
   else if(screen==='lesson')h=L.mode==='study'?studyView():lessonView();
   else if(screen==='result')h=resultView();
@@ -1567,12 +1874,17 @@ function prep(){
   L.cur=c;fx.stage=true;
 }
 function reviewPick(){
-  const missed=reviewPool().filter(e=>S.miss[e.id]>0).sort((a,b)=>S.miss[b.id]-S.miss[a.id]).slice(0,5);
-  const lessons=ALL.filter(l=>S.done[l.uid]&&!S.done[l.uid].skip).sort((a,b)=>S.done[a.uid].t-S.done[b.uid].t).slice(0,6);
-  const lists=lessons.map(l=>shuffle(l.lesson.ex.filter(e=>!missed.includes(e))));
-  const want=Math.min(8,reviewPool().length)-missed.length,rest=[];
-  for(let r=0;rest.length<want&&r<20;r++)lists.forEach(li=>{if(rest.length<want&&li[r])rest.push(li[r]);});
-  return shuffle(missed.concat(rest));
+  const pool=reviewPool(),due=dueList();
+  let q=due.slice(0,8);
+  if(q.length<8){const m=pool.filter(e=>S.miss[e.id]>0&&!q.includes(e)).sort((x,y)=>S.miss[y.id]-S.miss[x.id]);q=q.concat(m.slice(0,8-q.length));}
+  if(q.length<8){
+    const lessons=ALL.filter(l=>S.done[l.uid]&&!S.done[l.uid].skip).sort((x,y)=>S.done[x.uid].t-S.done[y.uid].t).slice(0,6);
+    const lists=lessons.map(l=>shuffle(l.lesson.ex.filter(e=>!q.includes(e))));
+    const want=Math.min(8,pool.length)-q.length,rest=[];
+    for(let r=0;rest.length<want&&r<20;r++)lists.forEach(li=>{if(rest.length<want&&li[r])rest.push(li[r]);});
+    q=q.concat(rest);
+  }
+  return shuffle(q);
 }
 function newRun(info,queue,extra){
   const mx=LEVELS[S.level].hearts;
@@ -1596,6 +1908,7 @@ function startPlacement(){
 function startLesson(uid){
   if(uid==='review'){startReview();return;}
   const info=ALL.find(l=>l.uid===uid);if(!info||!isUnlocked(info.n))return;
+  if(ALL.find(l=>l.ui===info.ui)===info&&!S.story[info.ui]&&STORY[info.ui]){pendingUid=uid;screen='story';fx.view=true;render();window.scrollTo(0,0);return;}
   newRun(info,info.lesson.ex.slice(),{mode:'study'});
 }
 function endStudy(){
@@ -1647,6 +1960,7 @@ function check(){
   else ok=ex.acc.some(a=>strip(a)===strip(c.val));
   c.checked=true;c.ok=ok;fx.res=ok?'pop':'shake';
   const firstTry=!L.retried.has(ex);
+  recordAnswer(ex,ok,firstTry,c);
   if(L.placement){
     L.done++;L.pl.push(ok);
   }else if(ok){
@@ -1706,6 +2020,7 @@ function finish(){
   const dxp=S.day.d===today()?S.day.xp:0;
   const goalHit=dxp<S.goal&&dxp+gain>=S.goal;
   S.day={d:today(),xp:dxp+gain};
+  {const H=S.hist[today()]||(S.hist[today()]={xp:0,ok:0,bad:0,sec:0});H.xp+=gain;}
   if(goalHit){S.stats.goals++;notes.push('Ціль дня виконано');}
   const st=bumpStreak();
   if(st.froze)notes.push('Заморожування врятувало серію');
@@ -1760,6 +2075,17 @@ $app.addEventListener('click',e=>{
   const el=e.target.closest('[data-act]');if(!el||el.disabled)return;
   const a=el.dataset.act;
   if(a==='start'){startLesson(el.dataset.uid);return;}
+  if(a==='snext'||a==='sback'||a==='leave')stopSpeak();
+  if(a==='speak'){if(L&&L.info&&L.info.lesson.learn)speak(L.info.lesson.learn[L.si]);return;}
+  if(a==='sheetunit'){sheetUi=+el.dataset.i;fx.view=false;render();window.scrollTo(0,0);return;}
+  if(a==='print'){try{window.print();}catch(e){}return;}
+  if(a==='fit'){S.fit[el.dataset.slot]=el.dataset.v;save();fx.view=false;render();return;}
+  if(a==='weak'){startWeak();return;}
+  if(a==='ide'){screen='ide';fx.view=true;render();window.scrollTo(0,0);return;}
+  if(a==='sample'){const sm=SAMPLES[+el.dataset.i];IDE.code=sm[1];IDE.stdin=sm[2];IDE.out='';IDE.kind='';fx.view=false;render();return;}
+  if(a==='run'){runCode();return;}
+  if(a==='storygo'){const info=ALL.find(l=>l.uid===pendingUid);if(info){S.story[info.ui]=1;save();const u=pendingUid;pendingUid=null;startLesson(u);}return;}
+  if(a==='ics'){icsDownload();return;}
   if(a==='auth'){doAuth();return;}
   if(a==='signout'){doSignOut();return;}
   if(a==='authmode'){AUI.mode=el.dataset.v;AUI.msg='';AUI.email=((document.getElementById('em')||{}).value||AUI.email);fx.view=false;render();return;}
@@ -1804,6 +2130,9 @@ $app.addEventListener('click',e=>{
 });
 $app.addEventListener('input',e=>{
   const t=e.target;
+  if(t.id==='rtime'){S.remind=t.value||'19:00';save(true);return;}
+  if(t.id==='ide-code'){IDE.code=t.value;return;}
+  if(t.id==='ide-in'){IDE.stdin=t.value;return;}
   if(t.id==='ans'&&screen==='lesson'&&L&&L.cur&&!L.cur.checked){
     L.cur.val=t.value;
     const sl=document.getElementById('tslot');
@@ -1813,6 +2142,10 @@ $app.addEventListener('input',e=>{
   }
 });
 document.addEventListener('keydown',e=>{
+  if(e.target&&e.target.id==='ide-code'){
+    if(e.key==='Tab'){e.preventDefault();const t=e.target,p=t.selectionStart;t.value=t.value.slice(0,p)+'    '+t.value.slice(t.selectionEnd);t.selectionStart=t.selectionEnd=p+4;IDE.code=t.value;return;}
+    if(e.key==='Enter'&&(e.ctrlKey||e.metaKey)){e.preventDefault();runCode();return;}
+  }
   if(e.key==='Enter'&&e.target&&(e.target.id==='pw'||e.target.id==='em')){e.preventDefault();doAuth();return;}
   if(e.key!=='Enter'||screen!=='lesson'||!L||L.leave)return;
   const ae=document.activeElement;
@@ -1876,6 +2209,10 @@ function mergeProgress(a,b){ // a = local, b = cloud (both normalised)
   if(a.last>b.last||(a.last===b.last&&a.streak>b.streak)){o.last=a.last;o.streak=a.streak;o.freeze=a.freeze;}
   if(a.day&&b.day){if(a.day.d>b.day.d||(a.day.d===b.day.d&&a.day.xp>b.day.xp))o.day=a.day;}
   for(const k in a.ach)if(!o.ach[k])o.ach[k]=a.ach[k];
+  for(const k in a.srs)if(!o.srs[k]||(a.srs[k].d||0)>(o.srs[k].d||0))o.srs[k]=a.srs[k];
+  for(const k in a.hist){const x=a.hist[k],y=o.hist[k]||(o.hist[k]={xp:0,ok:0,bad:0,sec:0});['xp','ok','bad','sec'].forEach(f=>{y[f]=Math.max(y[f]||0,x[f]||0);});}
+  for(const k in a.us){const x=a.us[k],y=o.us[k]||(o.us[k]={ok:0,bad:0});y.ok=Math.max(y.ok,x.ok);y.bad=Math.max(y.bad,x.bad);}
+  for(const k in a.story)o.story[k]=1;
   for(const k in a.stats)o.stats[k]=Math.max(a.stats[k]||0,o.stats[k]||0);
   return o;
 }
@@ -1945,6 +2282,270 @@ function accountCard(){
   return h+'</section>';
 }
 if(CLOUD&&AUTH)setTimeout(cloudPull,300);
+
+/* ---------- v13 features: SRS, weak spots, stats, wardrobe, cheat sheets, voice, reminders, stories, sandbox ---------- */
+IC.chart='<svg class="ico stroke" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg>';
+IC.speaker='<svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9zM16 8.5a5 5 0 0 1 0 7M18.5 6a8.5 8.5 0 0 1 0 12" fill-opacity="1" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>';
+IC.code='<svg class="ico stroke" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 7 3 12l5 5M16 7l5 5-5 5M14 4l-4 16"/></svg>';
+const SRS=[1,2,4,8,16,32];
+const dayN=()=>{const d=new Date();return Math.floor((d.getTime()-d.getTimezoneOffset()*6e4)/864e5);};
+function recordAnswer(ex,ok,firstTry,c){
+  if(L.placement)return;
+  const k=today();
+  const H=S.hist[k]||(S.hist[k]={xp:0,ok:0,bad:0,sec:0});
+  if(ok)H.ok++;else H.bad++;
+  H.sec+=Math.round(Math.min(90,(performance.now()-c.t0)/1000));
+  const u=S.us[ex.ui]||(S.us[ex.ui]={ok:0,bad:0});
+  if(ok)u.ok++;else u.bad++;
+  if(firstTry){
+    const r=S.srs[ex.id]||{b:0,due:0,d:0};
+    r.b=(ok&&!L.hinted.has(ex))?Math.min(5,r.b+1):0;
+    r.due=dayN()+SRS[r.b];r.d=dayN();
+    S.srs[ex.id]=r;
+  }
+}
+function dueList(){
+  const dn=dayN();
+  return reviewPool().filter(e=>S.srs[e.id]&&S.srs[e.id].due<=dn).sort((a,b)=>S.srs[a.id].due-S.srs[b.id].due);
+}
+function weakUnits(){
+  return Object.keys(S.us).map(k=>{const u=S.us[k],n=u.ok+u.bad;return {ui:+k,n,err:n?u.bad/n:0};})
+    .filter(x=>x.n>=4&&x.err>=0.2&&UNITS[x.ui]).sort((a,b)=>b.err-a.err);
+}
+function startWeak(){
+  const w=weakUnits().slice(0,2).map(x=>x.ui);
+  const pool=reviewPool().filter(e=>w.includes(e.ui));
+  if(!pool.length){toast('Поки немає слабких місць','Пройди ще кілька уроків');return;}
+  const missed=pool.filter(e=>S.miss[e.id]>0);
+  const rest=shuffle(pool.filter(e=>!(S.miss[e.id]>0)));
+  const q=shuffle(missed.concat(rest).slice(0,8));
+  newRun({uid:'review',n:-1,lesson:{title:'Слабкі місця',ex:[]}},q,{review:true,allEx:q.slice(),weak:true});
+}
+/* explain a wrong answer */
+function yours(ex,c){
+  let t='';
+  try{
+    if(ex.t==='mc'||ex.t==='out'){t='Твоя відповідь: <b>'+esc(c.opts[c.sel].text)+'</b>';}
+    else if(ex.t==='fill'){
+      const bad=[];
+      c.slots.forEach((id,k)=>{const w=c.words.find(x=>x.id===id).w;if(w!==ex.ans[k])bad.push('пропуск '+(k+1)+': ти поставив «'+esc(w)+'», потрібно «'+esc(ex.ans[k])+'»');});
+      t=bad.join('<br>');
+    }else if(ex.t==='order'){
+      const mine=c.built.map(b=>b.text);let i=0;
+      while(i<mine.length&&mine[i]===ex.lines[i])i++;
+      t=i?'Перші рядки ('+i+') стоять правильно. ':'';
+      if(i<ex.lines.length)t+='На місці '+(i+1)+' має бути: <b>'+esc(ex.lines[i].trim())+'</b>';
+    }else if(ex.t==='bug'){
+      t='Ти вказав рядок '+(c.sel+1)+': <b>'+esc((ex.lines[c.sel]||'').trim()||'порожній рядок')+'</b>. Помилка в рядку '+(ex.bad+1)+'.';
+    }else{
+      const a=strip(c.val);
+      if(ex.acc.some(x=>strip(x).toLowerCase()===a.toLowerCase()))t='Майже: у Java великі й малі літери мають значення.';
+      else t='Ти ввів: <b>'+esc(c.val.trim())+'</b>';
+    }
+  }catch(e){t='';}
+  return t?'<p class="yours">'+t+'</p>':'';
+}
+/* ---- wardrobe ---- */
+const FIT={
+  hat:[{id:'',t:'Без капелюха',lv:1},{id:'cap',t:'Беретка',lv:2},{id:'top',t:'Циліндр',lv:5},{id:'crown',t:'Корона',lv:9}],
+  gl:[{id:'',t:'Без окулярів',lv:1},{id:'round',t:'Окуляри',lv:3},{id:'shades',t:'Сонцезахисні',lv:6}],
+  sc:[{id:'',t:'Метелик',lv:1},{id:'red',t:'Червоний шарф',lv:4},{id:'gold',t:'Золотий шарф',lv:7}]
+};
+const FITSLOT={hat:'Капелюх',gl:'Окуляри',sc:'Шия'};
+const HATS={
+  cap:'<path d="M19.5 12Q21 3.5 32 3.5Q43 3.5 44.5 12Q32 8.6 19.5 12z" fill="#8E1F2F"/><circle cx="32" cy="3" r="1.7" fill="#8E1F2F"/>',
+  top:'<ellipse cx="32" cy="10.5" rx="13.5" ry="2.7" fill="#1B1411"/><rect x="24" y="-5" width="16" height="15.5" rx="1.6" fill="#1B1411"/><rect x="24" y="4.6" width="16" height="3.2" fill="url(#fxk)"/>',
+  crown:'<path d="M23 11.5L21.6 -0.5L28 5.4L32 -2L36 5.4L42.4 -0.5L41 11.5z" fill="url(#fxk)" stroke="#A97C1E" stroke-width=".6"/><circle cx="32" cy="7.5" r="1.3" fill="#C73A4B"/><circle cx="26.6" cy="8.6" r="1" fill="#2E86C1"/><circle cx="37.4" cy="8.6" r="1" fill="#2E86C1"/>'
+};
+const GLS={
+  round:'<g fill="none" stroke="url(#fxk)" stroke-width="1.7"><circle cx="22" cy="30" r="5.8"/><circle cx="42" cy="30" r="5.8"/><path d="M27.8 29.6q4.2-2 8.4 0"/></g>',
+  shades:'<g fill="#1B1411"><rect x="15" y="25.2" width="14" height="9.2" rx="3.8"/><rect x="35" y="25.2" width="14" height="9.2" rx="3.8"/><rect x="28.6" y="27.4" width="6.8" height="1.8"/></g><path d="M18 27.6l3-1M38 27.6l3-1" stroke="#fff" stroke-width="1" stroke-linecap="round" opacity=".5"/>'
+};
+const SCS={
+  red:'<path d="M14.5 48.4Q32 57.4 49.5 48.4L51 54.4Q32 63 13 54.4z" fill="#B5273A"/><path d="M38.5 57l5.6 5 3.4-8.4z" fill="#B5273A"/><path d="M20 52.2l-.4 4.4M27 54.4l-.3 4.6M35 54.4l.2 4.4M43 52.2l.6 4" stroke="#F3D6DA" stroke-width="1.1" stroke-linecap="round" opacity=".75"/>',
+  gold:'<path d="M14.5 48.4Q32 57.4 49.5 48.4L51 54.4Q32 63 13 54.4z" fill="url(#fxk)"/><path d="M38.5 57l5.6 5 3.4-8.4z" fill="url(#fxk)"/><path d="M20 52.2l-.4 4.4M27 54.4l-.3 4.6M35 54.4l.2 4.4M43 52.2l.6 4" stroke="#7A5A14" stroke-width="1.1" stroke-linecap="round" opacity=".6"/>'
+};
+const TIE='<path class="fa-dark" d="M32 54l-7-3v6zM32 54l7-3v6z"/><path d="M32 54l-7-3v6zM32 54l7-3v6z" fill="none" stroke="url(#fxk)" stroke-width=".8"/><circle cx="32" cy="54" r="1.9" fill="url(#fxk)"/>';
+function fitUnlocked(it){return lvlInfo(S.xp).n>=it.lv;}
+function fitNow(slot){const f=(S.fit&&S.fit[slot])||'';const it=FIT[slot].find(x=>x.id===f);return it&&fitUnlocked(it)?f:'';}
+/* ---- cheat sheets ---- */
+let sheetUi=0;
+function sheetView(){
+  let h='<div class="view hastabs'+(fx.view?' enter':'')+'"><header class="top"><div class="brand">Шпаргалки</div><div class="stats"><button class="stat" data-act="print" aria-label="Роздрукувати">'+IC.book+'<span>Друк</span></button></div></header>';
+  h+='<div class="chips-row" role="tablist">'+UNITS.map((u,i)=>'<button class="uchip'+(i===sheetUi?' on':'')+'" role="tab" aria-selected="'+(i===sheetUi)+'" data-act="sheetunit" data-i="'+i+'">'+(i+1)+'. '+esc(u.title)+'</button>').join('')+'</div>';
+  const u=UNITS[sheetUi];
+  h+='<div class="sheet" style="--uc:var(--u'+((sheetUi%6)+1)+')"><h1>'+esc(u.title)+'</h1><p class="sub">'+esc(u.sub)+'</p>';
+  ALL.filter(l=>l.ui===sheetUi).forEach(l=>{
+    h+='<h2 class="sh-l">'+esc(l.lesson.title)+'</h2>';
+    (l.lesson.learn||[]).forEach(k=>{
+      h+='<article class="sh-c"><h3>'+esc(k.h)+'</h3><p>'+fmt(k.p)+'</p>';
+      if(k.code)h+=codeBlock(k.code);
+      if(k.out!=null)h+='<div class="console"><span class="con-l">Результат</span><pre>'+esc(k.out)+'</pre></div>';
+      h+='</article>';
+    });
+  });
+  return h+'</div></div>'+tabs('sheet');
+}
+/* ---- voice ---- */
+function speak(k){
+  if(!('speechSynthesis' in window)){toast('Немає озвучення','Цей браузер його не підтримує');return;}
+  const ss=window.speechSynthesis;
+  if(ss.speaking){ss.cancel();return;}
+  const u=new SpeechSynthesisUtterance(k.h+'. '+k.p.replace(/`/g,'')+(k.code?' Приклад коду показано на екрані.':''));
+  const v=ss.getVoices().find(x=>/^uk/i.test(x.lang));
+  if(v){u.voice=v;u.lang=v.lang;}else{u.lang='uk-UA';if(ss.getVoices().length)toast('Українського голосу немає','Прочитаю стандартним');}
+  u.rate=.95;ss.speak(u);
+}
+function stopSpeak(){try{if('speechSynthesis' in window)window.speechSynthesis.cancel();}catch(e){}}
+/* ---- reminders ---- */
+function icsDownload(){
+  try{
+    const p=n=>String(n).padStart(2,'0');
+    const [hh,mm]=(S.remind||'19:00').split(':');
+    const d=new Date();
+    const ymd=d.getFullYear()+p(d.getMonth()+1)+p(d.getDate());
+    const stamp=d.getUTCFullYear()+p(d.getUTCMonth()+1)+p(d.getUTCDate())+'T'+p(d.getUTCHours())+p(d.getUTCMinutes())+'00Z';
+    const url=/^https?:/.test(location.protocol)?location.origin+location.pathname:'';
+    const L2=['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//Java Barista//UK','CALSCALE:GREGORIAN','BEGIN:VEVENT','UID:daily@java-barista','DTSTAMP:'+stamp,'DTSTART:'+ymd+'T'+hh+mm+'00','DURATION:PT15M','RRULE:FREQ=DAILY','SUMMARY:Java Бариста: час на урок','DESCRIPTION:Лисичка чекає! Пройди один урок і збережи серію.'+(url?' '+url:''),'BEGIN:VALARM','ACTION:DISPLAY','DESCRIPTION:Java Бариста: час на урок','TRIGGER:PT0M','END:VALARM','END:VEVENT','END:VCALENDAR'];
+    const blob=new Blob([L2.join('\r\n')],{type:'text/calendar;charset=utf-8'});
+    const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='java-barista.ics';
+    document.body.appendChild(a);a.click();a.remove();
+    toast('Файл збережено','Відкрий його, щоб додати нагадування в календар');
+  }catch(e){toast('Не вийшло','Браузер не дозволив зберегти файл');}
+}
+/* ---- stories ---- */
+const STORY=[
+ ['Привіт! Я Лисичка-бариста.','Сьогодні відкриваю власну кав’ярню, а меню в ній пишеться мовою Java.','Почнемо з першої таблички для дверей.'],
+ ['Кав’ярня відкрита, але я нічого не пам’ятаю.','Потрібні коробочки для замовлень: у Java вони називаються змінними.','Складемо їх по поличках.'],
+ ['Прийшли перші гості, треба рахувати чеки.','Додавати, множити й порівнювати числа допоможуть оператори.'],
+ ['Клієнти просять різне: хтось каву, хтось чай.','Щоб програма вирішувала, що робити, потрібні умови.'],
+ ['Черга росте, а я подаю одне й те саме по одній чашці.','Цикли зроблять усе швидше: повторимо дію стільки разів, скільки треба.'],
+ ['Склад повний пачок кави різних сортів.','Масиви допоможуть тримати їх у порядку, а методи стануть моїми рецептами.'],
+ ['Кав’ярня росте: з’явилися баристи, чашки й кавоварки.','Кожного опишемо окремим класом і створимо з нього справжні об’єкти.'],
+ ['Меню стало довгим, а замовлень сотні.','Колекції допоможуть зберігати їх списками і словниками.'],
+ ['Іноді кава розливається, а молоко закінчується.','Винятки навчать програму не падати, а спокійно все виправляти.'],
+ ['Меню на дошці й вітання гостей це текст.','Навчимося різати, склеювати й перевіряти рядки.'],
+ ['Ми відкриваємо мережу кав’ярень.','Успадкування й інтерфейси дадуть усім філіям спільні правила роботи.'],
+ ['Щодня тисячі замовлень, і їх треба швидко аналізувати.','Потоки Stream допоможуть фільтрувати й рахувати в кілька рядків.'],
+ ['Гості вводять замовлення з клавіатури, а звіти пишуться у файли.','Навчимося читати ввід і працювати з файлами.'],
+ ['Час для справжніх проєктів!','Зберемо калькулятор, гру «Вгадай число» і список справ для кав’ярні.'],
+ ['Мені потрібні скриньки для будь-яких предметів, але безпечні.','Generics дозволяють написати один клас для чашок, зерна і всього іншого.'],
+ ['Кухня працює, касa працює, гості чекають.','Потоки дозволяють робити кілька справ одночасно, але з обережністю.'],
+ ['Рецепти не можна ламати, коли додаємо нове.','Тести JUnit щоразу перевіряють, що все працює.'],
+ ['Замовлення мають жити довше, ніж один день.','Базі даних можна доручити їх зберігання, а JDBC дружить Java з нею.'],
+ ['Вся мережа хоче користуватися моїм меню онлайн.','Spring дає каркас, а REST-контролер відповідає на запити з сайту.'],
+ ['Останній етап: співбесіда в велику компанію.','Повторимо питання, які задають майже всім Java-розробникам.']
+];
+let pendingUid=null;
+function storyScreen(){
+  const info=ALL.find(l=>l.uid===pendingUid);const ui=info.ui,st=STORY[ui]||[];
+  return '<div class="view enter"><div class="story"><div class="st-m">'+mascot('cheer',120)+'</div><p class="kicker">Розділ '+(ui+1)+' · '+esc(UNITS[ui].title)+'</p>'
+    +'<div class="st-b">'+st.map((x,i)=>'<p style="--i:'+i+'">'+esc(x)+'</p>').join('')+'</div>'
+    +'<button class="btn" data-act="storygo">Поїхали</button><button class="btn ghost" data-act="home">Назад</button></div></div>';
+}
+/* ---- sandbox ---- */
+const IDE={code:'public class Main {\n    public static void main(String[] args) {\n        System.out.println("Привіт, Java!");\n    }\n}\n',stdin:'',out:'',kind:'',busy:false,lang:0};
+const SAMPLES=[
+ ['Привіт','public class Main {\n    public static void main(String[] args) {\n        System.out.println("Привіт, Java!");\n    }\n}\n',''],
+ ['Цикл','public class Main {\n    public static void main(String[] args) {\n        for (int i = 1; i <= 5; i++) {\n            System.out.println(i * i);\n        }\n    }\n}\n',''],
+ ['Клас','public class Main {\n    static class Dog {\n        String name;\n        Dog(String name) { this.name = name; }\n        void bark() { System.out.println(name + ": гав!"); }\n    }\n    public static void main(String[] args) {\n        new Dog("Рекс").bark();\n    }\n}\n',''],
+ ['Ввід','import java.util.Scanner;\n\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        String name = sc.nextLine();\n        System.out.println("Привіт, " + name + "!");\n    }\n}\n','Марічка']
+];
+const RUNNER=((window.BARISTA_CONFIG||{}).runner)||'https://ce.judge0.com';
+const b64=s=>btoa(unescape(encodeURIComponent(s)));
+const unb64=s=>{try{return s?decodeURIComponent(escape(atob(s))):'';}catch(e){return '';}};
+async function javaLang(){
+  if(IDE.lang)return IDE.lang;
+  try{
+    const r=await fetch(RUNNER+'/languages');const j=await r.json();
+    const ids=j.filter(x=>/^Java \(OpenJDK/i.test(x.name)).map(x=>x.id);
+    IDE.lang=ids.length?Math.max.apply(null,ids):62;
+  }catch(e){IDE.lang=62;}
+  return IDE.lang;
+}
+async function runCode(){
+  if(IDE.busy)return;
+  IDE.busy=true;IDE.out='Запускаю…';IDE.kind='';
+  const ca=document.getElementById('ide-code'),si=document.getElementById('ide-in');
+  if(ca)IDE.code=ca.value;if(si)IDE.stdin=si.value;
+  render();
+  try{
+    const lang=await javaLang();
+    const ctrl=new AbortController();const to=setTimeout(()=>ctrl.abort(),25000);
+    const r=await fetch(RUNNER+'/submissions?base64_encoded=true&wait=true',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({source_code:b64(IDE.code),language_id:lang,stdin:b64(IDE.stdin)}),signal:ctrl.signal});
+    clearTimeout(to);
+    if(!r.ok)throw new Error('http '+r.status);
+    const j=await r.json();
+    const so=unb64(j.stdout),se=unb64(j.stderr),co=unb64(j.compile_output);
+    if(co){IDE.kind='err';IDE.out='Помилка компіляції:\n'+co;}
+    else if(se){IDE.kind='err';IDE.out=(so?so+'\n':'')+'Помилка виконання:\n'+se;}
+    else{IDE.kind='ok';IDE.out=so||'(програма нічого не вивела)';}
+  }catch(e){
+    IDE.kind='err';IDE.out='Не вдалося зв’язатися із сервером запуску коду. Перевір інтернет і спробуй ще раз.';
+  }
+  IDE.busy=false;
+  if(screen==='ide'){fx.view=false;render();}
+}
+function ideView(){
+  let h='<div class="view'+(fx.view?' enter':'')+'"><div class="ide"><div class="lhead"><button class="x" data-act="home" aria-label="Назад">'+IC.cross+'</button><h1 class="ide-t">Пісочниця</h1></div>';
+  h+='<div class="chips-row">'+SAMPLES.map((s,i)=>'<button class="uchip" data-act="sample" data-i="'+i+'">'+esc(s[0])+'</button>').join('')+'</div>';
+  h+='<textarea id="ide-code" class="code-ta" spellcheck="false" autocapitalize="off" autocomplete="off" aria-label="Код Java">'+esc(IDE.code)+'</textarea>';
+  h+='<label class="ide-l" for="ide-in">Ввід програми (для Scanner), якщо потрібен</label><textarea id="ide-in" class="area mono" rows="2" spellcheck="false">'+esc(IDE.stdin)+'</textarea>';
+  h+='<button class="btn" data-act="run"'+(IDE.busy?' disabled':'')+'>'+(IDE.busy?'Виконується…':'Запустити')+'</button>';
+  h+='<div class="console'+(IDE.kind==='err'?' err':'')+'"><span class="con-l">Результат</span><pre>'+esc(IDE.out||'Натисни «Запустити».')+'</pre></div></div></div>';
+  return h;
+}
+/* ---- stats ---- */
+function statsView(){
+  const us=Object.values(S.us),okN=us.reduce((n,u)=>n+u.ok,0),badN=us.reduce((n,u)=>n+u.bad,0);
+  const acc=okN+badN?Math.round(okN/(okN+badN)*100):0;
+  const secs=Object.values(S.hist).reduce((n,d)=>n+(d.sec||0),0),mins=Math.round(secs/60);
+  const doneN=ALL.filter(l=>S.done[l.uid]&&!S.done[l.uid].skip).length;
+  let h='<div class="view hastabs'+(fx.view?' enter':'')+'">'+topbar();
+  h+='<h1 class="pg-t">Прогрес</h1><div class="tiles">'
+    +'<div class="tile"><b>'+S.xp+'</b><span>Досвід</span></div><div class="tile"><b>'+doneN+'</b><span>Уроків</span></div>'
+    +'<div class="tile"><b>'+(okN+badN?acc+'%':'0%')+'</b><span>Точність</span></div><div class="tile"><b>'+mins+'</b><span>Хвилин</span></div></div>';
+  // week chart
+  const names=['нд','пн','вт','ср','чт','пт','сб'];
+  const days=[];for(let i=6;i>=0;i--){const d=new Date();d.setDate(d.getDate()-i);const k=dayStr(d);days.push({k,n:names[d.getDay()],xp:(S.hist[k]&&S.hist[k].xp)||0});}
+  const mx=Math.max(30,S.goal,...days.map(d=>d.xp));
+  let svg='<svg class="chart" viewBox="0 0 320 150" role="img" aria-label="Досвід за останні 7 днів">';
+  const gy=116-(S.goal/mx)*96;
+  svg+='<line x1="8" x2="312" y1="'+gy+'" y2="'+gy+'" class="goal-l"/>';
+  days.forEach((d,i)=>{const bh=Math.round(d.xp/mx*96),x=14+i*43;
+    svg+='<rect x="'+x+'" y="'+(116-Math.max(bh,d.xp?3:0))+'" width="30" height="'+Math.max(bh,d.xp?3:0)+'" rx="6" class="bar-r'+(d.k===today()?' now':'')+'"/>'
+      +(d.xp?'<text x="'+(x+15)+'" y="'+(110-bh)+'" text-anchor="middle" class="bar-v">'+d.xp+'</text>':'')
+      +'<text x="'+(x+15)+'" y="138" text-anchor="middle" class="bar-n">'+d.n+'</text>';});
+  svg+='</svg>';
+  h+='<section class="card"><h2>Досвід за тиждень</h2>'+svg+'<p class="desc">Пунктир це твоя денна ціль: '+S.goal+' XP.</p></section>';
+  // accuracy by unit
+  const rows=Object.keys(S.us).map(k=>+k).filter(k=>UNITS[k]).sort((a,b)=>a-b);
+  h+='<section class="card"><h2>Точність за розділами</h2>';
+  if(!rows.length)h+='<p class="desc">Пройди кілька уроків, і тут з’явиться статистика.</p>';
+  rows.forEach(k=>{const u=S.us[k],n=u.ok+u.bad,p=Math.round(u.ok/n*100);
+    h+='<div class="urow"><span class="un">'+(k+1)+'. '+esc(UNITS[k].title)+'</span><div class="track"><div class="fill'+(p<70?' low':'')+'" style="width:'+p+'%"></div></div><span class="up">'+p+'%</span></div>';});
+  const wk=weakUnits();
+  if(wk.length)h+='<p class="desc">Найслабше: '+wk.slice(0,2).map(x=>esc(UNITS[x.ui].title)).join(', ')+'.</p><button class="btn" style="margin-top:12px" data-act="weak">Потренувати слабкі місця</button>';
+  else if(rows.length)h+='<p class="desc">Слабких місць не видно. Так тримати.</p>';
+  h+='</section>';
+  // wardrobe
+  const lv=lvlInfo(S.xp).n;
+  h+='<section class="card"><h2>Гардероб лисички</h2><div class="ward-m">'+mascot('happy',120)+'</div><p class="desc">Нові речі відкриваються з рівнями. Зараз у тебе рівень '+lv+'.</p>';
+  Object.keys(FIT).forEach(slot=>{
+    h+='<p class="ward-s">'+FITSLOT[slot]+'</p><div class="ward-r">';
+    FIT[slot].forEach(it=>{const un=fitUnlocked(it),on=fitNow(slot)===it.id;
+      h+='<button class="uchip'+(on?' on':'')+'" data-act="fit" data-slot="'+slot+'" data-v="'+it.id+'"'+(un?'':' disabled')+'>'+esc(it.t)+(un?'':' · рівень '+it.lv)+'</button>';});
+    h+='</div>';
+  });
+  h+='</section>';
+  // achievements
+  const got=ACH.filter(a=>S.ach[a.id]).length;
+  h+='<h2 class="pg-s">Досягнення · '+got+' / '+ACH.length+'</h2><div class="alist">';
+  ACH.forEach((a,i)=>{const on=!!S.ach[a.id];
+    h+='<div class="ach'+(on?' on':'')+'" style="--i:'+i+'"><div class="ach-i">'+(on?IC.star:IC.lock)+'</div><div class="ach-t"><h3>'+esc(a.t)+'</h3><p>'+esc(a.d)+'</p></div></div>';});
+  h+='</div></div>'+tabs('stats');
+  return h;
+}
 
 /* ---------- service worker (only on a real https site, never in the artifact viewer) ---------- */
 try{
