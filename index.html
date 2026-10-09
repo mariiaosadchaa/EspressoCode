@@ -119,6 +119,14 @@ svg{display:block}
 .x:hover{background:var(--line)}
 .lives{flex:none;display:flex;align-items:center;gap:1px;color:var(--bad);font-size:17px}
 .hrt{display:grid}
+.xpc{flex:none;position:relative;display:flex;align-items:center;gap:4px;font-weight:800;font-size:15px;color:var(--primary);font-variant-numeric:tabular-nums}
+.xpc .ico{width:18px;height:18px}
+.xpc .pp{position:absolute;right:0;top:100%;margin-top:2px;font-size:14px;font-weight:800;white-space:nowrap;animation:xpfloat 1.4s ease-out forwards;pointer-events:none}
+.xpc .pp.minus{color:var(--bad)}.xpc .pp.plus{color:var(--good,#2e8b57)}
+.xpc.dip{animation:shake .5s}
+.xpc.up{animation:bump .6s cubic-bezier(.3,1.6,.5,1)}
+@keyframes xpfloat{0%{opacity:0;transform:translateY(-6px)}20%{opacity:1}100%{opacity:0;transform:translateY(16px)}}
+.hintnote{color:var(--bad);font-weight:700}
 .hrt.lost{color:var(--line)}
 .stage{display:grid;gap:18px;padding-top:10px}
 .q{margin:0;font-family:var(--display);font-weight:600;font-size:19px;line-height:1.35;text-wrap:balance}
@@ -299,6 +307,26 @@ svg{display:block}
 
 /* ---------- profile, goal, notes ---------- */
 .me{margin-top:4px;background:var(--surface);border:2px solid var(--line);border-radius:18px;padding:14px 16px;display:grid;grid-template-columns:auto minmax(0,1fr);gap:6px 14px;align-items:center}
+.me{position:relative;overflow:hidden}
+.me>*{position:relative;z-index:1}
+.bean{position:absolute!important;z-index:0!important;width:9px;height:14px;border-radius:50%;background:var(--warm);opacity:.0;pointer-events:none;animation:beanfloat 7s ease-in-out infinite}
+.bean::after{content:"";position:absolute;left:50%;top:10%;bottom:10%;width:1.5px;background:var(--surface);transform:translateX(-50%) rotate(12deg);border-radius:2px}
+.bean.b1{left:6%;top:70%}.bean.b2{left:30%;top:80%;animation-delay:1.4s}.bean.b3{left:55%;top:75%;animation-delay:2.8s}.bean.b4{left:78%;top:82%;animation-delay:4.2s}.bean.b5{left:92%;top:68%;animation-delay:5.6s}.bean.b6{left:18%;top:85%;animation-delay:3.4s}
+@keyframes beanfloat{0%{opacity:0;transform:translateY(0) rotate(0)}15%{opacity:.35}85%{opacity:.2}100%{opacity:0;transform:translateY(-70px) rotate(200deg)}}
+.chips{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-top:12px}
+.chip{background:var(--surface);border:2px solid var(--line);border-radius:16px;padding:10px 8px;display:grid;justify-items:center;gap:2px;text-align:center;animation:rise .5s cubic-bezier(.3,1.4,.5,1) backwards}
+.chip:nth-child(2){animation-delay:.08s}.chip:nth-child(3){animation-delay:.16s}
+.chip .ico{width:22px;height:22px;color:var(--primary)}
+.chip.fl .ico{color:var(--warm);transform-origin:50% 90%;animation:flicker 1.8s ease-in-out infinite}
+.chip b{font-size:20px;font-variant-numeric:tabular-nums;line-height:1.1}
+.chip span{font-size:12px;color:var(--muted);font-weight:600}
+.say{margin-top:12px;display:flex;gap:12px;align-items:flex-start;background:var(--surface);border:2px solid var(--line);border-radius:18px;padding:12px 14px;animation:rise .5s .2s backwards}
+.say .ico{flex:none;width:22px;height:22px;color:var(--warm);animation:bob 2.6s ease-in-out infinite}
+.say p{margin:0;font-size:14px;line-height:1.45;transition:opacity .35s,transform .35s}
+.say p.out{opacity:0;transform:translateY(4px)}
+.say small{display:block;color:var(--muted);font-weight:700;font-size:11px;text-transform:uppercase;letter-spacing:.06em;margin-bottom:2px}
+.me-m{animation:bob 4s ease-in-out infinite}
+.me-m svg{filter:drop-shadow(0 6px 8px rgba(120,60,10,.18))}
 .me-t h2{margin:0;font-family:var(--display);font-weight:700;font-size:17px;line-height:1.25}
 .meter.slim{margin-top:8px;gap:10px}
 .meter.slim .track{height:10px}
@@ -1553,6 +1581,10 @@ const STALE=3*864e5;
 function isStale(d){return !!d&&!d.skip&&(Date.now()-(d.t||0))>STALE;}
 function staleCount(){return ALL.filter(l=>isStale(S.done[l.uid])).length;}
 
+const SAY=['Факт: Java створили в 1995 році, а назву взяли від кави з острова Ява.','Порада: пиши код руками, а не лише читай. Так він запам’ятовується швидше.','String у Java незмінний. Кожна «зміна» створює новий об’єкт.','== порівнює посилання, а equals() порівнює вміст.','Маленька перемога щодня краще, ніж великий ривок раз на тиждень.','Талісман Java звуть Дюк. Він досі махає рукою на конференціях.','Читай повідомлення про помилку з першого рядка: там майже завжди підказка.','У Java немає вказівників, зате є збирач сміття.','Слабкі теми чекають у «Повторенні». Заглянь туди!','Одна кава ☕ і один урок: ідеальний початок.'];
+function sayText(k){const d=Math.floor(Date.now()/86400000);return SAY[(d+k)%SAY.length];}
+let sayK=0;
+setInterval(()=>{try{if(screen!=='home')return;const p=document.getElementById('say');if(!p)return;p.classList.add('out');setTimeout(()=>{sayK++;p.textContent=sayText(sayK);p.classList.remove('out');},380);}catch(e){}},7000);
 function homeView(){
   const doneN=ALL.filter(l=>S.done[l.uid]).length;
   const cur=ALL.find(l=>!S.done[l.uid]);
@@ -1560,7 +1592,7 @@ function homeView(){
   const li=lvlInfo(S.xp);
   const dxp=S.day.d===today()?S.day.xp:0,gpct=Math.min(100,dxp/S.goal*100);
   let h='<div class="view hastabs'+(fx.view?' enter':'')+'">'+topbar();
-  h+='<section class="me"><div class="me-m">'+mascot('idle',64)+'</div><div class="me-t"><p class="kicker">Рівень '+li.n+'</p><h2>'+esc(li.title)+'</h2>'
+  h+='<section class="me"><span class="bean b1"></span><span class="bean b2"></span><span class="bean b3"></span><span class="bean b4"></span><span class="bean b5"></span><span class="bean b6"></span><div class="me-m">'+mascot('idle',64)+'</div><div class="me-t"><p class="kicker">Рівень '+li.n+'</p><h2>'+esc(li.title)+'</h2>'
     +'<div class="meter slim"><div class="track" role="progressbar" aria-label="Прогрес до наступного рівня" aria-valuemin="0" aria-valuemax="100" aria-valuenow="'+Math.round(li.pct)+'"><div class="fill" style="width:'+barFrom('lvl',li.pct)+'%" data-to="'+li.pct+'"></div></div><span>'+(li.hi?S.xp+' / '+li.hi:'максимум')+'</span></div></div>'
     +'<div class="goal'+(dxp>=S.goal?' met':'')+'"><span class="gl">Ціль дня</span><div class="track" role="progressbar" aria-label="Ціль дня" aria-valuemin="0" aria-valuemax="'+S.goal+'" aria-valuenow="'+Math.min(dxp,S.goal)+'"><div class="fill g" style="width:'+barFrom('goal',gpct)+'%" data-to="'+gpct+'"></div></div><span class="gv">'+Math.min(dxp,S.goal)+' / '+S.goal+' XP</span></div></section>';
   if(S.streak>0&&S.last!==today()){
@@ -1568,6 +1600,12 @@ function homeView(){
     else if(S.last===dAgo(2)&&S.freeze>0)h+='<p class="note">Ти пропустив день. Заморожування збереже серію, якщо пройдеш урок сьогодні.</p>';
   }
   if(isWeekend())h+='<p class="note good">Вихідні: за кожен урок подвійний досвід.</p>';
+  {const dn=ALL.filter(l=>S.done[l.uid]&&!S.done[l.uid].skip).length;
+   const cn=(n,f)=>' data-count="'+n+'" data-from="'+(fx.view?0:n)+'"';
+   h+='<div class="chips"><div class="chip fl">'+IC.flame+'<b'+cn(S.streak)+'>'+S.streak+'</b><span>Серія, дн.</span></div>'
+    +'<div class="chip">'+IC.layers+'<b'+cn(dn)+'>'+dn+'</b><span>Уроків пройдено</span></div>'
+    +'<div class="chip">'+IC.bolt+'<b'+cn(dxp)+'>'+dxp+'</b><span>XP сьогодні</span></div></div>';
+   h+='<div class="say">'+IC.bulb+'<div><small>Лисичка каже</small><p id="say">'+esc(sayText(0))+'</p></div></div>';}
   h+='<section class="next">';
   if(cur){
     h+='<p class="kicker">'+(doneN?'Продовжуй':'Починаємо')+'</p><h1>'+esc(cur.lesson.title)+'</h1><p class="sub">Розділ '+(cur.ui+1)+': '+esc(cur.unit.title)+'</p>';
@@ -1628,6 +1666,7 @@ function setView(){
   h+='<section class="card"><h2>Складність</h2>'+seg('setlevel',[{v:'easy',t:'Легкий'},{v:'normal',t:'Звичайний'},{v:'hard',t:'Складний'}],S.level)+'<p class="desc">'+esc(LEVELS[S.level].desc)+'</p></section>';
   h+='<section class="card"><h2>Ціль на день</h2>'+seg('setgoal',[{v:20,t:'20 XP'},{v:30,t:'30 XP'},{v:50,t:'50 XP'}],S.goal)+'</section>';
   h+='<section class="card">'+tog('sound','Звуки','Короткі сигнали правильної й неправильної відповіді.')+tog('big','Великий шрифт','Збільшує весь інтерфейс.')+tog('calm','Спокійний режим','Вимикає анімації.')+'</section>';
+  h+='<section class="card"><h2>Оновлення</h2><p class="desc">Застосунок сам перевіряє нову версію. Можна перевірити вручну: прогрес не втратиться.</p><button class="btn ghost" data-act="updchk">Перевірити оновлення</button></section>';
   h+='<section class="card"><h2>Нагадування</h2><p class="desc">Година для події в календарі. Сповіщення приходять окремо: щодня о 8, 11, 14, 17, 20 та 23.</p><input id="rtime" class="inp" type="time" value="'+esc(S.remind||'19:00')+'" aria-label="Година нагадування"><button class="btn ghost" style="margin-top:12px" data-act="ics">Додати в календар</button>'+pushCard()+'</section>';
   h+='<section class="card"><h2>Поділитись результатом</h2><textarea id="sharebox" class="area" rows="3" readonly>'+esc(shareText())+'</textarea><button class="btn ghost" data-act="copy" data-src="sharebox">Скопіювати</button></section>';
   h+='<section class="card"><h2>Резервний код прогресу</h2><p class="desc">Збережи код, щоб перенести прогрес на інший пристрій чи браузер.</p><textarea id="bkp" class="area mono" rows="3" readonly>'+esc(backupCode())+'</textarea><button class="btn ghost" data-act="copy" data-src="bkp">Скопіювати код</button>'
@@ -1672,6 +1711,10 @@ function ready(c){
   if(ex.t==='type')return c.val.trim().length>0;
   return c.bank.length===0;
 }
+function xpChip(){
+  const pp=fx.xpPop?'<i class="pp '+(fx.xpPop[0]==='+'?'plus':'minus')+'">'+fx.xpPop+' XP</i>':'';
+  return '<div class="xpc'+(fx.xpPop?(fx.xpPop[0]==='+'?' up':' dip'):'')+'" role="img" aria-label="Досвід за урок: '+(L.earn||0)+'">'+IC.bolt+'<span>'+(L.earn||0)+'</span>'+pp+'</div>';
+}
 function heartsHtml(){
   let s='';
   for(let i=0;i<L.max;i++)s+='<span class="hrt'+(i>=L.hearts?' lost':'')+(fx.hit===i?' hit':'')+'">'+IC.heart+'</span>';
@@ -1703,10 +1746,11 @@ function lessonView(){
   const idx=Math.min(L.total,L.total-L.queue.length+1);
   let h='<div class="view'+(fx.view?' enter':'')+'"><div class="lesson"><div class="lhead"><button class="x" data-act="leave" aria-label="Вийти з уроку">'+IC.cross+'</button>'
     +'<div class="track" role="progressbar" aria-valuemin="0" aria-valuemax="'+L.total+'" aria-valuenow="'+L.done+'"><div class="fill" style="width:'+from+'%" data-to="'+pct+'"></div></div>'
-    +(L.placement?'':heartsHtml())
+    +(L.placement?'':heartsHtml()+xpChip())
     +((L.info.lesson&&L.info.lesson.learn)?'<button class="x book" data-act="peek" aria-label="Переглянути теорію">'+IC.book+'</button>':'')+'</div>';
   const kicker=L.placement?'Тест рівня · '+idx+' / '+L.total:L.review?'Повторення':'Тренуємось';
   h+='<div class="stage'+(fx.stage?' enter':'')+'"><p class="kicker">'+kicker+'</p><h2 class="q">'+esc(ex.q)+'</h2><p class="how">'+HOW[ex.t]+'</p>';
+  if(S.level==='normal'&&L.hinted.has(ex)&&!c.checked)h+='<p class="hint hintnote">Підказку використано: за це завдання буде 5 XP замість 10.</p>';
   if(ex.t==='mc'||ex.t==='out'){
     if(ex.code)h+=codeBlock(ex.code);
     h+='<div class="opts">';
@@ -1844,7 +1888,8 @@ function confetti(){
 function render(){
   let h;
   let gated=false,lk=false;try{gated=CLOUD&&!AUTH;lk=LOCKED&&!!AUTH;}catch(e){}
-  if(gated)h=gateView();
+  if(NEWVER)h=updView();
+  else if(gated)h=gateView();
   else if(lk)h=lockView();
   else if(screen==='home')h=homeView();
   else if(screen==='ach'||screen==='stats')h=statsView();
@@ -1890,7 +1935,7 @@ function reviewPick(){
 }
 function newRun(info,queue,extra){
   const mx=LEVELS[S.level].hearts;
-  L=Object.assign({info,mode:'practice',queue,total:queue.length,done:0,first:0,hearts:mx,max:mx,retried:new Set(),hinted:new Set(),leave:false,cur:null,si:0,peek:false,fast:0,review:false,placement:false},extra||{});
+  L=Object.assign({info,mode:'practice',queue,total:queue.length,done:0,first:0,earn:0,hearts:mx,max:mx,retried:new Set(),hinted:new Set(),leave:false,cur:null,si:0,peek:false,fast:0,review:false,placement:false},extra||{});
   delete barsMem.lesson;
   screen='lesson';fx.view=true;prep();render();window.scrollTo(0,0);
 }
@@ -1922,6 +1967,7 @@ function hint(){
   const c=L.cur,ex=c.ex;
   if(!c||c.checked||canHint(c)!==true)return;
   c.hints++;S.stats.hints++;
+  if(S.level==='normal'&&!L.hinted.has(ex))fx.xpPop='−5';
   if(S.level!=='easy')L.hinted.add(ex);
   if(ex.t==='mc'||ex.t==='out'){
     const wrong=c.opts.map((o,i)=>i).filter(i=>!c.opts[i].ok&&i!==c.sel);
@@ -1967,6 +2013,7 @@ function check(){
     L.done++;L.pl.push(ok);
   }else if(ok){
     L.done++;
+    {const g=(L.retried.has(ex)||L.hinted.has(ex))?5:10;L.earn=(L.earn||0)+g;fx.xpPop='+'+g;}
     if(firstTry&&!L.hinted.has(ex)){
       L.first++;
       const dt=(performance.now()-c.t0)/1000;
@@ -2089,6 +2136,8 @@ $app.addEventListener('click',e=>{
   if(a==='storygo'){const info=ALL.find(l=>l.uid===pendingUid);if(info){S.story[info.ui]=1;save();const u=pendingUid;pendingUid=null;startLesson(u);}return;}
   if(a==='ics'){icsDownload();return;}
   if(a==='unlock'){bioUnlock();return;}
+  if(a==='upd'){doUpdate();return;}
+  if(a==='updchk'){checkUpdate().then(()=>{if(!NEWVER)toast('Оновлень немає','У тебе остання версія','ach');});return;}
   if(a==='bioon'){bioEnable();return;}
   if(a==='biooff'){bioDisable();return;}
   if(a==='pushon'){pushEnable();return;}
@@ -2363,6 +2412,29 @@ async function bioUnlock(){
     await navigator.credentials.get({publicKey:{challenge:rnd(32),allowCredentials:[{type:'public-key',id:u8(bioId())}],userVerification:'required',rpId:location.hostname,timeout:60000}});
     LOCKED=false;fx.view=true;render();
   }catch(e){toast('Не розблоковано','Спробуй ще раз або увійди з паролем');}
+}
+/* ---------- mandatory update gate ---------- */
+const BUILD='1791561105';
+let NEWVER=false,UPDBUSY=false;
+async function checkUpdate(){
+  try{
+    if(BUILD==='__BUILD__'||location.protocol!=='https:')return;
+    const r=await fetch('version.json?t='+Date.now(),{cache:'no-store'});
+    if(!r.ok)return;
+    const j=await r.json();
+    if(j&&j.v&&j.v!==BUILD&&!NEWVER){NEWVER=true;render();}
+  }catch(e){}
+}
+async function doUpdate(){
+  if(UPDBUSY)return;UPDBUSY=true;render();
+  try{
+    if('serviceWorker' in navigator){const rs=await navigator.serviceWorker.getRegistrations();await Promise.all(rs.map(r=>r.unregister()));}
+    if(window.caches){const ks=await caches.keys();await Promise.all(ks.map(k=>caches.delete(k)));}
+  }catch(e){}
+  location.replace(location.pathname+'?u='+Date.now());
+}
+function updView(){
+  return '<div class="view enter"><div class="story"><div class="st-m">'+mascot('happy',120)+'</div><h1 class="ide-t" style="text-align:center">Є нова версія</h1><p class="desc" style="text-align:center">Щоб продовжити, онови застосунок. Твій прогрес збережеться.</p><button class="btn" data-act="upd"'+(UPDBUSY?' disabled':'')+'>'+(UPDBUSY?'Оновлюю…':'Оновити')+'</button></div></div>';
 }
 function lockView(){
   return '<div class="view enter"><div class="story"><div class="st-m">'+mascot('happy',120)+'</div><h1 class="ide-t" style="text-align:center">З поверненням!</h1><p class="desc" style="text-align:center">Розблокуй застосунок за Face ID, відбитком або кодом пристрою.</p><button class="btn" data-act="unlock">Розблокувати</button><button class="btn ghost" data-act="signout">Увійти з іншим акаунтом</button></div></div>';
@@ -2655,6 +2727,9 @@ try{
 }catch(e){}
 
 render();
+checkUpdate();
+document.addEventListener('visibilitychange',()=>{if(!document.hidden)checkUpdate();});
+setInterval(checkUpdate,600000);
 })();
 </script>
 
