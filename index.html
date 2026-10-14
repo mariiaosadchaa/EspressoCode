@@ -692,7 +692,7 @@ input.inp::-webkit-date-and-time-value{text-align:left;min-width:0}
 .tc-s{display:block;margin-top:8px;font-size:13.5px;opacity:.85}
 .gm{display:grid;grid-template-columns:1fr 1.5fr;gap:10px;margin:12px 16px}
 .gm-c{display:grid;gap:8px;align-content:start}
-.gm-b{padding:11px 9px;border-radius:12px;border:2px solid var(--line,rgba(127,127,127,.3));background:var(--surface,#fff);color:inherit;font:600 13.5px/1.3 var(--display);text-align:left;cursor:pointer;min-width:0;overflow-wrap:anywhere}
+.gm-b{padding:11px 9px;border-radius:12px;border:2px solid var(--line,rgba(127,127,127,.3));background:var(--surface,#fff);color:inherit;font:600 12.5px/1.3 var(--display);hyphens:auto;text-align:left;cursor:pointer;min-width:0;overflow-wrap:anywhere}
 .gm-b.d{font-family:inherit;font-weight:500;font-size:12.5px}
 .gm-b.sel{border-color:var(--accent,#C77B30);box-shadow:0 0 0 2px var(--accent,#C77B30) inset}
 .gm-b.ok{opacity:.35;border-color:var(--good);background:var(--good-bg)}
@@ -700,6 +700,47 @@ input.inp::-webkit-date-and-time-value{text-align:left;min-width:0}
 .gm-o{text-align:center;padding:30px 16px;display:grid;gap:12px}
 .ow{padding:6px 16px 0;display:grid;gap:10px}
 .ow .area{width:100%;box-sizing:border-box}
+
+.tblw{overflow-x:auto;margin:10px 0;border-radius:12px;border:1px solid var(--line,rgba(127,127,127,.3))}
+table.trace{border-collapse:collapse;width:100%;font-size:13.5px}
+table.trace th{background:var(--accent,#C77B30);color:#fff;font:700 12px/1.2 var(--display);padding:8px 10px;text-align:left;white-space:nowrap}
+table.trace td{padding:8px 10px;border-top:1px solid var(--line,rgba(127,127,127,.25));font-family:var(--mono);vertical-align:top}
+table.trace tr:nth-child(even) td{background:rgba(127,127,127,.07)}
+pre.code.sh{background:#1F1A14;color:#F2E9DA;border-radius:12px}
+pre.code.sh code{color:inherit}
+.sh-p{color:#E0A458;font-weight:700;user-select:none}
+/* glossary v2 */
+.gl-top{padding:6px 16px 0;display:grid;gap:10px}
+.gl-bar{height:8px;border-radius:99px;background:var(--line,rgba(127,127,127,.25));overflow:hidden}
+.gl-bar i{display:block;height:100%;background:var(--good);border-radius:99px}
+.gl-sel{width:100%;box-sizing:border-box;padding:11px 12px;border-radius:12px;border:2px solid var(--line,rgba(127,127,127,.3));background:var(--surface,#fff);color:inherit;font:600 14px var(--display)}
+.gl-modes{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.gl-m{padding:10px 10px;border-radius:14px;border:2px solid var(--line,rgba(127,127,127,.3));background:var(--surface,#fff);color:inherit;font:inherit;text-align:left;cursor:pointer;display:grid;gap:2px}
+.gl-m b{font-family:var(--display);font-size:14px}
+.gl-m span{font-size:11.5px;opacity:.7;line-height:1.25}
+.gl-m.on{border-color:var(--accent,#C77B30);box-shadow:0 0 0 2px var(--accent,#C77B30) inset}
+.gl-help{margin:0;font-size:13px;opacity:.8}
+.tcard{min-height:280px!important}
+.tcard .tc-t{font-size:26px}
+.tcard .tc-d{font-size:16px;line-height:1.45;margin-top:10px}
+.gl-dots{display:flex;gap:4px;justify-content:center;align-items:center;font-size:12px;opacity:.75}
+.gl-dots i{width:8px;height:8px;border-radius:50%;background:var(--line,rgba(127,127,127,.4));display:inline-block}
+.gl-dots i.on{background:var(--good)}
+
+.trk{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin:4px 16px 10px;padding:4px;border-radius:14px;background:var(--bg)}
+.trkb{border:0;background:transparent;border-radius:11px;padding:10px 6px;font:700 14px var(--display);color:var(--muted);cursor:pointer}
+.trkb.on{background:var(--surface);color:var(--primary);box-shadow:0 0 0 2px var(--line)}
+.gmis{margin:6px 0 10px;padding:12px 14px;border-radius:14px;border:1px solid var(--line,rgba(127,127,127,.3));background:var(--surface,#fff)}
+.gdots{display:flex;gap:5px;margin-bottom:8px}
+.gdots i{flex:1;height:6px;border-radius:99px;background:var(--line,rgba(127,127,127,.3))}
+.gdots i.on{background:var(--good)}.gdots i.cur{background:var(--accent,#C77B30)}
+.gm-k{margin:0;font:700 10.5px/1 var(--display);letter-spacing:.07em;text-transform:uppercase;opacity:.65}
+.gm-t{margin:4px 0;font:700 17px var(--display)}
+.term{background:#1F1A14;color:#F2E9DA;border-radius:14px;padding:12px;font:13px/1.5 var(--mono);height:34vh;min-height:200px;overflow-y:auto}
+.term .tl{margin-top:6px;overflow-wrap:anywhere}
+.term .to{margin:2px 0 0;font:inherit;white-space:pre-wrap;overflow-wrap:anywhere;color:#CFC4B0}
+.tin{display:flex;gap:8px;align-items:center;margin-top:8px}
+.tin input{flex:1;min-width:0;padding:12px;border-radius:12px;border:2px solid var(--line,rgba(127,127,127,.3));background:var(--surface,#fff);color:inherit;font:14px var(--mono)}
 </style><style>*,*::before,*::after{box-sizing:border-box}html{-webkit-text-size-adjust:100%}body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--body)}</style>
 </head>
 <body>
@@ -719,7 +760,7 @@ const R=(q,lines,why)=>({t:'order',q,lines,why});
 const T=(q,code,acc,why)=>({t:'type',q,code,acc,why});
 const B=(q,lines,bad,why)=>({t:'bug',q:q||'У якому рядку помилка компіляції?',lines,bad,why});
 
-const UNITS=[
+let UNITS=[
 {title:'Перші кроки',sub:'Структура програми та вивід тексту',lessons:[
  {title:'Привіт, світе',ex:[
   C('Який рядок виводить текст у консоль?',['System.out.println("Hi");','print("Hi");','console.log("Hi");','echo "Hi";'],'У Java вивід у консоль виконує System.out.println.',null,true),
@@ -3772,6 +3813,1153 @@ System.out.println(total);`,
 "Внутрішній цикл працює n разів, а n щоразу вдвічі менше: 64 + 32 + 16 + 8 + 4 + 2 = 126.")
 ]},
 ];
+const GIT1=[
+{title:`Знайомство з Git`,sub:`Навіщо потрібен Git і перший репозиторій`,lessons:[
+{title:`Що таке Git і навіщо він`,learn:[
+K(`Навіщо потрібен Git`,
+`Уяви, що ти щодня змінюєш меню кав'ярні: сьогодні додав мокко, завтра прибрав чай, а ще через день зрозумів, що вчорашня версія була краща. Без помічника з'являються файли «меню_нове», «меню_нове2», «меню_остаточне». Git робить цю роботу за тебе: запам'ятовує кожну версію проєкту й дає повернутися до будь-якої. Такі програми називаються системами контролю версій, а Git найпопулярніша з них. Місце, де Git зберігає історію одного проєкту, називається репозиторієм (repository, скорочено repo): це звичайна тека з прихованою текою \`.git\` усередині.`,
+null,null),
+K(`Коміт: знімок меню`,
+`Історія в Git складається з комітів (commit). Коміт це знімок усіх файлів проєкту в певний момент, як фото меню на дошці. Кожен знімок має автора, дату, короткий опис і унікальний номер. Git не стирає старі знімки, тому можна будь-коли глянути, яким проєкт був тиждень тому.`,
+null,null),
+K(`Три області Git`,
+`Файли в Git живуть у трьох місцях. Робоча тека це твій стіл бариста, де ти редагуєш файли. Staging (область підготовки) це піднос, на який кладеш те, що хочеш потрапити в наступний знімок. Історія це альбом готових знімків. Шлях завжди такий: стіл, піднос, альбом.`,
+null,null),
+K(`Перші команди`,
+`Три команди для початку: \`git --version\` показує версію Git, \`git init\` створює репозиторій у поточній теці, \`git status\` розповідає, що зараз відбувається. У щойно створеному репозиторії історія порожня, і \`git status\` напише «No commits yet».`,
+`$ git --version
+$ git init`,
+`git version 2.43.0
+Initialized empty Git repository in /home/maria/cafe/.git/`),
+K(`Пастка: Git це не GitHub, і не в кожній теці є репозиторій`,
+`Git це програма на твоєму комп'ютері. GitHub це окремий сайт, де можна зберігати репозиторії в інтернеті, і Git працює без нього. Ще одна пастка: команди Git працюють лише всередині репозиторію. Якщо виконати \`git status\` у теці без \`.git\`, побачиш помилку, і це нормально: спершу потрібен \`git init\`.`,
+`$ git status`,
+`fatal: not a git repository (or any of the parent directories): .git`)
+],ex:[
+C(`Що таке система контролю версій?`,[`Програма, що веде історію змін файлів`,`Програма, що пришвидшує запуск коду`,`Сайт для публікації проєктів в інтернеті`,`Редактор, який перевіряє помилки у тексті`],`Система контролю версій запам'ятовує, що і коли змінилось у файлах, щоб можна було переглянути або повернути старий стан.`),
+C(`Що саме зберігає коміт у Git?`,[`Знімок усіх файлів проєкту в певний момент`,`Лише останній рядок, який ти змінив`,`Копію програми на сервері`,`Список помилок, знайдених у коді`],`Коміт це цілий знімок проєкту разом з описом, автором і датою. Через знімки Git і вміє повертатися в минуле.`),
+C(`Яке твердження про Git і GitHub правильне?`,[`Git працює на твоєму комп'ютері й без GitHub`,`Git і GitHub це дві назви однієї програми`,`Git не працює без інтернету та GitHub`,`GitHub потрібно встановити, щоб запустити git init`],`Git це локальна програма, яка веде історію. GitHub лише один з сайтів, де можна зберігати копії репозиторіїв.`),
+C(`Три області Git у правильному порядку, від першої до останньої:`,[`робоча тека, staging, історія`,`історія, staging, робоча тека`,`staging, робоча тека, історія`,`робоча тека, історія, staging`],`Ти редагуєш файли в робочій теці, відбираєш потрібне в staging, а потім робиш коміт, і знімок потрапляє в історію.`),
+C(`Для чого потрібна область staging?`,[`Щоб відібрати зміни, які ввійдуть у наступний коміт`,`Щоб зберігати старі версії файлів назавжди`,`Щоб редагувати файли в зручному вікні`,`Щоб надсилати файли на GitHub`],`Staging це піднос: на ньому лежить те, що ти вибрав для наступного знімка. Усе інше лишається в робочій теці.`),
+F(`Створи репозиторій у теці та перевір його стан:`,`$ git [[0]]
+$ git [[1]]`,[`init`,`status`],[`start`,`create`,`log`],`Спершу git init створює репозиторій, і вже після цього git status має що показати.`),
+R(`Створи теку для проєкту, зайди в неї, зроби її репозиторієм і перевір стан:`,[`$ mkdir cafe`,`$ cd cafe`,`$ git init`,`$ git status`],`Репозиторій створюється в поточній теці, тому спершу треба створити теку й зайти в неї, а вже потім виконувати git init.`),
+T(`Яка команда покаже встановлену версію Git?`,`$ [[0]]`,[`git --version`,`git version`],`Прапорець --version (або підкоманда version) виводить номер встановленої версії Git.`),
+B(`Яка команда записана з помилкою?`,[`$ git --version`,`$ git init`,`$ git statsu`,`$ git init`],2,`Команди «statsu» у Git не існує, це помилка в слові status. Git навіть підкаже схожу команду.`),
+O(`$ mkdir cafe
+$ cd cafe
+$ git init
+$ git status`,[`On branch main
+
+No commits yet
+
+nothing to commit (create/copy files and use "git add" to track)`,`fatal: not a git repository (or any of the parent directories): .git`,`On branch main
+nothing to commit, working tree clean`,`No commits yet`],`Репозиторій щойно створений, комітів ще немає, а файлів у теці теж немає. Тому Git пише про порожню історію й про те, що комітити нічого.`,`Що покаже остання команда?`)
+]},
+{title:`Налаштування й перший репозиторій`,learn:[
+K(`Навіщо Git знати твоє ім'я`,
+`На стакані з кавою пишуть ім'я бариста, щоб було видно, хто готував. У комітах те саме: кожен знімок підписаний автором. Тому перед першим комітом Git просить сказати, як тебе звати, і вказати пошту. Це робиться один раз для всього комп'ютера.`,
+null,null),
+K(`git config: ім'я та пошта`,
+`Команда \`git config\` записує налаштування. Прапорець \`--global\` означає «для всіх репозиторіїв на цьому комп'ютері». Ім'я зберігається в \`user.name\`, пошта в \`user.email\`. Якщо передати лише назву налаштування, Git покаже його значення.`,
+`$ git config --global user.name "Maria"
+$ git config --global user.email "maria@example.com"
+$ git config user.name`,
+`Maria`),
+K(`Новий репозиторій і перший файл`,
+`У репозиторії, створеному через \`git init\`, створимо файл і запитаємо в Git, що він про нього думає. Команда \`echo латте > menu.txt\` створює файл menu.txt з текстом усередині. Git бачить новий файл, але не стежить за ним, доки ти сам не скажеш.`,
+`$ echo latte > menu.txt
+$ git status`,
+`On branch main
+
+No commits yet
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+	menu.txt
+
+nothing added to commit but untracked files present (use "git add" to track)`),
+K(`Стани файлів: від untracked до staged`,
+`Файл може бути в різних станах. Untracked: Git його бачить, але не відстежує. Staged: файл на підносі, готовий до коміту. Modified: файл відстежується, але його змінили після останнього знімка. Скорочений вивід \`git status -s\` позначає їх кодами: \`??\` це untracked, \`A\` це новий файл у staging.`,
+`$ echo latte > menu.txt
+$ git status -s
+$ git add menu.txt
+$ git status -s`,
+`?? menu.txt
+A  menu.txt`),
+K(`Пастка: змінив файл після git add`,
+`Команда \`git add\` кладе на піднос поточний вигляд файлу, а не сам файл назавжди. Якщо після цього ще раз змінити файл, Git покаже і staged, і modified зміни одночасно. У скороченому виводі це два символи: перший для staging, другий для робочої теки. Щоб нова зміна потрапила в коміт, треба виконати \`git add\` ще раз.`,
+`$ git add menu.txt
+$ echo mocha >> menu.txt
+$ git status -s`,
+`AM menu.txt`)
+],ex:[
+C(`Навіщо Git потрібні user.name та user.email?`,[`Щоб підписувати кожен коміт автором`,`Щоб входити на сайт GitHub`,`Щоб захистити репозиторій паролем`,`Щоб Git міг створити нову теку`],`Ім'я й пошта записуються в кожен коміт. Так у команді видно, хто що зробив.`),
+C(`Що означає \`??\` перед назвою файлу у виводі git status -s?`,[`Файл untracked: Git його бачить, але не відстежує`,`Файл уже збережений в історії`,`У файлі є помилка`,`Файл лежить у staging`],`Дві позначки питання це untracked. Файл треба додати командою git add, щоб Git почав за ним стежити.`,`$ git status -s
+?? menu.txt`,true),
+O(`$ git init
+$ echo latte > menu.txt
+$ git status -s`,[`?? menu.txt`,`A  menu.txt`,`M  menu.txt`,`nothing to commit`],`Файл щойно створений і ще не доданий, тому Git позначає його як untracked, двома знаками питання.`,`Що покаже остання команда?`),
+F(`Задай ім'я та пошту для всіх репозиторіїв на комп'ютері:`,`$ git config --global [[0]] "Maria"
+$ git config --global [[1]] "maria@example.com"`,[`user.name`,`user.email`],[`name`,`email`,`username`],`Налаштування називаються user.name та user.email. Просто name чи email Git не розпізнає.`),
+R(`Створи репозиторій, потім файл menu.txt, додай його в staging і перевір стан коротким виводом:`,[`$ git init`,`$ echo latte > menu.txt`,`$ git add menu.txt`,`$ git status -s`],`Спершу має існувати репозиторій і сам файл, тоді його можна додати в staging, а наприкінці перевірити результат.`),
+T(`Запиши команду, що покаже стан репозиторію в короткому форматі:`,`$ [[0]]`,[`git status -s`,`git status --short`],`Прапорець -s (він же --short) скорочує вивід git status до одного рядка на файл.`),
+T(`Запиши команду, яка покаже збережене ім'я автора:`,`$ [[0]]`,[`git config user.name`,`git config --get user.name`,`git config --global user.name`],`Якщо передати git config тільки назву налаштування, Git покаже його поточне значення.`),
+C(`Файл menu.txt уже є в історії. Ти додав у нього новий рядок. У якому стані тепер файл?`,[`modified: змінений, але не доданий у staging`,`untracked: Git його не відстежує`,`staged: готовий до коміту`,`clean: змін немає`],`Файл вже відстежується, тому це не untracked. Змін після останнього знімка не додано в staging, отже файл має стан modified.`),
+B(`Яка команда записана з помилкою?`,[`$ git config --global user.name "Maria"`,`$ git config --global user.email "m@example.com"`,`$ git config --global useremail "m@example.com"`,`$ git config user.name`],2,`Назва налаштування useremail не існує: треба user.email, через крапку між секцією user і ключем email.`),
+O(`$ git init
+$ echo latte > menu.txt
+$ git add menu.txt
+$ git commit -m "Меню"
+$ echo mocha >> menu.txt
+$ git add menu.txt
+$ echo tea >> menu.txt
+$ git status -s`,[`MM menu.txt`,`M  menu.txt`,` M menu.txt`,`?? menu.txt`],`Після коміту файл відстежується. Перша зміна лежить у staging (перша M), а чай дописано вже після git add, тому він лише в робочій теці (друга M).`,`Що покаже остання команда?`)
+]}
+]},
+{title:`Перші коміти`,sub:`Зберігаємо історію змін`,lessons:[
+{title:`add і commit`,learn:[
+K(`Навіщо два кроки`,
+`Бариста спершу ставить готові напої на піднос, і лише потім виносить замовлення гостю. У Git так само: \`git add\` вибирає, що потрапить у знімок, а \`git commit\` робить сам знімок. Два кроки дають змогу зберегти в один коміт лише пов'язані зміни, навіть якщо ти встиг змінити багато файлів.`,
+null,null),
+K(`git add: що кладемо на піднос`,
+`Команда \`git add\` приймає назву файлу або кілька. Крапка \`.\` означає «усе в поточній теці й глибше». Перевіряй вибір через \`git status\`, поки не звик, щоб випадково не додати зайвого.`,
+`$ git add menu.txt
+$ git add menu.txt tea.txt
+$ git add .`,
+null),
+K(`git commit -m: робимо знімок`,
+`Команда \`git commit -m "текст"\` створює коміт з коротким описом. Після неї Git показує підсумок: гілку, скорочений номер коміту, скільки файлів змінено. Номер у квадратних дужках у тебе буде іншим, бо він унікальний. Слова «root-commit» означають, що це найперший коміт у репозиторії.`,
+`$ echo latte > menu.txt
+$ git add menu.txt
+$ git commit -m "Додано меню"`,
+`[main (root-commit) 6465901] Додано меню
+ 1 file changed, 1 insertion(+)
+ create mode 100644 menu.txt`),
+K(`Які повідомлення краще`,
+`Повідомлення читатимеш і ти, і колеги через місяць. Пиши коротко й конкретно, що саме зроблено: «Додано мокко до меню». Слова «зміни», «fix» чи «ще раз» нічого не пояснюють. Без повідомлення Git взагалі відмовиться створювати коміт.`,
+`$ git commit -m "зміни"
+$ git commit -m "Додано мокко до меню"
+$ git commit -m "Виправлено ціну американо"`,
+null),
+K(`Пастка: git commit -am не бачить нових файлів`,
+`Прапорець \`-a\` дозволяє пропустити \`git add\` для файлів, які Git уже відстежує. Тому \`git commit -am "текст"\` швидко зберігає зміни старих файлів. Але новий файл (untracked) -a не підхопить: його треба один раз додати вручну.`,
+`$ echo mocha >> menu.txt
+$ echo new > new.txt
+$ git commit -am "Додано мокко"
+$ git status -s`,
+`[main 0add6c5] Додано мокко
+ 1 file changed, 1 insertion(+)
+?? new.txt`)
+],ex:[
+C(`Що робить команда git add menu.txt?`,[`Кладе файл у staging для наступного коміту`,`Створює коміт з цим файлом`,`Створює новий файл menu.txt`,`Відправляє файл на GitHub`],`add лише готує файл до знімка. Сам знімок робить окрема команда commit.`),
+C(`Ти додав у staging файл a.txt, а файл b.txt змінив, але не додав. Що потрапить у git commit?`,[`Тільки a.txt`,`Обидва файли`,`Тільки b.txt`,`Нічого, бо файлів більше одного`],`У коміт ідуть лише зміни зі staging. Змінений b.txt лишається в робочій теці до наступного git add.`),
+O(`$ git init
+$ echo latte > menu.txt
+$ git add menu.txt
+$ git commit -m "Додано меню"
+$ git status`,[`On branch main
+nothing to commit, working tree clean`,`On branch main
+
+No commits yet`,`Changes to be committed:
+	new file:   menu.txt`,`Untracked files:
+	menu.txt`],`Усе збережено в коміті, а нових змін немає, тому дерево чисте: так Git називає робочу теку без незбережених змін.`,`Що покаже остання команда?`),
+F(`Додай файл menu.txt у staging і збережи коміт:`,`$ git [[0]] menu.txt
+$ git [[1]] -m "Додано латте"`,[`add`,`commit`],[`put`,`save`,`push`,`init`],`Спершу add кладе файл на піднос, потім commit фіксує знімок з повідомленням.`),
+R(`Створи файл tea.txt, додай його, збережи коміт і перевір, що тека чиста:`,[`$ echo tea > tea.txt`,`$ git add tea.txt`,`$ git commit -m "Додано чай"`,`$ git status -s`],`Файл має існувати до add, а add має бути до commit. Статус наприкінці покаже порожній вивід, якщо все збережено.`),
+T(`Додай у staging усі зміни та нові файли з поточної теки:`,`$ [[0]]`,[`git add .`,`git add -A`,`git add --all`],`Крапка означає поточну теку з усім вмістом. Прапорці -A та --all роблять майже те саме для всього репозиторію.`),
+T(`Збережи коміт з повідомленням Оновлено меню:`,`$ [[0]]`,[`git commit -m "Оновлено меню"`,`git commit -m 'Оновлено меню'`],`Повідомлення йде після -m і береться в лапки, щоб Git сприйняв його як один шматок тексту.`),
+C(`Яке повідомлення коміту найкраще?`,[`Додано сезонний гарбузовий латте`,`зміни`,`fix`,`ще раз`],`Хороше повідомлення коротко й конкретно каже, що зроблено. Решта варіантів нічого не скажуть тобі навіть через тиждень.`),
+B(`Яка команда записана з помилкою?`,[`$ git add menu.txt`,`$ git add -m menu.txt`,`$ git commit -m "Додано мокко"`,`$ git status`],1,`Прапорець -m існує лише в git commit, де він задає повідомлення. У git add такого прапорця немає.`),
+O(`$ git init
+$ echo latte > menu.txt
+$ git add menu.txt
+$ git commit -m "Меню"
+$ echo mocha >> menu.txt
+$ echo tea > tea.txt
+$ git commit -am "Мокко"
+$ git status -s`,[`?? tea.txt`,`?? menu.txt`,` M menu.txt\n?? tea.txt`,`nothing to commit`],`-a бере лише відстежувані файли, тому змінений menu.txt потрапив у коміт. Новий tea.txt Git не відстежує, тож він лишився untracked.`,`Що покаже остання команда?`)
+]},
+{title:`log, diff і .gitignore`,learn:[
+K(`git log: журнал знімків`,
+`Коли комітів стає багато, потрібен журнал, як зошит замовлень за день. Команда \`git log\` показує коміти від найновішого до найстарішого: номер, автора, дату й повідомлення. Щоб вийти з довгого журналу, натисни q.`,
+`$ git log`,
+`commit 3f2a9c1d7b5e4a6f8c0d1e2f3a4b5c6d7e8f9a0b
+Author: Maria <maria@example.com>
+Date:   Mon Oct 12 10:00:00 2026 +0300
+
+    Додано мокко
+
+commit 9b8a7c6d5e4f3a2b1c0d9e8f7a6b5c4d3e2f1a0b
+Author: Maria <maria@example.com>
+Date:   Mon Oct 12 09:00:00 2026 +0300
+
+    Перше меню`),
+K(`git log --oneline: коротко`,
+`Повний журнал займає багато місця. Прапорець \`--oneline\` залишає на кожен коміт один рядок: скорочений номер і повідомлення. Найновіший коміт завжди зверху.`,
+`$ git log --oneline`,
+`f3326a0 Додано мокко
+e22051b Перше меню`),
+K(`git diff: що змінилось`,
+`Команда \`git diff\` показує, чим робоча тека відрізняється від того, що вже лежить у staging. Рядки з плюсом додані, з мінусом видалені. Якщо потрібен лише підсумок, додай \`--stat\`: Git порахує файли й рядки.`,
+`$ echo mocha >> menu.txt
+$ git diff`,
+`diff --git a/menu.txt b/menu.txt
+index 5c76e70..780d82b 100644
+--- a/menu.txt
++++ b/menu.txt
+@@ -1 +1,2 @@
+ latte
++mocha`),
+K(`git diff --staged і git show`,
+`Після \`git add\` зміни переїхали у staging, і звичайний \`git diff\` стає порожнім. Щоб побачити, що саме піде в наступний коміт, використай \`git diff --staged\`. А \`git show\` показує вже збережений коміт: його опис і що в ньому змінилось.`,
+`$ git add menu.txt
+$ git diff
+$ git diff --staged
+$ git show`,
+null),
+K(`.gitignore: що Git не бачить`,
+`Є файли, які не треба зберігати: логи, тимчасові теки, паролі. Створи файл \`.gitignore\` і впиши туди шаблони по одному на рядок: \`*.log\` ігнорує всі файли з розширенням log, \`build/\` ігнорує теку. Пастка: .gitignore не діє на файли, які Git уже відстежує. Їх треба спершу прибрати з відстеження.`,
+`$ echo "*.log" > .gitignore
+$ echo "build/" >> .gitignore
+$ echo "log" > app.log
+$ git status -s`,
+`?? .gitignore`)
+],ex:[
+C(`У якому порядку \`git log\` показує коміти?`,[`Від найновішого до найстарішого`,`Від найстарішого до найновішого`,`За алфавітом повідомлень`,`У випадковому порядку`],`Журнал читається зверху вниз від свіжих змін до старих, тому останній коміт завжди на самому початку.`),
+C(`Ти змінив файл і виконав git add. Яка команда покаже ці підготовлені зміни?`,[`git diff --staged`,`git diff`,`git status -s`,`git log`],`Звичайний git diff порівнює робочу теку зі staging і вже буде порожнім. Для вмісту staging потрібен --staged.`,`$ echo mocha >> menu.txt
+$ git add menu.txt`,true),
+O(`$ git init
+$ echo latte > menu.txt
+$ git add menu.txt
+$ git commit -m "Меню"
+$ echo mocha >> menu.txt
+$ git diff --stat`,[`1 file changed, 1 insertion(+)`,`1 file changed, 1 deletion(-)`,`2 files changed, 1 insertion(+)`,`nothing to commit`],`Додано один рядок у одному файлі. Ключове слово insertion(+) означає додані рядки, а deletion(-) видалені.`,`Який рядок підсумку покаже остання команда?`),
+O(`$ git init
+$ echo "*.log" > .gitignore
+$ echo log > app.log
+$ echo latte > menu.txt
+$ git status -s`,[`?? .gitignore\n?? menu.txt`,`?? .gitignore\n?? app.log\n?? menu.txt`,`?? menu.txt`,`?? app.log`],`Файл app.log підходить під шаблон *.log, тому Git його не бачить. Сам .gitignore і menu.txt нові, тому вони untracked.`,`Що покаже остання команда?`),
+F(`Покажи зміни, підготовлені до коміту, а потім історію в один рядок на коміт:`,`$ git [[0]] --staged
+$ git [[1]] --oneline`,[`diff`,`log`],[`status`,`add`,`commit`],`diff --staged показує вміст staging, log --oneline коротко виводить журнал комітів.`),
+R(`Зміни файл, подивись різницю, додай зміни, перевір staging і збережи коміт:`,[`$ echo mocha >> menu.txt`,`$ git diff`,`$ git add menu.txt`,`$ git diff --staged`,`$ git commit -m "Додано мокко"`],`Спершу зміна, потім огляд змін у робочій теці. Після add вони переїжджають у staging, і їх видно через --staged, а коміт завершує справу.`),
+T(`Запиши команду, що виводить історію по одному рядку на коміт:`,`$ [[0]]`,[`git log --oneline`],`Прапорець --oneline стискає кожен коміт до скороченого номера й повідомлення.`),
+T(`Допиши шаблон, щоб Git ігнорував усі файли з розширенням tmp:`,`$ echo "[[0]]" > .gitignore`,[`*.tmp`],`Зірочка замінює будь-яку назву файлу, а після крапки йде розширення.`),
+B(`Яка команда записана з помилкою?`,[`$ git log --oneline`,`$ git diff --staged`,`$ git --oneline log`,`$ git show`],2,`Прапорці підкоманди стоять після неї: git log --oneline. Якщо поставити --oneline перед log, Git не зрозуміє, що це за опція.`),
+C(`Файл menu.txt уже збережений у коміті. Потім ти додав menu.txt у .gitignore. Що буде?`,[`Git й далі стежитиме за menu.txt`,`Git одразу видалить menu.txt з історії`,`Git видалить menu.txt з диска`,`Git покаже помилку в git status`],`.gitignore діє лише на файли, які Git ще не відстежує. Вже збережений файл треба окремо прибрати з відстеження, інакше його зміни Git і далі побачить.`)
+]}
+]}
+];
+const GIT2=[
+{title:'Гілки',sub:'Працюємо над кількома ідеями одночасно',lessons:[
+{title:'Створюємо гілки',
+learn:[
+K('Навіщо потрібні гілки',"Уяви, що ти придумуєш новий рецепт латте з сиропом, але основне меню псувати не хочеш. Тож береш чернетку: пробуєш на ній що завгодно, а меню лежить собі недоторканим. У Git така чернетка називається гілка (branch). Головна гілка зветься `main`.",`$ git branch`,`* main`),
+K('Створюємо гілку і переходимо на неї',"`git branch назва` лише створює гілку, а `git switch назва` переходить на неї. Найчастіше роблять обидві дії одразу: `git switch -c назва` (літера c від create). Старий аналог такої команди: `git checkout -b назва`.",`$ git switch -c latte
+$ git branch`,`Switched to a new branch 'latte'
+* latte
+  main`),
+K('HEAD: де ти зараз',"`HEAD` це вказівник «я стою тут». Він завжди вказує на поточну гілку. Коли робиш `git switch`, Git пересуває HEAD і підмінює файли в теці під ту гілку. Тому на гілці latte в menu.txt є рядок про латте, а на main його немає.",`$ cat .git/HEAD
+$ git switch latte
+$ cat .git/HEAD`,`ref: refs/heads/main
+Switched to branch 'latte'
+ref: refs/heads/latte`),
+K('Чому гілки дешеві',"Гілка це не копія всіх файлів. Це крихітний файл з одним хешем: адресою коміту, на який вона вказує. Саме тому створити гілку можна миттєво, навіть у величезному проєкті. Тож не бійся створювати їх багато.",`$ wc -c .git/refs/heads/main`,`41 .git/refs/heads/main`),
+K('Видаляємо гілку і типова пастка',"Коли чернетка вже не потрібна, її видаляють: `git branch -d назва`. Безпечне `-d` відмовиться, якщо в гілці є коміти, яких немає більше ніде. Примусове `-D` видаляє без питань, тому вживай його, лише коли точно знаєш, що ці зміни тобі не потрібні. Поточну гілку видалити не можна: спершу перейди на іншу.",`$ git branch -d latte`,`error: the branch 'latte' is not fully merged.
+If you are sure you want to delete it, run 'git branch -D latte'`)
+],
+ex:[
+C("Яка команда створює гілку і відразу переходить на неї?",
+ ["git switch -c latte","git branch latte","git switch latte","git branch -d latte"],
+ "Прапорець -c (create) створює гілку, а switch переходить на неї. Просто git branch latte гілку створить, але залишить тебе там, де ти був.",null,true),
+C("Що таке HEAD у Git?",
+ ["Вказівник на гілку (або коміт), на якій ти зараз стоїш","Назва головної гілки проєкту","Останній коміт, надісланий на сервер","Файл, у якому записано всі гілки"],
+ "HEAD показує, де ти зараз. Зазвичай він вказує на поточну гілку, а та вже вказує на свій останній коміт."),
+O(`$ git switch -c latte
+$ git branch`,
+ ["* latte\n  main","  latte\n* main","* main","* latte"],
+ "Після switch -c ти стоїш на новій гілці latte, а зірочка позначає поточну. main нікуди не зникла, тому список має два рядки.",
+ "Що покаже остання команда?"),
+F("Створи гілку iced і перейди на неї.",
+ `$ git [[0]] [[1]] iced`,
+ ['switch','-c'],['checkout','-d','commit'],
+ "switch переходить між гілками, а -c каже створити нову. Без -c Git шукав би вже існуючу гілку iced і не знайшов би."),
+C("Гілка latte створена, у ній є коміт, і ти повертаєшся на main. Що станеться на останній команді?",
+ ["Git відмовиться, бо коміт з latte ще не злито в main","Гілку видалено без жодних питань","Git видалить гілку і перенесе її коміт у main","Git перейде на latte і видалить її там"],
+ "Прапорець -d безпечний: він не дає загубити роботу, якої немає в інших гілках. Щоб видалити попри це, потрібен -D, але тоді коміт можна втратити.",
+ `$ git switch -c latte
+$ git commit -am "Додали латте"
+$ git switch main
+$ git branch -d latte`),
+R("Збери послідовність: створи гілку mocha, збережи зміну в menu.txt і повернися на main.",
+ ['$ git switch -c mocha','$ git add menu.txt','$ git commit -m "Додали мокка"','$ git switch main'],
+ "Спершу створюємо гілку, щоб коміт потрапив саме в неї. Потім додаємо файл у стадію, робимо коміт і лише тоді повертаємося на main."),
+T("Безпечно видали гілку iced, яку вже злито.",
+ `$ [[0]]`,
+ ['git branch -d iced','git branch --delete iced'],
+ "Малий -d видаляє гілку лише тоді, коли її зміни вже є в іншій гілці. Це і є безпечний варіант."),
+T("Створи гілку cold, але залишся на тій, де ти зараз.",
+ `$ [[0]]`,
+ ['git branch cold'],
+ "git branch з назвою тільки створює гілку, не чіпаючи HEAD. Щоб ще й перейти, використовують git switch -c."),
+B("Яка команда записана з помилкою?",
+ ['$ git switch main','$ git switch -b mocha','$ git add menu.txt','$ git commit -m "Мокка"'],
+ 1,
+ "Прапорець -b належить старій команді git checkout. У git switch для створення гілки є -c, а -b дає помилку unknown switch."),
+O(`$ git switch -c latte
+$ git switch -c mocha
+$ git switch main
+$ git branch`,
+ ["  latte\n* main\n  mocha","  latte\n  main\n* mocha","* latte\n  main\n  mocha","  main\n* mocha"],
+ "Нові гілки створено, але в кінці ти повернувся на main, тому зірочка біля неї. Гілки в списку йдуть за алфавітом, а не в порядку створення.",
+ "Що покаже остання команда?")
+]},
+{title:'Злиття і конфлікти',
+learn:[
+K('Навіщо зливати гілки',"Нове латте вдалося, і тепер його час внести в основне меню. Це робить `git merge`: він вливає зміни однієї гілки в поточну. Правило: стань на гілку, яка отримує зміни, і назви гілку, яку вливаєш.",`$ git switch main
+$ git merge latte`,`Switched to branch 'main'
+Updating ee65e85..ceedc76
+Fast-forward
+ menu.txt | 1 +
+ 1 file changed, 1 insertion(+)`),
+K('Fast-forward проти merge-коміту',"Якщо main за цей час не змінювалась, Git просто посуває її вказівник уперед. Це fast-forward («перемотка»), нового коміту немає. Якщо ж нові коміти з'явилися в обох гілках, Git створює особливий merge-коміт з двома батьками, і в історії видно розгалуження.",`$ git log --oneline --graph`,`*   a1b2c3d Merge branch 'mocha'
+|\\
+| * 4ee538b Мокка
+* | 9f8e7d6 Чай
+|/
+* ceedc76 Латте`),
+K('Конфлікт: коли Git не може вирішити сам',"Якщо в обох гілках змінили один і той самий рядок, Git не знає, чия версія краща. Він зупиняється і ставить у файл маркери. Між `<<<<<<< HEAD` і `=======` твоя поточна версія, а між `=======` і `>>>>>>>` версія з гілки, яку ти вливаєш.",`$ git merge sale
+$ cat menu.txt`,`Auto-merging menu.txt
+CONFLICT (content): Merge conflict in menu.txt
+Automatic merge failed; fix conflicts and then commit the result.
+espresso
+<<<<<<< HEAD
+price 4
+=======
+price 2
+>>>>>>> sale`),
+K('Розв’язуємо конфлікт крок за кроком',"Відкрий файл і залиш такий текст, який має бути в підсумку: вибери одну версію, іншу або поєднай. Усі три рядки з маркерами (`<<<<<<<`, `=======`, `>>>>>>>`) обов'язково видали. Потім познач файл готовим через `git add` і заверши злиття комітом.",`$ nano menu.txt
+$ git add menu.txt
+$ git commit --no-edit`,`[main cdffe18] Merge branch 'sale'`),
+K('Хочеш відмінити? Скасуй злиття',"Якщо конфлікт заплутаний і хочеться почати з чистого аркуша, виконай `git merge --abort`. Усе повернеться до стану до злиття. Пастка: якщо залишити маркери у файлі й зробити коміт, Git не заперечить, і сміття `<<<<<<<` потрапить в історію. Завжди перечитуй файл перед `git add`.",`$ git merge --abort
+$ git status`,`On branch main
+nothing to commit, working tree clean`)
+],
+ex:[
+C("Ти хочеш влити гілку latte в main. Що робити?",
+ ["Перейти на main і виконати git merge latte","Перейти на latte і виконати git merge main","Виконати git push latte main","Виконати git switch latte main"],
+ "merge вливає вказану гілку в ту, на якій ти стоїш. Тож спершу стань на main, яка має отримати зміни.",null,false),
+C("Що означає слово fast-forward у повідомленні про злиття?",
+ ["Git просто посунув вказівник гілки вперед, без нового merge-коміту","Git швидко знайшов і виправив усі конфлікти","Git надіслав зміни на сервер","Git створив копію гілки"],
+ "Fast-forward буває, коли main не мала власних нових комітів. Тоді історія залишається прямою лінією, і створювати окремий коміт злиття не треба."),
+O(`$ git switch main
+$ git merge sale`,
+ ["CONFLICT (content): Merge conflict in menu.txt","CONFLICT: menu.txt cannot be merged","fatal: conflict detected in menu.txt","error: merge failed, menu.txt is locked"],
+ "Обидві гілки змінили один рядок у menu.txt, тож Git повідомляє про CONFLICT (content). Такий рядок і треба шукати у виводі.",
+ "Який рядок про конфлікт покаже Git, якщо в main і sale по-різному змінили ціну в menu.txt?"),
+C("Що означає частина файлу між рядками <<<<<<< HEAD і =======?",
+ ["Версія рядка з поточної гілки, на якій ти стоїш","Версія рядка з гілки, яку ти вливаєш","Старий рядок до будь-яких змін","Рядок, який Git вже вибрав сам"],
+ "HEAD це поточна гілка, тому над розділювачем твоя версія. Після ======= іде версія з чужої гілки, а в кінці її назва після >>>>>>>.",
+ `espresso
+<<<<<<< HEAD
+price 4
+=======
+price 2
+>>>>>>> sale`),
+F("Конфлікт у menu.txt розв'язано вручну. Завершуємо злиття.",
+ `$ git [[0]] menu.txt
+$ git [[1]] --no-edit`,
+ ['add','commit'],['merge','push','restore'],
+ "git add повідомляє Git, що в файлі конфлікт розв'язано. Потім commit завершує злиття, а --no-edit залишає готове повідомлення Merge branch."),
+R("Збери послідовність дій від початку злиття до його завершення з розв'язаним конфліктом.",
+ ['$ git merge sale','$ nano menu.txt','$ git add menu.txt','$ git commit -m "Знизили ціну"'],
+ "Спершу злиття зупиняється на конфлікті. Ти редагуєш файл, позначаєш його готовим через add, і лише потім коміт завершує злиття."),
+T("Конфлікт виглядає надто складним. Скасуй злиття і поверни все як було.",
+ `$ [[0]]`,
+ ['git merge --abort'],
+ "git merge --abort відкочує теку й історію до стану перед злиттям. Дані з твоєї гілки при цьому не пропадають."),
+T("Влий гілку mocha в поточну гілку.",
+ `$ [[0]]`,
+ ['git merge mocha'],
+ "Команда merge приймає назву гілки, яку треба влити. Куди вливати, визначає поточна гілка."),
+B("Яка команда записана з помилкою?",
+ ['$ git switch main','$ git merge latte','$ git merge --stop','$ git status'],
+ 2,
+ "У git merge немає прапорця --stop. Скасовує злиття --abort, а ще є --continue та --quit."),
+C("Після конфлікту маркери з menu.txt залишились на місці, але далі йдуть git add menu.txt і git commit. Що вийде?",
+ ["Коміт створиться, а рядки з <<<<<<< і >>>>>>> залишаться в меню","Git відмовиться створювати коміт","Git автоматично вибере нову версію і видалить маркери","Злиття скасується саме"],
+ "Git не перевіряє зміст файлу: для нього add означає «готово». Маркери стають частиною коміту, тому файл перед add треба вичитувати.",
+ `$ git merge sale
+$ git add menu.txt
+$ git commit --no-edit`),
+O(`$ git switch main
+$ git merge mocha
+$ git log --oneline`,
+ ["4","3","2","5"],
+ "У логу: спільний коміт «Меню», «Чай» з main, «Мокка» з mocha і ще один, сам merge-коміт. Разом чотири.",
+ "Спільний коміт «Меню» один. Потім на main додали «Чай», на mocha додали «Мокка». Скільки рядків покаже git log --oneline після злиття?")
+]}
+]},
+{title:'Віддалені репозиторії',sub:'GitHub і робота в команді',lessons:[
+{title:'clone, remote і push',
+learn:[
+K('Навіщо потрібен віддалений репозиторій',"Твій репозиторій лежить тільки на твоєму комп'ютері. Щоб кав'ярня була спільною, потрібен «склад рецептів» в інтернеті: це GitHub. Команда `git clone` завантажує звідти повну копію проєкту з усією історією.",`$ git clone https://github.com/barista/cafe.git`,`Cloning into 'cafe'...
+done.`),
+K('remote і origin',"Віддалений репозиторій у Git має ім'я. За звичаєм першому дають ім'я `origin`, і `git clone` додає його сам. `git remote -v` показує всі збережені адреси. Якщо ж ти створив репозиторій через `git init`, адресу додають вручну: `git remote add origin адреса`.",`$ git remote -v`,`origin	https://github.com/barista/cafe.git (fetch)
+origin	https://github.com/barista/cafe.git (push)`),
+K('Відправляємо коміти: push',"`git push` відправляє твої коміти на сервер. У команді `git push -u origin main` слово `origin` каже куди, `main` каже яку гілку. Прапорець `-u` запам'ятовує зв'язок між локальною main і origin/main, тому надалі вистачить просто `git push`.",`$ git push -u origin main`,`To https://github.com/barista/cafe.git
+ * [new branch]      main -> main
+branch 'main' set up to track 'origin/main'.`),
+K('Бачимо, що відправлено, а що ні',"Після локального коміту твоя main на крок попереду сервера. `git status` одразу про це скаже, а `git branch -vv` покаже, яку віддалену гілку відстежує кожна локальна, і на скільки комітів вони розійшлись.",`$ git status
+$ git branch -vv`,`On branch main
+Your branch is ahead of 'origin/main' by 1 commit.
+  (use "git push" to publish your local commits)
+
+nothing to commit, working tree clean
+* main 8b7d4e0 [origin/main: ahead 1] Додали мокка`),
+K('Пастка: нова гілка без зв’язку',"Нову гілку Git ще не знає на сервері, тому звичайний `git push` відмовить і підкаже правильну команду. Це не поломка. Просто один раз виконай `git push -u origin назва`, і далі працюватиме коротка форма.",`$ git switch -c latte
+$ git push`,`Switched to a new branch 'latte'
+fatal: The current branch latte has no upstream branch.
+To push the current branch and set the remote as upstream, use
+
+    git push --set-upstream origin latte`)
+],
+ex:[
+C("Яка команда завантажує на твій комп'ютер копію репозиторію з GitHub?",
+ ["git clone","git remote","git push","git init"],
+ "clone створює локальну копію разом з усією історією і сам додає віддалений репозиторій origin. init лише створює порожній репозиторій.",null,true),
+C("Що таке origin?",
+ ["Ім'я, під яким Git зберіг адресу віддаленого репозиторію","Назва головної гілки проєкту","Перший коміт в історії","Окрема гілка на GitHub"],
+ "origin це не гілка і не коміт, а звичайне ім'я для адреси сервера. Його можна змінити, але за традицією лишають origin."),
+O(`$ git remote add origin https://github.com/barista/cafe.git
+$ git remote -v`,
+ ["origin\thttps://github.com/barista/cafe.git (fetch)\norigin\thttps://github.com/barista/cafe.git (push)","origin\thttps://github.com/barista/cafe.git (fetch)","cafe\thttps://github.com/barista/cafe.git (fetch)\ncafe\thttps://github.com/barista/cafe.git (push)","origin\thttps://github.com/barista/cafe.git (push)\norigin\thttps://github.com/barista/cafe.git (fetch)"],
+ "Git показує адресу двічі: окремо для завантаження (fetch) і для відправки (push). Зазвичай це та сама адреса.",
+ "Що покаже остання команда?"),
+F("Відправ гілку main на сервер і запам'ятай зв'язок для майбутніх push.",
+ `$ git [[0]] -u [[1]] main`,
+ ['push','origin'],['pull','clone','remote'],
+ "push відправляє коміти, origin називає сервер, а -u запам'ятовує зв'язок. Тоді далі достатньо просто git push."),
+R("Збери робочий цикл: скопіюй проєкт, зайди в теку, зміни меню, збережи і відправ.",
+ ['$ git clone https://github.com/barista/cafe.git','$ cd cafe','$ nano menu.txt','$ git commit -am "Додали мокка"','$ git push'],
+ "Спочатку clone створює теку cafe, і в неї треба зайти. Далі правиш файл, робиш коміт і відправляєш. Просто push вистачає, бо clone вже налаштував зв'язок main з origin/main."),
+T("Покажи всі віддалені адреси, які знає Git.",
+ `$ [[0]]`,
+ ['git remote -v','git remote --verbose'],
+ "git remote без прапорця показав би лише імена. З -v (verbose) додаються ще й адреси."),
+T("Відправ нову гілку latte на сервер і запам'ятай зв'язок.",
+ `$ [[0]]`,
+ ['git push -u origin latte','git push --set-upstream origin latte'],
+ "Для нової гілки потрібно вказати і сервер, і назву. Прапорець -u (повна форма --set-upstream) зв'яже локальну latte з origin/latte."),
+B("Яка команда записана з помилкою?",
+ ['$ git clone https://github.com/barista/cafe.git','$ cd cafe','$ git push --upstream origin main','$ git remote -v'],
+ 2,
+ "У git push немає прапорця --upstream. Повна форма називається --set-upstream, а коротка -u."),
+C("Що станеться після цих команд?",
+ ["Git відмовить і підкаже git push --set-upstream origin latte","Гілка latte тихо з'явиться на GitHub","Git відправить main замість latte","Git сам створить новий репозиторій"],
+ "Для нової гілки Git не знає, куди її відправляти, і просить указати origin та назву. Після git push -u origin latte цього більше не буде.",
+ `$ git switch -c latte
+$ git push`),
+O(`$ git commit -am "Додали мокка"
+$ git status`,
+ ["Your branch is ahead of 'origin/main' by 1 commit.","Your branch is up to date with 'origin/main'.","Your branch is behind 'origin/main' by 1 commit.","Your branch has diverged from 'origin/main'."],
+ "Коміт є лише локально, на сервері його ще немає. Тому main попереду origin/main на один коміт, поки ти не зробиш git push.",
+ "Який рядок про стан гілки покаже git status після локального коміту, який ще не відправлено на сервер?")
+]},
+{title:'pull, fetch і pull request',
+learn:[
+K('fetch: дізнатися новини, нічого не чіпаючи',"Колега змінив меню на GitHub, а твоя копія сама не оновиться. `git fetch` ходить на сервер і приносить новини, але твої файли й гілки не змінює. Новини лягають у «нотатку» `origin/main`, яка показує, що зараз на сервері.",`$ git fetch
+$ git status`,`From https://github.com/barista/cafe
+   2d91e2c..529ac3e  main       -> origin/main
+On branch main
+Your branch is behind 'origin/main' by 2 commits, and can be fast-forwarded.
+  (use "git pull" to update your local branch)
+
+nothing to commit, working tree clean`),
+K('pull: завантажити і влити',"`git pull` це два кроки в одному: fetch, а одразу за ним merge. Якщо ти не мав власних нових комітів, це проста перемотка fast-forward, і твоя main стає такою ж, як на сервері.",`$ git pull`,`From https://github.com/barista/cafe
+   2d91e2c..529ac3e  main       -> origin/main
+Updating 2d91e2c..529ac3e
+Fast-forward
+ menu.txt | 2 ++
+ 1 file changed, 2 insertions(+)`),
+K('Потік роботи в команді',"Напряму в `main` зазвичай не пишуть. Роблять так: створюють гілку, пушать її, на GitHub відкривають pull request (запит «влийте мою гілку в main»). Колеги переглядають зміни (review), залишають коментарі, і лише після схвалення гілку зливають кнопкою Merge. Pull request це функція GitHub, а не команда Git.",`$ git push -u origin mocha`,`To https://github.com/barista/cafe.git
+ * [new branch]      mocha -> mocha
+branch 'mocha' set up to track 'origin/mocha'.`),
+K('Після злиття: оновлюємо локальний main',"Коли pull request злито на GitHub, твоя локальна main про це ще не знає. Повернись на main, зроби `git pull`, а гілку, яка вже не потрібна, видали. Безпечне `-d` тепер спрацює, бо зміни вже є в main.",`$ git switch main
+$ git pull
+$ git branch -d mocha`,`Switched to branch 'main'
+Your branch is up to date with 'origin/main'.
+From https://github.com/barista/cafe
+   4ee538b..9f8e7d6  main       -> origin/main
+Updating 4ee538b..9f8e7d6
+Fast-forward
+ menu.txt | 1 +
+ 1 file changed, 1 insertion(+)
+Deleted branch mocha (was 4ee538b).`),
+K('Пастка: «up to date» може бути застарілим',"Фраза «up to date» означає лише, що ти синхронізований із тим, що Git знав після останнього fetch. Сервер міг змінитись, а ти й не знаєш. А якщо коміти з'явились і в тебе, і на сервері, простий `git pull` зупиниться з `fatal: Need to specify how to reconcile divergent branches`. Тоді допоможе `git pull --rebase`: він приставляє твої коміти після чужих (докладно про rebase поговоримо пізніше).",`$ git pull
+$ git pull --rebase`,`fatal: Need to specify how to reconcile divergent branches.
+Successfully rebased and updated refs/heads/main.`)
+],
+ex:[
+C("Чим git fetch відрізняється від git pull?",
+ ["fetch лише завантажує новини, а pull ще й вливає їх у поточну гілку","fetch відправляє зміни на сервер, а pull їх завантажує","fetch працює лише з main, а pull з усіма гілками","Нічим, це два імені однієї команди"],
+ "pull дорівнює fetch плюс merge. Тому fetch безпечний: він нічого не змінює у твоїх файлах і гілках, лише оновлює знання про сервер."),
+C("Який порядок роботи з pull request правильний?",
+ ["Гілка, push, pull request, review, merge","Push у main, review, нова гілка, merge","Pull request, гілка, merge, push","Merge, review, гілка, push"],
+ "Спершу працюєш в окремій гілці й пушиш її. Потім відкриваєш pull request, колеги роблять review, і лише після схвалення гілку зливають у main."),
+O(`$ git fetch
+$ git status`,
+ ["Your branch is behind 'origin/main' by 2 commits, and can be fast-forwarded.","Your branch is up to date with 'origin/main'.","Your branch is ahead of 'origin/main' by 2 commits.","Your branch has diverged from 'origin/main'."],
+ "fetch приніс два нові коміти з сервера, а твої файли лишились старі. Тому status повідомляє, що ти позаду на 2 коміти, а pull це виправить.",
+ "На сервері колега додав 2 коміти, у тебе нових комітів немає. Який рядок про стан гілки покаже останній status?"),
+F("Pull request злито. Онови локальний main і прибери вже непотрібну гілку mocha.",
+ `$ git switch [[0]]
+$ git [[1]]
+$ git branch -d [[2]]`,
+ ['main','pull','mocha'],['push','clone','latte'],
+ "Спочатку переходимо на main, потім pull приносить злиті зміни, і лише тоді -d дозволить видалити mocha, бо її вже влито."),
+R("Збери правильний початок нової роботи: свіжий main, нова гілка, зміна і відправка.",
+ ['$ git switch main','$ git pull','$ git switch -c iced','$ nano menu.txt','$ git commit -am "Додали iced"','$ git push -u origin iced'],
+ "Починай з актуального main, щоб твоя гілка виросла з найновішого меню. Далі нова гілка, зміна, коміт і push з -u."),
+T("Завантаж новини з сервера, але нічого не вливай у свої гілки.",
+ `$ [[0]]`,
+ ['git fetch','git fetch origin'],
+ "fetch лише оновлює origin/main та інші відстежувані гілки. Твої власні гілки й файли він не чіпає."),
+T("Завантаж зміни з сервера й приставь свої локальні коміти після чужих.",
+ `$ [[0]]`,
+ ['git pull --rebase','git pull -r'],
+ "Прапорець --rebase замінює merge на перенесення твоїх комітів поверх завантажених. Історія виходить без зайвого merge-коміту."),
+B("Яка команда записана з помилкою?",
+ ['$ git switch -c mocha','$ git push -u origin mocha','$ git pull request','$ git switch main'],
+ 2,
+ "pull request існує на GitHub, але не як команда Git. Git сприйме request як ім'я віддаленого репозиторію й скаже, що такого немає."),
+C("Колега змінив main на GitHub десять хвилин тому. fetch або pull після цього не було. Що покаже git status?",
+ ["Your branch is up to date with 'origin/main'.","Your branch is behind 'origin/main' by 1 commit.","fatal: the remote has changed","Your branch has diverged from 'origin/main'."],
+ "status не ходить на сервер, а порівнює з тим, що запам'ятала нотатка origin/main під час останнього fetch. Тому відставання він не побачить, поки не завантажиш новини.",
+ `$ git status`),
+C("Під час git pull ти бачиш: fatal: Need to specify how to reconcile divergent branches. Що це означає?",
+ ["І в тебе, і на сервері є різні нові коміти, треба вибрати merge або rebase","Сервер зараз недоступний","Гілку main видалили на сервері","У тебе немає прав на push"],
+ "Історії розійшлись, тож Git не знає, як їх поєднати. Вибери спосіб: git pull --rebase приставить твої коміти після чужих, а git pull --no-rebase зробить merge-коміт.",
+ `$ git pull`)
+]}
+]}
+];
+const GIT3=[
+{title:'Виправляємо помилки',sub:'Скасовуємо зміни без паніки',lessons:[
+
+// ============ УРОК 1: restore і amend ============
+{title:'restore і amend',
+learn:[
+K("Навіщо скасовувати зміни",
+"В кав'ярні бариста почав переписувати меню, а потім вирішив, що старий варіант був кращим. Добре, що є чистий примірник! У Git таким примірником стає останній коміт. Команда `git restore` бере файл з нього й повертає, як було. Спершу подивимось, як Git показує змінений файл.",
+`$ echo "кола" >> menu.txt
+$ git status`,
+`On branch main
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+\tmodified:   menu.txt
+
+no changes added to commit (use "git add" and/or "git commit -a")`),
+K("git restore: скасувати правки у файлі",
+"`git restore menu.txt` повертає файл до стану останнього коміту. Усі правки, яких ще немає в staging, зникають. Зверни увагу: Git сам підказує цю команду у виводі `git status`. Старий аналог цієї команди: `git checkout -- menu.txt`.",
+`$ git restore menu.txt
+$ git status`,
+`On branch main
+nothing to commit, working tree clean`),
+K("git restore --staged: зняти файл з підноса",
+"Команда `git add` кладе файл на піднос (staging) перед комітом. Якщо додали зайве, `git restore --staged menu.txt` знімає файл з підноса. Сама правка у файлі лишається, нічого не губиться. Це безпечна команда, на відміну від звичайного `restore`.",
+`$ git add menu.txt
+$ git restore --staged menu.txt
+$ git status`,
+`On branch main
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+\tmodified:   menu.txt
+
+no changes added to commit (use "git add" and/or "git commit -a")`),
+K("git commit --amend: виправити останній коміт",
+"Помилка в повідомленні останнього коміту? Команда `git commit --amend -m \"нове повідомлення\"` замінює його. Забули файл? Спочатку `git add` для цього файлу, потім `git commit --amend --no-edit`: повідомлення лишиться тим самим, а файл потрапить у той самий коміт.",
+`$ git add syrop.txt
+$ git commit --amend --no-edit`,
+null),
+K("Пастка: що не повертається",
+"Дві важливі речі. Перша: `git restore menu.txt` стирає правки назавжди, бо вони не потрапили в жоден знімок. Друга: `--amend` не дописує, а заміняє останній коміт новим, з іншим хешем (ідентифікатором). Тому не роби amend для коміту, який уже відправлено командою push: в інших людей лишиться старий варіант.",
+`$ git commit --amend -m "Add mocha"`,
+null),
+],
+ex:[
+C("Файл menu.txt змінено, але ще не додано в staging. Яка команда скасує ці правки?",
+ ["git restore menu.txt","git restore --staged menu.txt","git commit --amend","git add menu.txt"],
+ "Звичайний `git restore файл` повертає файл до стану останнього коміту. Варіант з `--staged` лише знімає файл з підноса, а правки лишає.",null,true),
+O(`$ echo latte > menu.txt
+$ git add menu.txt
+$ git commit -m "Add latte"
+$ echo cola >> menu.txt
+$ git restore menu.txt
+$ git status`,
+ ["On branch main\nnothing to commit, working tree clean","On branch main\nChanges not staged for commit:","On branch main\nChanges to be committed:","On branch main\nUntracked files:"],
+ "Після `restore` файл такий самий, як в останньому коміті, тому відмінностей немає і дерево чисте.",
+ "Що покаже остання команда?"),
+C("Файл уже додано через `git add`, але його треба прибрати з майбутнього коміту, не втративши правки. Що виконати?",
+ ["git restore --staged menu.txt","git restore menu.txt","git commit --amend --no-edit","git add menu.txt"],
+ "Прапорець `--staged` працює зі staging: файл виходить з підноса, а зміни в самому файлі лишаються.",null,true),
+F("Допиши прапорець, який знімає файл зі staging, але зберігає правки.",
+ `$ git restore [[0]] menu.txt`,
+ ["--staged"],["--hard","--soft","--amend"],
+ "Прапорець `--staged` каже restore працювати з підносом, а не з файлом на диску."),
+O(`$ echo latte > menu.txt
+$ git add menu.txt
+$ git commit -m "Add latte"
+$ echo cola >> menu.txt
+$ git add menu.txt
+$ git restore --staged menu.txt
+$ git status`,
+ ["Changes not staged for commit:","Changes to be committed:","Untracked files:","nothing to commit, working tree clean"],
+ "Файл знято з підноса, але змінений. Тому він знову в розділі «Changes not staged for commit».",
+ "Який заголовок розділу з'явиться у виводі останньої команди?"),
+R("Забули додати файл syrop.txt у коміт. Збери команди, які виправлять останній коміт.",
+ ["$ git add mocha.txt",'$ git commit -m "Add mocha"',"$ git add syrop.txt","$ git commit --amend --no-edit"],
+ "Спочатку звичайний коміт. Потім додаємо забутий файл у staging і заміняємо останній коміт через amend без зміни повідомлення."),
+T("Напиши команду, яка змінює повідомлення останнього коміту на «Add latte».",
+ `$ [[0]]`,
+ ['git commit --amend -m "Add latte"',"git commit --amend -m 'Add latte'",'git commit -m "Add latte" --amend'],
+ "`--amend` каже замінити останній коміт, а `-m` задає нове повідомлення."),
+T("Напиши команду, яка знімає файл tea.txt зі staging (правки лишаються).",
+ `$ [[0]]`,
+ ["git restore --staged tea.txt","git restore -S tea.txt","git reset tea.txt","git reset HEAD tea.txt"],
+ "Сучасний запис: `git restore --staged`. Старий аналог: `git reset HEAD файл`, його теж приймаємо."),
+B("Яка команда записана з помилкою?",
+ ["$ git add menu.txt","$ git restore --unstage menu.txt",'$ git commit -m "Add cola"'],
+ 1,
+ "Такого прапорця немає. Правильно `--staged`."),
+C("Файл із помилкою вже відправлено на сервер командою push. Що безпечніше за все зробити?",
+ ["Виправити файл і зробити новий звичайний коміт","Виконати git commit --amend і примусово відправити","Виконати git restore, щоб повернути сервер","Видалити локальну теку й почати заново"],
+ "Новий коміт лише додається до історії, тож ніхто не отримає розбіжностей. Amend змінює вже опублікований коміт, і колегам буде важко синхронізуватися."),
+]},
+
+// ============ УРОК 2: reset і revert ============
+{title:'reset і revert',
+learn:[
+K("Два способи скасувати коміт",
+"Іноді помилку вже закомічено. Уяви меню з кількома сторінками. Можна вирвати останню сторінку, ніби її й не було: це `git reset`. А можна дописати нову сторінку «попередню сторінку скасовано»: це `git revert`. Різниця велика, тому вчимо обидва способи повільно.",
+`$ git reset HEAD~1
+$ git revert HEAD`,
+null),
+K("reset: три рівні",
+"`HEAD~1` означає «коміт перед останнім». Команда `git reset` пересуває гілку туди, а три режими вирішують, що робити зі змінами. `--soft`: тільки коміт зникає, а файли лишаються у staging. `--mixed` (типовий): коміт зникає, файли лишаються змінені, але не у staging. Ось приклад змішаного режиму, коли останній коміт додавав mocha.txt.",
+`$ git reset HEAD~1
+$ git status`,
+`On branch main
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+\tmocha.txt
+
+nothing added to commit but untracked files present (use "git add" to track)`),
+K("reset --hard: найнебезпечніший режим",
+"`--hard` прибирає коміт, staging і саму зміну у файлах. Це як вирвати сторінку й спалити її. Усе незакомічене, що було в робочій теці, зникне, і повернути його вже не вийде. Перш ніж виконати `--hard`, переконайся, що жодної потрібної правки не губиш.",
+`$ git reset --hard HEAD~1
+$ git status`,
+`HEAD is now at 6ad77c8 Add tea
+On branch main
+nothing to commit, working tree clean`),
+K("revert: скасувати, не стираючи історію",
+"`git revert HEAD` створює новий коміт, який робить протилежне до останнього. Якщо останній коміт додав tea.txt, то revert видалить цей файл новим комітом. Старий коміт нікуди не дівається: історія лише росте, а файл tea.txt зникає з теки. Прапорець `--no-edit` залишає стандартне повідомлення «Revert ...».",
+`$ git revert --no-edit HEAD`,
+`[main 6059ef1] Revert "Add tea"
+ Date: Wed Oct 14 09:31:04 2026 +0000
+ 1 file changed, 1 deletion(-)
+ delete mode 100644 tea.txt`),
+K("Коли що брати",
+"Правило просте. Коміт тільки на твоєму комп'ютері і ніхто його не бачив: можна `reset`. Коміт уже відправлено на сервер (push) і з ним працюють інші: бери `revert`, бо він не переписує історію. А якщо після `reset` зробити примусовий push, колеги отримають зіпсовану історію. І пам'ятай про `--hard`: це єдиний режим, що втрачає незакомічену роботу.",
+`$ git revert --no-edit HEAD
+$ git push`,
+null),
+],
+ex:[
+C("Який режим git reset залишає зміни скасованого коміту у staging?",
+ ["--soft","--mixed","--hard","--amend"],
+ "Режим `--soft` переносить лише вказівник гілки, а staging і файли не чіпає. Тому зміни лишаються готовими до нового коміту.",null,true),
+C("Яка з цих команд може безповоротно стерти незакомічені правки?",
+ ["git reset --hard HEAD~1","git reset --soft HEAD~1","git revert HEAD","git stash"],
+ "Режим `--hard` перезаписує файли в робочій теці. Інші команди зі списку зберігають правки: soft лишає їх у staging, revert додає коміт, stash ховає на полицю."),
+O(`$ echo latte > latte.txt
+$ git add .
+$ git commit -m "Add latte"
+$ echo tea > tea.txt
+$ git add .
+$ git commit -m "Add tea"
+$ echo mocha > mocha.txt
+$ git add .
+$ git commit -m "Add mocha"
+$ git reset --soft HEAD~1
+$ git log --oneline | wc -l`,
+ ["2","3","1","0"],
+ "Було три коміти. `reset --soft HEAD~1` прибрав останній, тому лишилось два. Файл mocha.txt при цьому ще у staging.",
+ "Скільки рядків покаже остання команда?"),
+O(`$ echo latte > latte.txt
+$ git add .
+$ git commit -m "Add latte"
+$ echo tea > tea.txt
+$ git add .
+$ git commit -m "Add tea"
+$ git reset --hard HEAD~1
+$ ls`,
+ ["latte.txt","latte.txt\ntea.txt","tea.txt","(порожньо)"],
+ "`--hard` повернув теку до стану першого коміту. Файл tea.txt з'явився в другому коміті, тож його більше немає.",
+ "Що виведе ls наприкінці?"),
+F("Допиши команду, яка створює коміт, що скасовує останній.",
+ `$ git [[0]] --no-edit HEAD`,
+ ["revert"],["reset","restore","stash"],
+ "`git revert` додає новий коміт з протилежною зміною. Решта команд або повертають файли, або пересувають гілку."),
+R("Збери команди: закомітили з помилкою в назві, потім скасували коміт, не втрачаючи файл, і закомітили правильно.",
+ ["$ git add mocha.txt",'$ git commit -m "Add moka"',"$ git reset --soft HEAD~1",'$ git commit -m "Add mocha"'],
+ "Спочатку невдалий коміт. `reset --soft` прибирає його, але файл лишається у staging. Далі робимо новий коміт із правильним повідомленням."),
+T("Напиши команду, яка створює новий коміт, що скасовує останній, і не стирає історію.",
+ `$ [[0]]`,
+ ["git revert HEAD","git revert --no-edit HEAD","git revert HEAD --no-edit"],
+ "`git revert HEAD` скасовує останній коміт новим комітом. Прапорець `--no-edit` лише пропускає відкриття редактора."),
+T("Напиши команду, яка відкидає останній коміт разом з усіма змінами у файлах (небезпечна).",
+ `$ [[0]]`,
+ ["git reset --hard HEAD~1","git reset --hard HEAD^"],
+ "`HEAD~1` це коміт перед останнім, а `--hard` стирає й файли. Тому використовуй її лише тоді, коли згоден усе втратити."),
+B("Яка команда записана з помилкою?",
+ ["$ git reset --soft HEAD~1","$ git reset --hard HEAD~1","$ git reset --medium HEAD~1","$ git revert HEAD"],
+ 2,
+ "Режимів reset три: `--soft`, `--mixed`, `--hard`. Режиму `--medium` не існує."),
+C("Помилковий коміт уже відправили на спільний сервер, і колега отримав його. Як правильно скасувати?",
+ ["git revert, а потім звичайний push","git reset --hard і примусовий push","git commit --amend і примусовий push","Видалити репозиторій на сервері"],
+ "Revert додає новий коміт, тож історія в усіх лишається спільною. Reset з примусовим push переписує історію, і в колеги з'являться конфлікти та дублікати."),
+]},
+
+// ============ УРОК 3: stash ============
+{title:'stash',
+learn:[
+K("Полиця для незавершеної роботи",
+"Бариста готує латте, і тут просять терміново зробити колу. Недороблену чашку не викидають, а ставлять на полицю, готують колу й повертаються до латте. У Git роль полиці виконує `git stash`: він ховає незакомічені правки, а робоча тека стає чистою.",
+`$ git stash
+$ git status`,
+`Saved working directory and index state WIP on main: a600f6f Add latte
+On branch main
+nothing to commit, working tree clean`),
+K("git stash list: що лежить на полиці",
+"Відкладених записів може бути кілька. `git stash list` показує їх, найновіший зверху під номером `stash@{0}`. Щоб потім не плутатись, дай запису назву: `git stash push -m \"ідея з чаєм\"`.",
+`$ git stash push -m "ідея з чаєм"
+$ git stash list`,
+`Saved working directory and index state On main: ідея з чаєм
+stash@{0}: On main: ідея з чаєм`),
+K("git stash pop: забрати з полиці",
+"`git stash pop` повертає останній відкладений запис у робочу теку й видаляє його зі списку. Крок за кроком: у menu.txt було «latte» і незакомічений рядок «cola»; `stash` прибрав «cola», файл став «latte»; `pop` повернув «cola» назад і видалив запис (останній рядок виводу).",
+`$ git stash pop`,
+`On branch main
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+\tmodified:   menu.txt
+
+no changes added to commit (use "git add" and/or "git commit -a")
+Dropped refs/stash@{0} (2a67f2eac4206c87d6f01f93e2ef76e56fda94a3)`),
+K("apply і drop",
+"`git stash apply` теж повертає правки, але запис лишається на полиці: корисно, якщо хочеш застосувати ті самі правки в кількох гілках. `git stash drop` видаляє найновіший запис без застосування. Отже, `pop` це майже `apply` плюс `drop` разом.",
+`$ git stash apply
+$ git stash drop`,
+null),
+K("Коли потрібен stash і що він не бере",
+"Типовий випадок: у середині роботи треба терміново перейти на іншу гілку (`git switch`), а Git не дає, бо є незакомічені правки. Відклади їх у stash, перейди, зроби справу й повернись. Пастка: звичайний `git stash` не чіпає нові файли, які Git ще не знає (untracked). Для них додай прапорець `-u`.",
+`$ git stash -u`,
+`Saved working directory and index state WIP on main: 1a2b3c4 Add latte`),
+],
+ex:[
+C("Яка команда ховає незакомічені правки «на полицю» й очищає робочу теку?",
+ ["git stash","git stash drop","git stash list","git restore ."],
+ "`git stash` зберігає правки в окремому списку й повертає теку до стану останнього коміту. `restore .` теж очистить теку, але правки при цьому втратяться.",null,true),
+O(`$ echo latte > menu.txt
+$ git add menu.txt
+$ git commit -m "Add latte"
+$ echo cola >> menu.txt
+$ git stash
+$ cat menu.txt`,
+ ["latte","latte\ncola","cola","(файлу немає)"],
+ "Після `git stash` файл повертається до стану останнього коміту. Рядок «cola» лежить на полиці, а не у файлі.",
+ "Що виведе cat наприкінці?"),
+C("Чим `git stash pop` відрізняється від `git stash apply`?",
+ ["pop видаляє запис зі списку після застосування, а apply лишає","pop застосовує всі записи одразу, а apply тільки один","pop працює лише для нових файлів, а apply для змінених","Нічим, це два імені однієї команди"],
+ "Обидві команди повертають правки. Але `pop` ще й прибирає запис зі stash, а `apply` залишає його про всяк випадок."),
+F("Допиши підкоманду, яка показує всі відкладені записи.",
+ `$ git stash [[0]]`,
+ ["list"],["status","history","all"],
+ "`git stash list` друкує список записів: stash@{0}, stash@{1} і так далі."),
+O(`$ echo latte > menu.txt
+$ git add menu.txt
+$ git commit -m "Add latte"
+$ echo a >> menu.txt
+$ git stash
+$ echo b >> menu.txt
+$ git stash
+$ git stash pop
+$ cat menu.txt`,
+ ["latte\nb","latte\na","latte\na\nb","latte"],
+ "У полиці два записи, найновіший (з «b») зверху. `pop` забирає саме його, тому «a» лишається на полиці, а у файлі з'являється «b».",
+ "Що виведе cat наприкінці?"),
+R("Збери команди: відкласти правки, зазирнути в іншу гілку, повернутись і забрати правки.",
+ ["$ git stash","$ git switch -c hotfix","$ git switch main","$ git stash pop"],
+ "Спочатку ховаємо правки, щоб перемкнутись. Потім працюємо в іншій гілці, повертаємось у main і забираємо правки з полиці."),
+T("Напиши команду, яка показує всі відкладені записи stash.",
+ `$ [[0]]`,
+ ["git stash list"],
+ "Підкоманда `list` показує перелік записів, найновіший зверху."),
+T("Напиши команду, яка повертає останній відкладений запис і одразу видаляє його зі списку.",
+ `$ [[0]]`,
+ ["git stash pop","git stash pop stash@{0}"],
+ "`pop` робить обидві речі: застосовує правки й прибирає запис."),
+B("Яка команда записана з помилкою?",
+ ["$ git stash","$ git switch main","$ git stash restore","$ git stash pop"],
+ 2,
+ "Підкоманди `restore` у stash немає. Правильно `pop` або `apply`."),
+C("У теці є змінений menu.txt і новий файл notes.txt, який Git ще не відстежує. Що буде після простого `git stash`?",
+ ["menu.txt відкладеться, а notes.txt лишиться на місці","Відкладуться обидва файли","Не відкладеться жоден, Git видасть помилку","notes.txt зникне, а menu.txt лишиться"],
+ "Без прапорця `-u` stash працює лише з відстежуваними файлами. Нові файли лишаються на диску."),
+]},
+]},
+
+{title:'Просунуто',sub:'Інструменти досвідчених',lessons:[
+
+// ============ УРОК 4: rebase і cherry-pick ============
+{title:'rebase і cherry-pick',
+learn:[
+K("Навіщо rebase",
+"Бариста працює над новим рецептом у чернетці (гілка feature), а в основній книжці (main) за цей час з'явилися нові сторінки. Щоб чернетка спиралась на свіжу книжку, її можна переписати так, ніби починаєш після нових сторінок. Це робить `git rebase main`, коли ти на гілці feature.",
+`$ git switch feature
+$ git rebase main`,
+`Switched to branch 'feature'
+Successfully rebased and updated refs/heads/feature.`),
+K("Що відбувається під капотом",
+"Rebase діє у три кроки. Спершу Git відкладає твої коміти з feature. Потім переставляє гілку на кінець main. Нарешті, повторює твої коміти один за одним поверх нової бази. Це копії, тому в них нові хеші. В історії все виглядає так, ніби ти почав роботу вже після останнього коміту main.",
+`$ git log --oneline`,
+`9f3c1a2 Add tea
+b71e0c4 Add mocha
+5d8a2e7 Add cola
+c3a1f90 Add latte`),
+K("rebase проти merge",
+"Merge поєднує дві гілки новим merge-комітом, і в історії лишається розвилка. Rebase вибудовує коміти в пряму лінію без зайвого коміту. Merge безпечніший і чесніше показує, що було, а rebase дає акуратнішу історію. Після rebase зазвичай роблять швидкий merge у main, і він проходить без додаткового коміту.",
+`$ git switch main
+$ git merge feature`,
+null),
+K("cherry-pick: взяти один коміт",
+"Іноді потрібна не вся гілка, а лише один коміт, наприклад виправлення ціни. `git cherry-pick <хеш>` копіює саме цей коміт на поточну гілку. Спершу перейди на потрібну гілку, а хеш візьми з `git log --oneline`. Копія отримує новий хеш, а оригінал лишається там, де був.",
+`$ git cherry-pick 4f2a9c1`,
+`[main 58f39bd] Fix price
+ Date: Wed Oct 14 09:31:16 2026 +0000
+ 1 file changed, 1 insertion(+)
+ create mode 100644 fix.txt`),
+K("Золоте правило rebase",
+"Ніколи не роби rebase для гілки, яку вже відправили на сервер і з якою працюють інші. Rebase створює нові коміти замість старих, тож у колег на комп'ютерах лишаться старі, і вийдуть дублікати та конфлікти. Rebase безпечний для твоїх локальних комітів, яких ще ніхто не бачив.",
+`$ git rebase main`,
+null),
+],
+ex:[
+C("Ти на гілці feature. Яка команда перебудує її коміти поверх свіжої main?",
+ ["git rebase main","git merge main --abort","git cherry-pick main","git reset main"],
+ "`git rebase main` бере коміти поточної гілки й повторює їх після кінця main.",null,true),
+O(`$ echo latte > latte.txt
+$ git add .
+$ git commit -m "Add latte"
+$ git switch -c feature
+$ echo mocha > mocha.txt
+$ git add .
+$ git commit -m "Add mocha"
+$ echo tea > tea.txt
+$ git add .
+$ git commit -m "Add tea"
+$ git switch main
+$ echo cola > cola.txt
+$ git add .
+$ git commit -m "Add cola"
+$ git switch feature
+$ git rebase main
+$ git log --oneline | wc -l`,
+ ["4","3","5","2"],
+ "Після rebase гілка feature містить усе з main (latte, cola) і два власні коміти (mocha, tea). Усього чотири коміти в одній лінії.",
+ "Яке число покаже остання команда (у новому репозиторії)?"),
+C("Чим rebase відрізняється від merge в історії?",
+ ["Rebase вибудовує коміти в пряму лінію без merge-коміту","Rebase зберігає розвилку, а merge її прибирає","Rebase копіює файли, а merge копіює коміти","Різниці в історії немає"],
+ "Merge залишає розвилку й додає окремий merge-коміт. Rebase переписує коміти поверх нової бази, тому історія виглядає прямою."),
+O(`$ echo latte > latte.txt
+$ git add .
+$ git commit -m "Add latte"
+$ git switch -c exp
+$ echo mocha > mocha.txt
+$ git add .
+$ git commit -m "Add mocha"
+$ echo tea > tea.txt
+$ git add .
+$ git commit -m "Add tea"
+$ git switch main
+$ git cherry-pick exp
+$ ls`,
+ ["latte.txt\ntea.txt","latte.txt\nmocha.txt\ntea.txt","latte.txt","mocha.txt\ntea.txt"],
+ "Ім'я гілки в cherry-pick означає її верхній коміт, тобто «Add tea». Він додає лише tea.txt, а mocha.txt лишається в exp.",
+ "Що виведе ls наприкінці?"),
+F("Допиши команду, яка переносить твої коміти поверх main.",
+ `$ git [[0]] main`,
+ ["rebase"],["cherry-pick","stash","revert"],
+ "`git rebase main` переставляє основу гілки на кінець main."),
+R("Збери команди: перебудувати feature поверх main, а потім перенести її в main.",
+ ["$ git switch feature","$ git rebase main","$ git switch main","$ git merge feature"],
+ "Спершу rebase на гілці feature, щоб вона йшла прямо від main. Потім у main merge проходить швидко, без merge-коміту."),
+T("Напиши команду, яка копіює коміт з хешем 4f2a9c1 на поточну гілку.",
+ `$ [[0]]`,
+ ["git cherry-pick 4f2a9c1"],
+ "`git cherry-pick <хеш>` бере рівно один коміт і створює його копію тут."),
+C("Яку гілку не можна перебудовувати через rebase?",
+ ["Ту, що вже відправлена на сервер і над якою працюють інші","Ту, що існує лише на твоєму комп'ютері","Ту, що має лише один коміт","Ту, яку ти щойно створив"],
+ "Rebase переписує історію. Якщо інші вже мають старі коміти, у них виникнуть дублі й конфлікти."),
+B("Яка команда записана з помилкою?",
+ ["$ git switch feature","$ git rebase main","$ git cherrypick 4f2a9c1","$ git switch main"],
+ 2,
+ "Правильно писати через дефіс: `cherry-pick`. Команди `cherrypick` у Git немає."),
+C("Гілку feature вже відправили на сервер, і колега працює від неї. Треба підтягнути свіжі зміни з main. Що безпечніше?",
+ ["git merge main","git rebase main","git reset --hard main","git cherry-pick main"],
+ "Merge не змінює існуючих комітів, тож колега не отримає розбіжностей. Rebase створив би нові коміти й порушив золоте правило."),
+]},
+
+// ============ УРОК 5: теги, reflog ============
+{title:'Теги, reflog і порятунок',
+learn:[
+K("Тег: закладка на коміті",
+"Гілка рухається вперед із кожним комітом. Але іноді треба позначити один момент: «ось меню версії 1.0». Для цього є тег: підписана закладка на конкретному коміті, яка нікуди не зсувається. `git tag v1.0` ставить тег на поточний коміт, а `git tag` без аргументів показує всі теги.",
+`$ git tag v1.0
+$ git tag`,
+`v1.0`),
+K("Анотований тег",
+"Звичайний тег це лише назва. Анотований, з прапорцем `-a`, зберігає ще автора, дату й повідомлення. Саме такі використовують для релізів. Теги самі не потрапляють на сервер: їх відправляють окремо, наприклад `git push origin v2.0`.",
+`$ git tag -a v2.0 -m "Друге меню"
+$ git tag`,
+`v1.0
+v2.0`),
+K("reflog: журнал усіх рухів",
+"Git ще й веде таємний щоденник: кожне переміщення HEAD (коміт, reset, перехід на гілку) записується в `git reflog`. Нові записи зверху: `HEAD@{0}` це зараз, `HEAD@{1}` це один крок тому. Навіть коли коміт зник з `git log`, у reflog його слід лишається.",
+`$ git reset --hard HEAD~2
+$ git reflog`,
+`HEAD is now at 415cce9 Add latte
+415cce9 HEAD@{0}: reset: moving to HEAD~2
+7652a9d HEAD@{1}: commit: Add mocha
+a91b3c0 HEAD@{2}: commit: Add tea
+415cce9 HEAD@{3}: commit (initial): Add latte`),
+K("Відновлення втраченого коміту",
+"Помилково виконали `reset --hard` і втратили два коміти? Не панікуй. Крок 1: відкрий `git reflog` і знайди запис до помилки (наприклад `HEAD@{1}`). Крок 2: поверни стан командою `git reset --hard HEAD@{1}`. Усе повертається на місце. Так само можна врятувати видалену гілку: знайти її останній коміт у reflog і створити гілку командою `git switch -c назва хеш`.",
+`$ git reset --hard HEAD@{1}
+$ git log --oneline`,
+`HEAD is now at 7652a9d Add mocha
+7652a9d Add mocha
+a91b3c0 Add tea
+415cce9 Add latte`),
+K("Межі порятунку",
+"Reflog зберігає лише те, що колись було закомічено. Якщо правки не потрапили в коміт, а потім виконано `reset --hard` або `restore`, reflog їх не врятує. Також reflog локальний: його немає на сервері й у свіжому клоні, а старі записи з часом прибираються (приблизно через 90 днів). Видалити тег можна командою `git tag -d`.",
+`$ git tag -d v1.0`,
+`Deleted tag 'v1.0' (was 415cce9)`),
+],
+ex:[
+C("Для чого потрібен тег у Git?",
+ ["Щоб позначити конкретний коміт, наприклад версію 1.0","Щоб швидко перемикатись між гілками","Щоб приховати зміни на полицю","Щоб скасувати останній коміт"],
+ "Тег не рухається, як гілка, і назавжди вказує на один коміт. Тому його зручно ставити на випуски.",null,false),
+O(`$ echo latte > latte.txt
+$ git add .
+$ git commit -m "Add latte"
+$ git tag v1.0
+$ git tag -a v2.0 -m "Second"
+$ git tag -d v1.0
+$ git tag`,
+ ["v2.0","v1.0\nv2.0","v1.0","(нічого не виведе)"],
+ "Тег v1.0 видалено командою `tag -d`, лишився тільки v2.0.",
+ "Що виведе остання команда?"),
+C("Чим анотований тег (`git tag -a`) відрізняється від звичайного?",
+ ["Зберігає автора, дату й повідомлення","Автоматично потрапляє на сервер","Рухається разом з гілкою","Працює лише на гілці main"],
+ "Анотований тег є окремим об'єктом з метаданими. Звичайний тег це лише назва, яка вказує на коміт. На сервер жоден тег сам не потрапляє."),
+F("Допиши команду для перегляду журналу всіх рухів HEAD.",
+ `$ git [[0]]`,
+ ["reflog"],["history","journal","logall"],
+ "Команда `git reflog` показує журнал рухів, у ньому можна знайти й втрачені коміти."),
+O(`$ echo latte > latte.txt
+$ git add .
+$ git commit -m "Add latte"
+$ echo tea > tea.txt
+$ git add .
+$ git commit -m "Add tea"
+$ echo mocha > mocha.txt
+$ git add .
+$ git commit -m "Add mocha"
+$ git reset --hard HEAD~2
+$ git reset --hard HEAD@{1}
+$ git log --oneline | wc -l`,
+ ["3","1","2","0"],
+ "Перший reset залишив один коміт, а `HEAD@{1}` у reflog це стан до нього, тобто всі три коміти. Другий reset повернув їх усі.",
+ "Яке число покаже остання команда?"),
+R("Збери команди: гілку idea видалили помилково, її треба відновити за хешем з reflog.",
+ ["$ git branch -D idea","$ git reflog","$ git switch -c idea 9fd2c1a","$ git log --oneline"],
+ "Після видалення дивимось reflog, щоб знайти хеш останнього коміту гілки. Далі створюємо гілку з тим самим ім'ям на цьому коміті."),
+T("Напиши команду, що ставить легкий тег v1.0 на поточний коміт.",
+ `$ [[0]]`,
+ ["git tag v1.0"],
+ "`git tag назва` ставить звичайний тег, `-a` потрібен лише для анотованого."),
+T("Напиши команду, що показує журнал рухів HEAD.",
+ `$ [[0]]`,
+ ["git reflog","git reflog show","git reflog show HEAD"],
+ "`git reflog` це скорочення від `git reflog show HEAD`."),
+B("Яка команда записана з помилкою?",
+ [`$ git tag -a v2.0 -m "Друге меню"`,"$ git tag -d v1.0","$ git reflog","$ git tag --remove v1.0"],
+ 3,
+ "Для видалення тега є `-d` або `--delete`. Прапорця `--remove` у git tag немає."),
+C("Після `git reset --hard` зник потрібний коміт. Що робити?",
+ ["Знайти його хеш у git reflog і виконати git reset --hard <хеш>","Нічого, він зник назавжди","Виконати git revert HEAD","Виконати git stash pop"],
+ "Reflog пам'ятає, куди вказував HEAD раніше. Знайшовши хеш, можна повернутись у цей стан. Коміти не видаляються одразу, поки їх не прибере збирач сміття."),
+]},
+
+// ============ УРОК 6: хороші практики ============
+{title:'Хороші практики',
+learn:[
+K("Хороше повідомлення коміту",
+"Історія комітів це зошит рецептів: за місяць треба зрозуміти, що саме змінили. Повідомлення «fix» або «зміни» нічого не пояснює. Пиши коротко й конкретно, у наказовому способі: що робить цей коміт («Add mocha to menu», «Fix price of latte»).",
+`$ git commit -m "fix"
+$ git commit -m "Fix wrong price of latte"`,
+null),
+K("Малі коміти й гілки",
+"Один коміт це одна думка. Не збирай у нього пів дня роботи: маленький коміт легко прочитати, знайти в ньому помилку й скасувати. Те саме з гілками: main завжди має бути робочою, нову справу роби в короткій гілці зі зрозумілою назвою (наприклад `feature/menu`), а готове зливай через merge.",
+`$ git switch -c feature/menu
+$ git switch main`,
+null),
+K(".gitignore: що Git має ігнорувати",
+"Не все варто зберігати в репозиторії: логи, скомпільовані файли, налаштування редактора, паролі. Перелічи їх у файлі `.gitignore`, по одному шаблону в рядку (`*.log`, `out/`). Git перестане пропонувати їх для додавання. Перевірити, яке правило спрацювало, можна командою `git check-ignore -v файл`.",
+`$ echo "*.log" > .gitignore
+$ git check-ignore -v app.log`,
+`.gitignore:1:*.log\tapp.log`),
+K("Паролі не комітять",
+"Пароль чи ключ, що потрапив у коміт, лишається в історії, навіть якщо наступним комітом видалити файл: хто завгодно може відкрити старий коміт. Тому секрети одразу додавай у `.gitignore`. Якщо файл уже відстежується, команда `git rm --cached` припиняє стежити за ним, але лишає його на диску. А потрапив пароль обов'язково зміни.",
+`$ git rm --cached secret.env`,
+`rm 'secret.env'`),
+K("blame і bisect",
+"`git blame файл` показує для кожного рядка, хто й у якому коміті його змінив: так знаходять, звідки взялась зміна. `git bisect` шукає коміт, що зламав програму, бінарним пошуком: ти позначаєш `good` і `bad`, а Git щоразу перемикається на коміт посередині. Коли закінчиш, обов'язково виконай `git bisect reset`, щоб повернутись на свою гілку.",
+`$ git blame -L 2,2 menu.txt`,
+`d3064f8a (Maria 2026-10-14 09:31:37 +0000 2) cola`),
+],
+ex:[
+C("Яке повідомлення коміту найкраще?",
+ ["Fix wrong price of latte","fix","зміни","123"],
+ "Хороше повідомлення коротко й конкретно каже, що змінилося. Слова «fix» чи «зміни» нічого не пояснюють.",null,false),
+C("Для чого потрібен файл .gitignore?",
+ ["Щоб Git не стежив за логами, паролями й зібраними файлами","Щоб видалити файл з історії комітів","Щоб захистити репозиторій паролем","Щоб заборонити зміни у файлах"],
+ "У `.gitignore` записують шаблони файлів, яких не варто зберігати в репозиторії."),
+O(`$ echo "*.log" > .gitignore
+$ git add .gitignore
+$ git commit -m "Add gitignore"
+$ echo log > app.log
+$ echo code > Main.java
+$ git status`,
+ ["Main.java","app.log",".gitignore","Main.java\napp.log"],
+ "Файл app.log підпадає під шаблон `*.log`, тому Git його не показує. Нестежуваним лишається тільки Main.java.",
+ "Яке ім'я файлу з'явиться в розділі Untracked files?"),
+F("Допиши команду, що показує авторів рядків у файлі.",
+ `$ git [[0]] -L 2,2 menu.txt`,
+ ["blame"],["show","bisect","tag"],
+ "`git blame` для кожного рядка показує коміт і автора. Прапорець `-L 2,2` обмежує вивід другим рядком."),
+R("Збери команди пошуку поганого коміту: почати, позначити поганий, позначити хороший старий, завершити.",
+ ["$ git bisect start","$ git bisect bad","$ git bisect good HEAD~5","$ git bisect reset"],
+ "Спочатку `start`, потім відомі межі: поточний коміт поганий, старий хороший. Наприкінці `reset` повертає на твою гілку."),
+T("Напиши команду, що припиняє стежити за файлом secret.env, але лишає його на диску.",
+ `$ [[0]]`,
+ ["git rm --cached secret.env"],
+ "Прапорець `--cached` видаляє файл лише з відстеження, а на диску він лишається."),
+C("Файл із паролем закомітили, а наступним комітом видалили. Чи безпечно?",
+ ["Ні, пароль лишився в історії, його треба змінити","Так, файл уже видалено","Так, якщо додати файл у .gitignore","Так, якщо зробити git push"],
+ "Старі коміти лишаються в історії, і з них файл можна прочитати. Тому після витоку пароль завжди міняють."),
+B("Яка команда записана з помилкою?",
+ ["$ git bisect start","$ git bisect bad","$ git bisect fine","$ git bisect reset"],
+ 2,
+ "Позначок лише дві: `good` і `bad`. Слова `fine` Git не знає."),
+O(`$ echo latte > latte.txt
+$ git add .
+$ git commit -m "Add latte"
+$ git switch -c feature/menu
+$ echo mocha > mocha.txt
+$ git add .
+$ git commit -m "Add mocha"
+$ git switch main
+$ ls`,
+ ["latte.txt","latte.txt\nmocha.txt","mocha.txt","(порожньо)"],
+ "Коміт з mocha.txt лежить у гілці feature/menu. У main його ще немає, поки гілку не злито.",
+ "Що виведе ls наприкінці?"),
+C("Команда з трьох людей працює над одним проєктом. Яка схема гілок найбезпечніша?",
+ ["main завжди робоча, нові справи в коротких гілках, потім merge","Усі комітять прямо в main","Одна довга гілка на кожного, злиття раз на рік","Без гілок, а проблеми вирішувати через reset --hard"],
+ "Коротка гілка під окрему справу не заважає іншим, а злиття відбувається, коли робота готова й перевірена."),
+]},
+]},
+];
+const GITTERMS=[
+{t:'Репозиторій',c:'Git',d:'Тека проєкту, за якою стежить Git. Усередині є прихована тека .git з усією історією змін.',ex:'$ git init',k:['стежить','.git','історією'],s:'Це вся кав\'ярня разом із книгою замовлень: і сьогоднішнє меню, і записи про всі його зміни.'},
+{t:'Коміт',c:'Git',d:'Збережений знімок проєкту з коротким повідомленням. Коміти складають історію, до якої можна повернутися.',ex:'$ git commit -m "Add latte"',k:['знімок','повідомленням','історію'],s:'Це знімок меню на певний день: пізніше можна подивитися, яким воно було.'},
+{t:'Гілка',c:'Git',d:'Окрема лінія комітів. У гілці можна пробувати нове й не чіпати головну лінію, поки робота не готова.',ex:'$ git switch -c new-drink',k:['лінія','нове','головну'],s:'Це чернетка рецепта: експериментуєш у ній, а основне меню лишається недоторканим.'},
+{t:'HEAD',c:'Git',d:'Це вказівник на поточний коміт, зазвичай через поточну гілку. Показує, де ти зараз в історії.',ex:'$ git show HEAD',k:['вказівник','поточний','гілку'],s:'Це закладка в книзі замовлень: показує сторінку, на якій ти зараз.'},
+{t:'Staging area',c:'Git',d:'Проміжна зона (її ще звуть індексом), куди кладуть зміни перед комітом. Так обирають, які саме зміни потраплять у наступний знімок.',ex:'$ git add menu.txt',k:['індексом','зміни','комітом'],s:'Це піднос на барі: кладеш на нього лише те, що зараз віднесеш гостю.'},
+{t:'Робоча тека',c:'Git',d:'Файли проєкту в тому вигляді, як вони лежать на диску просто зараз. Саме їх ти редагуєш, поки не додав зміни у staging area.',ex:null,k:['диску','редагуєш','staging area'],s:'Це робочий стіл бариста: тут усе в процесі, ще не відправлено в записи.'},
+{t:'Remote',c:'Git',d:'Це копія репозиторію на іншому комп\'ютері або сервері, наприклад на GitHub. З нею обмінюються комітами.',ex:'$ git remote -v',k:['копія','сервері','GitHub'],s:'Це спільна книга замовлень у головному офісі: усі кав\'ярні звіряють з нею свої записи.'},
+{t:'origin',c:'Git',d:'Типове ім\'я головного remote. Після git clone воно вказує на місце, звідки скопіювали проєкт. Це лише назва за звичаєм, її можна змінити.',ex:'$ git push origin main',k:['remote','clone','за звичаєм'],s:'Це підпис «головний офіс» на дверях: просто зручна назва, а не особлива магія.'},
+{t:'clone',c:'Git',d:'Команда, яка копіює весь віддалений репозиторій на твій комп\'ютер разом з історією. Заодно налаштовує remote під назвою origin.',ex:'$ git clone https://github.com/user/cafe.git',k:['копіює','історією','origin'],s:'Це як отримати повну копію книги рецептів із головної кав\'ярні.'},
+{t:'Fork',c:'Git',d:'Власна копія чужого репозиторію на GitHub. Її можна вільно змінювати, не чіпаючи оригінал.',ex:null,k:['копія','чужого','оригінал'],s:'Це твій примірник чужої книги рецептів: пишеш у ньому що хочеш, а оригінал цілий.'},
+{t:'Pull request',c:'Git',d:'Це прохання на GitHub додати зміни зі своєї гілки в іншу, зазвичай у main. Колеги переглядають код і обговорюють його до злиття.',ex:null,k:['прохання','переглядають','злиття'],s:'Це записка шефу: «Я придумав новий напій, подивись і додай у меню».'},
+{t:'Merge',c:'Git',d:'Операція злиття гілок: зміни однієї гілки переносяться в іншу. Якщо гілки розійшлися, Git створює спеціальний merge-коміт.',ex:'$ git merge new-drink',k:['злиття','розійшлися','merge-коміт'],s:'Це момент, коли рецепт із чернетки вносять в основне меню.'},
+{t:'Конфлікт злиття',c:'Git',d:'Ситуація, коли в обох гілок змінено ті самі рядки, і Git не знає, яку версію лишити. У файлі з\'являються позначки <<<<<<<, ======= і >>>>>>>, а обрати потрібний варіант треба вручну.',ex:'$ git merge new-drink',k:['рядки','версію','вручну'],s:'Двоє бариста по-різному виправили той самий рядок рецепта, і шеф має вибрати, чия версія лишиться.'},
+{t:'Rebase',c:'Git',d:'Перенесення комітів гілки поверх іншої гілки. Історія стає рівною лінією, але коміти отримують нові хеші.',ex:'$ git rebase main',k:['комітів','поверх','лінією'],s:'Це переписати свою чернетку так, ніби ти почав її вже після останніх змін у меню.'},
+{t:'Fast-forward',c:'Git',d:'Злиття без нового коміту: якщо в main за цей час нічого не змінилося, Git просто пересуває вказівник гілки вперед.',ex:null,k:['без нового','main','вказівник'],s:'Це як просто пересунути закладку на кілька сторінок уперед, нічого не переписуючи.'},
+{t:'Stash',c:'Git',d:'Тимчасова схованка для незакомічених змін. Робоча тека стає чистою, а зміни можна повернути пізніше.',ex:'$ git stash',k:['схованка','незакомічених','повернути'],s:'Це шухляда під баром: ховаєш недороблене замовлення, щоб швидко обслужити термінове.'},
+{t:'Tag',c:'Git',d:'Постійна мітка на конкретному коміті, найчастіше для версій, наприклад v1.0. На відміну від гілки, вона не рухається.',ex:'$ git tag v1.0',k:['мітка','версій','гілки'],s:'Це наклейка «Меню весна 2026» на одній зі сторінок книги: вона лишається на місці.'},
+{t:'.gitignore',c:'Git',d:'Файл зі списком шаблонів, які Git має ігнорувати: паролі, логи, зібрані файли. Він не діє на файли, які вже відстежуються.',ex:'$ echo "*.log" >> .gitignore',k:['шаблонів','ігнорувати','відстежуються'],s:'Це список на дверях комори: «Це не записуємо в книгу».'},
+{t:'Diff',c:'Git',d:'Команда, яка показує різницю між версіями: які рядки додали, а які видалили. Без прапорців порівнює робочу теку зі staging area.',ex:'$ git diff',k:['різницю','рядки','прапорців'],s:'Це червоний і зелений маркер, яким шеф позначає, що змінилося в рецепті.'},
+{t:'Хеш коміту',c:'Git',d:'Довгий унікальний ідентифікатор коміту з цифр і літер. Зазвичай достатньо перших семи символів.',ex:'$ git log --oneline',k:['унікальний','ідентифікатор','символів'],s:'Це номер чека: за ним точно знайдеш потрібне замовлення.'},
+{t:'Upstream',c:'Git',d:'Гілка на remote, з якою пов\'язана твоя локальна гілка. Завдяки цьому git push і git pull працюють без додаткових аргументів.',ex:'$ git push -u origin main',k:['remote','пов\'язана','аргументів'],s:'Це постійний партнер: бариста знає, з ким звіряти записи, і не питає щоразу.'},
+{t:'Fetch',c:'Git',d:'Команда, яка завантажує нові коміти з remote, але не змінює твою поточну гілку і файли. Після неї можна подивитися, що змінилось, і лише тоді зливати.',ex:'$ git fetch',k:['нові коміти','не змінює','зливати'],s:'Це подивитися свіжу книгу замовлень з головного офісу, не переписуючи свою.'},
+{t:'Push',c:'Git',d:'Команда, яка відправляє твої локальні коміти на remote. Якщо там вже є чужі нові коміти, Git відмовить.',ex:'$ git push',k:['локальні','remote','відмовить'],s:'Це віднести свої записи в головний офіс, щоб колеги їх побачили.'},
+{t:'Pull',c:'Git',d:'Скорочення для fetch і наступного злиття (merge). Завантажує зміни з remote й одразу додає їх у поточну гілку.',ex:'$ git pull',k:['fetch','злиття','поточну'],s:'Це отримати свіжі записи з офісу й одразу вклеїти їх у свою книгу.'},
+{t:'switch і checkout',c:'Git',d:'switch перемикає на іншу гілку, а restore відновлює файли. Старий checkout вміє і те, і те, тому ним легко зробити не те, що задумано.',ex:'$ git switch main',k:['перемикає','відновлює','checkout'],s:'Це перейти до іншого столика з іншою чернеткою; старий checkout робив і це, і ще пів десятка речей.'},
+{t:'Reset',c:'Git',d:'Команда, яка пересуває поточну гілку на інший коміт. З прапорцем --hard вона ще й стирає зміни в робочій теці, тож будь обережний.',ex:'$ git reset --hard HEAD~1',k:['пересуває','--hard','обережний'],s:'Це повернути книгу на кілька сторінок назад і викинути все, що дописано пізніше.'},
+{t:'Revert',c:'Git',d:'Команда, яка створює новий коміт, що скасовує дію старого. Історія не переписується, тому це безпечний спосіб скасувати вже опублікований коміт.',ex:'$ git revert HEAD',k:['новий коміт','переписується','безпечний'],s:'Це не вирвати сторінку, а дописати нову: «Попередній запис скасовано».'},
+{t:'Reflog',c:'Git',d:'Журнал усіх переміщень HEAD на твоєму комп\'ютері. Допомагає знайти «втрачені» коміти після reset чи rebase.',ex:'$ git reflog',k:['переміщень','втрачені','reset'],s:'Це камера на кухні: навіть якщо запис зник із книги, на записі видно, що було.'},
+{t:'Cherry-pick',c:'Git',d:'Команда, яка бере один коміт з іншої гілки й повторює його в поточній. Корисна, коли потрібна одна правка, а не вся гілка.',ex:'$ git cherry-pick a1b2c3d',k:['один коміт','повторює','правка'],s:'Це перенести з чернетки в меню один рецепт, а решту не чіпати.'},
+{t:'Blame',c:'Git',d:'Команда, яка показує, хто і в якому коміті востаннє змінив кожен рядок файлу. Допомагає зрозуміти, звідки взялася правка.',ex:'$ git blame menu.txt',k:['хто','востаннє','рядок'],s:'Це підпис біля кожного рядка рецепта: хто його писав востаннє.'},
+{t:'Bisect',c:'Git',d:'Пошук коміту, який зламав код, діленням навпіл. Ти позначаєш коміти як good або bad, а Git швидко звужує діапазон.',ex:'$ git bisect start',k:['зламав','навпіл','good'],s:'Це як знайти день, коли кава стала гіркою: перевіряєш середину, потім половину половини.'},
+{t:'Working tree clean',c:'Git',d:'Повідомлення git status про те, що в проєкті немає незакомічених змін і нових файлів. Нічого не треба додавати чи комітити.',ex:'$ git status',k:['git status','незакомічених','нових файлів'],s:'Це чистий стіл наприкінці зміни: усе записано, нічого не розкидано.'},
+{t:'Restore',c:'Git',d:'Команда, яка відновлює файл зі staging area або коміту. З прапорцем --staged вона прибирає файл зі staging area, не чіпаючи його вміст.',ex:'$ git restore --staged menu.txt',k:['відновлює','--staged','вміст'],s:'Це зняти страву з підносу назад на стіл, нічого з неї не псуючи.'},
+{t:'Detached HEAD',c:'Git',d:'Стан, коли HEAD вказує прямо на коміт, а не на гілку. Нові коміти тут легко втратити, тож для роботи спершу створи гілку.',ex:'$ git switch --detach HEAD~1',k:['коміт','гілку','втратити'],s:'Це гортати стару сторінку книги без закладки: дописав щось, а потім не знайдеш.'},
+{t:'Untracked файл',c:'Git',d:'Файл, про який Git ще не знає, бо його жодного разу не додавали. У git status він видно в списку Untracked files.',ex:'$ git status',k:['не знає','додавали','Untracked'],s:'Це нова страва, якої ще немає в жодному меню: її спершу треба вписати.'},
+{t:'Головна гілка (main)',c:'Git',d:'Назва основної гілки в більшості нових репозиторіїв. Раніше частіше її називали master. Саме тут лежить стабільна версія проєкту.',ex:'$ git switch main',k:['основної','master','стабільна'],s:'Це основне меню, яке бачать гості, а все недороблене лежить у чернетках.'},
+{t:'Amend',c:'Git',d:'Прапорець --amend змінює останній коміт: можна виправити повідомлення або додати забуті файли. Коміт отримує новий хеш, тому не роби так з уже опублікованим.',ex:'$ git commit --amend -m "Add mocha"',k:['останній коміт','забуті','хеш'],s:'Це швидко виправити щойно написаний рядок у книзі, поки ніхто не встиг його переписати собі.'}
+];
+const GITQ=[
+C('Що робить `git fetch`?',['Завантажує нові коміти з remote, але не змінює твою поточну гілку й файли','Завантажує нові коміти й одразу зливає їх у поточну гілку','Відправляє твої локальні коміти на remote','Видаляє локальні гілки, яких уже нема на сервері'],'fetch лише оновлює знання про remote (origin/main), а твоя гілка main і файли лишаються як були. Злиття робить окремо merge, або pull, який поєднує обидві дії.'),
+O('$ git fetch\n$ git status -sb',['## main...origin/main [behind 1]','## main...origin/main [ahead 1]','## main...origin/main','nothing to commit, working tree clean'],'Колега запушив один коміт, fetch його завантажив, але main ти не зсунув. Тому гілка відстає від origin/main на один коміт.','Який рядок виведе остання команда, якщо на сервері з\'явився один новий коміт, а локальних змін нема?'),
+C('Що станеться з файлами після останньої команди?',['Правка в menu.txt зникне, new.txt теж зникне, бо його вже додали в staging area','Правка в menu.txt зникне, а new.txt лишиться, бо він новий','Нічого не зміниться, reset --hard лише пересуває HEAD','Git відмовить, поки зміни не закомічено'],'--hard повертає і staging area, і робочу теку до стану коміту, тому все відстежуване або додане в індекс зникає. Untracked-файли, які ніколи не додавали, reset --hard не чіпає.','$ echo "extra" >> menu.txt\n$ echo "n" > new.txt\n$ git add new.txt\n$ git reset --hard'),
+C('Ти зробив `git reset --hard HEAD~1`, а коміт був потрібен. Що робити?',['Знайти його в `git reflog` і виконати `git reset --hard` на його хеш або HEAD@{1}','Нічого: коміт видалено назавжди','Виконати `git revert HEAD~1`','Виконати `git fetch --all`'],'Коміт не зникає одразу: reflog пам\'ятає всі переміщення HEAD. Скинувши гілку назад на потрібний запис, ти повернеш і коміт, і файли.','$ git commit -m "Add b"\n$ git reset --hard HEAD~1'),
+C('menu.txt у корені й sub/s.txt змінено. Що потрапить у staging area?',['Лише sub/s.txt, бо крапка означає поточну теку','Обидва файли, бо крапка означає весь проєкт','Лише menu.txt','Нічого, треба спершу git status'],'`git add .` додає зміни з поточної теки й глибше. `git add -A` бере весь проєкт, звідки б ти його не запустив.','$ cd sub\n$ git add .'),
+O('$ echo "mocha" >> menu.txt\n$ echo "new" > new.txt\n$ git commit -am "Edit"\n$ git status -s',['?? new.txt',' M menu.txt','A  new.txt','(порожньо, нічого не виведе)'],'Прапорець -a бере лише вже відстежувані файли, тому menu.txt потрапив у коміт. new.txt Git не знає, тож лишився untracked (??).','Файл menu.txt уже відстежується в репозиторії. Що покаже остання команда?'),
+C('Що покаже остання команда?',['Нічого: зміна вже в staging area, а diff без прапорців порівнює її з робочою текою','Рядок із плюсом перед «mocha»','Повідомлення «nothing to commit»','Помилку: файл не змінено'],'Звичайний `git diff` показує те, що ще НЕ додано в індекс. Додане побачиш через `git diff --staged`.','$ echo "mocha" >> menu.txt\n$ git add menu.txt\n$ git diff'),
+C('Чим історія гілки feat після `git rebase main` відрізняється від результату merge?',['Вона лінійна: коміти feat лежать поверх main, і merge-коміта нема','З\'являється додатковий merge-коміт','Коміти feat видаляються з історії','Гілка main отримує нові хеші'],'rebase відтворює коміти поверх main, тому вони отримують нові хеші, а історія стає прямою лінією. merge натомість зберігає розгалуження й додає коміт злиття.'),
+O('$ git switch -c feat\n$ echo f > f.txt\n$ git add f.txt\n$ git commit -m "f"\n$ git switch main\n$ echo g > g.txt\n$ git add g.txt\n$ git commit -m "g"\n$ git merge feat -m "Merge feat"\n$ git log --oneline | wc -l',['4','3','5','2'],'Спочатку в main був один коміт. Додалися f, g і сам merge-коміт, бо гілки розійшлися і fast-forward неможливий. Разом чотири.','Скільки рядків виведе остання команда?'),
+C('Що виведе другий `git push`?',['Відмову: rejected (non-fast-forward)','Успіх: Git перепише коміт на remote','Нічого, бо нових комітів нема','Створить дублікат коміту на remote'],'`--amend` робить новий коміт з іншим хешем, а на remote лежить старий. Історії розійшлися, тому звичайний push відхиляється. Лише для власних гілок можна після цього `--force-with-lease`.','$ git push\n$ git commit --amend -m "Add a v2"\n$ git push'),
+C('Чим `git push --force-with-lease` безпечніший за `--force`?',['Відмовить, якщо на remote є коміти, яких ти ще не завантажив','Спершу запускає тести проєкту','Робить резервну копію гілки на remote','Нічим, це просто інша назва'],'lease звіряє, що remote такий, яким ти його востаннє бачив. Якщо колега встиг запушити, push зупиниться з помилкою stale info, і ти не затреш його роботу.'),
+C('Гілка wip має коміт, якого нема в main. Що зробить команда?',['Відмовить: гілка не повністю злита, і запропонує -D','Видалить гілку разом з комітом без питань','Видалить гілку, а коміт злиє в main','Перейде на wip і видалить її там'],'-d (малою) видаляє лише злиті гілки, щоб ти не втратив роботу. -D (великою) примусово видаляє, навіть якщо коміти ніде більше не лежать.','$ git branch -d wip'),
+C('Що тепер з комітом c?',['Він не належить жодній гілці, але лишається в reflog, і його можна врятувати гілкою','Він автоматично злився в main','Він одразу видалився назавжди','Він перетворився на тег'],'У detached HEAD нові коміти не прив\'язані до гілки. Після switch Git лише попереджає. Поки reflog пам\'ятає хеш, можна зробити `git switch -c rescue <хеш>`.','$ git switch --detach HEAD~1\n$ echo c > c.txt\n$ git add c.txt\n$ git commit -m "c"\n$ git switch main'),
+C('Де після останньої команди буде файл note.txt?',['Лишиться в теці, бо untracked-файли не належать жодній гілці','Зникне, бо належить гілці dev','Перейде в main як новий коміт','Git відмовить у перемиканні'],'Git переносить між гілками лише відстежувані файли. Untracked-файл просто лежить у робочій теці, поки його не додадуть, і його видно в обох гілках.','$ git switch -c dev\n$ echo "n" > note.txt\n$ git switch main'),
+C('Що станеться з останньою командою?',['Git відмовить: локальні зміни було б перезаписано, треба закомітити або сховати їх','Git тихо перенесе правку в dev','Git видалить локальну правку','Git створить merge-коміт автоматично'],'Якщо в dev menu.txt інший, ніж у main, а ти ще й змінив його, змішати їх безпечно не вийде. Git зупиняється і радить `git commit` або `git stash`.','$ echo "local" >> menu.txt\n$ git switch dev'),
+C('Файл secret.txt уже закомічено. Що зробить цей рядок?',['Нічого для вже відстежуваного файлу: зміни в ньому й далі видно в git status','Видалить secret.txt з репозиторію','Видалить secret.txt з диска','Сховає файл і з історії комітів'],'.gitignore діє лише на untracked-файли. Щоб Git забув вже відстежуваний файл, виконай `git rm --cached secret.txt` і закоміть. Старі коміти з ним лишаються в історії.','$ echo "secret.txt" > .gitignore'),
+T('Допиши команду: прибрати secret.txt з відстеження Git, але лишити файл на диску.','$ [[0]]',['git rm --cached secret.txt','git rm --cached ./secret.txt','git rm --cached -- secret.txt'],'Прапорець --cached каже видалити файл лише з індексу. Без нього `git rm` стирає ще й сам файл з диска.'),
+C('Що станеться, якщо в чистій теці виконати цю команду?',['Коміт не створиться, Git напише: nothing to commit, working tree clean','Створиться порожній коміт із цим повідомленням','Git створить коміт із останніми змінами','Git запитає, що саме комітити'],'Без змін у staging area Git відмовляється робити коміт. Порожній коміт можливий лише свідомо, з прапорцем --allow-empty.','$ git commit -m "Nothing"'),
+T('Допиши прапорець, щоб створити коміт без жодних змін.','$ git commit --[[0]] -m "Empty"',['allow-empty'],'За замовчуванням Git не створює порожніх комітів. --allow-empty дозволяє це, наприклад щоб запустити CI на сервері.'),
+F('Прибери menu.txt зі staging area, не втрачаючи правок у файлі.','$ git [[0]] --staged menu.txt',['restore'],['reset','revert','checkout'],'Тільки restore приймає --staged. reset і checkout з таким прапорцем дають помилку, а revert взагалі скасовує коміти.'),
+F('Вперше відправ гілку main на origin і запам\'ятай upstream.','$ git [[0]] -u origin [[1]]',['push','main'],['pull','clone','dev'],'`-u` (--set-upstream) прив\'язує локальну гілку до origin/main, тому далі працюють просто `git push` і `git pull`. Гілки dev ще нема, а pull не знає прапорця -u.'),
+O('$ echo "mocha" >> menu.txt\n$ echo "new" > new.txt\n$ git stash\n$ git status -s',['?? new.txt',' M menu.txt','A  new.txt','(порожньо, нічого не виведе)'],'За замовчуванням stash ховає лише відстежувані файли. Untracked new.txt лишився в теці; щоб сховати й його, потрібен прапорець -u.','Файл menu.txt відстежується, new.txt створено вперше. Що покаже остання команда?'),
+O('$ echo "syrup" >> menu.txt\n$ git commit -am "Add syrup"\n$ git revert --no-edit HEAD\n$ git log -1 --format=%s',['Revert "Add syrup"','Add syrup','Reset "Add syrup"','Merge branch "Add syrup"'],'revert не стирає старий коміт, а додає новий, чиє повідомлення починається з Revert. Тому в історії тепер на один коміт більше, а syrup зник з файлу.','Що виведе остання команда?'),
+B('Яка команда записана з помилкою?',['$ git switch -c dev','$ git add menu.txt','$ git commit -m "Add latte"','$ git push --upstream-set origin dev'],3,'Правильний прапорець називається --set-upstream (або коротко -u). Git відповість: unknown option `upstream-set\'.')
+];
 /* New lessons are slotted into the existing units; old lessons keep their ids so saved progress stays valid */
 UNITS.forEach((u,ui)=>u.lessons.forEach((l,li)=>{l.key=ui+'-'+li;}));
 [].concat(NEWL_CYCLES,NEWL_COLLS,NEWL_OOP,NEWL_ADV,NEWL_PRO).forEach(nl=>{
@@ -3780,7 +4968,7 @@ UNITS.forEach((u,ui)=>u.lessons.forEach((l,li)=>{l.key=ui+'-'+li;}));
   if(nl.after!=='START'&&at===0)at=u.lessons.length;
   u.lessons.splice(at,0,l);
 });
-const ALL=[];
+let ALL=[];
 UNITS.forEach((u,ui)=>u.lessons.forEach((l,li)=>{
   const uid=l.key;
   if(!l.learn)l.learn=LEARN[uid];
@@ -3788,6 +4976,16 @@ UNITS.forEach((u,ui)=>u.lessons.forEach((l,li)=>{
   l.ex.forEach((e,k)=>{e.id=uid+':'+k;e.ui=ui;});
   ALL.push({uid,ui,li,unit:u,lesson:l,n:ALL.length});
 }));
+/* second course: Git. UNITS/ALL are swapped by applyTrack() */
+const GIT_UNITS=[].concat(GIT1,GIT2,GIT3);
+const GIT_ALL=[];
+GIT_UNITS.forEach((u,gi)=>u.lessons.forEach((l,li)=>{
+  const uid='g'+gi+'-'+li;l.key=uid;
+  l.ex.forEach((e,k)=>{e.id=uid+':'+k;e.ui=gi;e.git=true;});
+  GIT_ALL.push({uid,ui:gi,li,unit:u,lesson:l,n:GIT_ALL.length});
+}));
+const JAVA={UNITS,ALL},GIT={UNITS:GIT_UNITS,ALL:GIT_ALL};
+function applyTrack(){const T=S&&S.track==='git'?GIT:JAVA;UNITS=T.UNITS;ALL=T.ALL;}
 
 /* ================= Helpers ================= */
 const $app=document.getElementById('app');
@@ -3829,22 +5027,24 @@ const IC={
 
 /* ================= State ================= */
 const KEY='java-schodnya-v1';
-function fresh(){return {xp:0,streak:0,last:'',done:{},miss:{},day:{d:'',xp:0},goal:30,level:'normal',freeze:1,sound:true,big:false,calm:false,ach:{},srs:{},hist:{},us:{},story:{},fit:{hat:'',gl:'',sc:''},nm:'',nv:'',sex:'',theme:'auto',pj:{},terms:{},wk:null,daily:'',bm:{},rate:0.95,pause:'',vac:{m:'',n:0},quiet:{on:false,from:23,to:8},wkdLate:false,remind:'19:00',stats:{perfect:0,run:0,runBest:0,reviews:0,peeks:0,bugs:0,typed:0,hints:0,placement:0,lessons:0,goals:0,iv:0,wk:0}};}
+function fresh(){return {xp:0,streak:0,last:'',done:{},miss:{},day:{d:'',xp:0},goal:30,level:'normal',freeze:1,sound:true,big:false,calm:false,ach:{},srs:{},hist:{},us:{},usg:{},gitm:{},track:'java',story:{},fit:{hat:'',gl:'',sc:''},nm:'',nv:'',sex:'',theme:'auto',pj:{},terms:{},wk:null,daily:'',bm:{},rate:0.95,pause:'',vac:{m:'',n:0},quiet:{on:false,from:23,to:8},wkdLate:false,remind:'19:00',stats:{perfect:0,run:0,runBest:0,reviews:0,peeks:0,bugs:0,typed:0,hints:0,placement:0,lessons:0,goals:0,iv:0,wk:0}};}
 function norm(s){
   const r=Object.assign(fresh(),s);
   r.stats=Object.assign(fresh().stats,s.stats||{});
   r.day=Object.assign(fresh().day,s.day||{});
-  r.ach=s.ach||{};r.miss=s.miss||{};r.done=s.done||{};r.srs=s.srs||{};r.hist=s.hist||{};r.us=s.us||{};r.story=s.story||{};r.fit=Object.assign({hat:'',gl:'',sc:''},s.fit||{});
+  r.ach=s.ach||{};r.miss=s.miss||{};r.done=s.done||{};r.srs=s.srs||{};r.hist=s.hist||{};r.us=s.us||{};r.usg=s.usg||{};r.gitm=s.gitm||{};r.story=s.story||{};r.fit=Object.assign({hat:'',gl:'',sc:''},s.fit||{});
   Object.keys(r.done).forEach(k=>{if(!r.done[k].t)r.done[k].t=Date.now();});
   return r;
 }
 function load(){try{const s=JSON.parse(localStorage.getItem(KEY));if(s&&typeof s==='object'&&s.done)return norm(s);}catch(e){}return fresh();}
 function save(quiet){try{localStorage.setItem(KEY,JSON.stringify(S));}catch(e){}if(!quiet&&typeof cloudDirty==='function')cloudDirty();}
 let S=load();
+const US=()=>S.track==='git'?(S.usg||(S.usg={})):S.us;
 
 const REDUCED=!!(window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches);
 const isReduced=()=>REDUCED||S.calm;
-function applyPrefs(){const r=document.documentElement;r.dataset.big=S.big?'1':'0';r.dataset.calm=S.calm?'1':'0';if(S.theme==='light'||S.theme==='dark')r.dataset.theme=S.theme;else r.removeAttribute('data-theme');}
+function applyPrefs(){
+  applyTrack();const r=document.documentElement;r.dataset.big=S.big?'1':'0';r.dataset.calm=S.calm?'1':'0';if(S.theme==='light'||S.theme==='dark')r.dataset.theme=S.theme;else r.removeAttribute('data-theme');}
 applyPrefs();
 
 const dayStr=d=>d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
@@ -3871,7 +5071,7 @@ function bumpStreak(){
   return r;
 }
 const isUnlocked=n=>n===0||!!S.done[ALL[n-1].uid];
-const doneReal=()=>ALL.filter(l=>S.done[l.uid]&&!S.done[l.uid].skip).length;
+const doneReal=()=>JAVA.ALL.concat(GIT.ALL).filter(l=>S.done[l.uid]&&!S.done[l.uid].skip).length;
 const strip=s=>String(s).replace(/\s+/g,'').replace(/;+$/,'');
 
 /* ---------- levels ---------- */
@@ -3893,7 +5093,8 @@ const ACH=[
   {id:'first',t:'Перший крок',d:'Пройди перший урок',ok:()=>doneReal()>=1},
   {id:'five',t:'На ходу',d:'Пройди 5 уроків',ok:()=>doneReal()>=5},
   {id:'ten',t:'Не зупинити',d:'Пройди 10 уроків',ok:()=>doneReal()>=10},
-  {id:'all',t:'Курс пройдено',d:'Пройди всі уроки',ok:()=>ALL.every(l=>S.done[l.uid])},
+  {id:'all',t:'Курс пройдено',d:'Пройди всі уроки',ok:()=>JAVA.ALL.every(l=>S.done[l.uid])},
+  {id:'gitall',t:'Git-майстер',d:'Пройди всі уроки Git',ok:()=>GIT.ALL.every(l=>S.done[l.uid])},
   {id:'perfect',t:'Без жодної помилки',d:'Пройди урок на 100%',ok:()=>S.stats.perfect>=1},
   {id:'run10',t:'Десять поспіль',d:'Дай 10 правильних відповідей підряд',ok:()=>S.stats.runBest>=10},
   {id:'run25',t:'Двадцять п\'ять поспіль',d:'Дай 25 правильних відповідей підряд',ok:()=>S.stats.runBest>=25},
@@ -4009,7 +5210,7 @@ const HOW={
 function topbar(){
   const s=shownStreak(),bump=s>shownStreakVal;
   const cnt=S.xp!==shownXp?' data-count="'+S.xp+'" data-from="'+shownXp+'"':'';
-  return '<header class="top"><div class="brand">Java <span>Бариста</span></div><div class="stats">'
+  return '<header class="top"><div class="brand">'+(S.track==='git'?'Git':'Java')+' <span>Бариста</span></div><div class="stats">'
    +'<div class="stat streak'+(s?'':' off')+(bump?' bump':'')+(s>0&&s%7===0?' ms':'')+'" aria-label="Серія днів: '+s+'">'+(s>0&&s%7===0?'<i class="spk a">✦</i><i class="spk b">✦</i><i class="spk c">✦</i>':'')+IC.flame+'<span>'+s+'</span></div>'
    +'<div class="stat xp'+(cnt?' bump':'')+'" aria-label="Досвід: '+S.xp+'">'+IC.bolt+'<span'+cnt+'>'+S.xp+'</span></div></div></header>';
 }
@@ -4615,7 +5816,7 @@ function moreHtml(ex,c){
     }
   }catch(e){}
   {const tl=termsIn(exText(ex),3);if(tl.length)h+='<h4>Слова із завдання</h4>'+termRows(tl);}
-  const code=wrapJava(exCode(ex,c));
+  const code=isSh(exCode(ex,c))||isSh(ex.code)?null:wrapJava(exCode(ex,c));
   if(code){h+='<button class="btn ghost sm" data-act="runhere" data-id="'+esc(ex.id)+'">Запустити код і побачити самій</button><div class="console more-out" hidden><span class="con-l">Результат</span><pre></pre></div>';}
   return h+'</div></details>';
 }
@@ -5651,22 +6852,26 @@ System.out.println(percent + "%");`),
 ];
 /* ---------- round 4: more trainers, glossary game, own words, fox helper ---------- */
 TERMS2.forEach(x=>TERMS.push(x));
+GITTERMS.forEach(x=>TERMS.push(x));
 const TCAT_OLD={'Клас':'ООП',"Об'єкт":'ООП','Метод':'ООП','Поле':'ООП','Конструктор':'ООП','static':'ООП','final':'ООП','Інтерфейс':'ООП','Абстрактний клас':'ООП','Наслідування':'ООП','Поліморфізм':'ООП','Інкапсуляція':'ООП','Перевантаження':'ООП','Перевизначення':'ООП','Запис (record)':'ООП','Перелік (enum)':'ООП','Виняток':'Винятки','try/catch':'Винятки','Колекція':'Колекції','Список (List)':'Колекції','Множина (Set)':'Колекції','Мапа (Map)':'Колекції','Масив':'Колекції','Узагальнення (generic)':'Колекції','Потік (Stream)':'Колекції','Лямбда':'Колекції','Потік виконання (Thread)':'Потоки й паралельність','Змінна':'Типи й змінні','Тип даних':'Типи й змінні','boolean':'Типи й змінні','null':'Типи й змінні','Цикл':'Керування потоком','Рядок (String)':'Рядки й ввід'};
-const TCATS=['Основи','Типи й змінні','Керування потоком','ООП','Колекції','Винятки','Рядки й ввід','Потоки й паралельність','Інструменти й тести','Бази даних і веб','Загальне програмування'];
+const TCATS=['Основи','Типи й змінні','Керування потоком','ООП','Колекції','Винятки','Рядки й ввід','Потоки й паралельність','Інструменти й тести','Бази даних і веб','Загальне програмування','Git'];
 const autoKeys=d=>{const out=[];String(d).toLowerCase().split(/[^a-zа-яіїєґ']+/).forEach(w=>{if(w.length>=6){const k=w.slice(0,5);if(!out.includes(k))out.push(k);}});return out.slice(0,4);};
 TERMS.forEach(x=>{if(!x.c)x.c=TCAT_OLD[x.t]||'Основи';if(!x.k||!x.k.length)x.k=autoKeys(x.d);});
 READ.forEach((e,k)=>{e.id='rd:'+k;e.ui=102;});
 REFAC.forEach((e,k)=>{e.id='rf:'+k;e.ui=103;});
 TRAPS.forEach((e,k)=>{e.id='tp:'+k;e.ui=104;});
 RTERR.forEach((e,k)=>{e.id='rt:'+k;e.ui=105;});
+GITQ.forEach((e,k)=>{e.id='gq:'+k;e.ui=106;e.git=true;});
 const TRN={
   ce:{t:'Помилки компілятора',d:'Що пише компілятор і чому',pool:()=>COMPERR,n:8},
   rd:{t:'Читаю чужий код',d:'Що робить ця програма',pool:()=>READ,n:8},
   rf:{t:'Рефакторинг',d:'Обираємо охайніший код',pool:()=>REFAC,n:8},
   tp:{t:'Пастки співбесіди',d:'Каверзні питання',pool:()=>TRAPS,n:10},
-  rt:{t:'Помилки виконання',d:'Код працює, але падає',pool:()=>RTERR,n:8}
+  rt:{t:'Помилки виконання',d:'Код працює, але падає',pool:()=>RTERR,n:8},
+  gq:{t:'Каверзний Git',d:'Різниця команд і пастки',pool:()=>GITQ,n:8,git:true}
 };
-const TRNUI={101:()=>COMPERR,102:()=>READ,103:()=>REFAC,104:()=>TRAPS,105:()=>RTERR};
+const TRNUI={101:()=>COMPERR,102:()=>READ,103:()=>REFAC,104:()=>TRAPS,105:()=>RTERR,106:()=>GITQ};
+const GIT_AN=['Git це журнал кав\'ярні: він пам\'ятає, як змінювалось меню, і дозволяє повернутись до будь-якої сторінки.','Коміт це знімок меню: спочатку відкладаєш потрібні сторінки (add), потім фіксуєш знімок (commit).','Гілка це чернетка нового рецепта: можна експериментувати й не псувати основне меню.','Віддалений репозиторій це спільна кухня в хмарі: ти надсилаєш свої рецепти (push) і забираєш чужі (pull).','Скасування змін це гумка для меню: можна стерти одну правку, а можна відкотити цілу сторінку, головне знати яку.','Rebase і теги це наведення порядку в книзі рецептів: переписуємо історію охайно й ставимо закладки на важливих версіях.'];
 function startTrainer(k){
   const T0=TRN[k];if(!T0)return;
   const q=shuffle(T0.pool().slice()).slice(0,T0.n);
@@ -5723,7 +6928,7 @@ const UNIT_AN=[
  'Співбесіда це екзамен з кав\'ярні: основи, ООП, колекції та каверзні запитання про дрібниці.'
 ];
 function foxHtml(ex,c){
-  const unit=ex.ui<100?UNIT_AN[ex.ui]:'';
+  const unit=ex.git?(GIT_AN[ex.ui]||''):ex.ui<100?UNIT_AN[ex.ui]:'';
   let h='<div class="foxm" data-act="foxx"><div class="foxm-b" role="dialog" aria-label="Лисичка пояснює" data-act="fxnone"><button class="x foxm-x" data-act="foxx" aria-label="Закрити">'+IC.cross+'</button>'
     +'<div class="foxm-h">'+mascot('happy',54)+'<h3>Поясню простіше</h3></div>';
   if(unit)h+='<div class="fbx-r why"><i>Як у кав\'ярні</i><p>'+esc(unit)+'</p></div>';
@@ -5784,17 +6989,21 @@ function termChips(){
   return '<div class="chips-row" style="padding:8px 16px 0"><button class="uchip'+(TM.cat?'':' on')+'" data-act="tcat" data-c="">Усі</button>'+TCATS.map(c=>'<button class="uchip'+(TM.cat===c?' on':'')+'" data-act="tcat" data-c="'+esc(c)+'">'+esc(c)+'</button>').join('')+'</div>';
 }
 function termsView(){
-  const known=Object.values(S.terms||{}).filter(v=>v>=2).length;
+  const pool=termPool(),known=pool.filter(x=>(S.terms&&S.terms[x.t]||0)>=2).length;
+  const pct=pool.length?Math.round(known/pool.length*100):0;
   let h='<div class="view hastabs'+(fx.view?' enter':'')+'"><header class="top"><div class="brand">Словник</div><div class="stats"><button class="stat" data-act="tab" data-tab="sheet" aria-label="До шпаргалок">'+IC.book+'<span>Шпаргалки</span></button></div></header>';
-  const modes=[['cards','Картки'],['game','Гра'],['own','Своїми словами'],['list','Список']];
-  h+='<div class="seg" style="margin:6px 16px 0" role="group">'+modes.map(m=>'<button class="segb'+(TM.mode===m[0]?' on':'')+'" data-act="tmode" data-v="'+m[0]+'">'+m[1]+'</button>').join('')+'</div>'+termChips();
-  h+='<p class="sh-n" style="margin:10px 16px 0">Вивчено: '+known+' з '+TERMS.length+(TM.cat?' · у розділі «'+esc(TM.cat)+'»: '+termPool().length:'')+'</p>';
+  const modes=[['cards','Картки','Згадуй і перевертай'],['game','Гра','З’єднуй пари на час'],['own','Поясни','Своїми словами'],['list','Усі терміни','Пошук і довідка']];
+  const help={cards:'Прочитай термін і спробуй згадати, що він означає. Потім натисни «Показати пояснення» і чесно познач, знаєш ти його чи ні.',game:'Ліворуч терміни, праворуч пояснення. Торкни термін, потім його пояснення. За раунд без зайвих помилок дається бонус.',own:'Напиши, що означає термін, власними словами. Потім застосунок покаже, які ключові слова ти згадала, і зразок для порівняння.',list:'Усі терміни одним списком. Можна шукати за назвою чи словом із пояснення.'};
+  h+='<div class="gl-top"><div><p class="sh-n" style="margin:0 0 6px">Вивчено: '+known+' з '+pool.length+'</p><div class="gl-bar" role="progressbar" aria-valuenow="'+pct+'" aria-valuemin="0" aria-valuemax="100"><i style="width:'+pct+'%"></i></div></div>'
+    +'<select id="tcatsel" class="gl-sel" aria-label="Розділ словника"><option value="">Усі розділи ('+TERMS.length+')</option>'+TCATS.filter(c=>TERMS.some(x=>x.c===c)).map(c=>'<option value="'+esc(c)+'"'+(TM.cat===c?' selected':'')+'>'+esc(c)+' ('+TERMS.filter(x=>x.c===c).length+')</option>').join('')+'</select>'
+    +'<div class="gl-modes">'+modes.map(m=>'<button class="gl-m'+(TM.mode===m[0]?' on':'')+'" data-act="tmode" data-v="'+m[0]+'"><b>'+m[1]+'</b><span>'+m[2]+'</span></button>').join('')+'</div>'
+    +'<p class="gl-help">'+help[TM.mode]+'</p></div>';
+  if(!pool.length)return h+'<p class="desc" style="text-align:center">У цьому розділі поки порожньо.</p></div>'+tabs('sheet');
   if(TM.mode==='cards'){
-    const ord=termOrder();
-    if(!ord.length)return h+'</div>'+tabs('sheet');
-    const t=ord[TM.i%ord.length];
-    h+='<div class="tcard-w"><button class="tcard'+(TM.show?' flip':'')+'" data-act="tflip" aria-label="Перевернути картку"><span class="tc-c">'+esc(t.c)+'</span><span class="tc-t">'+esc(t.t)+'</span>'+(TM.show?'<span class="tc-d">'+esc(t.d)+'</span>'+(t.s?'<span class="tc-s">Простіше: '+esc(t.s)+'</span>':'')+(t.ex?'<span class="tc-x">'+esc(t.ex)+'</span>':''):'<span class="tc-h">Торкнись, щоб побачити пояснення</span>')+'</button>';
-    if(TM.show)h+='<div class="btnrow"><button class="btn ghost" data-act="tno">Ще раз</button><button class="btn good" data-act="tyes">Знаю</button></div>';
+    const ord=termOrder(),t=ord[TM.i%ord.length],lv=(S.terms&&S.terms[t.t])||0;
+    h+='<div class="tcard-w"><p class="gl-dots" aria-label="Картка '+((TM.i%ord.length)+1)+' з '+ord.length+'">Картка '+((TM.i%ord.length)+1)+' з '+ord.length+' &nbsp;·&nbsp; знаю на '+['0','1','2','3'][lv]+' з 3 <span>'+[0,1,2].map(i=>'<i class="'+(i<lv?'on':'')+'"></i>').join('')+'</span></p>'
+      +'<button class="tcard'+(TM.show?' flip':'')+'" data-act="tflip" aria-label="Перевернути картку"><span class="tc-c">'+esc(t.c)+'</span><span class="tc-t">'+esc(t.t)+'</span>'+(TM.show?'<span class="tc-d">'+esc(t.d)+'</span>'+(t.s?'<span class="tc-s">Простіше: '+esc(t.s)+'</span>':'')+(t.ex?'<span class="tc-x">'+esc(t.ex)+'</span>':''):'<span class="tc-h">Що це означає? Спробуй згадати</span>')+'</button>';
+    h+=TM.show?'<div class="btnrow"><button class="btn ghost" data-act="tno">Ще не знаю</button><button class="btn good" data-act="tyes">Знаю</button></div>':'<button class="btn" data-act="tflip">Показати пояснення</button>';
     h+='</div>';
   }else if(TM.mode==='game'){
     if(!TM.g)gameNew();
@@ -5803,25 +7012,23 @@ function termsView(){
       const sec=Math.round(g.time/1000);
       h+='<div class="gm-o"><h2>Раунд пройдено</h2><p>Час: '+Math.floor(sec/60)+':'+String(sec%60).padStart(2,'0')+'. Помилок: '+g.err+'.'+(g.xp?' Бонус +'+g.xp+' XP.':g.err>2?' Для бонусу потрібно не більше двох помилок.':' Сьогодні вже взято три бонуси за гру.')+'</p><button class="btn" data-act="gnew">Ще раунд</button></div>';
     }else{
-      h+='<p class="desc" style="margin:8px 16px 0">Торкни термін, а потім його пояснення.</p><div class="gm">'
+      h+='<div class="gm">'
         +'<div class="gm-c">'+g.pairs.map((p,i)=>'<button class="gm-b'+(g.done.includes(i)?' ok':'')+(g.sel&&g.sel.s==='l'&&g.sel.i===i?' sel':'')+(g.flash&&g.flash.l===i?' no':'')+'" data-act="gpick" data-s="l" data-i="'+i+'"'+(g.done.includes(i)?' disabled':'')+'>'+esc(p.t)+'</button>').join('')+'</div>'
         +'<div class="gm-c">'+g.right.map((pid,i)=>'<button class="gm-b d'+(g.done.includes(pid)?' ok':'')+(g.sel&&g.sel.s==='r'&&g.sel.i===i?' sel':'')+(g.flash&&g.flash.r===i?' no':'')+'" data-act="gpick" data-s="r" data-i="'+i+'"'+(g.done.includes(pid)?' disabled':'')+'>'+esc(shortDef(g.pairs[pid].d))+'</button>').join('')+'</div></div>';
     }
   }else if(TM.mode==='own'){
-    const ord=termOrder();
-    if(!ord.length)return h+'</div>'+tabs('sheet');
-    const t=ord[TM.ow.i%ord.length],r=TM.ow.res;
-    h+='<div class="ow"><p class="kicker">Поясни своїми словами</p><h2 class="q">'+esc(t.t)+'</h2>';
+    const ord=termOrder(),t=ord[TM.ow.i%ord.length],r=TM.ow.res;
+    h+='<div class="ow"><h2 class="q" style="margin:0">'+esc(t.t)+'</h2><p class="desc" style="margin:0">'+esc(t.c)+'</p>';
     if(!r)h+='<textarea id="owin" class="area" rows="4" placeholder="Що це таке? Напиши простими словами, як другу." aria-label="Твоє пояснення">'+esc(TM.ow.val)+'</textarea><button class="btn" data-act="owcheck">Перевірити</button>';
     else{
-      h+='<div class="fbx-r mine" style="margin-top:8px"><i>Твоя відповідь</i><p>'+esc(TM.ow.val||'(порожньо)')+'</p></div>'
-        +'<div class="fbx"><div class="fbx-r"><i>Ключові слова: '+r.hit.length+' з '+t.k.length+'</i><div class="fbx-chips">'+t.k.map(k=>'<code style="'+(r.hit.includes(k)?'':'opacity:.5;text-decoration:line-through')+'">'+(r.hit.includes(k)?'✓ ':'✗ ')+esc(k)+'…</code>').join('')+'</div><p class="desc" style="margin:6px 0 0">Перевірка за ключовими словами: застосунок не вміє читати зміст, тому ти сама порівняй із поясненням нижче.</p></div>'
-        +'<div class="fbx-r right"><i>Пояснення</i><p>'+esc(t.d)+'</p>'+(t.s?'<p>Простіше: '+esc(t.s)+'</p>':'')+'</div></div>'
-        +'<div class="btnrow"><button class="btn ghost" data-act="ownext" data-v="0">Ще раз потім</button><button class="btn good" data-act="ownext" data-v="1">'+(r.ok?'Знаю':'Далі')+'</button></div>';
+      h+='<div class="fbx-r mine"><i>Твоя відповідь</i><p>'+esc(TM.ow.val||'(порожньо)')+'</p></div>'
+        +'<div class="fbx-r"><i>Ключові слова: '+r.hit.length+' з '+t.k.length+'</i><div class="fbx-chips">'+t.k.map(k=>'<code style="'+(r.hit.includes(k)?'':'opacity:.5;text-decoration:line-through')+'">'+(r.hit.includes(k)?'✓ ':'✗ ')+esc(k)+'…</code>').join('')+'</div><p class="desc" style="margin:6px 0 0">Це грубa перевірка за словами: зміст сама порівняй із зразком нижче.</p></div>'
+        +'<div class="fbx-r right"><i>Зразок</i><p>'+esc(t.d)+'</p>'+(t.s?'<p>Простіше: '+esc(t.s)+'</p>':'')+'</div>'
+        +'<div class="btnrow"><button class="btn ghost" data-act="ownext" data-v="0">Ще повторю</button><button class="btn good" data-act="ownext" data-v="1">'+(r.ok?'Знаю':'Далі')+'</button></div>';
     }
     h+='</div>';
   }else{
-    h+='<div class="sh-tools"><input id="tq" class="inp" type="search" placeholder="Пошук терміна" value="'+esc(TM.q)+'" aria-label="Пошук терміна" autocomplete="off"></div><div class="sheet" id="tlist">'+termsList()+'</div>';
+    h+='<div class="sh-tools" style="padding-top:8px"><input id="tq" class="inp" type="search" placeholder="Пошук терміна" value="'+esc(TM.q)+'" aria-label="Пошук терміна" autocomplete="off"></div><div class="sheet" id="tlist">'+termsList()+'</div>';
   }
   return h+'</div>'+tabs('sheet');
 }
@@ -5831,11 +7038,184 @@ function termsList(){
   if(!l.length)return '<p class="desc" style="text-align:center">Нічого не знайшлося.</p>';
   return l.map(x=>'<article class="sh-c"><h3 style="padding:14px 16px 0">'+esc(x.t)+' <small style="opacity:.6;font-weight:500">'+esc(x.c)+'</small></h3><div style="padding:6px 16px 14px;display:grid;gap:8px;min-width:0"><p>'+esc(x.d)+'</p>'+(x.s?'<p class="desc">Простіше: '+esc(x.s)+'</p>':'')+(x.ex?codeBlock(x.ex):'')+'</div></article>').join('');
 }
-const wordOfDay=()=>TERMS[hashStr(today())%TERMS.length];
+
+/* ---------- git terminal (simulator) ---------- */
+const GM=[
+ {t:'Створи репозиторій',d:'Зроби теку репозиторієм Git.',h:'git init',ok:g=>g.init},
+ {t:'Створи файл і подивись статус',d:'Створи порожній файл menu.txt командою touch, потім виконай git status.',h:'touch menu.txt  і  git status',ok:g=>!!g.files['menu.txt']&&g.ran.status},
+ {t:'Додай файл до індексу',d:'Підготуй menu.txt до коміту.',h:'git add menu.txt',ok:g=>!!g.files['menu.txt']&&g.files['menu.txt'].idx!=null},
+ {t:'Перший коміт',d:'Збережи знімок із повідомленням.',h:'git commit -m "Перше меню"',ok:g=>g.commits.length>=1},
+ {t:'Зміни файл',d:'Допиши рядок у menu.txt командою echo, а потім виконай git status: Git покаже modified.',h:'echo "Лате" >> menu.txt  і  git status',ok:g=>g.ran.modified},
+ {t:'Нова гілка',d:'Створи гілку latte і перейди на неї одразу.',h:'git switch -c latte',ok:g=>g.head==='latte'},
+ {t:'Коміт у гілці',d:'Додай зміну в індекс і зроби коміт, поки ти на гілці latte.',h:'git add menu.txt  і  git commit -m "Додали лате"',ok:g=>!!g.branches.latte&&!!g.branches.main&&g.branches.latte!==g.branches.main},
+ {t:'Повернись і злий гілку',d:'Перейди на main і злий у неї гілку latte.',h:'git switch main  і  git merge latte',ok:g=>g.head==='main'&&g.commits.length>=2&&g.branches.main===g.branches.latte},
+ {t:'Подивись історію',d:'Виведи історію комітів одним рядком на коміт.',h:'git log --oneline',ok:g=>g.ran.log}
+];
+function gsNew(){return {init:false,files:{},commits:[],branches:{},head:'main',lines:[],ran:{},n:0};}
+let GS=gsNew();
+const gsId=n=>{let h=(n*2654435761>>>0).toString(16);return (h+'0000000').slice(0,7);};
+const gsTok=s=>{const r=[],rx=/"([^"]*)"|'([^']*)'|(\S+)/g;let m;while((m=rx.exec(s)))r.push(m[1]!=null?m[1]:m[2]!=null?m[2]:m[3]);return r;};
+const gsCommit=id=>GS.commits.find(c=>c.id===id);
+const gsTip=()=>GS.branches[GS.head]||null;
+function gsAnc(id){const r=[];let q=[id];while(q.length){const x=q.pop();if(!x||r.includes(x))continue;r.push(x);const c=gsCommit(x);if(c)c.parents.forEach(p=>q.push(p));}return r;}
+function gsDirty(){return Object.keys(GS.files).some(n=>{const f=GS.files[n];return f.tracked&&(f.work!==f.head||f.idx!==f.head);});}
+function gsLoad(id){
+  const c=gsCommit(id),snap=c?c.snap:{};
+  Object.keys(GS.files).forEach(n=>{const f=GS.files[n];if(f.tracked&&!(n in snap))delete GS.files[n];});
+  Object.keys(snap).forEach(n=>{GS.files[n]={work:snap[n],idx:snap[n],head:snap[n],tracked:true};});
+}
+function gsStatus(){
+  const o=[],f=GS.files,names=Object.keys(f).sort();
+  o.push('On branch '+GS.head);
+  if(!gsTip())o.push('','No commits yet');
+  const st=names.filter(n=>f[n].tracked&&f[n].idx!==f[n].head);
+  const ch=names.filter(n=>f[n].tracked&&f[n].work!==f[n].idx);
+  const un=names.filter(n=>!f[n].tracked);
+  if(st.length){o.push('','Changes to be committed:','  (use "git restore --staged <file>..." to unstage)');st.forEach(n=>o.push('\t'+(f[n].head==null?'new file:   ':'modified:   ')+n));}
+  if(ch.length){o.push('','Changes not staged for commit:','  (use "git add <file>..." to update what will be committed)','  (use "git restore <file>..." to discard changes in working directory)');ch.forEach(n=>o.push('\tmodified:   '+n));GS.ran.modified=true;}
+  if(un.length){o.push('','Untracked files:','  (use "git add <file>..." to include in what will be committed)');un.forEach(n=>o.push('\t'+n));}
+  if(!st.length&&!ch.length)o.push(un.length?'\nnothing added to commit but untracked files present (use "git add" to track)':(gsTip()?'\nnothing to commit, working tree clean':'\nnothing to commit (create/copy files and use "git add" to track)'));
+  return o;
+}
+function gsDoCommit(msg,parents,snap){
+  GS.n++;const id=gsId(GS.n*7919+msg.length);
+  GS.commits.push({id,msg,parents,snap});GS.branches[GS.head]=id;return id;
+}
+function gsGit(a){
+  const sub=a[1],o=[];
+  if(!sub||sub==='--help')return ['usage: git <команда>. Тут працюють: init, status, add, commit, log, branch, switch, checkout, merge, diff, restore'];
+  if(sub==='init'){if(GS.init)return ['Reinitialized existing Git repository'];GS.init=true;return ['Initialized empty Git repository in .git/'];}
+  if(!GS.init)return ['fatal: not a git repository (or any of the parent directories): .git'];
+  if(sub==='status'){GS.ran.status=true;return gsStatus();}
+  if(sub==='add'){
+    const t=a.slice(2).filter(x=>x[0]!=='-');if(!t.length)return ['Nothing specified, nothing added.'];
+    const names=t.includes('.')||t.includes('-A')||a.includes('-A')||a.includes('--all')?Object.keys(GS.files):t;
+    for(const n of names){const f=GS.files[n];if(!f)return ["fatal: pathspec '"+n+"' did not match any files"];f.tracked=true;f.idx=f.work;}
+    return [];
+  }
+  if(sub==='commit'){
+    const mi=a.indexOf('-m'),am=a.includes('-a')||a.includes('-am');
+    let msg=mi>=0?a[mi+1]:null;
+    if(a.some(x=>/^-am$/.test(x))){const k=a.indexOf('-am');msg=a[k+1];}
+    if(!msg)return ['Aborting commit due to empty commit message. Додай -m "повідомлення"'];
+    if(am)Object.keys(GS.files).forEach(n=>{const f=GS.files[n];if(f.tracked)f.idx=f.work;});
+    const f=GS.files,ch=Object.keys(f).filter(n=>f[n].tracked&&f[n].idx!==f[n].head);
+    if(!ch.length)return gsStatus().filter(x=>x!=='');
+    const snap={};Object.keys(f).forEach(n=>{if(f[n].tracked&&f[n].idx!=null)snap[n]=f[n].idx;});
+    ch.forEach(n=>{f[n].head=f[n].idx;});
+    const p=gsTip();const id=gsDoCommit(msg,p?[p]:[],snap);
+    return ['['+GS.head+(p?'':' (root-commit)')+' '+id+'] '+msg,' '+ch.length+' file'+(ch.length>1?'s':'')+' changed'];
+  }
+  if(sub==='log'){
+    GS.ran.log=true;const one=a.includes('--oneline');let id=gsTip();if(!id)return ["fatal: your current branch '"+GS.head+"' does not have any commits yet"];
+    let first=true;
+    while(id){const c=gsCommit(id);const refs=Object.keys(GS.branches).filter(b=>GS.branches[b]===id).map(b=>b===GS.head?'HEAD -> '+b:b);
+      if(one)o.push(id+(refs.length?' ('+refs.join(', ')+')':'')+' '+c.msg);
+      else{if(!first)o.push('');o.push('commit '+id+(refs.length?' ('+refs.join(', ')+')':''),'Author: Ти <you@cafe.dev>','','    '+c.msg);}
+      first=false;id=c.parents[0];}
+    return o;
+  }
+  if(sub==='branch'){
+    const t=a.slice(2).filter(x=>x[0]!=='-');
+    if(a.includes('-d')||a.includes('-D')){const n=t[0];if(!(n in GS.branches))return ["error: branch '"+n+"' not found."];if(n===GS.head)return ["error: cannot delete branch '"+n+"' used by worktree"];delete GS.branches[n];return ['Deleted branch '+n];}
+    if(t.length){if(!gsTip())return ['fatal: not a valid object name: \''+GS.head+'\''];if(t[0] in GS.branches)return ["fatal: a branch named '"+t[0]+"' already exists"];GS.branches[t[0]]=gsTip();return [];}
+    const names=Object.keys(GS.branches);if(!names.includes(GS.head))names.push(GS.head);
+    return names.sort().map(n=>(n===GS.head?'* ':'  ')+n);
+  }
+  if(sub==='switch'||sub==='checkout'){
+    const mk=a.includes('-c')||a.includes('-b');const t=a.slice(2).filter(x=>x[0]!=='-');const n=t[0];
+    if(!n)return ['fatal: missing branch name'];
+    if(mk){if(n in GS.branches)return ["fatal: a branch named '"+n+"' already exists"];if(!gsTip())return ['fatal: нема з чого створювати гілку: зроби перший коміт'];GS.branches[n]=gsTip();GS.head=n;return ["Switched to a new branch '"+n+"'"];}
+    if(!(n in GS.branches))return [sub==='switch'?"fatal: invalid reference: "+n:"error: pathspec '"+n+"' did not match any file(s) known to git"];
+    if(n===GS.head)return ["Already on '"+n+"'"];
+    if(gsDirty()&&GS.branches[n]!==gsTip())return ['error: Your local changes would be overwritten by checkout.','Please commit your changes or stash them before you switch branches.'];
+    GS.head=n;gsLoad(GS.branches[n]);return ["Switched to branch '"+n+"'"];
+  }
+  if(sub==='merge'){
+    const n=a[2];if(!n||!(n in GS.branches))return ['merge: '+(n||'')+' - not something we can merge'];
+    const cur=gsTip(),tgt=GS.branches[n];
+    if(cur===tgt||gsAnc(cur).includes(tgt))return ['Already up to date.'];
+    if(gsDirty())return ['error: Your local changes would be overwritten by merge. Спочатку зроби коміт.'];
+    if(gsAnc(tgt).includes(cur)){GS.branches[GS.head]=tgt;gsLoad(tgt);return ['Updating '+cur+'..'+tgt,'Fast-forward'];}
+    const A=gsCommit(cur).snap,B=gsCommit(tgt).snap,base=gsAnc(cur).find(x=>gsAnc(tgt).includes(x)),C=(base&&gsCommit(base).snap)||{};
+    const snap={};
+    for(const f of new Set(Object.keys(A).concat(Object.keys(B)))){
+      const a1=A[f],b1=B[f],c1=C[f];
+      if(a1===b1)snap[f]=a1;else if(a1===c1)snap[f]=b1;else if(b1===c1)snap[f]=a1;
+      else return ['Auto-merging '+f,'CONFLICT (content): Merge conflict in '+f,'Automatic merge failed (у тренажері конфлікти не розв’язуються, скасуй: git merge --abort).'];
+    }
+    GS.n++;const id=gsId(GS.n*104729);GS.commits.push({id,msg:"Merge branch '"+n+"'",parents:[cur,tgt],snap});GS.branches[GS.head]=id;gsLoad(id);
+    return ["Merge made by the 'ort' strategy."];
+  }
+  if(sub==='diff'){
+    const f=GS.files;const ch=Object.keys(f).filter(n=>f[n].tracked&&f[n].work!==f[n].idx);
+    if(!ch.length)return [];
+    ch.forEach(n=>{o.push('diff --git a/'+n+' b/'+n);const oldL=String(f[n].idx||'').split('\n'),newL=String(f[n].work||'').split('\n');
+      oldL.forEach(l=>{if(!newL.includes(l)&&l!=='')o.push('-'+l);});newL.forEach(l=>{if(!oldL.includes(l)&&l!=='')o.push('+'+l);});});
+    return o;
+  }
+  if(sub==='restore'){
+    const st=a.includes('--staged');const t=a.slice(2).filter(x=>x[0]!=='-');
+    if(!t.length)return ['fatal: you must specify path(s) to restore'];
+    for(const n of t){const f=GS.files[n];if(!f||!f.tracked)return ["error: pathspec '"+n+"' did not match any file(s) known to git"];if(st)f.idx=f.head;else f.work=f.idx;}
+    return [];
+  }
+  if(['push','pull','fetch','clone','remote','rebase','reset','stash','tag','revert','cherry-pick'].includes(sub))return ['Цей тренажер поки не вміє «git '+sub+'»: тут працює лише локальний репозиторій з основними командами. Спробуй цю команду в справжньому терміналі.'];
+  return ["git: '"+sub+"' is not a git command. See 'git --help'."];
+}
+function gsRun(line){
+  const a=gsTok(line.trim());if(!a.length)return null;
+  const c=a[0];
+  if(c==='git')return gsGit(a);
+  if(c==='clear'){GS.lines=[];return null;}
+  if(c==='ls'){const n=Object.keys(GS.files).sort();return n.length?[n.join('  ')]:[];}
+  if(c==='touch'){a.slice(1).forEach(n=>{if(!GS.files[n])GS.files[n]={work:'',idx:null,head:null,tracked:false};});return [];}
+  if(c==='cat'){const f=GS.files[a[1]];return f?String(f.work).split('\n').filter((x,i,r)=>!(i===r.length-1&&x==='')):['cat: '+a[1]+': No such file or directory'];}
+  if(c==='echo'){
+    const gi=line.indexOf('>>'),g1=line.indexOf('>');
+    if(g1<0)return [a.slice(1).join(' ')];
+    const append=gi>=0&&gi===g1,txtPart=line.slice(line.indexOf('echo')+4,g1).trim().replace(/^["']|["']$/g,'');
+    const fn=line.slice(append?gi+2:g1+1).trim().split(/\s+/)[0];
+    if(!fn)return ['bash: syntax error near unexpected token `newline\''];
+    const f=GS.files[fn]||(GS.files[fn]={work:'',idx:null,head:null,tracked:false});
+    f.work=append?(f.work?(f.work.endsWith('\n')?f.work:f.work+'\n'):'')+txtPart+'\n':txtPart+'\n';
+    return [];
+  }
+  if(c==='help')return ['Команди: git init | status | add | commit -m | log [--oneline] | branch | switch [-c] | checkout [-b] | merge | diff | restore [--staged]','Файли: touch, echo "текст" > файл (або >>), cat, ls, clear'];
+  return ['bash: '+c+': command not found'];
+}
+function gsCur(){const S2=S.gitm||{};return GM.findIndex((m,i)=>!S2[i]);}
+function gitExec(){
+  const el=document.getElementById('gitin');if(!el)return;
+  const v=el.value;if(!v.trim())return;
+  const out=gsRun(v);
+  if(out!==null)GS.lines.push({c:v,o:out});
+  el.value='';
+  S.gitm=S.gitm||{};
+  GM.forEach((m,i)=>{if(!S.gitm[i]&&m.ok(GS)){const first=GM.findIndex((x,j)=>!S.gitm[j])===i;S.gitm[i]=1;if(first||true){bonusXp(10);toast('Місія виконана',m.t+' · +10 XP');}}});
+  save();fx.view=false;render();
+  const t=document.getElementById('gterm');if(t)t.scrollTop=t.scrollHeight;
+  const e2=document.getElementById('gitin');if(e2)e2.focus({preventScroll:true});
+}
+function gitSimView(){
+  const cur=gsCur(),m=GM[cur>=0?cur:GM.length-1],S2=S.gitm||{};
+  let h='<div class="view'+(fx.view?' enter':'')+'"><div class="ide"><div class="lhead"><button class="x" data-act="home" aria-label="Назад">'+IC.cross+'</button><h1 class="ide-t">Git-термінал</h1></div>';
+  h+='<div class="gmis"><div class="gdots">'+GM.map((x,i)=>'<i class="'+(S2[i]?'on':i===cur?'cur':'')+'"></i>').join('')+'</div>';
+  if(cur<0)h+='<p class="gm-t">Усі місії виконано!</p><p class="desc">Можеш далі вільно пробувати команди. Кнопка «Почати заново» очищає репозиторій.</p>';
+  else h+='<p class="gm-k">Місія '+(cur+1)+' з '+GM.length+'</p><p class="gm-t">'+esc(m.t)+'</p><p class="desc">'+esc(m.d)+'</p><details class="more"><summary>Підказка</summary><div class="more-b"><p><code>'+esc(m.h)+'</code></p></div></details>';
+  h+='</div>';
+  h+='<div class="term" id="gterm" role="log" aria-live="polite"><div class="tl"><span class="sh-p">Тренажер Git.</span> Введи help, щоб побачити команди.</div>'
+    +GS.lines.map(l=>'<div class="tl"><span class="sh-p">$</span> '+esc(l.c)+'</div>'+(l.o.length?'<pre class="to">'+esc(l.o.join('\n'))+'</pre>':'')).join('')+'</div>';
+  h+='<form class="tin" onsubmit="return false"><span class="sh-p">$</span><input id="gitin" type="text" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" placeholder="введи команду" aria-label="Команда"><button class="btn sm" data-act="gitrun" type="button">Виконати</button></form>';
+  h+='<button class="btn ghost sm" data-act="gitreset" style="margin-top:8px">Почати заново</button></div></div>';
+  return h;
+}
+
+const wordOfDay=()=>{const pool=TERMS.filter(x=>(x.c==='Git')===(S.track==='git'));return pool[hashStr(today())%pool.length];};
 
 /* certificate */
 function certView(){
-  const all=ALL.every(l=>S.done[l.uid]);
+  const all=JAVA.ALL.every(l=>S.done[l.uid]);
   const n=doneReal();
   if(!all)return '<div class="view enter hastabs"><header class="top"><div class="brand">Сертифікат</div></header><div class="sets"><section class="card"><h2>Ще не готовий</h2><p class="desc">Сертифікат з’явиться, коли ти пройдеш усі уроки. Зараз пройдено '+n+' з '+ALL.length+'.</p><div class="meter"><div class="track"><div class="fill" style="width:'+Math.round(n/ALL.length*100)+'%"></div></div></div></section></div></div>'+tabs('stats');
   const d=new Date();const ds=String(d.getDate()).padStart(2,'0')+'.'+String(d.getMonth()+1).padStart(2,'0')+'.'+d.getFullYear();
@@ -5914,6 +7294,7 @@ function homeView(){
   const li=lvlInfo(S.xp);
   const dxp=S.day.d===today()?S.day.xp:0,gpct=Math.min(100,dxp/S.goal*100);
   let h='<div class="view hastabs'+(fx.view?' enter':'')+'">'+topbar();
+  h+='<div class="trk" role="group" aria-label="Курс"><button class="trkb'+(S.track==='git'?'':' on')+'" data-act="track" data-v="java">☕ Java</button><button class="trkb'+(S.track==='git'?' on':'')+'" data-act="track" data-v="git">🌿 Git</button></div>';
   h+='<p class="hello">'+greetWord()+', <b>'+esc(nv())+'</b>!</p>';
   h+='<section class="me"><span class="bean b1"></span><span class="bean b2"></span><span class="bean b3"></span><span class="bean b4"></span><span class="bean b5"></span><span class="bean b6"></span>'+cupSvg(li.pct)+'<div class="me-m">'+mascot('idle',64)+'</div><div class="me-t"><p class="kicker">Рівень '+li.n+'</p><h2>'+esc(li.title)+'</h2>'
     +'<div class="meter slim"><div class="track" role="progressbar" aria-label="Прогрес до наступного рівня" aria-valuemin="0" aria-valuemax="100" aria-valuenow="'+Math.round(li.pct)+'"><div class="fill" style="width:'+barFrom('lvl',li.pct)+'%" data-to="'+li.pct+'"></div></div><span>'+(li.hi?S.xp+' / '+li.hi:'максимум')+'</span></div></div>'
@@ -5938,7 +7319,7 @@ function homeView(){
   }
   h+='<div class="meter"><div class="track" role="progressbar" aria-label="Прогрес курсу" aria-valuemin="0" aria-valuemax="'+ALL.length+'" aria-valuenow="'+doneN+'"><div class="fill" style="width:'+barFrom('home',pct)+'%" data-to="'+pct+'"></div></div><span>'+doneN+' / '+ALL.length+'</span></div>';
   if(cur)h+='<button class="btn" data-act="start" data-uid="'+cur.uid+'">'+(doneN?'Продовжити':'Почати')+'</button>';
-  if(!doneN&&!S.stats.placement)h+='<button class="btn ghost" data-act="placement">Я вже знаю основи: пройти тест рівня</button>';
+  if(!doneN&&!S.stats.placement&&S.track!=='git')h+='<button class="btn ghost" data-act="placement">Я вже знаю основи: пройти тест рівня</button>';
   h+='</section>';
   if(doneN-ALL.filter(l=>S.done[l.uid]&&S.done[l.uid].skip).length>0){
     const mc=reviewMissCount(),sc=staleCount(),dc=dueList().length;
@@ -5946,14 +7327,15 @@ function homeView(){
       +(dc?'За графіком пора повторити завдань: '+dc+'.':mc?'Є завдання, де ти '+G('помилялась','помилявся')+': '+mc+'. Повтори їх.':sc?'Давно не '+G('повторювала','повторював')+' уроків: '+sc+'. Освіжи їх.':'Закріпи пройдене змішаними завданнями.')
       +'</p></div><button class="btn sm" data-act="start" data-uid="review">Повторити</button></section>';
   }
-  h+='<section class="review"><div class="rv-ico">'+IC.code+'</div><div class="rv-t"><h2>Пісочниця</h2><p>Пиши Java і запускай прямо тут.</p></div><button class="btn sm" data-act="ide">Відкрити</button></section>';
+  if(S.track==='git')h+='<section class="review"><div class="rv-ico">'+IC.code+'</div><div class="rv-t"><h2>Git-термінал</h2><p>Вводь команди й виконуй місії: '+Object.keys(S.gitm||{}).length+' з '+GM.length+'.</p></div><button class="btn sm" data-act="gits">Відкрити</button></section>';
+  else h+='<section class="review"><div class="rv-ico">'+IC.code+'</div><div class="rv-t"><h2>Пісочниця</h2><p>Пиши Java і запускай прямо тут.</p></div><button class="btn sm" data-act="ide">Відкрити</button></section>';
   {
     const dx=dailyEx(),dd=S.daily===today(),w=wkState();
     h+='<section class="review"><div class="rv-ico">'+IC.bolt+'</div><div class="rv-t"><h2>Задача дня</h2><p>'+(dd?'Сьогодні вже виконано. Завтра буде нова.':'Одне завдання й бонус +15 XP.')+'</p></div><button class="btn sm" data-act="daily"'+(dx&&!dd?'':' disabled')+'>'+(dd?'Готово':'Почати')+'</button></section>';
     h+='<section class="review" style="display:block"><div style="display:flex;gap:12px;align-items:center"><div class="rv-ico">'+IC.star+'</div><div class="rv-t"><h2>Виклик тижня</h2><p>'+(w.got?'Виконано! Нагорода отримана.':'Заверши '+WK_GOAL+' занять до неділі, нагорода +50 XP.')+'</p></div></div><div class="wkbar"><i style="width:'+Math.min(100,w.n/WK_GOAL*100)+'%"></i></div><p class="desc" style="margin:6px 0 0">'+Math.min(w.n,WK_GOAL)+' з '+WK_GOAL+'</p></section>';
-    h+='<section class="review"><div class="rv-ico">'+IC.chart+'</div><div class="rv-t"><h2>Співбесіда на час</h2><p>15 питань підряд без підказок.</p></div><button class="btn sm" data-act="interview">Почати</button></section>';
-    h+='<h2 class="pg-s">Тренажери</h2><div class="trn">'+Object.keys(TRN).map(k=>'<button class="trn-b" data-act="trn" data-k="'+k+'"><b>'+esc(TRN[k].t)+'</b><span>'+esc(TRN[k].d)+'</span></button>').join('')+'<button class="trn-b" data-act="terms"><b>Словник</b><span>Картки, гра, свої слова</span></button></div>';
-    h+='<h2 class="pg-s">Проєкти</h2><div class="pjs">'+PROJECTS.map(p=>{const dn=(S.pj&&S.pj[p.id])||0;return '<section class="pj"><div class="pj-h"><b>'+esc(p.title)+'</b><span>'+esc(p.sub)+'</span></div><div class="pj-s">'+p.steps.map((st,si)=>'<button class="pjn'+(si<dn?' done':si===dn?' cur':'')+'" data-act="pj" data-p="'+p.id+'" data-s="'+si+'"'+(si>dn?' disabled':'')+'><i>'+(si<dn?'✓':si+1)+'</i><span>'+esc(st.title)+'</span></button>').join('')+'</div></section>';}).join('')+'</div>';
+    if(S.track!=='git')h+='<section class="review"><div class="rv-ico">'+IC.chart+'</div><div class="rv-t"><h2>Співбесіда на час</h2><p>15 питань підряд без підказок.</p></div><button class="btn sm" data-act="interview">Почати</button></section>';
+    h+='<h2 class="pg-s">Тренажери</h2><div class="trn">'+Object.keys(TRN).filter(k=>!!TRN[k].git===(S.track==='git')).map(k=>'<button class="trn-b" data-act="trn" data-k="'+k+'"><b>'+esc(TRN[k].t)+'</b><span>'+esc(TRN[k].d)+'</span></button>').join('')+'<button class="trn-b" data-act="terms"><b>Словник</b><span>Картки, гра, свої слова</span></button></div>';
+    if(S.track!=='git')h+='<h2 class="pg-s">Проєкти</h2><div class="pjs">'+PROJECTS.map(p=>{const dn=(S.pj&&S.pj[p.id])||0;return '<section class="pj"><div class="pj-h"><b>'+esc(p.title)+'</b><span>'+esc(p.sub)+'</span></div><div class="pj-s">'+p.steps.map((st,si)=>'<button class="pjn'+(si<dn?' done':si===dn?' cur':'')+'" data-act="pj" data-p="'+p.id+'" data-s="'+si+'"'+(si>dn?' disabled':'')+'><i>'+(si<dn?'✓':si+1)+'</i><span>'+esc(st.title)+'</span></button>').join('')+'</div></section>';}).join('')+'</div>';
   }
   UNITS.forEach((u,ui)=>{
     h+='<section style="--uc:var(--u'+((ui%6)+1)+')"><div class="unit"><p class="kicker">Розділ '+(ui+1)+'</p><h2>'+esc(u.title)+'</h2><p>'+esc(u.sub)+'</p></div>'+unitArt(ui)+'<div class="path">';
@@ -6020,7 +7402,19 @@ function setView(){
   return h;
 }
 
+const isSh=c=>/^\s*\$ /m.test(String(c||''));
+const plainSh=s=>esc(s).replace(/^(\s*)\$ /gm,'$1<span class="sh-p">$</span> ');
+function tableHtml(code){
+  const ls=String(code||'').split('\n').map(l=>l.trim()).filter(Boolean);
+  if(ls.length<3||/[;{}]/.test(code))return null;
+  const n=ls[0].split('|').length;
+  if(n<2||!ls.every(l=>l.split('|').length===n))return null;
+  const row=(l,t)=>'<tr>'+l.split('|').map(c=>'<'+t+'>'+esc(c.trim())+'</'+t+'>').join('')+'</tr>';
+  return '<div class="tblw"><table class="trace"><thead>'+row(ls[0],'th')+'</thead><tbody>'+ls.slice(1).map(l=>row(l,'td')).join('')+'</tbody></table></div>';
+}
 function codeBlock(code,cp){
+  const tb=tableHtml(code);if(tb)return tb;
+  if(isSh(code))return '<div class="cw"><pre class="code sh"><code>'+plainSh(code)+'</code></pre></div>';
   let carry='';
   const lines=hl(code).split('\n').map(l=>{let t=carry+l;const o=(t.match(/<span /g)||[]).length,c=(t.match(/<\/span>/g)||[]).length;
     if(o>c){const m=t.match(/<span class="t-\w+">/g);carry=m[m.length-1];t+='</span>'.repeat(o-c);}else carry='';return '<span class="l">'+t+'</span>';});
@@ -6030,7 +7424,7 @@ function fmt(s){return esc(s).replace(/`([^`]+)`/g,'<code>$1</code>');}
 function fillCode(ex,c){
   const parts=ex.code.split(/\[\[(\d)\]\]/);let h='';
   parts.forEach((p,i)=>{
-    if(i%2===0){h+=hl(p);}
+    if(i%2===0){h+=isSh(ex.code)?plainSh(p):hl(p);}
     else{
       const k=+p,id=c.slots[k],w=id==null?null:c.words.find(x=>x.id===id).w;
       let cls='blank';
@@ -6048,7 +7442,8 @@ function typeCode(ex,c){
   const parts=ex.code.split('[[0]]');
   const cls='tslot'+(c.checked?(c.ok?' good':' bad'):'');
   const val=c.val?esc(c.val):'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
-  return '<pre class="code"><code>'+hl(parts[0])+'<span class="'+cls+'" id="tslot">'+val+'</span>'+hl(parts[1]||'')+'</code></pre>';
+  const H=isSh(ex.code)?plainSh:hl;
+  return '<pre class="code'+(isSh(ex.code)?' sh':'')+'"><code>'+H(parts[0])+'<span class="'+cls+'" id="tslot">'+val+'</span>'+H(parts[1]||'')+'</code></pre>';
 }
 function ready(c){
   const ex=c.ex;
@@ -6084,7 +7479,7 @@ function studyView(){
     const ran=L.ran&&L.ran[L.si];
     if(k.out!=null&&!ran)h+='<button class="btn ghost sm runex" data-act="crun">▶ Запустити приклад</button>';
     if(k.out!=null&&ran)h+='<div class="console"><span class="con-l">Результат</span><pre>'+esc(k.out)+'</pre></div>';
-    h+='<button class="btn ghost sm runex" data-act="csb">Змінити й запустити самій</button>';
+    if(!isSh(k.code)&&!tableHtml(k.code))h+='<button class="btn ghost sm runex" data-act="csb">Змінити й запустити самій</button>';
   }
   h+='</div></div></div>';
   h+='<div class="bar"><div class="bar-in"><div class="btnrow">'+(L.si>0?'<button class="btn ghost" data-act="sback">Назад</button>':'')
@@ -6151,7 +7546,7 @@ function lessonView(){
         else if(c.sel===i)cls+=' bad'+(fx.res==='shake'?' shake':'');
       }else if(c.sel===i)cls+=' sel';
       if(gone)cls+=' gone';
-      h+='<button class="'+cls+'" style="--i:'+i+'" data-act="bugpick" data-i="'+i+'"'+((c.checked||gone)?' disabled':'')+'><span class="ln">'+(i+1)+'</span><span class="lc">'+(ln?hl(ln):'&nbsp;')+'</span></button>';
+      h+='<button class="'+cls+'" style="--i:'+i+'" data-act="bugpick" data-i="'+i+'"'+((c.checked||gone)?' disabled':'')+'><span class="ln">'+(i+1)+'</span><span class="lc">'+(ln?(isSh(ln)?plainSh(ln):hl(ln)):'&nbsp;')+'</span></button>';
     });
     h+='</div>';
   }else{
@@ -6275,6 +7670,7 @@ function render(){
   else if(screen==='ide')h=ideView();
   else if(screen==='terms')h=termsView();
   else if(screen==='cert')h=certView();
+  else if(screen==='gits')h=gitSimView();
   else if(screen==='set')h=setView();
   else if(screen==='lesson')h=L.mode==='study'?studyView():lessonView();
   else if(screen==='result')h=resultView();
@@ -6339,7 +7735,7 @@ function startPlacement(){
 function startLesson(uid){
   if(uid==='review'){startReview();return;}
   const info=ALL.find(l=>l.uid===uid);if(!info||!isUnlocked(info.n))return;
-  if(ALL.find(l=>l.ui===info.ui)===info&&!S.story[info.ui]&&STORY[info.ui]){pendingUid=uid;screen='story';fx.view=true;render();window.scrollTo(0,0);return;}
+  if(S.track!=='git'&&ALL.find(l=>l.ui===info.ui)===info&&!S.story[info.ui]&&STORY[info.ui]){pendingUid=uid;screen='story';fx.view=true;render();window.scrollTo(0,0);return;}
   const q=info.lesson.ex.map((e,i)=>({e,i})).sort((a,b)=>stageOf(a.e)-stageOf(b.e)||a.i-b.i).map(x=>x.e);
   newRun(info,q,{mode:'study',staged:true,stSeen:{},stList:[...new Set(q.map(stageOf))]});
 }
@@ -6540,6 +7936,10 @@ $app.addEventListener('click',e=>{
   if(a==='interview'){startInterview();return;}
   if(a==='comp'){startComp();return;}
   if(a==='trn'){startTrainer(el.dataset.k);return;}
+  if(a==='track'){const v=el.dataset.v==='git'?'git':'java';if(S.track!==v){S.track=v;applyTrack();save();sheetUi=0;fx.view=true;render();window.scrollTo(0,0);}return;}
+  if(a==='gits'){screen='gits';fx.view=true;render();window.scrollTo(0,0);return;}
+  if(a==='gitrun'){gitExec();return;}
+  if(a==='gitreset'){GS=gsNew();fx.view=false;render();return;}
   if(a==='tcat'){TM.cat=el.dataset.c||'';TM.i=0;TM.show=false;TM.g=null;TM.ow={i:0,val:'',res:null};fx.view=false;render();return;}
   if(a==='gpick'){gamePick(el.dataset.s,+el.dataset.i);fx.view=false;render();return;}
   if(a==='gnew'){gameNew();fx.view=false;render();return;}
@@ -6627,6 +8027,7 @@ $app.addEventListener('click',e=>{
 });
 $app.addEventListener('change',e=>{
   const t=e.target;
+  if(t.id==='tcatsel'){TM.cat=t.value;TM.i=0;TM.show=false;TM.g=null;TM.ow={i:0,val:'',res:null};fx.view=false;render();return;}
   if(t.id==='qfrom'||t.id==='qto'){S.quiet=S.quiet||{on:false,from:23,to:8};if(t.id==='qfrom')S.quiet.from=+t.value;else S.quiet.to=+t.value;save();}
 });
 $app.addEventListener('input',e=>{
@@ -6652,6 +8053,7 @@ document.addEventListener('keydown',e=>{
     if(e.key==='Tab'){e.preventDefault();const t=e.target,p=t.selectionStart;t.value=t.value.slice(0,p)+'    '+t.value.slice(t.selectionEnd);t.selectionStart=t.selectionEnd=p+4;IDE.code=t.value;return;}
     if(e.key==='Enter'&&(e.ctrlKey||e.metaKey)){e.preventDefault();runCode();return;}
   }
+  if(e.key==='Enter'&&e.target&&e.target.id==='gitin'){e.preventDefault();gitExec();return;}
   if(e.key==='Enter'&&e.target&&(e.target.id==='pw'||e.target.id==='em')){e.preventDefault();doAuth();return;}
   if(e.key!=='Enter'||screen!=='lesson'||!L||L.leave)return;
   const ae=document.activeElement;
@@ -6725,6 +8127,8 @@ function mergeProgress(a,b){ // a = local, b = cloud (both normalised)
   for(const k in a.srs)if(!o.srs[k]||(a.srs[k].d||0)>(o.srs[k].d||0))o.srs[k]=a.srs[k];
   for(const k in a.hist){const x=a.hist[k],y=o.hist[k]||(o.hist[k]={xp:0,ok:0,bad:0,sec:0});['xp','ok','bad','sec'].forEach(f=>{y[f]=Math.max(y[f]||0,x[f]||0);});}
   for(const k in a.us){const x=a.us[k],y=o.us[k]||(o.us[k]={ok:0,bad:0});y.ok=Math.max(y.ok,x.ok);y.bad=Math.max(y.bad,x.bad);}
+  o.usg=o.usg||{};for(const k in (a.usg||{})){const x=a.usg[k],y=o.usg[k]||(o.usg[k]={ok:0,bad:0});y.ok=Math.max(y.ok,x.ok);y.bad=Math.max(y.bad,x.bad);}
+  o.gitm=Object.assign({},o.gitm||{},a.gitm||{});o.track=a.track||o.track||'java';
   for(const k in a.story)o.story[k]=1;
   for(const k in a.stats)o.stats[k]=Math.max(a.stats[k]||0,o.stats[k]||0);
   return o;
@@ -6937,7 +8341,7 @@ function introView(){
   return h+'</div></div>';
 }
 /* ---------- mandatory update gate ---------- */
-const BUILD='1791966919';
+const BUILD='1791971393';
 let PULLED=false;
 let NEWVER=false,UPDBUSY=false;
 async function checkUpdate(){
@@ -6991,7 +8395,7 @@ function recordAnswer(ex,ok,firstTry,c){
   const H=S.hist[k]||(S.hist[k]={xp:0,ok:0,bad:0,sec:0});
   if(ok)H.ok++;else H.bad++;
   H.sec+=Math.round(Math.min(90,(performance.now()-c.t0)/1000));
-  const u=S.us[ex.ui]||(S.us[ex.ui]={ok:0,bad:0});
+  const u=US()[ex.ui]||(US()[ex.ui]={ok:0,bad:0});
   if(ok)u.ok++;else u.bad++;
   if(firstTry){
     const r=S.srs[ex.id]||{b:0,due:0,d:0};
@@ -7005,7 +8409,7 @@ function dueList(){
   return reviewPool().filter(e=>S.srs[e.id]&&S.srs[e.id].due<=dn).sort((a,b)=>S.srs[a.id].due-S.srs[b.id].due);
 }
 function weakUnits(){
-  return Object.keys(S.us).map(k=>{const u=S.us[k],n=u.ok+u.bad;return {ui:+k,n,err:n?u.bad/n:0};})
+  return Object.keys(US()).map(k=>{const u=US()[k],n=u.ok+u.bad;return {ui:+k,n,err:n?u.bad/n:0};})
     .filter(x=>x.n>=4&&x.err>=0.2&&UNITS[x.ui]).sort((a,b)=>b.err-a.err);
 }
 function startWeak(){
@@ -7234,7 +8638,7 @@ function ideView(){
 }
 /* ---- stats ---- */
 function statsView(){
-  const us=Object.values(S.us),okN=us.reduce((n,u)=>n+u.ok,0),badN=us.reduce((n,u)=>n+u.bad,0);
+  const us=Object.values(US()),okN=us.reduce((n,u)=>n+u.ok,0),badN=us.reduce((n,u)=>n+u.bad,0);
   const acc=okN+badN?Math.round(okN/(okN+badN)*100):0;
   const secs=Object.values(S.hist).reduce((n,d)=>n+(d.sec||0),0),mins=Math.round(secs/60);
   const doneN=ALL.filter(l=>S.done[l.uid]&&!S.done[l.uid].skip).length;
@@ -7256,12 +8660,12 @@ function statsView(){
   svg+='</svg>';
   h+='<section class="card"><h2>Досвід за тиждень</h2>'+svg+'<p class="desc">Пунктир це твоя денна ціль: '+S.goal+' XP.</p></section>';
   h+=heatCard();
-  h+='<section class="card"><h2>Сертифікат</h2><p class="desc">'+(ALL.every(l=>S.done[l.uid])?'Курс пройдено. Можна роздрукувати сертифікат.':'З’явиться, коли ти пройдеш усі уроки.')+'</p><button class="btn ghost" data-act="cert">Відкрити сертифікат</button></section>';
+  h+='<section class="card"><h2>Сертифікат</h2><p class="desc">'+(JAVA.ALL.every(l=>S.done[l.uid])?'Курс пройдено. Можна роздрукувати сертифікат.':'З’явиться, коли ти пройдеш усі уроки.')+'</p><button class="btn ghost" data-act="cert">Відкрити сертифікат</button></section>';
   // accuracy by unit
-  const rows=Object.keys(S.us).map(k=>+k).filter(k=>UNITS[k]).sort((a,b)=>a-b);
+  const rows=Object.keys(US()).map(k=>+k).filter(k=>UNITS[k]).sort((a,b)=>a-b);
   h+='<section class="card"><h2>Точність за розділами</h2>';
   if(!rows.length)h+='<p class="desc">Пройди кілька уроків, і тут з’явиться статистика.</p>';
-  rows.forEach(k=>{const u=S.us[k],n=u.ok+u.bad,p=Math.round(u.ok/n*100);
+  rows.forEach(k=>{const u=US()[k],n=u.ok+u.bad,p=Math.round(u.ok/n*100);
     h+='<div class="urow"><span class="un">'+(k+1)+'. '+esc(UNITS[k].title)+'</span><div class="track"><div class="fill'+(p<70?' low':'')+'" style="width:'+p+'%"></div></div><span class="up">'+p+'%</span></div>';});
   const wk=weakUnits();
   if(wk.length)h+='<p class="desc">Найслабше: '+wk.slice(0,2).map(x=>esc(UNITS[x.ui].title)).join(', ')+'.</p><button class="btn" style="margin-top:12px" data-act="weak">Потренувати слабкі місця</button>';
@@ -7293,6 +8697,7 @@ try{
   }
 }catch(e){}
 
+applyTrack();
 render();
 checkUpdate();
 document.addEventListener('visibilitychange',()=>{if(!document.hidden)checkUpdate();});
