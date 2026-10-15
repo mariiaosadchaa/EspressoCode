@@ -67,6 +67,7 @@ svg{display:block}
 .ico.stroke{fill:none;stroke:currentColor;stroke-width:3;stroke-linecap:round;stroke-linejoin:round}
 
 .app{max-width:560px;margin:0 auto;padding-inline:16px;min-height:100%}
+.app.wide{max-width:1240px}
 .app > *{min-width:0}
 
 /* ---------- header ---------- */
@@ -741,6 +742,89 @@ pre.code.sh code{color:inherit}
 .term .to{margin:2px 0 0;font:inherit;white-space:pre-wrap;overflow-wrap:anywhere;color:#CFC4B0}
 .tin{display:flex;gap:8px;align-items:center;margin-top:8px}
 .tin input{flex:1;min-width:0;padding:12px;border-radius:12px;border:2px solid var(--line,rgba(127,127,127,.3));background:var(--surface,#fff);color:inherit;font:14px var(--mono)}
+/* ---- візуалізатор ---- */
+.viz{max-width:1180px;margin:0 auto;padding:0 16px 48px;display:grid;gap:12px}
+.vz-grid{display:grid;gap:14px}
+@media(min-width:900px){.vz-grid{grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);align-items:start}.vz-left{position:sticky;top:10px;grid-column:1;grid-row:1}.vz-right{grid-column:2;grid-row:1 / span 2}.vz-more{grid-column:1;grid-row:2}}
+
+.vz-left,.vz-right{display:grid;gap:12px;min-width:0}
+.vz-code{background:var(--code-bg);color:var(--code-ink);border:1px solid var(--line);border-radius:14px;padding:8px 0;max-height:44vh;overflow:auto;font:400 13.5px/1.75 var(--mono);position:relative;outline:none}
+@media(min-width:900px){.vz-code{max-height:58vh}}
+.vl{display:flex;white-space:pre;padding-right:14px;transition:background .25s,box-shadow .25s}
+.vl b{flex:none;width:38px;padding-right:10px;text-align:right;color:var(--com);font-weight:400;user-select:none}
+.vl.dim span{opacity:.42}
+.vl.cur{background:color-mix(in srgb,var(--warm) 26%,transparent);box-shadow:inset 4px 0 0 var(--warm)}
+.vl.cur.crash{background:var(--bad-bg);box-shadow:inset 4px 0 0 var(--bad)}
+.vz-note{display:flex;gap:10px;align-items:flex-start;background:var(--surface);border:2px solid var(--line);border-radius:16px;padding:10px 14px 10px 10px;min-height:68px}
+.vz-note p{margin:3px 0 0;font-size:15px;line-height:1.45}
+.vz-note.k-call{border-color:var(--ty)}.vz-note.k-ret{border-color:var(--good)}.vz-note.k-crash,.vz-note.k-err{border-color:var(--bad);background:var(--bad-bg);color:var(--bad-ink)}.vz-note.k-catch,.vz-note.k-fin{border-color:var(--warm)}
+.vz-note.pop{animation:vznote .35s cubic-bezier(.2,.8,.2,1)}
+@keyframes vznote{from{opacity:.2;transform:translateY(6px)}to{opacity:1;transform:none}}
+.vz-fox{flex:none;width:44px;height:44px}
+.vz-ctl{display:grid;gap:8px}
+.vz-btns{display:flex;justify-content:center;gap:10px;align-items:center}
+.vzb{width:46px;height:46px;border-radius:50%;border:2px solid var(--line);background:var(--surface);color:var(--ink);display:grid;place-items:center;cursor:pointer;box-shadow:0 3px 0 var(--line)}
+.vzb:active:not(:disabled){transform:translateY(2px);box-shadow:0 1px 0 var(--line)}
+.vzb:disabled{opacity:.4;cursor:default}
+.vzb.main{width:58px;height:58px;background:var(--primary);color:var(--on-primary);border-color:var(--primary);box-shadow:0 4px 0 var(--primary-edge)}
+.vzb svg{width:22px;height:22px;fill:currentColor}
+#vzr{width:100%;accent-color:var(--warm);height:28px}
+.vz-meta{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;font-size:13px;color:var(--muted)}
+.vz-sp{display:flex;gap:6px}.uchip.sm{padding:4px 10px;font-size:12px}
+.vz-tools{display:flex;gap:8px}
+.vz-help{background:var(--surface);border:2px solid var(--line);border-radius:14px;padding:8px 14px;font-size:14px}
+.vz-help summary{cursor:pointer;font-weight:600}.vz-help p{margin:8px 0}
+.vz-h{font:700 12px var(--body);letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin:6px 2px 2px}.vz-h small{text-transform:none;letter-spacing:0;font-weight:400}
+.vz-mem{display:grid;gap:6px;align-content:start}
+.vz-mem .empty{color:var(--muted);font-size:14px;margin:2px 4px}
+.frame{border:2px solid var(--line);border-radius:14px;background:var(--surface);overflow:hidden}
+.frame.vztop{border-color:var(--warm)}
+.frame header{display:flex;justify-content:space-between;gap:8px;align-items:center;padding:6px 12px;background:color-mix(in srgb,var(--line) 70%,transparent);font:700 13px var(--mono)}
+.frame header em{font:600 11px var(--body);font-style:normal;color:var(--muted)}
+.frame.vztop header em{color:var(--warm)}
+.frame.new{animation:vzin .4s cubic-bezier(.2,.8,.2,1)}
+@keyframes vzin{from{opacity:0;transform:translateY(-12px) scale(.96)}to{opacity:1;transform:none}}
+.var{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:6px 12px;border-top:1px solid var(--line);font:500 13.5px var(--mono)}
+.var small{color:var(--ty);font-size:11px;font-weight:600}
+.var.none{color:var(--muted);font:400 13px var(--body)}
+.var.new{animation:vzin .4s cubic-bezier(.2,.8,.2,1)}
+.vv{padding:2px 10px;border-radius:8px;background:var(--code-bg);border:1px solid var(--line);max-width:60%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;display:inline-block}
+.vv.t-i,.vv.t-d{color:var(--num)}.vv.t-s,.vv.t-c{color:var(--str)}.vv.t-b{color:var(--kw)}.vv.nl{opacity:.65;font-style:italic}.vv.vzun{color:var(--muted)}
+.chg{animation:vzchg .95s ease-out}
+@keyframes vzchg{0%{background:var(--gold);color:var(--on-primary);transform:scale(1.22);box-shadow:0 0 0 6px color-mix(in srgb,var(--gold) 45%,transparent)}70%{transform:scale(1)}100%{box-shadow:0 0 0 0 transparent}}
+.vref{border:2px solid var(--rc);color:var(--rc);background:transparent;border-radius:999px;padding:1px 10px;font:700 12.5px var(--mono);cursor:pointer}
+.hc{border:2px solid var(--rc);border-radius:14px;background:var(--surface);padding:8px 12px 10px;transition:box-shadow .25s}
+.hc.new{animation:vzin .45s cubic-bezier(.2,.8,.2,1)}
+.hc.hi{box-shadow:0 0 0 4px color-mix(in srgb,var(--rc) 35%,transparent)}
+.hc.exc{background:var(--bad-bg)}
+.hh{display:flex;gap:8px;align-items:baseline;margin-bottom:6px;font:600 13px var(--mono)}
+.hh i{font-style:normal;color:var(--surface);background:var(--rc);border-radius:8px;padding:0 7px;font-size:12px}
+.hh small{color:var(--muted)}
+.cells{display:flex;flex-wrap:wrap;gap:4px}
+.cell{display:grid;text-align:center;gap:1px}.cell small{font-size:10px;color:var(--muted)}
+.cell>span{display:block;min-width:36px;padding:4px 6px;border:1px solid var(--line-edge);background:var(--code-bg);font:500 13px var(--mono);border-radius:6px}
+.cell>span .vv{border:0;background:none;padding:0;max-width:none}
+.cell.vzmore{align-self:end;color:var(--muted);font-size:12px}
+.flds{display:grid;gap:3px}.fld{display:flex;align-items:center;gap:8px;font:500 13px var(--mono)}
+.fld .fk{min-width:54px;color:var(--ty)}.fld .ar{color:var(--muted)}
+.fld.chg{border-radius:8px}
+.sbt{font:500 13px var(--mono);word-break:break-all}
+.vz-out pre{margin:0;white-space:pre-wrap;word-break:break-word;min-height:42px;font:500 13.5px/1.55 var(--mono)}
+.vz-out .newout{background:color-mix(in srgb,var(--gold) 32%,transparent);border-radius:4px;animation:vzchg .95s ease-out}
+.vz-out .errout{color:var(--bad)}
+.vz-out .muted{color:var(--muted)}
+.vz-bad{display:flex;gap:14px;align-items:flex-start;background:var(--surface);border:2px solid var(--line);border-radius:18px;padding:16px}
+.vz-bad h2{margin:0 0 6px;font-family:var(--display);font-size:19px}.vz-bad p{margin:4px 0}
+.vzbtn{margin-top:8px}
+@media(prefers-reduced-motion:reduce){.chg,.frame.new,.var.new,.hc.new,.vz-note.pop,.newout{animation:none}}
+@media(max-width:899px){
+ .viz{padding-bottom:190px}
+ .vz-top{position:sticky;top:0;z-index:6;background:var(--bg);padding:4px 0 8px;display:grid;gap:8px}
+ .vz-code{max-height:27vh}
+ .vz-note{min-height:56px}.vz-note p{font-size:14px}
+ .vz-ctl{position:fixed;left:0;right:0;bottom:0;z-index:20;background:var(--surface);border-top:2px solid var(--line);padding:8px 16px calc(8px + env(safe-area-inset-bottom,0px));gap:2px}
+ .vz-btns{gap:8px}.vzb{width:42px;height:42px}.vzb.main{width:52px;height:52px}
+}
 </style><style>*,*::before,*::after{box-sizing:border-box}html{-webkit-text-size-adjust:100%}body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--body)}</style>
 </head>
 <body>
@@ -5009,6 +5093,12 @@ function shuffle(a,avoidSame){
   return r;
 }
 const IC={
+  vfirst:'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 5h2v14H6zM20 5v14L9.5 12z"/></svg>',
+  vprev:'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17 5v14L6 12z"/></svg>',
+  vplay:'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4.5v15l13-7.5z"/></svg>',
+  vpause:'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 4h4v16H6zM14 4h4v16h-4z"/></svg>',
+  vnext:'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 5v14l11-7z"/></svg>',
+  vlast:'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16 5h2v14h-2zM4 5v14l10.5-7z"/></svg>',
   flame:'<svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2c1 3.5 5 5.5 5 10.5A5 5 0 0 1 12 22a5 5 0 0 1-5-5c0-2 1-3.5 2.5-5 .3 1.8 1.2 2.7 2 3 .5-3-.5-5.5-.5-8.5z"/></svg>',
   bolt:'<svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M13 2 4 14h6l-1 8 9-12h-6z"/></svg>',
   heart:'<svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-8-5.2-8-11a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 20 10c0 5.8-8 11-8 11z"/></svg>',
@@ -5817,6 +5907,7 @@ function moreHtml(ex,c){
   }catch(e){}
   {const tl=termsIn(exText(ex),3);if(tl.length)h+='<h4>Слова із завдання</h4>'+termRows(tl);}
   const code=isSh(exCode(ex,c))||isSh(ex.code)?null:wrapJava(exCode(ex,c));
+  {const vc=exCode(ex,c);if(vc&&!isSh(vc)&&vzOK(vc,ex.stdin))h+='<button class="btn ghost sm vzbtn" data-act="vzex">Подивитись покроково</button> ';}
   if(code){h+='<button class="btn ghost sm" data-act="runhere" data-id="'+esc(ex.id)+'">Запустити код і побачити самій</button><div class="console more-out" hidden><span class="con-l">Результат</span><pre></pre></div>';}
   return h+'</div></details>';
 }
@@ -7480,6 +7571,7 @@ function studyView(){
     if(k.out!=null&&!ran)h+='<button class="btn ghost sm runex" data-act="crun">▶ Запустити приклад</button>';
     if(k.out!=null&&ran)h+='<div class="console"><span class="con-l">Результат</span><pre>'+esc(k.out)+'</pre></div>';
     if(!isSh(k.code)&&!tableHtml(k.code))h+='<button class="btn ghost sm runex" data-act="csb">Змінити й запустити самій</button>';
+    if(vzOK(k.code,k.stdin))h+='<button class="btn ghost sm runex vzbtn" data-act="vzcard">Подивитись покроково</button>';
   }
   h+='</div></div></div>';
   h+='<div class="bar"><div class="bar-in"><div class="btnrow">'+(L.si>0?'<button class="btn ghost" data-act="sback">Назад</button>':'')
@@ -7590,7 +7682,7 @@ function lessonView(){
       body='<div class="fbx">'+(mine?'<div class="fbx-r mine"><i>Що не так</i><div class="yours">'+mine+'</div></div>':'')
         +'<div class="fbx-r right"><i>Правильно</i>'+right+'</div>'
         +'<div class="fbx-r why"><i>Чому</i><p>'+esc(ex.why)+'</p></div></div>'
-        +((L.iv||L.hearts<=0)?'':'<p class="hint">Далі буде схоже завдання, щоб ти '+G('зрозуміла','зрозумів')+' суть, а не '+G('завчила','завчив')+' відповідь.</p>')+moreHtml(ex,c)+(L.iv?'':'<button class="btn ghost sm" data-act="fox" style="margin-top:8px">🦊 Поясни простіше</button>');
+        +((L.iv||L.hearts<=0)?'':'<p class="hint">Далі буде схоже завдання, щоб ти '+G('зрозуміла','зрозумів')+' суть, а не '+G('завчила','завчив')+' відповідь.</p>')+(()=>{try{const vc=exCode(ex,c);return vc&&!isSh(vc)&&vzOK(vc,ex.stdin)?'<button class="btn sm vzbtn" data-act="vzex" style="margin-top:8px">▶ Подивитись, як виконується код</button>':'';}catch(e){return '';}})()+moreHtml(ex,c)+(L.iv?'':'<button class="btn ghost sm" data-act="fox" style="margin-top:8px">🦊 Поясни простіше</button>');
     }
     h+='<div class="bar slide '+(ok?'good':'bad')+'"><div class="bar-in">'+plus+'<div class="fb"><div class="badge m">'+mascot(ok?'happy':'sad',48)+'</div><div class="fb-text"><h3>'+(ok?praise:'Не зовсім')+'</h3>'+body+'</div></div><button class="btn '+(ok?'good':'bad')+'" data-act="next">'+(!L.placement&&L.hearts<=0&&!ok?'Зрозуміло':'Далі')+'</button></div></div>';
   }
@@ -7668,6 +7760,7 @@ function render(){
   else if(screen==='sheet')h=sheetView();
   else if(screen==='story')h=storyScreen();
   else if(screen==='ide')h=ideView();
+  else if(screen==='viz')h=vzView();
   else if(screen==='terms')h=termsView();
   else if(screen==='cert')h=certView();
   else if(screen==='gits')h=gitSimView();
@@ -7683,6 +7776,8 @@ function render(){
   runCounters();
   if(screen==='home'){shownXp=S.xp;shownStreakVal=shownStreak();}
   if(fx.confetti)confetti();
+  $app.classList.toggle('wide',screen==='viz');
+  if(screen==='viz')vzPaint();else if(VZ.timer)vzStop();
   if(screen==='lesson'&&L.mode!=='study'&&L.cur.checked&&!L.leave){const b=$app.querySelector('[data-act="next"]');if(b)b.focus({preventScroll:true});}
   fx={};
 }
@@ -7926,6 +8021,14 @@ $app.addEventListener('click',e=>{
   if(a==='cpy'){const t=el.closest('.cw').querySelector('code').textContent;const done=()=>toast('Скопійовано','Код у буфері обміну');try{navigator.clipboard.writeText(t).then(done,()=>{});}catch(e){const ta=document.createElement('textarea');ta.value=t;document.body.appendChild(ta);ta.select();try{document.execCommand('copy');done();}catch(_){}ta.remove();}return;}
   if(a==='settheme'){S.theme=el.dataset.v;const r=document.documentElement;r.classList.add('tt');applyPrefs();save();fx.view=false;render();setTimeout(()=>r.classList.remove('tt'),800);return;}
   if(a==='weak'){startWeak();return;}
+  if(a==='vzback'){vzBack();return;}
+  if(a==='vzgo'){vzGo(el.dataset.d);return;}
+  if(a==='vzspeed'){VZ.speed=+el.dataset.v;if(VZ.play)vzTick();else vzPaint();return;}
+  if(a==='vzref'){const id=+el.dataset.id;VZ.hi=VZ.hi===id?0:id;vzPaint();const hc=document.getElementById('hc'+id);if(hc&&VZ.hi)hc.scrollIntoView({block:'nearest',behavior:'smooth'});return;}
+  if(a==='vzedit'){vzStop();IDE.code=VZ.code;IDE.stdin=VZ.stdin;IDE.out='';IDE.kind='';IDE.errLine=0;IDE.back=VZ.back==='lesson'&&!!L;screen='ide';fx.view=true;render();window.scrollTo(0,0);return;}
+  if(a==='vz'){const ca=document.getElementById('ide-code'),si=document.getElementById('ide-in');if(ca)IDE.code=ca.value;if(si)IDE.stdin=si.value;openViz(IDE.code,{stdin:IDE.stdin,back:'ide',title:'Покроково: твій код'});return;}
+  if(a==='vzcard'){const k=L.info.lesson.learn[L.si];openViz(k.code,{stdin:k.stdin,back:'lesson',title:k.h});return;}
+  if(a==='vzex'){const ex=L&&L.cur&&L.cur.ex;if(!ex)return;openViz(exCode(ex,L.cur),{stdin:ex.stdin,back:'lesson',title:'Розбір завдання покроково'});return;}
   if(a==='ide'){screen='ide';fx.view=true;render();window.scrollTo(0,0);return;}
   if(a==='sample'){const sm=SAMPLES[+el.dataset.i];IDE.code=sm[1];IDE.stdin=sm[2];IDE.out='';IDE.kind='';fx.view=false;render();return;}
   if(a==='run'){runCode();return;}
@@ -8037,6 +8140,7 @@ $app.addEventListener('input',e=>{
   if(t.id==='onname'){ONB.name=t.value;return;}
   if(t.id==='onnv'){ONB.nv=t.value;return;}
   if(t.id==='rtime'){S.remind=t.value||'19:00';save();pushTime();return;}
+  if(t.id==='vzr'){VZ.i=+t.value;vzStop();vzPaint();return;}
   if(t.id==='ide-code'){IDE.code=t.value;return;}
   if(t.id==='owin'){TM.ow.val=t.value;return;}
   if(t.id==='ide-in'){IDE.stdin=t.value;return;}
@@ -8049,6 +8153,7 @@ $app.addEventListener('input',e=>{
   }
 });
 document.addEventListener('keydown',e=>{
+  if(vzKey(e))return;
   if(e.target&&e.target.id==='ide-code'){
     if(e.key==='Tab'){e.preventDefault();const t=e.target,p=t.selectionStart;t.value=t.value.slice(0,p)+'    '+t.value.slice(t.selectionEnd);t.selectionStart=t.selectionEnd=p+4;IDE.code=t.value;return;}
     if(e.key==='Enter'&&(e.ctrlKey||e.metaKey)){e.preventDefault();runCode();return;}
@@ -8341,7 +8446,7 @@ function introView(){
   return h+'</div></div>';
 }
 /* ---------- mandatory update gate ---------- */
-const BUILD='1791971393';
+const BUILD='1792056717';
 let PULLED=false;
 let NEWVER=false,UPDBUSY=false;
 async function checkUpdate(){
@@ -8572,6 +8677,1974 @@ function storyScreen(){
     +'<button class="btn" data-act="storygo">Поїхали</button><button class="btn ghost" data-act="home">Назад</button></div></div>';
 }
 /* ---- sandbox ---- */
+/*JVBLOCK-BEGIN*/
+/*JV-BEGIN*/
+const JV=(function(){
+/* ===== JV: Java-subset visualizer — tokenizer + parser ===== */
+class JUnsup extends Error{constructor(m,line){super(m);this.unsup=true;this.line=line||0;}}
+const KW=new Set('abstract assert boolean break byte case catch char class continue default do double else enum extends final finally float for if implements import instanceof int interface long new package private protected public return short static super switch synchronized this throw throws try void volatile while transient native strictfp record var yield'.split(' '));
+const PRIM=new Set(['int','long','double','float','boolean','char','byte','short']);
+const OPS=['<<=','...','->','::','++','--','&&','||','==','!=','<=','>=','+=','-=','*=','/=','%=','&=','|=','^=','<<'];
+function tokenize(src){
+  const T=[];let i=0,line=1;const n=src.length;
+  const push=(t,v,s,e,extra)=>{const o={t,v,line:line,s,e};if(extra)Object.assign(o,extra);T.push(o);};
+  while(i<n){
+    const c=src[i];
+    if(c==='\n'){line++;i++;continue;}
+    if(c===' '||c==='\t'||c==='\r'){i++;continue;}
+    if(c==='/'&&src[i+1]==='/'){while(i<n&&src[i]!=='\n')i++;continue;}
+    if(c==='/'&&src[i+1]==='*'){i+=2;while(i<n&&!(src[i]==='*'&&src[i+1]==='/')){if(src[i]==='\n')line++;i++;}i+=2;continue;}
+    if(/[A-Za-z_$]/.test(c)||c.charCodeAt(0)>127&&/\p{L}/u.test(c)){let j=i+1;while(j<n&&(/[A-Za-z0-9_$]/.test(src[j])||src.charCodeAt(j)>127&&/\p{L}/u.test(src[j])))j++;const w=src.slice(i,j);
+      push(w==='true'||w==='false'?'bool':w==='null'?'null':'id',w,i,j);i=j;continue;}
+    if(/[0-9]/.test(c)||c==='.'&&/[0-9]/.test(src[i+1]||'')){
+      let j=i;let isF=false;
+      if(c==='0'&&/[xX]/.test(src[i+1]||'')){j=i+2;while(j<n&&/[0-9a-fA-F_]/.test(src[j]))j++;}
+      else if(c==='0'&&/[bB]/.test(src[i+1]||'')){j=i+2;while(j<n&&/[01_]/.test(src[j]))j++;}
+      else{while(j<n&&/[0-9_]/.test(src[j]))j++;
+        if(src[j]==='.'&&/[0-9]/.test(src[j+1]||'')||src[j]==='.'&&!/[A-Za-z_]/.test(src[j+1]||'')){isF=true;j++;while(j<n&&/[0-9_]/.test(src[j]))j++;}
+        if(/[eE]/.test(src[j]||'')&&/[0-9+-]/.test(src[j+1]||'')){isF=true;j+=2;while(j<n&&/[0-9]/.test(src[j]))j++;}}
+      let txt=src.slice(i,j).replace(/_/g,'');let suf=src[j]||'';
+      if(/[lL]/.test(suf)){j++;push('num',txt,i,j,{kind:'long'});}
+      else if(/[fFdD]/.test(suf)&&!/^0[xX]/.test(txt)){j++;push('num',txt,i,j,{kind:/[fF]/.test(suf)?'float':'double'});}
+      else push('num',txt,i,j,{kind:isF?'double':'int'});
+      i=j;continue;}
+    if(c==='"'){
+      if(src.startsWith('"""',i)){let j=i+3;while(j<n&&src[j]!=='\n')j++;j++;let st=j;while(j<n&&!src.startsWith('"""',j)){if(src[j]==='\\')j++;j++;}
+        let raw=src.slice(st,j);const ls=raw.split('\n');let ind=1e9;ls.forEach((l,ix)=>{if(l.trim()||ix===ls.length-1){const m=l.match(/^ */)[0].length;if(m<ind)ind=m;}});
+        let body=ls.map(l=>l.slice(Math.min(ind,l.length)).replace(/\s+$/,'')).join('\n');
+        body=body.replace(/\\n/g,'\n').replace(/\\t/g,'\t').replace(/\\"/g,'"').replace(/\\\\/g,'\\');
+        const lines=raw.split('\n').length-1;push('str',body,i,j+3);line+=lines;i=j+3;continue;}
+      let j=i+1,s='';while(j<n&&src[j]!=='"'){if(src[j]==='\n')throw new JUnsup('Незакритий рядок',line);if(src[j]==='\\'){j++;const e=src[j];const m={n:'\n',t:'\t',r:'\r','0':'\0','"':'"',"'":"'",'\\':'\\',b:'\b',f:'\f'};
+          if(e==='u'){s+=String.fromCharCode(parseInt(src.slice(j+1,j+5),16));j+=5;continue;}
+          s+=m[e]!==undefined?m[e]:e;j++;}else{s+=src[j];j++;}}
+      push('str',s,i,j+1);i=j+1;continue;}
+    if(c==="'"){let j=i+1,s;if(src[j]==='\\'){j++;const e=src[j];const m={n:'\n',t:'\t',r:'\r','0':'\0','"':'"',"'":"'",'\\':'\\',b:'\b',f:'\f'};
+        if(e==='u'){s=String.fromCharCode(parseInt(src.slice(j+1,j+5),16));j+=5;}else{s=m[e]!==undefined?m[e]:e;j++;}}else{s=src[j];j++;}
+      if(src[j]!=="'")throw new JUnsup('Некоректний символьний літерал',line);push('chr',s,i,j+1);i=j+1;continue;}
+    let op=null;for(const o of OPS){if(src.startsWith(o,i)){op=o;break;}}
+    if(!op)op=c;
+    push('op',op,i,i+op.length);i+=op.length;
+  }
+  push('eof','',n,n);return T;
+}
+
+function parse(src){
+  const T=tokenize(src);let p=0;
+  const pk=(o)=>T[p+(o||0)];
+  const err=(m,tk)=>{throw new JUnsup(m,(tk||pk()).line);};
+  const isOp=(v,o)=>{const t=pk(o);return t.t==='op'&&t.v===v;};
+  const isId=(v,o)=>{const t=pk(o);return t.t==='id'&&t.v===v;};
+  const acc=(v)=>{if(isOp(v)){p++;return true;}return false;};
+  const accId=(v)=>{if(isId(v)){p++;return true;}return false;};
+  const exp=(v)=>{if(!acc(v))err('Очікувалось «'+v+'», а знайдено «'+(pk().v||'кінець')+'»');};
+  const ident=()=>{const t=pk();if(t.t!=='id')err('Очікувалось імʼя, а знайдено «'+(t.v||'кінець')+'»');p++;return t.v;};
+  const MODS=new Set(['public','private','protected','static','final','abstract','synchronized','native','transient','volatile','strictfp','default','sealed','non-sealed']);
+
+  function skipAnn(){while(isOp('@')&&!isId('interface',1)){p++;ident();while(acc('.'))ident();if(isOp('(')){let d=0;do{if(isOp('('))d++;if(isOp(')'))d--;p++;}while(d>0&&pk().t!=='eof');}}}
+  function mods(){const m={};skipAnn();while(pk().t==='id'&&MODS.has(pk().v)&&!(pk().v==='default'&&(isOp(':',1)||isOp('->',1)))){m[pk().v]=true;p++;skipAnn();}return m;}
+  function closeAngle(){const t=pk();if(t.t==='op'&&t.v==='>'){p++;return;}err('Очікувалось «>»');}
+  function peekShift(){const t=pk();if(!(t.t==='op'&&t.v==='>'))return null;const t1=T[p+1];if(!(t1.t==='op'&&t1.s===t.e))return null;if(t1.v==='>'){const t2=T[p+2];if(t2.t==='op'&&t2.s===t1.e&&t2.v==='>')return{op:'>>>',n:3};if(t2.t==='op'&&t2.s===t1.e&&t2.v==='>=')return{op:'>>>=',n:3,asg:true};return{op:'>>',n:2};}if(t1.v==='>=')return{op:'>>=',n:2,asg:true};return null;}
+  function typeArgs(){ // after '<'
+    if(isOp('>')){p++;return;}
+    for(;;){skipAnn();if(acc('?')){if(accId('extends')||accId('super'))parseType();}else parseType();
+      if(acc(','))continue;break;}
+    closeAngle();}
+  function tryType(){ // returns type string or null (no throw)
+    const sv=p;try{const t=parseType();return t;}catch(e){if(e.unsup){p=sv;return null;}throw e;}}
+  function parseType(){
+    skipAnn();const t=pk();let name;
+    if(t.t==='id'&&(PRIM.has(t.v)||t.v==='void'||t.v==='var'||!KW.has(t.v))){name=t.v;p++;}
+    else err('Очікувався тип, а знайдено «'+(t.v||'кінець')+'»');
+    while(isOp('.')&&pk(1).t==='id'){p++;name=pk().v;p++;}
+    if(isOp('<')){p++;typeArgs();}
+    let d=0;while(isOp('[')&&isOp(']',1)){p+=2;d++;}
+    if(isOp('...')){/* varargs handled by caller */}
+    return name+'[]'.repeat(d);}
+  function typeParamsDecl(){if(isOp('<')){let d=0;do{if(isOp('<'))d++;else if(isOp('>'))d--;else if(isOp('>>')){d-=2;}p++;}while(d>0&&pk().t!=='eof');}}
+
+  /* ---------- expressions ---------- */
+  const N=(k,t,o)=>Object.assign({k,line:t.line,s0:t.s},o);
+  function parseExpr(){const t0=pk();const e=assign();e.src=src.slice(t0.s,T[p-1].e);return e;}
+  function assign(){
+    const l=ternary();const t=pk();const sh=peekShift();
+    if(sh&&sh.asg||t.t==='op'&&['=','+=','-=','*=','/=','%=','&=','|=','^=','<<='].includes(t.v)){
+      if(!['Name','Field','Index'].includes(l.k))err('Ліва частина присвоєння некоректна',t);
+      const opv=sh?sh.op:t.v;p+=sh?sh.n:1;const r=assign();
+      return N('Assign',t,{op:opv,l,r,src:src.slice(l.s0,T[p-1].e)});}
+    return l;}
+  function ternary(){const c=binary(0);if(isOp('?')){const t=pk();p++;const a=ternaryBranch();exp(':');const b=ternaryBranch();return N('Cond',t,{c,a,b});}return c;}
+  function ternaryBranch(){const t0=pk();const e=lambdaOrAssign();if(!e.src)e.src=src.slice(t0.s,T[p-1].e);return e;}
+  function lambdaOrAssign(){return assign();}
+  const PREC=[['||'],['&&'],['|'],['^'],['&'],['==','!='],['<','>','<=','>=','instanceof'],['<<'],['+','-'],['*','/','%']];
+  function binary(lv){
+    if(lv>=PREC.length)return unary();
+    let l=binary(lv+1);
+    for(;;){const t=pk();
+      const isIO=lv===6&&t.t==='id'&&t.v==='instanceof';
+      if(lv===7){const sh=peekShift();if(sh&&!sh.asg){p+=sh.n;const r=binary(lv+1);l=N('Bin',t,{op:sh.op,l,r,src:src.slice(l.s0,T[p-1].e)});continue;}}
+      if(!(isIO||t.t==='op'&&PREC[lv].includes(t.v)))break;
+      if(lv===6&&t.v==='>'&&peekShift())break;
+      p++;
+      if(isIO){accId('final');const ty=parseType();let bind=null;if(pk().t==='id'&&!KW.has(pk().v)){bind=pk().v;p++;}l=N('InstOf',t,{e:l,ty,bind,src:src.slice(l.s0,T[p-1].e)});continue;}
+      const r=binary(lv+1);l=N('Bin',t,{op:t.v,l,r,src:src.slice(l.s0,T[p-1].e)});}
+    return l;}
+  function isCast(){ // at '('
+    if(!isOp('('))return false;const sv=p;p++;
+    try{
+      const t=pk();
+      if(t.t==='id'&&PRIM.has(t.v)){const ty=parseType();if(isOp(')')){p=sv;return true;}p=sv;return false;}
+      if(t.t==='id'&&!KW.has(t.v)){const ty=parseType();while(acc('&'))parseType();
+        if(isOp(')')){const n=pk(1);p=sv;
+          return n.t==='id'&&(!KW.has(n.v)||['this','new','super','switch'].includes(n.v))||n.t==='str'||n.t==='chr'||n.t==='num'||n.t==='bool'||n.t==='null'||n.t==='op'&&(n.v==='('||n.v==='!'||n.v==='~');}}
+      p=sv;return false;
+    }catch(e){p=sv;if(e.unsup)return false;throw e;}}
+  function unary(){
+    const t=pk();
+    if(t.t==='op'){
+      if(t.v==='+'||t.v==='-'||t.v==='!'||t.v==='~'){p++;const e=unary();
+        if(t.v==='-'&&e.k==='Lit'&&(e.ty==='int'||e.ty==='long'||e.ty==='double')&&!e.neg&&e.raw!==undefined){return N('Lit',t,Object.assign({},e,{neg:true,raw:'-'+e.raw,src:'-'+(e.src||'')}));}
+        return N('Un',t,{op:t.v,e,src:src.slice(t.s,T[p-1].e)});}
+      if(t.v==='++'||t.v==='--'){p++;const e=unary();return N('Inc',t,{op:t.v,pre:true,e,src:src.slice(t.s,T[p-1].e)});}
+      if(t.v==='('&&isCast()){p++;const ty=parseType();while(acc('&'))parseType();exp(')');const e=unary();return N('Cast',t,{ty,e,src:src.slice(t.s,T[p-1].e)});}
+    }
+    return postfix(primary());}
+  function args(){const a=[];exp('(');if(!isOp(')')){do{a.push(parseExpr());}while(acc(','));}exp(')');return a;}
+  function postfix(e){
+    for(;;){const t=pk();
+      if(isOp('.')){p++;
+        if(isOp('<')){p++;typeArgs();}
+        const nm=pk();
+        if(nm.t==='id'&&nm.v==='new')err('Внутрішні класи з outer.new не підтримуються',nm);
+        if(nm.t!=='id'&&!(nm.t==='op'&&0))err('Очікувалось імʼя після крапки',nm);
+        p++;
+        if(isOp('(')){const a=args();e=N('Call',nm,{tg:e,name:nm.v,args:a,src:src.slice(e.s0,T[p-1].e)});}
+        else e=N('Field',nm,{o:e,name:nm.v,src:src.slice(e.s0,T[p-1].e)});
+        continue;}
+      if(isOp('[')){p++;const ix=parseExpr();exp(']');e=N('Index',t,{a:e,i:ix,src:src.slice(e.s0,T[p-1].e)});continue;}
+      if(isOp('++')||isOp('--')){p++;e=N('Inc',t,{op:t.v,pre:false,e,src:src.slice(e.s0,T[p-1].e)});continue;}
+      if(isOp('::')){p++;const nm=pk().v;p++;e=N('MRef',t,{o:e,name:nm,src:src.slice(e.s0,T[p-1].e)});continue;}
+      break;}
+    return e;}
+  function isLambdaAhead(){ // at id or '('
+    if(pk().t==='id'&&isOp('->',1))return true;
+    if(!isOp('('))return false;let d=0,q=p;
+    for(;;){const t=T[q];if(t.t==='eof')return false;if(t.t==='op'&&t.v==='(')d++;else if(t.t==='op'&&t.v===')'){d--;if(d===0)break;}q++;}
+    return T[q+1].t==='op'&&T[q+1].v==='->';}
+  function lambda(){
+    const t=pk();const ps=[];
+    if(pk().t==='id'){ps.push(ident());}
+    else{exp('(');if(!isOp(')')){do{accId('final');if(pk().t==='id'&&(isOp(',',1)||isOp(')',1))){ps.push(ident());}else{parseType();ps.push(ident());}}while(acc(','));}exp(')');}
+    exp('->');
+    let body;if(isOp('{'))body=block();else body=parseExpr();
+    return N('Lambda',t,{ps,body,src:src.slice(t.s,T[p-1].e)});}
+  function arrayInit(){const t=pk();exp('{');const el=[];while(!isOp('}')){el.push(isOp('{')?arrayInit():parseExpr());if(!acc(','))break;}exp('}');return N('ArrInit',t,{el});}
+  function primary(){
+    const t=pk();
+    if(t.t==='num'){p++;return N('Lit',t,{ty:t.kind,raw:t.v,src:src.slice(t.s,t.e)});}
+    if(t.t==='str'){p++;return N('Lit',t,{ty:'String',raw:t.v,src:src.slice(t.s,t.e)});}
+    if(t.t==='chr'){p++;return N('Lit',t,{ty:'char',raw:t.v,src:src.slice(t.s,t.e)});}
+    if(t.t==='bool'){p++;return N('Lit',t,{ty:'boolean',raw:t.v==='true',src:t.v});}
+    if(t.t==='null'){p++;return N('Lit',t,{ty:'null',raw:null,src:'null'});}
+    if(t.t==='op'&&t.v==='('){
+      if(isLambdaAhead())return lambda();
+      p++;const e=parseExpr();exp(')');return N('Paren',t,{e,src:'('+e.src+')'});}
+    if(t.t==='id'){
+      if(isLambdaAhead())return lambda();
+      if(t.v==='this'){p++;if(isOp('(')){const a=args();return N('CtorCall',t,{sup:false,args:a});}return N('This',t,{src:'this'});}
+      if(t.v==='super'){p++;if(isOp('(')){const a=args();return N('CtorCall',t,{sup:true,args:a});}
+        if(isOp('::')){err('Посилання на метод super:: не підтримується',t);}
+        exp('.');const nm=ident();if(isOp('(')){const a=args();return N('Call',t,{tg:N('Super',t,{}),name:nm,args:a,src:'super.'+nm+'(…)'});}
+        return N('Field',t,{o:N('This',t,{}),name:nm,src:'super.'+nm});}
+      if(t.v==='new'){return newExpr();}
+      if(t.v==='switch'){return switchNode(true);}
+      if(PRIM.has(t.v)){ // int[].class / int[]::new etc
+        const ty=parseType();if(isOp('::')){p++;const nm=pk().v;p++;return N('MRef',t,{o:N('Name',t,{name:ty}),name:nm,src:ty+'::'+nm});}
+        err('Неочікуваний тип «'+t.v+'»',t);}
+      if(KW.has(t.v)&&!['var','record','yield'].includes(t.v))err('Неочікуване слово «'+t.v+'»',t);
+      p++;
+      if(isOp('(')){const a=args();return N('Call',t,{tg:null,name:t.v,args:a,src:src.slice(t.s,T[p-1].e)});}
+      // generic type method ref like List<String>::new  (skip)
+      // array type ref: String[]::new
+      if(isOp('[')&&isOp(']',1)){let d=0;while(isOp('[')&&isOp(']',1)){p+=2;d++;}if(isOp('::')){p++;const nm=pk().v;p++;return N('MRef',t,{o:N('Name',t,{name:t.v+'[]'}),name:nm,src:src.slice(t.s,T[p-1].e)});}err('Неочікуваний вираз',t);}
+      return N('Name',t,{name:t.v,src:t.v});}
+    err('Неочікуваний вираз «'+(t.v||'кінець')+'»',t);}
+  function newExpr(){
+    const t=pk();p++;skipAnn();
+    // element/class type without dims
+    const nt=pk();let name;
+    if(nt.t==='id'){name=nt.v;p++;while(isOp('.')&&pk(1).t==='id'){p++;name=pk().v;p++;}}else err('Очікувався тип після new',nt);
+    let diamond=false;if(isOp('<')){p++;if(isOp('>')){p++;diamond=true;}else typeArgs();}
+    if(isOp('[')){
+      const dims=[];let extra=0;
+      while(isOp('[')){p++;if(isOp(']')){p++;extra++;}else{if(extra)err('Некоректний масив',nt);dims.push(parseExpr());exp(']');}}
+      let init=null;if(isOp('{')){init=arrayInit();}
+      return N('NewArr',t,{et:name,dims,extra,init,src:src.slice(t.s,T[p-1].e)});}
+    const a=args();
+    if(isOp('{')){
+      anonN++;const aname=(classes.length?classes[0].name:'Main')+'$'+anonN;
+      const ci={name:aname,kind:'class',sup:null,ifaces:[],fields:[],methods:[],ctors:[],sinit:[],iinit:[],consts:[],abstract:false,line:t.line,outer:null,rec:null,compact:null,anon:true,anonBase:name};
+      classes.push(ci);classBody(ci);
+      return N('New',t,{cls:aname,args:a,anon:true,src:'new '+name+'(){…}'});}
+    return N('New',t,{cls:name,args:a,src:src.slice(t.s,T[p-1].e)});}
+
+  /* ---------- statements ---------- */
+  function block(){const t=pk();exp('{');const st=[];while(!isOp('}')){if(pk().t==='eof')err('Не вистачає «}»');st.push(stmt());}exp('}');return N('Block',t,{st,end:T[p-1].line});}
+  function looksLikeDecl(){
+    const t=pk();if(t.t!=='id')return false;
+    if(['var'].includes(t.v)&&pk(1).t==='id')return true;
+    if(KW.has(t.v)&&!PRIM.has(t.v))return false;
+    const sv=p;try{parseType();const ok=pk().t==='id'&&!KW.has(pk().v)||pk().t==='id'&&pk().v==='var';const nx=pk(1);
+      const r=ok&&nx.t==='op'&&['=',';',',',':','['].includes(nx.v);p=sv;return r;}catch(e){p=sv;if(e.unsup)return false;throw e;}}
+  function varDecl(noSemi){
+    const t=pk();const ty=parseType();const ds=[];
+    do{const nm=pk();const name=ident();let d=0;while(isOp('[')&&isOp(']',1)){p+=2;d++;}
+      let init=null;if(acc('=')){init=isOp('{')?arrayInit():parseExpr();}
+      ds.push({name,ty:ty+'[]'.repeat(d),init,line:nm.line,src:src.slice(nm.s,T[p-1].e)});}while(acc(','));
+    if(!noSemi)exp(';');
+    return N('Decl',t,{ds});}
+  function switchNode(isExpr){
+    const t=pk();p++;exp('(');const sel=parseExpr();exp(')');exp('{');
+    const cases=[];let arrow=false;
+    while(!isOp('}')){
+      const ct=pk();const labels=[];let isDef=false;
+      if(accId('default')){isDef=true;}
+      else if(accId('case')){do{
+        if(accId('default')){isDef=true;continue;}
+        if(pk().t==='null'){p++;labels.push(N('Lit',ct,{ty:'null',raw:null}));continue;}
+        if(pk().t==='id'&&pk(1).t==='id'&&!KW.has(pk().v))err('Pattern matching у switch не підтримується',ct);
+        labels.push(ternary());}while(acc(','));}
+      else err('Очікувалось case або default',ct);
+      let body=[],ex=null,blk=null;
+      if(acc('->')){arrow=true;
+        if(isOp('{'))blk=block();
+        else if(isId('throw')){blk=N('Block',ct,{st:[stmt()]});}
+        else{ex=parseExpr();exp(';');}
+        cases.push({labels,isDef,ex,blk,line:ct.line});}
+      else{exp(':');
+        while(!isOp('}')&&!isId('case')&&!isId('default')){body.push(stmt());}
+        cases.push({labels,isDef,body,line:ct.line});}
+    }
+    exp('}');
+    return N(isExpr?'SwitchE':'Switch',t,{sel,cases,arrow,src:src.slice(t.s,T[p-1].e)});}
+  function stmt(){
+    const t=pk();
+    if(t.t==='op'){
+      if(t.v==='{')return block();
+      if(t.v===';'){p++;return N('Empty',t,{});}
+      if(t.v==='@'){skipAnn();return stmt();}}
+    if(t.t==='id'){
+      switch(t.v){
+        case 'if':{p++;exp('(');const c=parseExpr();exp(')');const a=stmt();let b=null;if(accId('else'))b=stmt();return N('If',t,{c,a,b});}
+        case 'while':{p++;exp('(');const c=parseExpr();exp(')');const b=stmt();return N('While',t,{c,b});}
+        case 'do':{p++;const b=stmt();if(!accId('while'))err('Очікувалось while');exp('(');const c=parseExpr();exp(')');exp(';');return N('Do',t,{c,b});}
+        case 'for':{p++;exp('(');
+          // foreach?
+          const sv=p;let fe=null;
+          try{accId('final');const ty=parseType();const nm=pk();if(nm.t==='id'&&isOp(':',1)){p+=2;const it=parseExpr();exp(')');fe={ty,name:nm.v,it};}else p=sv;}catch(e){if(!e.unsup)throw e;p=sv;}
+          if(fe){const b=stmt();return N('ForEach',t,Object.assign(fe,{b}));}
+          let init=[];if(!isOp(';')){accId('final');if(looksLikeDecl())init=[varDecl(true)];else{do{init.push(N('ExprS',pk(),{e:parseExpr()}));}while(acc(','));}}
+          exp(';');let c=null;if(!isOp(';'))c=parseExpr();exp(';');
+          let upd=[];if(!isOp(')')){do{upd.push(parseExpr());}while(acc(','));}exp(')');
+          const b=stmt();return N('For',t,{init,c,upd,b});}
+        case 'return':{p++;let e=null;if(!isOp(';'))e=parseExpr();exp(';');return N('Return',t,{e});}
+        case 'break':{p++;let lb=null;if(pk().t==='id'){lb=pk().v;p++;}exp(';');return N('Break',t,{label:lb});}
+        case 'continue':{p++;let lb=null;if(pk().t==='id'){lb=pk().v;p++;}exp(';');return N('Continue',t,{label:lb});}
+        case 'throw':{p++;const e=parseExpr();exp(';');return N('Throw',t,{e});}
+        case 'yield':{if(!isOp('=',1)&&!isOp('.',1)){p++;const e=parseExpr();exp(';');return N('Yield',t,{e});}break;}
+        case 'switch':{const s=switchNode(false);return s;}
+        case 'synchronized':{p++;exp('(');parseExpr();exp(')');return block();}
+        case 'assert':{p++;const c=parseExpr();let m=null;if(acc(':'))m=parseExpr();exp(';');return N('Empty',t,{});}
+        case 'try':{p++;
+          let res=null;
+          if(isOp('(')){p++;res=[];while(!isOp(')')){accId('final');const d=varDecl(true);res.push(d);if(!acc(';'))break;}exp(')');}
+          const body=block();const catches=[];let fin=null;
+          while(isId('catch')){const ct=pk();p++;exp('(');accId('final');const tys=[parseType()];while(acc('|'))tys.push(parseType());const nm=ident();exp(')');catches.push({tys,name:nm,body:block(),line:ct.line});}
+          if(accId('finally'))fin=block();
+          if(!catches.length&&!fin&&!res)err('try без catch/finally',t);
+          return N('Try',t,{res,body,catches,fin});}
+        case 'class':case 'interface':case 'enum':case 'abstract':
+          err('Локальні класи всередині методів візуалізатор не підтримує',t);
+        case 'final':{p++;if(isId('class'))err('Локальні класи не підтримуються',t);const d=varDecl();return d;}
+      }
+      if(pk(1).t==='op'&&pk(1).v===':'&&!KW.has(t.v)&&t.v!=='default'){p+=2;const st=stmt();return N('Labeled',t,{label:t.v,st});}
+      if(looksLikeDecl())return varDecl();
+    }
+    const e=parseExpr();
+    if(!['Assign','Inc','Call','New','CtorCall'].includes(e.k))err('Це не інструкція: «'+(e.src||'')+'»',t);
+    exp(';');return N('ExprS',t,{e});}
+
+  /* ---------- declarations ---------- */
+  const classes=[];let anonN=0;
+  function params(){exp('(');const ps=[];let va=false;
+    if(!isOp(')')){do{mods();let ty=parseType();let v=false;if(acc('...')){v=true;ty+='[]';va=true;}const nm=ident();let d=0;while(isOp('[')&&isOp(']',1)){p+=2;d++;}ps.push({name:nm,ty:ty+'[]'.repeat(d),va:v});}while(acc(','));}
+    exp(')');return {ps,va};}
+  function skipThrows(){if(accId('throws')){do{parseType();}while(acc(','));}}
+  function classBody(ci){
+    exp('{');
+    if(ci.kind==='enum'){
+      while(pk().t==='id'&&!isOp(';')){skipAnn();const nt=pk();const nm=ident();let a=[];if(isOp('('))a=args();if(isOp('{'))err('Enum-константи з власним тілом не підтримуються',nt);ci.consts.push({name:nm,args:a,line:nt.line});if(!acc(','))break;}
+      acc(';');}
+    while(!isOp('}')){
+      if(pk().t==='eof')err('Не вистачає «}» у класі '+ci.name);
+      if(acc(';'))continue;
+      const mt=pk();const m=mods();
+      if(isOp('{')){const b=block();(m.static?ci.sinit:ci.iinit).push(b);continue;}
+      if(isId('class')||isId('interface')||isId('enum')||isId('record')&&pk(1).t==='id'&&isOp('(',2)||isOp('@')&&isId('interface',1)){classDecl(m,ci);continue;}
+      typeParamsDecl();
+      // constructor
+      if(pk().t==='id'&&pk().v===ci.name&&isOp('(',1)){const nt=pk();p++;const pr=params();skipThrows();const body=block();ci.ctors.push({params:pr.ps,va:pr.va,body,line:nt.line,name:ci.name});continue;}
+      if(ci.kind==='record'&&pk().t==='id'&&pk().v===ci.name&&isOp('{',1)){p++;const body=block();ci.compact=body;continue;}
+      const ty=parseType();const nt=pk();const name=ident();
+      if(isOp('(')){const pr=params();let d=0;while(isOp('[')&&isOp(']',1)){p+=2;d++;}skipThrows();
+        let body=null;if(isOp('{'))body=block();else{if(accId('default')){parseExpr();}exp(';');}
+        const abs=!body;
+        ci.methods.push({name,ret:ty,params:pr.ps,va:pr.va,body,static:!!m.static,abs,line:nt.line,cls:ci.name});continue;}
+      p--;// re-read name for declarators
+      const ds=[];
+      for(;;){const n2=pk();const nm=ident();let d=0;while(isOp('[')&&isOp(']',1)){p+=2;d++;}let init=null;if(acc('='))init=isOp('{')?arrayInit():parseExpr();
+        ds.push({name:nm,ty:ty+'[]'.repeat(d),init,static:!!m.static||ci.kind==='interface',line:n2.line});if(acc(','))continue;break;}
+      exp(';');ds.forEach(d=>ci.fields.push(d));
+    }
+    exp('}');}
+  function classDecl(m,outer){
+    const kt=pk();const kind=kt.v==='@'?(p++,'annotation'):kt.v;p++;
+    if(kind==='annotation')err('Анотації-оголошення не підтримуються',kt);
+    const name=ident();typeParamsDecl();
+    const ci={name,kind,sup:null,ifaces:[],fields:[],methods:[],ctors:[],sinit:[],iinit:[],consts:[],abstract:!!m.abstract||kind==='interface',line:kt.line,outer:outer?outer.name:null,rec:null,compact:null};
+    if(kind==='record'){const pr=params();ci.rec=pr.ps;}
+    if(accId('extends')){if(kind==='interface'){do{ci.ifaces.push(parseType());}while(acc(','));}else ci.sup=parseType();}
+    if(accId('implements')){do{ci.ifaces.push(parseType());}while(acc(','));}
+    if(accId('permits')){do{parseType();}while(acc(','));}
+    classes.push(ci);classBody(ci);return ci;}
+  // compilation unit
+  while(isId('package')||isId('import')){while(!isOp(';')&&pk().t!=='eof')p++;p++;}
+  while(pk().t!=='eof'){
+    if(acc(';'))continue;
+    const m=mods();
+    if(isId('class')||isId('interface')||isId('enum')||isId('record'))classDecl(m,null);
+    else err('Очікувалось оголошення класу, а знайдено «'+pk().v+'»');
+  }
+  return classes;
+}
+/* ===== JV runtime part 1: values, formatting ===== */
+class Dbl{constructor(v,f){this.f=!!f;this.v=f?Math.fround(v):v;}}
+class Lng{constructor(v){this.v=BigInt.asIntN(64,BigInt(v));}}
+class Chr{constructor(c){this.c=c&0xFFFF;}}
+class StrObj{constructor(s){this.s=s;}}
+const UNSET={unset:true};
+class JThrow extends Error{constructor(o){super('java');this.obj=o;}}
+class StopEx extends Error{constructor(why){super(why);this.why=why;}}
+class ExitEx extends Error{constructor(c){super('exit');this.code=c;}}
+const isStr=v=>typeof v==='string'||v instanceof StrObj;
+const S=v=>typeof v==='string'?v:v.s;
+const isNumV=v=>typeof v==='number'||v instanceof Dbl||v instanceof Lng||v instanceof Chr;
+function fmtD(x){
+  if(Number.isNaN(x))return 'NaN';if(x===Infinity)return 'Infinity';if(x===-Infinity)return '-Infinity';
+  if(x===0)return (1/x<0)?'-0.0':'0.0';
+  const a=Math.abs(x);
+  if(a>=1e-3&&a<1e7){let s=String(x);if(s.indexOf('e')>=0)s=x.toFixed(10).replace(/0+$/,'');if(s.indexOf('.')<0)s+='.0';return s;}
+  let e=x.toExponential();let m=e.match(/^(-?)(\d)(?:\.(\d+))?e([+-])(\d+)$/);
+  return m[1]+m[2]+'.'+(m[3]||'0')+'E'+(m[4]==='-'?'-':'')+m[5];}
+function fmtF(x){
+  if(Number.isNaN(x)||!Number.isFinite(x)||x===0)return fmtD(x);
+  let best=null;for(let p=1;p<=9;p++){const t=Number(x.toPrecision(p));if(Math.fround(t)===x){best=t;break;}}
+  return fmtD(best===null?x:best);}
+function hashStr(s){let h=0;for(let i=0;i<s.length;i++)h=(Math.imul(h,31)+s.charCodeAt(i))|0;return h;}
+const EXC={Throwable:null,Exception:'Throwable',Error:'Throwable',RuntimeException:'Exception',
+  IllegalArgumentException:'RuntimeException',IllegalStateException:'RuntimeException',ArithmeticException:'RuntimeException',
+  NullPointerException:'RuntimeException',ClassCastException:'RuntimeException',IndexOutOfBoundsException:'RuntimeException',
+  ArrayIndexOutOfBoundsException:'IndexOutOfBoundsException',StringIndexOutOfBoundsException:'IndexOutOfBoundsException',
+  NumberFormatException:'IllegalArgumentException',UnsupportedOperationException:'RuntimeException',
+  ConcurrentModificationException:'RuntimeException',NegativeArraySizeException:'RuntimeException',ArrayStoreException:'RuntimeException',
+  NoSuchElementException:'RuntimeException',InputMismatchException:'NoSuchElementException',
+  IOException:'Exception',FileNotFoundException:'IOException',InterruptedException:'Exception',CloneNotSupportedException:'Exception',
+  StackOverflowError:'Error',OutOfMemoryError:'Error',AssertionError:'Error',TimeoutException:'Exception',ExecutionException:'Exception',
+  DateTimeException:'RuntimeException',UncheckedIOException:'RuntimeException',EmptyStackException:'RuntimeException'};
+const EXPKG={NoSuchElementException:'java.util.',InputMismatchException:'java.util.',ConcurrentModificationException:'java.util.',EmptyStackException:'java.util.',
+  IOException:'java.io.',FileNotFoundException:'java.io.',UncheckedIOException:'java.io.',TimeoutException:'java.util.concurrent.',ExecutionException:'java.util.concurrent.'};
+/* java.util.Random LCG */
+class JRandom{constructor(seed){this.id=0;this.kind='rnd';const m=(1n<<48n)-1n;this.m=m;this.s=(BigInt(seed)^0x5DEECE66Dn)&m;}
+  next(bits){this.s=(this.s*0x5DEECE66Dn+0xBn)&this.m;return Number(BigInt.asIntN(32,this.s>>(48n-BigInt(bits))));}
+  nextInt(b){if(b===undefined)return this.next(32);
+    if((b&-b)===b)return Number((BigInt(b)*BigInt(this.next(31)))>>31n);
+    let bits,val;do{bits=this.next(31);val=bits%b;}while(bits-val+(b-1)>2147483647);return val;}
+  nextDouble(){return (this.next(26)*134217728+this.next(27))/9007199254740992;}
+  nextBoolean(){return this.next(1)!==0;}}
+/* ===== JV runtime part 2: interpreter core ===== */
+const MAXSTEPS=1000, MAXINSTR=2500000, MAXDEPTH=400;
+class Interp{
+  constructor(classes,stdin,opt){
+    this.opt=opt||{};this.stdin=stdin||'';this.sp=0;this.nid=1;this.steps=[];this.out='';this.errOut='';this.instr=0;
+    this.rcs=new Map();this.fr=null;this.stack=[];this.hint=null;this.depth=0;this.statOrder=[];
+    classes.forEach(ci=>{this.rcs.set(ci.name,{name:ci.name,ast:ci,sup:null,supName:ci.sup,ifaces:ci.ifaces,statics:new Map(),inited:false,methods:new Map(),isEnum:ci.kind==='enum',enumVals:[],outer:ci.outer});
+      ci.methods.forEach(m=>{const rc=this.rcs.get(ci.name);if(!rc.methods.has(m.name))rc.methods.set(m.name,[]);rc.methods.get(m.name).push(m);});});
+    classes.filter(c=>c.anon).forEach(c=>{const rc=this.rcs.get(c.name);const b=this.rcs.get(c.anonBase);
+      if(b&&b.ast.kind!=='interface'){rc.supName=c.anonBase;}else rc.ifaces=[c.anonBase];});
+    this.rcs.forEach(rc=>{if(rc.supName&&this.rcs.has(rc.supName))rc.sup=this.rcs.get(rc.supName);});
+    if(classes.some(c=>c.kind==='record'))classes.filter(c=>c.kind==='record').forEach(c=>{});
+  }
+  /* ---------- errors ---------- */
+  unsup(msg,line){throw new JUnsup(msg,line||(this.fr&&this.fr.line)||0);}
+  newExc(name,msg,cause){const o={id:this.nid++,kind:'obj',ci:null,cname:name,f:{},msg:msg===undefined?null:msg,cause:cause||null,exc:true};return o;}
+  throwJ(name,msg){throw new JThrow(this.newExc(name,msg));}
+  npe(what){this.throwJ('NullPointerException',what);}
+  /* ---------- class helpers ---------- */
+  rcOf(o){return o.ci||null;}
+  isa(v,ty){
+    if(ty==='Object')return v!==null;
+    if(v===null)return false;
+    if(typeof v==='boolean')return ty==='Boolean'||ty==='Comparable';
+    if(typeof v==='number')return ['Integer','Number','Comparable','Short','Byte'].includes(ty);
+    if(v instanceof Dbl)return ['Double','Float','Number','Comparable'].includes(ty);
+    if(v instanceof Lng)return ['Long','Number','Comparable'].includes(ty);
+    if(v instanceof Chr)return ty==='Character'||ty==='Comparable';
+    if(isStr(v))return ['String','CharSequence','Comparable'].includes(ty);
+    switch(v.kind){
+      case 'arr':return ty===v.et+'[]'||ty==='Object';
+      case 'list':return ['List','ArrayList','LinkedList','Collection','Iterable','Deque','Queue','Stack','Vector'].includes(ty)&&(ty===v.t||['List','Collection','Iterable'].includes(ty)||v.t==='LinkedList'&&['Deque','Queue'].includes(ty));
+      case 'map':return ['Map',v.t].includes(ty);
+      case 'set':return ['Set','Collection','Iterable',v.t].includes(ty);
+      case 'sb':return ['StringBuilder','StringBuffer','CharSequence'].includes(ty);
+      case 'fn':return true;
+      case 'obj':return this.objIsa(v,ty);
+    }
+    return false;}
+  objIsa(o,ty){
+    let rc=o.ci;let guard=0;
+    const ifaceHas=(rc2,t)=>{if(!rc2)return false;if(rc2.name===t)return true;for(const i of rc2.ifaces||[]){if(i===t)return true;const r=this.rcs.get(i);if(r&&ifaceHas(r,t))return true;}return false;};
+    while(rc&&guard++<50){if(rc.name===ty||ifaceHas(rc,ty))return true;if(!rc.sup){if(rc.supName&&EXC.hasOwnProperty(rc.supName))return this.excIsa(rc.supName,ty);return ty==='Object'||ty==='Record'&&rc.ast.kind==='record'||ty==='Enum'&&rc.isEnum;}rc=rc.sup;}
+    if(o.cname)return this.excIsa(o.cname,ty);
+    return false;}
+  excIsa(name,t){let c=name,g=0;while(c&&g++<30){if(c===t)return true;c=EXC[c];}return t==='Object';}
+  className(v){
+    if(v===null)return 'null';if(typeof v==='number')return 'Integer';if(typeof v==='boolean')return 'Boolean';if(v instanceof Dbl)return 'Double';if(v instanceof Lng)return 'Long';if(v instanceof Chr)return 'Character';if(isStr(v))return 'String';
+    switch(v.kind){case 'obj':return v.ci?v.ci.name:v.cname;case 'arr':return v.et+'[]';case 'list':return v.t;case 'map':return v.t;case 'set':return v.t;case 'sb':return 'StringBuilder';}
+    return 'Object';}
+  qname(v){const n=this.className(v);if(v!==null&&(typeof v!=='object'||isStr(v)||v instanceof Dbl||v instanceof Lng||v instanceof Chr))return 'java.lang.'+n;if(v&&v.kind==='obj'&&!v.ci){return (EXPKG[n]||'java.lang.')+n;}return n;}
+  findMethods(rc,name,out,seen){
+    out=out||[];seen=seen||new Set();
+    while(rc){if(seen.has(rc))break;seen.add(rc);const ms=rc.methods.get(name);if(ms)ms.forEach(m=>out.push({m,rc}));
+      (rc.ifaces||[]).forEach(i=>{const r=this.rcs.get(i);if(r)this.findMethods(r,name,out,seen);});
+      rc=rc.sup;}
+    return out;}
+  argScore(ty,v){
+    if(ty==='int'||ty==='short'||ty==='byte')return typeof v==='number'?3:v instanceof Chr?1:-1;
+    if(ty==='long')return v instanceof Lng?3:typeof v==='number'?2:v instanceof Chr?1:-1;
+    if(ty==='double'||ty==='float')return v instanceof Dbl?3:v instanceof Lng?2:typeof v==='number'?1:v instanceof Chr?1:-1;
+    if(ty==='char')return v instanceof Chr?3:-1;
+    if(ty==='boolean')return typeof v==='boolean'?3:-1;
+    if(ty==='Integer')return typeof v==='number'?2:v===null?1:-1;
+    if(ty==='Double')return v instanceof Dbl?2:v===null?1:-1;
+    if(ty==='Long')return v instanceof Lng?2:v===null?1:-1;
+    if(ty==='Character')return v instanceof Chr?2:v===null?1:-1;
+    if(ty==='Boolean')return typeof v==='boolean'?2:v===null?1:-1;
+    if(ty==='String')return isStr(v)?3:v===null?1:-1;
+    if(ty==='Object')return 1;
+    if(/^[A-Z]$/.test(ty)||/^[A-Z]\d?$/.test(ty))return 1;
+    if(v===null)return 1;
+    if(this.isa(v,ty))return v.kind==='obj'&&v.ci&&v.ci.name===ty?3:2;
+    if(/\[\]$/.test(ty))return -1;
+    if(this.rcs.has(ty))return -1;
+    if(typeof v==='number'||typeof v==='boolean'||v instanceof Dbl||isStr(v))return -1;
+    return 0;}
+  pickMethod(cands,args){
+    let best=null,bs=-1e9;
+    for(const c of cands){const ps=c.m.params||c.params;const va=c.m.va;
+      let sc=0,ok=true;
+      if(!va&&ps.length!==args.length)continue;
+      if(va&&args.length<ps.length-1)continue;
+      for(let i=0;i<ps.length;i++){
+        if(va&&i===ps.length-1){ // varargs
+          if(args.length===ps.length&&(args[i] instanceof Object&&args[i].kind==='arr'||args[i]===null)){sc+=2;break;}
+          const et=ps[i].ty.slice(0,-2);for(let j=i;j<args.length;j++){const s=this.argScore(et,args[j]);if(s<0)ok=false;sc+=s;}sc-=1;break;}
+        const s=this.argScore(ps[i].ty,args[i]);if(s<0){ok=false;break;}sc+=s;}
+      if(!ok)continue;if(sc>bs){bs=sc;best=c;}}
+    return best;}
+  /* ---------- value conversion ---------- */
+  defaultOf(ty){switch(ty){case 'int':case 'short':case 'byte':return 0;case 'long':return new Lng(0);case 'double':return new Dbl(0);case 'float':return new Dbl(0,true);case 'boolean':return false;case 'char':return new Chr(0);default:return null;}}
+  coerce(ty,v){
+    if(v===null||v===undefined)return v;
+    switch(ty){
+      case 'int':case 'short':case 'byte':case 'Integer':case 'Short':case 'Byte':return v instanceof Chr?v.c:v;
+      case 'long':case 'Long':return typeof v==='number'?new Lng(v):v instanceof Chr?new Lng(v.c):v;
+      case 'double':case 'Double':return typeof v==='number'?new Dbl(v):v instanceof Lng?new Dbl(Number(v.v)):v instanceof Chr?new Dbl(v.c):v instanceof Dbl&&v.f?new Dbl(v.v):v;
+      case 'float':case 'Float':return typeof v==='number'?new Dbl(v,true):v instanceof Lng?new Dbl(Number(v.v),true):v instanceof Chr?new Dbl(v.c,true):v instanceof Dbl&&!v.f?new Dbl(v.v,true):v;
+      case 'char':case 'Character':return typeof v==='number'?new Chr(v):v;
+    }
+    return v;}
+  castTo(ty,v,line){
+    switch(ty){
+      case 'int':{if(v instanceof Chr)return v.c;if(typeof v==='number')return v;if(v instanceof Lng)return Number(BigInt.asIntN(32,v.v));if(v instanceof Dbl){const x=v.v;if(Number.isNaN(x))return 0;return x>=2147483647?2147483647:x<=-2147483648?-2147483648:Math.trunc(x);}break;}
+      case 'short':{const i=this.castTo('int',v);return (i<<16)>>16;}
+      case 'byte':{const i=this.castTo('int',v);return (i<<24)>>24;}
+      case 'char':{if(v instanceof Chr)return v;if(typeof v==='number')return new Chr(v);if(v instanceof Lng)return new Chr(Number(BigInt.asUintN(16,v.v)));if(v instanceof Dbl)return new Chr(this.castTo('int',v));break;}
+      case 'long':{if(v instanceof Lng)return v;if(typeof v==='number')return new Lng(v);if(v instanceof Chr)return new Lng(v.c);if(v instanceof Dbl){const x=v.v;if(Number.isNaN(x))return new Lng(0);if(x>=9223372036854775807)return new Lng(9223372036854775807n);if(x<=-9223372036854775808)return new Lng(-9223372036854775808n);return new Lng(BigInt(Math.trunc(x)));}break;}
+      case 'double':return this.coerce('double',v);
+      case 'float':return this.coerce('float',v);
+      case 'boolean':return v;
+      case 'String':if(v===null||isStr(v))return v;this.throwJ('ClassCastException','class '+this.className(v)+' cannot be cast to class java.lang.String');
+      case 'Integer':if(v===null||typeof v==='number')return v;this.throwJ('ClassCastException','class '+this.qname(v)+' cannot be cast to class java.lang.Integer');
+      case 'Double':if(v===null||v instanceof Dbl)return v;this.throwJ('ClassCastException','class '+this.qname(v)+' cannot be cast to class java.lang.Double');
+      case 'Long':if(v===null||v instanceof Lng)return v;this.throwJ('ClassCastException','class '+this.qname(v)+' cannot be cast to class java.lang.Long');
+      case 'Character':if(v===null||v instanceof Chr)return v;this.throwJ('ClassCastException','class '+this.qname(v)+' cannot be cast to class java.lang.Character');
+      case 'Boolean':if(v===null||typeof v==='boolean')return v;this.throwJ('ClassCastException','class '+this.qname(v)+' cannot be cast to class java.lang.Boolean');
+      case 'Object':case 'Number':case 'Comparable':return v;
+    }
+    if(v===null)return null;
+    if(typeof v==='object'&&(v.kind==='obj')&&(this.rcs.has(ty)||EXC.hasOwnProperty(ty))&&!this.isa(v,ty))this.throwJ('ClassCastException','class '+this.className(v)+' cannot be cast to class '+ty);
+    if(this.rcs.has(ty)&&!(v&&v.kind==='obj'))this.throwJ('ClassCastException','class '+this.qname(v)+' cannot be cast to class '+ty);
+    return v;}
+  toBool(v){return v===true;}
+  /* ---------- string conversion ---------- */
+  jstr(v){
+    if(v===null)return 'null';
+    if(typeof v==='string')return v;
+    if(typeof v==='number')return String(v);
+    if(typeof v==='boolean')return v?'true':'false';
+    if(v instanceof Chr)return String.fromCharCode(v.c);
+    if(v instanceof Dbl)return v.f?fmtF(v.v):fmtD(v.v);
+    if(v instanceof Lng)return v.v.toString();
+    if(v instanceof StrObj)return v.s;
+    switch(v.kind){
+      case 'arr':{const code={int:'[I',double:'[D',char:'[C',boolean:'[Z',long:'[J',byte:'[B'}[v.et];return (code||'[L'+v.et+';')+'@'+(0x1b6d3586+v.id*0x3a1f).toString(16);}
+      case 'list':return '['+v.a.map(x=>x===v?'(this Collection)':this.jstr(x)).join(', ')+']';
+      case 'set':return '['+this.setOrder(v).map(x=>this.jstr(x)).join(', ')+']';
+      case 'map':return '{'+this.mapOrder(v).map(e=>this.jstr(e[0])+'='+this.jstr(e[1])).join(', ')+'}';
+      case 'sb':return v.s;
+      case 'fn':return 'Main$$Lambda@'+(0x4e50df2e+v.id).toString(16);
+      case 'entry':return this.jstr(v.k)+'='+this.jstr(v.v);
+      case 'opt':return v.v===null?'Optional.empty':'Optional['+this.jstr(v.v)+']';
+      case 'obj':{
+        if(v.ci&&this.safe){if(v.ci.isEnum)return v.f.__name;if(v.ci.ast.kind==='record')return v.ci.name+'['+v.ci.ast.rec.map(p=>p.name+'='+this.jstr(v.f[p.name])).join(', ')+']';return v.ci.name+'@'+this.hashOfSafe(v).toString(16);}
+        if(v.ci){const ms=this.findMethods(v.ci,'toString').filter(c=>c.m.params.length===0&&!c.m.abs);
+          if(ms.length)return this.jstr(this.invoke(ms[0].m,ms[0].rc,v,[],null));
+          if(v.ci.isEnum)return v.f.__name;
+          if(v.ci.ast.kind==='record')return v.ci.name+'['+v.ci.ast.rec.map(p=>p.name+'='+this.jstr(v.f[p.name])).join(', ')+']';
+          return v.ci.name+'@'+this.hashOf(v).toString(16);}
+        return this.excToString(v);}
+    }
+    return String(v);}
+  excToString(o){const nm=this.qnameExc(o);return o.msg===null||o.msg===undefined?nm:nm+': '+o.msg;}
+  qnameExc(o){if(o.ci)return o.ci.name;return (EXPKG[o.cname]||'java.lang.')+o.cname;}
+  hashOfSafe(v){return (0x1b6d3586+(v.id||0)*0x3a1f)|0;}
+  hashOf(v){
+    if(v===null)return 0;if(typeof v==='number')return v;if(typeof v==='boolean')return v?1231:1237;if(v instanceof Chr)return v.c;
+    if(v instanceof Lng){return Number(BigInt.asIntN(32,v.v^(v.v>>32n)));}
+    if(v instanceof Dbl){const b=new DataView(new ArrayBuffer(8));b.setFloat64(0,v.v);const hi=b.getInt32(0),lo=b.getInt32(4);return hi^lo;}
+    if(isStr(v))return hashStr(S(v));
+    if(v.kind==='obj'&&v.ci){const ms=this.findMethods(v.ci,'hashCode').filter(c=>c.m.params.length===0&&!c.m.abs);
+      if(ms.length)return this.invoke(ms[0].m,ms[0].rc,v,[],null);
+      if(v.ci.isEnum)return 0x1a2b3c+v.f.__ord*7919;
+      if(v.ci.ast.kind==='record'){let h=0;v.ci.ast.rec.forEach(p=>{h=(Math.imul(h,31)+this.hashOf(v.f[p.name]))|0;});return h;}}
+    if(v.kind==='list'){let h=1;v.a.forEach(x=>{h=(Math.imul(h,31)+this.hashOf(x))|0;});return h;}
+    if(v.kind==='set'){let h=0;v.e.forEach(x=>{h=(h+this.hashOf(x))|0;});return h;}
+    if(v.kind==='entry'){return this.hashOf(v.k)^this.hashOf(v.v);}
+    return (0x1b6d3586+(v.id||0)*0x3a1f)|0;}
+  equalsVal(a,b){
+    if(a===b)return true;if(a===null||b===null)return false;
+    if(isStr(a)||isStr(b))return isStr(a)&&isStr(b)&&S(a)===S(b);
+    if(typeof a==='number')return typeof b==='number'&&a===b;
+    if(a instanceof Dbl)return b instanceof Dbl&&(a.v===b.v||Number.isNaN(a.v)&&Number.isNaN(b.v));
+    if(a instanceof Lng)return b instanceof Lng&&a.v===b.v;
+    if(a instanceof Chr)return b instanceof Chr&&a.c===b.c;
+    if(typeof a==='boolean')return a===b;
+    if(a.kind==='obj'&&a.ci){const ms=this.findMethods(a.ci,'equals').filter(c=>c.m.params.length===1&&!c.m.abs);
+      if(ms.length)return this.invoke(ms[0].m,ms[0].rc,a,[b],null)===true;
+      if(a.ci.ast.kind==='record'&&b&&b.kind==='obj'&&b.ci===a.ci)return a.ci.ast.rec.every(p=>this.equalsVal(a.f[p.name],b.f[p.name]));return false;}
+    if(a.kind==='list')return b&&b.kind==='list'&&a.a.length===b.a.length&&a.a.every((x,i)=>this.equalsVal(x,b.a[i]));
+    if(a.kind==='set')return b&&b.kind==='set'&&a.e.length===b.e.length&&a.e.every(x=>b.e.some(y=>this.equalsVal(x,y)));
+    if(a.kind==='map')return b&&b.kind==='map'&&a.e.length===b.e.length&&a.e.every(([k,v])=>b.e.some(([k2,v2])=>this.equalsVal(k,k2)&&this.equalsVal(v,v2)));
+    if(a.kind==='entry')return b&&b.kind==='entry'&&this.equalsVal(a.k,b.k)&&this.equalsVal(a.v,b.v);
+    return false;}
+  compareVals(a,b){ // natural ordering
+    if(a===null||b===null)this.npe('Cannot compare null');
+    if(isStr(a)&&isStr(b)){const x=S(a),y=S(b);const n=Math.min(x.length,y.length);for(let i=0;i<n;i++){if(x.charCodeAt(i)!==y.charCodeAt(i))return x.charCodeAt(i)-y.charCodeAt(i);}return x.length-y.length;}
+    if(isNumV(a)&&isNumV(b)){const x=this.numD(a),y=this.numD(b);return x<y?-1:x>y?1:0;}
+    if(typeof a==='boolean')return a===b?0:a?1:-1;
+    if(a.kind==='obj'&&a.ci){if(a.ci.isEnum&&b.ci===a.ci)return a.f.__ord-b.f.__ord;
+      const ms=this.findMethods(a.ci,'compareTo').filter(c=>c.m.params.length===1&&!c.m.abs);
+      if(ms.length)return this.invoke(ms[0].m,ms[0].rc,a,[b],null);
+      this.throwJ('ClassCastException','class '+a.ci.name+' cannot be cast to class java.lang.Comparable');}
+    this.throwJ('ClassCastException','class '+this.className(a)+' cannot be cast to class java.lang.Comparable');}
+  numD(v){return typeof v==='number'?v:v instanceof Dbl?v.v:v instanceof Lng?Number(v.v):v.c;}
+  /* ---------- hash ordering for HashMap/HashSet ---------- */
+  spread(h){return (h^(h>>>16));}
+  orderBy(items,keyf,cap,kind){
+    if(kind==='Linked')return items.slice();
+    if(kind==='Tree')return items.slice().sort((a,b)=>this.compareVals(keyf(a),keyf(b)));
+    const idx=items.map((it,i)=>({it,i,b:(this.spread(this.hashOf(keyf(it)))&(cap-1))>>>0}));
+    idx.sort((x,y)=>x.b-y.b||x.i-y.i);return idx.map(x=>x.it);}
+  mapKind(t){return /^Linked/.test(t)?'Linked':/^Tree/.test(t)?'Tree':'Hash';}
+  mapOrder(m){return this.orderBy(m.e,e=>e[0],m.cap,this.mapKind(m.t));}
+  setOrder(s){return this.orderBy(s.e,e=>e,s.cap,this.mapKind(s.t));}
+  grow(c){let n=c.e.length;while(n>c.cap*0.75)c.cap*=2;}
+  mapFind(m,k){for(let i=0;i<m.e.length;i++)if(this.equalsVal(m.e[i][0],k))return i;return -1;}
+  setFind(s,k){for(let i=0;i<s.e.length;i++)if(this.equalsVal(s.e[i],k))return i;return -1;}
+  /* ---------- allocation ---------- */
+  mk(kind,props){const o=Object.assign({id:this.nid++,kind},props);return o;}
+  newList(a,t){return this.mk('list',{a:a||[],t:t||'ArrayList',mod:0});}
+  newArr(et,a){return this.mk('arr',{et,a});}
+  newStr(s){return new StrObj(s);}
+}
+/* ===== JV runtime part 3: snapshots, scopes, operators, expressions ===== */
+const BRK={b:1}, CNT={c:1};
+Object.assign(Interp.prototype,{
+  /* ---------- display ---------- */
+  sh(v,lim){let s;this.safe=(this.safe||0)+1;try{if(isStr(v))s='"'+S(v)+'"';else if(v instanceof Chr)s="'"+String.fromCharCode(v.c)+"'";else if(v===UNSET)s='?';else s=this.jstr(v);}finally{this.safe--;}lim=lim||48;return s.length>lim?s.slice(0,lim-1)+'…':s;},
+  desc(v,reg){
+    if(v===UNSET)return {p:'?',u:1};
+    if(v===null)return {p:'null',nl:1};
+    if(typeof v==='number')return {p:String(v),k:'i'};
+    if(typeof v==='boolean')return {p:v?'true':'false',k:'b'};
+    if(v instanceof Dbl)return {p:v.f?fmtF(v.v):fmtD(v.v),k:'d'};
+    if(v instanceof Lng)return {p:v.v.toString()+'L',k:'i'};
+    if(v instanceof Chr)return {p:"'"+(v.c<32?'\\u'+v.c.toString(16).padStart(4,'0'):String.fromCharCode(v.c))+"'",k:'c'};
+    if(isStr(v)){const s=S(v);return {p:'"'+(s.length>26?s.slice(0,25)+'…':s)+'"',k:'s'};}
+    if(v.kind==='sb'||v.kind==='obj'||v.kind==='arr'||v.kind==='list'||v.kind==='map'||v.kind==='set'||v.kind==='fn'||v.kind==='entry'||v.kind==='opt'){reg.set(v.id,v);return {r:v.id};}
+    return {p:'…'};},
+  cellsOf(fr){const out=[];if(fr.self)out.push({n:'this',t:fr.self.ci?fr.self.ci.name:this.className(fr.self),v:fr.self});
+    const seen=new Set();for(let i=0;i<fr.scopes.length;i++)fr.scopes[i].forEach((c,k)=>{if(!c.hide)out.push(c);});return out;},
+  snapshot(line,note,kind){
+    this.quiet=(this.quiet||0)+1;try{return this.snapshot0(line,note,kind);}finally{this.quiet--;}},
+  snapshot0(line,note,kind){
+    const reg=new Map();
+    const frames=this.stack.map((fr,i)=>({fn:fr.name,line:fr.line,vars:this.cellsOf(fr).map(c=>Object.assign({n:c.n,t:c.t||''},this.desc(c.v,reg)))}));
+    const statics=[];this.rcs.forEach(rc=>{if(rc.inited&&rc.statics.size){const vs=[];rc.statics.forEach(c=>{if(rc.isEnum&&c.enumConst)return;vs.push(Object.assign({n:c.n,t:c.t||''},this.desc(c.v,reg)));});if(vs.length)statics.push({cls:rc.name,vars:vs});}});
+    // heap closure
+    const heap=[];const done=new Set();const queue=[...reg.values()];
+    while(queue.length){const o=queue.shift();if(done.has(o.id))continue;done.add(o.id);heap.push(this.heapItem(o,reg,queue));}
+    heap.sort((a,b)=>a.id-b.id);
+    return {line,note,kind:kind||'step',frames,statics,heap,out:this.out,err:this.errOut};},
+  heapItem(o,reg,queue){
+    const sub=(v)=>{const before=reg.size;const d=this.desc(v,reg);if(d.r!==undefined)queue.push(reg.get(d.r));return d;};
+    const LIM=24;
+    switch(o.kind){
+      case 'obj':{
+        if(o.exc&&!o.ci){return {id:o.id,k:'obj',t:o.cname,f:[['message',sub(o.msg===null?null:o.msg)]],exc:1};}
+        const f=[];const names=Object.keys(o.f).filter(k=>!k.startsWith('__'));
+        names.forEach(k=>f.push([k,sub(o.f[k])]));
+        const it={id:o.id,k:'obj',t:o.ci.name,f};if(o.ci.isEnum){it.en=o.f.__name;}if(o.ci.ast.kind==='record')it.rec=1;if(o.exc||this.objIsa(o,'Throwable'))it.exc=1;return it;}
+      case 'arr':return {id:o.id,k:'arr',t:o.et+'[]',items:o.a.slice(0,LIM).map(sub),more:Math.max(0,o.a.length-LIM),n:o.a.length};
+      case 'list':return {id:o.id,k:'list',t:o.t,items:o.a.slice(0,LIM).map(sub),more:Math.max(0,o.a.length-LIM),n:o.a.length};
+      case 'set':{const ord=this.setOrder(o);return {id:o.id,k:'set',t:o.t,items:ord.slice(0,LIM).map(sub),more:Math.max(0,ord.length-LIM),n:ord.length};}
+      case 'map':{const ord=this.mapOrder(o);return {id:o.id,k:'map',t:o.t,entries:ord.slice(0,LIM).map(e=>[sub(e[0]),sub(e[1])]),more:Math.max(0,ord.length-LIM),n:ord.length};}
+      case 'sb':return {id:o.id,k:'sb',t:'StringBuilder',text:o.s};
+      case 'fn':return {id:o.id,k:'fn',t:'лямбда'};
+      case 'entry':return {id:o.id,k:'entry',t:'Entry',f:[['key',sub(o.k)],['value',sub(o.v)]]};
+      case 'opt':return {id:o.id,k:'opt',t:'Optional',f:[['value',sub(o.v)]]};
+    }
+    return {id:o.id,k:'obj',t:'?',f:[]};},
+  emit(line,note,kind){
+    if(this.quiet>0)return;
+    if(this.fr)this.fr.line=line;
+    if(this.steps.length>=MAXSTEPS){this.skipped=(this.skipped||0)+1;return;}
+    this.steps.push(this.snapshot(line,note,kind));},
+  tick(){if(++this.instr>MAXINSTR)throw new StopEx('loop');},
+  /* ---------- frames & scopes ---------- */
+  pushFrame(name,rc,self,line){
+    if(this.stack.length>=MAXDEPTH){this.throwJ('StackOverflowError',null);}
+    const fr={name,rc,self,scopes:[new Map()],line:line||0};this.stack.push(fr);this.fr=fr;return fr;},
+  popFrame(){this.stack.pop();this.fr=this.stack[this.stack.length-1]||null;},
+  pushScope(){this.fr.scopes.push(new Map());},
+  popScope(){this.fr.scopes.pop();},
+  declare(name,ty,v){const sc=this.fr.scopes[this.fr.scopes.length-1];const c={n:name,t:ty,v};sc.set(name,c);return c;},
+  findCell(name){const sc=this.fr.scopes;for(let i=sc.length-1;i>=0;i--){const c=sc[i].get(name);if(c)return c;}
+    const ot=this.fr.outer;if(ot)for(let i=ot.length-1;i>=0;i--){const c=ot[i].get(name);if(c)return c;}return null;},
+  staticCell(rc,name){let r=rc;while(r){this.ensureInit(r);const c=r.statics.get(name);if(c)return c;
+      for(const i of r.ifaces||[]){const ir=this.rcs.get(i);if(ir){const c2=this.staticCell(ir,name);if(c2)return c2;}}
+      if(!r.sup&&r.outer&&!r.isEnum){}
+      r=r.sup;}
+    // outer classes
+    let o=rc&&rc.outer?this.rcs.get(rc.outer):null;let g=0;while(o&&g++<10){this.ensureInit(o);const c=o.statics.get(name);if(c)return c;o=o.outer?this.rcs.get(o.outer):null;}
+    return null;},
+  resolve(name){ // -> {c} | {o,n} | null
+    const c=this.findCell(name);if(c)return {c};
+    const self=this.fr.self;
+    if(self&&self.kind==='obj'&&Object.prototype.hasOwnProperty.call(self.f,name))return {o:self,n:name};
+    if(self&&self.encl){let e=self.encl,g=0;while(e&&g++<5){if(Object.prototype.hasOwnProperty.call(e.f,name))return {o:e,n:name};e=e.encl;}}
+    const sc=this.staticCell(this.fr.rc,name);if(sc)return {c:sc};
+    return null;},
+  ensureInit(rc){
+    if(rc.inited)return;rc.inited=true;
+    if(rc.sup)this.ensureInit(rc.sup);
+    const ast=rc.ast;
+    ast.fields.filter(f=>f.static).forEach(f=>rc.statics.set(f.name,{n:f.name,t:f.ty,v:this.defaultOf(f.ty)}));
+    const fr=this.pushFrame('static '+rc.name,rc,null,ast.line);
+    try{
+      if(rc.isEnum){ast.consts.forEach((cst,i)=>{const args=cst.args.map(a=>this.ev(a));const o=this.mk('obj',{ci:rc,f:{__name:cst.name,__ord:i}});
+          this.allocFields(rc,o);rc.statics.set(cst.name,{n:cst.name,t:rc.name,v:o,enumConst:true});rc.enumVals.push(o);this.runCtor(rc,o,args,cst.line);});}
+      ast.fields.filter(f=>f.static&&f.init).forEach(f=>{rc.statics.get(f.name).v=this.coerce(f.ty,this.evInit(f.init,f.ty));});
+      ast.sinit.forEach(b=>this.exec(b));
+    }finally{this.popFrame();}},
+  evInit(n,ty){if(n.k==='ArrInit')return this.arrInit(n,ty.replace(/\[\]$/,''));return this.ev(n);},
+  arrInit(n,et){const a=n.el.map(e=>e.k==='ArrInit'?this.arrInit(e,et.replace(/\[\]$/,'')):this.coerce(et,this.ev(e)));return this.newArr(et,a);},
+  allocFields(rc,o){const chain=[];let r=rc;while(r){chain.unshift(r);r=r.sup;}
+    chain.forEach(r=>{r.ast.fields.filter(f=>!f.static).forEach(f=>{o.f[f.name]=this.defaultOf(f.ty);});if(r.ast.kind==='record')r.ast.rec.forEach(p=>{o.f[p.name]=this.defaultOf(p.ty);});});},
+  /* ---------- operators ---------- */
+  kindRank(v,line){if(typeof v==='number'||v instanceof Chr)return 0;if(v instanceof Lng)return 1;if(v instanceof Dbl)return 2;return -1;},
+  binop(op,a,b){
+    if(op==='+'&&(isStr(a)||isStr(b)))return new StrObj(this.jstr(a)+this.jstr(b));
+    if(typeof a==='boolean'&&typeof b==='boolean'){switch(op){case '&':return a&&b;case '|':return a||b;case '^':return a!==b;}}
+    const ra=this.kindRank(a),rb=this.kindRank(b);
+    if(ra<0||rb<0){if(a===null||b===null)this.npe('Cannot unbox a null value');this.unsup('Операція «'+op+'» для цих типів не підтримується');}
+    const r=Math.max(ra,rb);
+    if(r===0){const x=a instanceof Chr?a.c:a,y=b instanceof Chr?b.c:b;
+      switch(op){
+        case '+':return (x+y)|0;case '-':return (x-y)|0;case '*':return Math.imul(x,y);
+        case '/':if(y===0)this.throwJ('ArithmeticException','/ by zero');return (x/y)|0;
+        case '%':if(y===0)this.throwJ('ArithmeticException','/ by zero');return (x%y)|0;
+        case '<':return x<y;case '>':return x>y;case '<=':return x<=y;case '>=':return x>=y;
+        case '&':return x&y;case '|':return x|y;case '^':return x^y;
+        case '<<':return x<<(y&31);case '>>':return x>>(y&31);case '>>>':return (x>>>(y&31))|0;}}
+    if(r===1){const L=v=>v instanceof Lng?v.v:BigInt(v instanceof Chr?v.c:v);const x=L(a),y=L(b);
+      if(op==='<<'||op==='>>'||op==='>>>'){const sh=BigInt(Number(y)&63);if(ra===0&&op!=='x'){const xx=a instanceof Chr?a.c:a;const s=Number(y)&31;return op==='<<'?xx<<s:op==='>>'?xx>>s:(xx>>>s)|0;}
+        return new Lng(op==='<<'?x<<sh:op==='>>'?x>>sh:BigInt.asUintN(64,x)>>sh);}
+      switch(op){
+        case '+':return new Lng(x+y);case '-':return new Lng(x-y);case '*':return new Lng(x*y);
+        case '/':if(y===0n)this.throwJ('ArithmeticException','/ by zero');return new Lng(x/y);
+        case '%':if(y===0n)this.throwJ('ArithmeticException','/ by zero');return new Lng(x%y);
+        case '<':return x<y;case '>':return x>y;case '<=':return x<=y;case '>=':return x>=y;
+        case '&':return new Lng(x&y);case '|':return new Lng(x|y);case '^':return new Lng(x^y);}}
+    const x=this.numD(a),y=this.numD(b);const fl=(!(a instanceof Dbl)||a.f)&&(!(b instanceof Dbl)||b.f);
+    switch(op){case '+':return new Dbl(x+y,fl);case '-':return new Dbl(x-y,fl);case '*':return new Dbl(x*y,fl);case '/':return new Dbl(x/y,fl);case '%':return new Dbl(x%y,fl);
+      case '<':return x<y;case '>':return x>y;case '<=':return x<=y;case '>=':return x>=y;}
+    this.unsup('Операція «'+op+'» для дробових чисел не підтримується');},
+  eqOp(a,b,ln,rn){
+    if(isNumV(a)&&isNumV(b)){
+      if(a instanceof Lng||b instanceof Lng){if(!(a instanceof Dbl||b instanceof Dbl)){const L=v=>v instanceof Lng?v.v:BigInt(v instanceof Chr?v.c:v);return L(a)===L(b);}}
+      const same=this.numD(a)===this.numD(b);
+      // boxed Integer cache trap
+      if(same&&ln&&rn&&ln.k==='Name'&&rn.k==='Name'){const c1=this.findCell(ln.name),c2=this.findCell(rn.name);
+        if(c1&&c2&&['Integer','Long','Short','Byte'].includes(c1.t)&&c1.t===c2.t){const x=this.numD(a);if(x<-128||x>127)return false;}}
+      return same;}
+    if(typeof a==='string'&&typeof b==='string')return a===b;
+    return a===b;},
+  /* ---------- lvalues ---------- */
+  lval(n){
+    if(n.k==='Name'){const r=this.resolve(n.name);if(!r)this.unsup('Змінну «'+n.name+'» не знайдено',n.line);
+      if(r.c)return {get:()=>r.c.v,set:v=>{r.c.v=this.coerce(r.c.t,v);},ty:r.c.t,nm:n.name};
+      return {get:()=>r.o.f[r.n],set:v=>{r.o.f[r.n]=this.coerceField(r.o,r.n,v);},ty:this.fieldType(r.o,r.n),nm:'this.'+n.name};}
+    if(n.k==='Field'){
+      let cls=this.asClassName(n.o);
+      if(cls!==null){const rc=this.rcs.get(cls);if(!rc)this.unsup('Поле '+cls+'.'+n.name+' не підтримується');const c=this.staticCell(rc,n.name);if(!c)this.unsup('Статичне поле «'+n.name+'» не знайдено');
+        return {get:()=>c.v,set:v=>{c.v=this.coerce(c.t,v);},ty:c.t,nm:cls+'.'+n.name};}
+      const o=this.ev(n.o);if(o===null)this.npe('Cannot assign field "'+n.name+'" because "'+(n.o.src||'?')+'" is null');
+      if(o.kind==='obj')return {get:()=>o.f[n.name],set:v=>{o.f[n.name]=this.coerceField(o,n.name,v);},ty:this.fieldType(o,n.name),nm:(n.o.src||'obj')+'.'+n.name};
+      this.unsup('Поле «'+n.name+'» недоступне для запису');}
+    if(n.k==='Index'){
+      const a=this.ev(n.a);const i=this.ev(n.i);
+      if(a===null)this.npe('Cannot store to array because "'+(n.a.src||'?')+'" is null');
+      const ix=i instanceof Chr?i.c:i;
+      const chk=()=>{if(ix<0||ix>=a.a.length)this.throwJ('ArrayIndexOutOfBoundsException','Index '+ix+' out of bounds for length '+a.a.length);};
+      return {get:()=>{chk();return a.a[ix];},set:v=>{chk();a.a[ix]=this.coerce(a.et,v);},ty:a.et,nm:(n.a.src||'arr')+'['+ix+']',arr:a,ix};}
+    this.unsup('Некоректна ліва частина присвоєння');},
+  fieldType(o,name){let r=o.ci;while(r){const f=r.ast.fields.find(f=>f.name===name&&!f.static);if(f)return f.ty;if(r.ast.kind==='record'){const p=r.ast.rec.find(p=>p.name===name);if(p)return p.ty;}r=r.sup;}return '';},
+  coerceField(o,name,v){return this.coerce(this.fieldType(o,name),v);},
+  asClassName(n){ // returns class-name string if node denotes a type (not a variable)
+    if(n.k==='Name'){if(this.resolve(n.name))return null;return n.name;}
+    if(n.k==='Field'){const base=this.asClassName(n.o);if(base!==null&&/^[A-Z]/.test(n.name)&&(this.rcs.has(n.name)||base==='java'||/^[a-z]/.test(base)))return n.name;
+      if(n.o.k==='Name'&&/^[a-z]/.test(n.o.name)&&!this.resolve(n.o.name)&&/^[A-Z]/.test(n.name))return n.name;}
+    return null;},
+  /* ---------- expression evaluation ---------- */
+  ev(n){
+    this.tick();
+    switch(n.k){
+      case 'Lit':{switch(n.ty){
+          case 'int':{const x=Number(n.raw);return x|0;}
+          case 'long':return new Lng(BigInt(n.raw));
+          case 'double':return new Dbl(Number(n.raw));
+          case 'float':return new Dbl(Number(n.raw),true);
+          case 'char':return new Chr(n.raw.charCodeAt(0));
+          default:return n.raw;}}
+      case 'Paren':return this.ev(n.e);
+      case 'Name':{const r=this.resolve(n.name);if(!r){this.unsup('Змінну «'+n.name+'» не знайдено. Перевір, чи вона оголошена вище в цьому ж блоці та чи правильно написана назва (Java розрізняє великі й малі літери).',n.line);}
+        const v=r.c?r.c.v:r.o.f[r.n];if(v===UNSET)this.unsup('Змінна «'+n.name+'» ще не отримала значення',n.line);return v;}
+      case 'This':return this.fr.self;
+      case 'Field':return this.evField(n);
+      case 'Index':{const a=this.ev(n.a);const i=this.ev(n.i);if(a===null)this.npe('Cannot load from '+'array because "'+(n.a.src||'?')+'" is null');
+        const ix=i instanceof Chr?i.c:i;if(ix<0||ix>=a.a.length)this.throwJ('ArrayIndexOutOfBoundsException','Index '+ix+' out of bounds for length '+a.a.length);return a.a[ix];}
+      case 'Call':return this.evCall(n);
+      case 'New':return this.evNew(n);
+      case 'NewArr':return this.evNewArr(n);
+      case 'ArrInit':return this.arrInit(n,'Object');
+      case 'Assign':return this.evAssign(n);
+      case 'Inc':{const lv=this.lval(n.e);const old=lv.get();let nv;
+          if(old instanceof Chr)nv=new Chr(old.c+(n.op==='++'?1:-1));else if(old instanceof Dbl)nv=new Dbl(old.v+(n.op==='++'?1:-1),old.f);else if(old instanceof Lng)nv=new Lng(old.v+(n.op==='++'?1n:-1n));else{if(old===null)this.npe('Cannot unbox null');nv=(old+(n.op==='++'?1:-1))|0;
+            if(lv.ty==='byte')nv=(nv<<24)>>24;if(lv.ty==='short')nv=(nv<<16)>>16;}
+          lv.set(nv);this.hint='«'+lv.nm+'» '+(n.op==='++'?'збільшується':'зменшується')+' на 1: '+this.sh(old)+' → '+this.sh(nv);
+          return n.pre?nv:old;}
+      case 'Cond':return this.ev(n.c)===true?this.ev(n.a):this.ev(n.b);
+      case 'Un':{const v=this.ev(n.e);switch(n.op){
+          case '!':return !v;
+          case '-':if(typeof v==='number')return (-v)|0;if(v instanceof Chr)return -v.c;if(v instanceof Lng)return new Lng(-v.v);if(v instanceof Dbl)return new Dbl(-v.v,v.f);break;
+          case '+':return v instanceof Chr?v.c:v;
+          case '~':return typeof v==='number'?~v:v instanceof Lng?new Lng(~v.v):~v.c;}
+          this.unsup('Некоректна унарна операція');}
+      case 'Bin':{
+        if(n.op==='&&'){return this.ev(n.l)===true?this.ev(n.r)===true:false;}
+        if(n.op==='||'){return this.ev(n.l)===true?true:this.ev(n.r)===true;}
+        const a=this.ev(n.l),b=this.ev(n.r);
+        if(n.op==='=='||n.op==='!='){const e=this.eqOp(a,b,n.l,n.r);return n.op==='=='?e:!e;}
+        if(n.op==='+'&&(isStr(a)||isStr(b))){const r=this.jstr(a)+this.jstr(b);const lit=x=>x.k==='Lit'||x.k==='Paren'&&x.e.k==='Lit';return (lit(n.l)&&lit(n.r))?r:new StrObj(r);}
+        return this.binop(n.op,a,b);}
+      case 'InstOf':{const v=this.ev(n.e);const r=this.isa(v,n.ty);if(r&&n.bind)this.declare(n.bind,n.ty,v);return r;}
+      case 'Cast':return this.castTo(n.ty,this.ev(n.e),n.line);
+      case 'Lambda':return this.mk('fn',{ps:n.ps,body:n.body,scopes:this.fr.scopes.slice(),self:this.fr.self,rc:this.fr.rc,src:n.src});
+      case 'MRef':return this.evMRef(n);
+      case 'SwitchE':return this.evSwitch(n,true);
+      case 'CtorCall':this.unsup('this(...)/super(...) можна викликати тільки першим рядком конструктора',n.line);
+      case 'Super':return this.fr.self;
+    }
+    this.unsup('Вираз типу '+n.k+' не підтримується',n.line);},
+  ctl(r,n){if(!r)return null;if(r.b){return (!r.l||r.l===n.label)?'b':'r';}if(r.c){return (!r.l||r.l===n.label)?'c':'r';}return 'r';},
+  evField(n){
+    const cls=this.asClassName(n.o);
+    if(cls!==null){return this.staticField(cls,n.name,n);}
+    const o=this.ev(n.o);
+    if(o===null)this.npe('Cannot read field "'+n.name+'" because "'+(n.o.src||'?')+'" is null');
+    if(n.name==='length'&&o.kind==='arr')return o.a.length;
+    if(o.kind==='obj'&&Object.prototype.hasOwnProperty.call(o.f,n.name))return o.f[n.name];
+    if(o.kind==='obj'&&o.ci){const c=this.staticCell(o.ci,n.name);if(c)return c.v;}
+    this.unsup('Поле «'+n.name+'» не знайдено',n.line);},
+  staticField(cls,name,n){
+    const rc=this.rcs.get(cls);
+    if(rc){const c=this.staticCell(rc,name);if(c)return c.v;
+      if(name==='length')return 0;this.unsup('Статичне поле «'+cls+'.'+name+'» не знайдено',n&&n.line);}
+    switch(cls+'.'+name){
+      case 'Integer.MAX_VALUE':return 2147483647;case 'Integer.MIN_VALUE':return -2147483648;
+      case 'Long.MAX_VALUE':return new Lng(9223372036854775807n);case 'Long.MIN_VALUE':return new Lng(-9223372036854775808n);
+      case 'Double.MAX_VALUE':return new Dbl(Number.MAX_VALUE);case 'Double.MIN_VALUE':return new Dbl(5e-324);
+      case 'Double.POSITIVE_INFINITY':return new Dbl(Infinity);case 'Double.NEGATIVE_INFINITY':return new Dbl(-Infinity);case 'Double.NaN':return new Dbl(NaN);
+      case 'Math.PI':return new Dbl(Math.PI);case 'Math.E':return new Dbl(Math.E);
+      case 'Short.MAX_VALUE':return 32767;case 'Short.MIN_VALUE':return -32768;case 'Byte.MAX_VALUE':return 127;case 'Byte.MIN_VALUE':return -128;
+      case 'Character.MAX_VALUE':return new Chr(65535);case 'Character.MIN_VALUE':return new Chr(0);
+      case 'System.in':return this.mk('obj',{ci:null,cname:'InputStream',f:{}});
+      case 'System.out':case 'System.err':return {kind:'out',err:name==='err'};
+      case 'String.CASE_INSENSITIVE_ORDER':return this.mk('fn',{native:(x)=>this.compareVals(S(x[0]).toLowerCase(),S(x[1]).toLowerCase())});
+      case 'Boolean.TRUE':return true;case 'Boolean.FALSE':return false;
+    }
+    this.unsup('Невідоме поле «'+cls+'.'+name+'»',n&&n.line);},
+  evAssign(n){
+    const lv=this.lval(n.l);let v;
+    if(n.op==='='){v=n.r.k==='ArrInit'?this.arrInit(n.r,(lv.ty||'Object').replace(/\[\]$/,'')):this.ev(n.r);
+      const old=lv.get();lv.set(v);const nv=lv.get();
+      if(lv.arr)this.hint='Записуємо '+this.sh(nv)+' в елемент '+lv.nm+(old!==undefined?' (було '+this.sh(old)+')':'');
+      else this.hint='«'+lv.nm+'» тепер дорівнює '+this.sh(nv)+(old!==undefined&&old!==UNSET?' (було '+this.sh(old)+')':'');
+      return nv;}
+    const old=lv.get();const r=this.ev(n.r);const op=n.op.slice(0,-1);
+    let res=this.binop(op,old,r);
+    if(!isStr(res)){ // implicit narrowing to the variable's type
+      if(old instanceof Chr)res=this.castTo('char',res);else if(typeof old==='number'&&!(res instanceof Dbl||res instanceof Lng)){}else if(typeof old==='number')res=this.castTo(lv.ty==='byte'?'byte':lv.ty==='short'?'short':'int',res);
+      else if(old instanceof Lng&&res instanceof Dbl)res=this.castTo('long',res);else if(old instanceof Dbl&&old.f&&res instanceof Dbl&&!res.f)res=new Dbl(res.v,true);}
+    lv.set(res);this.hint='«'+lv.nm+'» '+n.op+' '+this.sh(r)+': було '+this.sh(old)+', стало '+this.sh(lv.get());return lv.get();},
+  evNewArr(n){
+    const mk=(dims,i)=>{const len=this.ev(dims[i]);if(len<0)this.throwJ('NegativeArraySizeException',String(len));
+      const et=n.et+'[]'.repeat(n.dims.length-i-1+n.extra);
+      if(i===dims.length-1){return this.newArr(et,Array.from({length:len},()=>this.defaultOf(et)));}
+      return this.newArr(et,Array.from({length:len},()=>mk(dims,i+1)));};
+    if(n.init)return this.arrInit(n.init,n.et+'[]'.repeat(n.extra-1));
+    return mk(n.dims,0);},
+  evMRef(n){
+    const nm=n.name;const fn=this.mk('fn',{native:null,src:n.src});
+    const cls=n.o.k==='Name'||n.o.k==='Field'?this.asClassName(n.o):null;
+    if(cls!==null&&n.o.k!=='This'){
+      if(nm==='new'){fn.native=(args)=>/\[\]$/.test(cls)?this.newArr(cls.slice(0,-2),Array.from({length:args[0]},()=>this.defaultOf(cls.slice(0,-2)))):this.construct(cls,args,n);return fn;}
+      fn.native=(args)=>{
+        const rc=this.rcs.get(cls);
+        if(rc){const ms=this.findMethods(rc,nm);const st=ms.filter(c=>c.m.static);const pk=this.pickMethod(st,args);if(pk)return this.invoke(pk.m,pk.rc,null,args,n);
+          if(args.length)return this.invokeOn(args[0],nm,args.slice(1),n);}
+        const r=this.tryStatic(cls,nm,args,n);if(r!==undefined&&r!==NOSTATIC)return r;
+        if(args.length)return this.invokeOn(args[0],nm,args.slice(1),n);
+        this.unsup('Посилання на метод '+n.src+' не підтримується');};
+      return fn;}
+    if(n.o.k==='Field'&&n.o.o.k==='Name'&&n.o.o.name==='System'){fn.native=(args)=>{this.print(args.length?this.jstr(args[0]):'',nm==='println',n.o.name==='err');return undefined;};return fn;}
+    const tgt=this.ev(n.o);
+    fn.native=(args)=>this.invokeOn(tgt,nm,args,n);return fn;},
+});
+const NOSTATIC={no:1};
+/* ===== JV runtime part 4: statements and calls ===== */
+Object.assign(Interp.prototype,{
+  takeHint(def){const h=this.hint;this.hint=null;return h||def;},
+  isRef(v){return v!==null&&typeof v==='object'&&(v.kind==='obj'||v.kind==='arr'||v.kind==='list'||v.kind==='map'||v.kind==='set'||v.kind==='sb');},
+  tyName(v){return this.className(v);},
+  exec(n){
+    this.tick();
+    switch(n.k){
+      case 'Block':{this.pushScope();try{for(const st of n.st){const c=this.exec(st);if(c)return c;}}finally{this.popScope();}return undefined;}
+      case 'Empty':return undefined;
+      case 'Decl':{
+        for(const d of n.ds){
+          let v=UNSET,ty=d.ty;this.hint=null;
+          if(d.init){v=this.evInit(d.init,d.ty);if(ty==='var')ty=this.className(v);v=this.coerce(ty,v);
+            if(isStr(v)&&d.init.k!=='Lit'&&false){}}
+          if(ty==='var')ty='?';
+          this.declare(d.name,ty,v);
+          let note;
+          if(!d.init)note='Оголошуємо змінну «'+d.name+'» ('+ty+') — поки без значення';
+          else if(d.init.k==='Lit'||d.init.k==='ArrInit')note=(d.init.k==='ArrInit'?'Створюємо масив і кладемо його в':'Створюємо змінну «'+d.name+'» ('+ty+') зі значенням '+this.sh(v)+'. Це')+(d.init.k==='ArrInit'?' змінну «'+d.name+'»':' і є значення');
+          else if(this.isRef(v)&&(d.init.k==='New'||d.init.k==='NewArr'))note='Виконується '+d.init.src+': у купі (heap) створено об’єкт, а змінна «'+d.name+'» зберігає посилання на нього';
+          else note='Обчислюємо '+(d.init.src||'вираз')+' = '+this.sh(v)+' і кладемо в нову змінну «'+d.name+'» ('+ty+')';
+          if(note.endsWith('. Це і є значення'))note=note.slice(0,-'. Це і є значення'.length);
+          this.hint=null;this.emit(d.line,note);}
+        return undefined;}
+      case 'ExprS':{
+        this.hint=null;const e=n.e;
+        let userCall=this.callCount;this.callCount=0;
+        const v=this.ev(e);
+        let h=this.takeHint(null);
+        if(!h&&e.k==='Call'&&!this.lastWasUser){h='Викликаємо '+(e.src||'метод')+(v!==undefined&&v!==null?' → '+this.sh(v):'');}
+        if(h||e.k!=='Call'||!this.lastWasUser)this.emit(n.line,h||('Виконуємо '+(e.src||'вираз')));
+        this.lastWasUser=false;return undefined;}
+      case 'If':{
+        const c=this.ev(n.c);this.hint=null;
+        this.emit(n.line,'Перевіряємо умову '+this.condSrc(n.c)+': '+(c?'true → виконуємо блок if':(n.b?'false → переходимо до else':'false → пропускаємо блок if')));
+        if(c===true)return this.exec(n.a);if(n.b)return this.exec(n.b);return undefined;}
+      case 'While':{let it=0;
+        for(;;){const c=this.ev(n.c);it++;this.hint=null;
+          this.emit(n.line,'Умова '+this.condSrc(n.c)+': '+(c?'true → виконуємо тіло циклу (ітерація '+it+')':'false → виходимо з циклу'));
+          if(c!==true)break;
+          const r=this.exec(n.b);const k=this.ctl(r,n);if(k==='b')break;if(k==='c')continue;if(k==='r')return r;}
+        return undefined;}
+      case 'Do':{let it=0;
+        for(;;){it++;const r=this.exec(n.b);const k=this.ctl(r,n);if(k==='b')break;if(k==='r')return r;
+          const c=this.ev(n.c);this.hint=null;
+          this.emit(n.c.line||n.line,'Умова do-while '+this.condSrc(n.c)+': '+(c?'true → ще один раз':'false → виходимо з циклу'));
+          if(c!==true)break;}
+        return undefined;}
+      case 'For':{
+        this.pushScope();
+        try{
+          n.init.forEach(s=>{this.exec(s);});
+          let it=0;
+          for(;;){
+            let c=true;if(n.c)c=this.ev(n.c);it++;this.hint=null;
+            this.emit(n.line,n.c?('Умова '+this.condSrc(n.c)+': '+(c?'true → виконуємо тіло (ітерація '+it+')':'false → цикл завершено')):'Цикл без умови: виконуємо тіло');
+            if(c!==true)break;
+            const r=this.exec(n.b);const k=this.ctl(r,n);if(k==='b')break;if(k==='r')return r;
+            this.hint=null;n.upd.forEach(u=>{this.ev(u);});
+            if(n.upd.length)this.emit(n.line,this.takeHint('Оновлюємо лічильник: '+n.upd.map(u=>u.src).join(', ')));}
+        }finally{this.popScope();}
+        return undefined;}
+      case 'ForEach':{
+        const it=this.ev(n.it);if(it===null)this.npe('Cannot read the array length because "'+(n.it.src||'?')+'" is null');
+        let seq,list=null;
+        if(it.kind==='arr')seq=it.a.slice();
+        else if(it.kind==='list'){list=it;seq=null;}
+        else if(it.kind==='set')seq=this.setOrder(it);
+        else if(it.kind==='map')this.unsup('Map не можна обходити напряму — використайте keySet()/entrySet()');
+        else this.unsup('Цей тип не можна обійти циклом for-each');
+        let i=0,exp=list?list.mod:0,count=0;
+        for(;;){
+          if(list){if(i===list.a.length)break;if(list.mod!==exp)this.throwJ('ConcurrentModificationException',null);}
+          else if(i>=seq.length)break;
+          const v=list?list.a[i]:seq[i];i++;count++;
+          this.pushScope();
+          try{
+            this.declare(n.name,n.ty==='var'?this.className(v):n.ty,this.coerce(n.ty,v));this.hint=null;
+            this.emit(n.line,'Беремо наступний елемент ('+count+'-й): «'+n.name+'» = '+this.sh(v));
+            const r=this.exec(n.b);const k=this.ctl(r,n);if(k==='b')break;if(k==='r')return r;
+          }finally{this.popScope();}
+        }
+        this.emit(n.line,'Елементи закінчились → виходимо з циклу');
+        return undefined;}
+      case 'Switch':return this.evSwitch(n,false);
+      case 'Return':{
+        let v;if(n.e){v=this.ev(n.e);v=this.coerce(this.fr.ret,v);}
+        this.hint=null;
+        this.emit(n.line,n.e?('Метод «'+(this.fr.mname||'')+'» повертає '+this.sh(v)+' і завершується'+(this.stack.length>1?' → повертаємось у '+this.callerName():'')):'Достроково виходимо з методу'+(this.stack.length>1?' → повертаємось у '+this.callerName():''),'ret');
+        return {r:v};}
+      case 'Break':this.emit(n.line,'break'+(n.label?' '+n.label:'')+' → виходимо з циклу/switch');return n.label?{b:1,l:n.label}:BRK;
+      case 'Continue':this.emit(n.line,'continue'+(n.label?' '+n.label:'')+' → переходимо до наступної ітерації');return n.label?{c:1,l:n.label}:CNT;
+      case 'Labeled':{n.st.label=n.label;const r=this.exec(n.st);if(r&&r.b&&r.l===n.label)return undefined;return r;}
+      case 'Yield':{const v=this.ev(n.e);return {y:v};}
+      case 'Throw':{const e=this.ev(n.e);if(e===null)this.npe('Cannot throw exception because value is null');
+        this.emit(n.line,'Кидаємо виняток: '+this.excToString(e)+' — виконання метода перервано, шукаємо catch','err');
+        throw new JThrow(e);}
+      case 'Try':return this.execTry(n);
+    }
+    this.unsup('Інструкція '+n.k+' не підтримується',n.line);},
+  condSrc(c){return '('+(c.src||'…')+')';},
+  callerName(){const f=this.stack[this.stack.length-2];return f?f.name.split('(')[0]:'';},
+  execTry(n){
+    const depth=this.stack.length,sc=this.fr.scopes.length,fr0=this.fr;
+    let comp,pending=null;
+    this.pushScope();
+    const resv=[];
+    try{
+      try{
+        if(n.res)n.res.forEach(d=>{const dd=d.ds[0];const v=this.ev(dd.init);this.declare(dd.name,dd.ty,v);resv.push(v);});
+        comp=this.exec(n.body);
+        for(let i=resv.length-1;i>=0;i--){const r=resv[i];if(r&&r.kind==='obj'&&r.ci){const ms=this.findMethods(r.ci,'close');if(ms.length)this.invoke(ms[0].m,ms[0].rc,r,[],null);}}
+      }catch(e){
+        if(!(e instanceof JThrow))throw e;
+        while(this.stack.length>depth)this.popFrame();this.fr=fr0;fr0.scopes.length=sc+1;
+        const ex=e.obj;let hit=null;
+        for(const c of n.catches){if(c.tys.some(t=>this.isa(ex,t))){hit=c;break;}}
+        if(!hit)throw e;
+        fr0.scopes.length=sc;this.pushScope();
+        this.declare(hit.name,hit.tys[0],ex);
+        this.emit(hit.line,'Спіймали виняток '+this.className(ex)+(ex.msg?' ("'+ex.msg+'")':'')+' у блоці catch — програма не впала, виконуємо обробник','catch');
+        comp=this.exec(hit.body);
+      }
+    }catch(e){
+      if(e instanceof StopEx||e instanceof ExitEx)throw e;
+      if(n.fin){
+        while(this.stack.length>depth)this.popFrame();this.fr=fr0;fr0.scopes.length=sc;
+        this.emit(n.fin.line,'Блок finally виконується завжди — навіть коли був виняток','fin');
+        const fc=this.exec(n.fin);if(fc)return fc;
+      }
+      throw e;
+    }
+    fr0.scopes.length=sc;
+    if(n.fin){this.emit(n.fin.line,'Блок finally виконується завжди','fin');const fc=this.exec(n.fin);if(fc)return fc;}
+    return comp;},
+  matchLabel(v,lab){
+    if(lab.k==='Name'&&v&&v.kind==='obj'&&v.ci&&v.ci.isEnum)return v.f.__name===lab.name;
+    if(lab.k==='Field'&&v&&v.kind==='obj'&&v.ci&&v.ci.isEnum)return v.f.__name===lab.name;
+    const l=this.ev(lab);
+    if(v===null)return l===null;
+    if(isNumV(v)&&isNumV(l))return this.numD(v)===this.numD(l);
+    return this.equalsVal(v,l);},
+  evSwitch(n,isExpr){
+    const v=this.ev(n.sel);
+    if(v===null)this.npe('Cannot invoke "Object.hashCode()" because "'+(n.sel.src||'?')+'" is null');
+    let idx=-1,defIdx=-1;
+    n.cases.forEach((c,i)=>{if(idx>=0)return;if(c.isDef&&!c.labels.length)defIdx=i;else if(c.labels.some(l=>this.matchLabel(v,l)))idx=i;else if(c.isDef)defIdx=i;});
+    const hit=idx>=0?idx:defIdx;
+    if(!isExpr){this.hint=null;this.emit(n.line,'switch ('+(n.sel.src||'…')+') = '+this.sh(v)+(hit>=0?' → переходимо до '+(idx>=0?'case '+n.cases[hit].labels.map(l=>l.src||this.sh(this.ev(l))).join(', '):'default'):' → жоден case не підійшов, нічого не виконується'));}
+    if(hit<0){if(isExpr)this.throwJ('MatchException',null);return undefined;}
+    this.pushScope();
+    try{
+      if(n.arrow){const c=n.cases[hit];
+        if(c.ex){const val=this.ev(c.ex);if(isExpr)return val;this.hint=null;return undefined;}
+        const r=this.exec(c.blk);if(isExpr){if(r&&r.y!==undefined)return r.y;if(r&&r.r!==undefined)return r;return undefined;}
+        if(r&&r.b&&!r.l)return undefined;return r;}
+      for(let i=hit;i<n.cases.length;i++){
+        for(const st of n.cases[i].body){const r=this.exec(st);
+          if(r&&r.b&&!r.l)return undefined;
+          if(r){if(isExpr&&r.y!==undefined)return r.y;return r;}}}
+      return undefined;
+    }finally{this.popScope();}},
+  /* ---------- calls ---------- */
+  bindParams(m,args){
+    const ps=m.params;
+    for(let i=0;i<ps.length;i++){
+      if(m.va&&i===ps.length-1){
+        if(args.length===ps.length&&(args[i]===null||args[i].kind==='arr')){this.declare(ps[i].name,ps[i].ty,args[i]);}
+        else{const et=ps[i].ty.slice(0,-2);this.declare(ps[i].name,ps[i].ty,this.newArr(et,args.slice(i).map(a=>this.coerce(et,a))));}
+      }else this.declare(ps[i].name,ps[i].ty,this.coerce(ps[i].ty,args[i]));}},
+  invoke(m,rc,self,args,node){
+    if(!m.body)this.unsup('Метод «'+m.name+'» не має тіла (abstract/interface)',m.line);
+    const caller=this.fr;if(caller&&node&&node.line)caller.line=node.line;
+    const label=m.name+'('+args.map(a=>this.sh(a,12)).join(', ')+')';
+    const fr=this.pushFrame(label,rc,self,m.line);fr.mname=m.name;fr.ret=m.ret;if(self&&self.cap)fr.outer=self.cap;
+    try{
+      this.bindParams(m,args);
+      if(!this.noCallEmit)this.emit(m.line,'Викликаємо метод «'+m.name+'»'+(m.params.length?' з аргументами '+args.map(a=>this.sh(a,16)).join(', ')+': параметри '+m.params.map((p,i)=>p.name).join(', ')+' отримують ці значення':'')+'. У стеку з’являється новий кадр.','call');
+      const c=this.exec(m.body);
+      this.lastWasUser=true;
+      if(m.ret==='void'||!(c&&c.r!==undefined)){
+        if(m.ret==='void')this.emit(m.body.end,'Метод «'+m.name+'» завершився'+(caller?' → повертаємось у '+caller.name.split('(')[0]:''),'ret');}
+      this.callCount=(this.callCount||0)+1;
+      return c&&c.r!==undefined?this.coerce(m.ret,c.r):undefined;
+    }finally{this.popFrame();}},
+  callFn(fn,args){
+    if(fn.kind==='obj'&&fn.ci){const OB=new Set(['toString','equals','hashCode']);let pk=null;let rc=fn.ci;while(rc&&!pk){for(const [nm,ms] of rc.methods){if(OB.has(nm))continue;const c=ms.find(m=>!m.static&&m.params.length===args.length&&m.body);if(c){pk={m:c,rc};break;}}rc=rc.sup;}
+      if(!pk)this.unsup('Не вдалося викликати об’єкт як функцію');return this.invoke(pk.m,pk.rc,fn,args,null);}
+    if(fn.native)return fn.native(args);
+    const fr=this.pushFrame('λ('+args.map(a=>this.sh(a,10)).join(', ')+')',fn.rc,fn.self,this.fr?this.fr.line:0);fr.outer=fn.scopes;
+    try{
+      fn.ps.forEach((p,i)=>this.declare(p,'',args[i]));
+      if(fn.body.k==='Block'){const c=this.exec(fn.body);return c&&c.r!==undefined?c.r:undefined;}
+      return this.ev(fn.body);
+    }finally{this.popFrame();}},
+  construct(cls,args,node){
+    const rc=this.rcs.get(cls);
+    if(rc){
+      if(rc.ast.kind==='interface'||rc.ast.abstract&&rc.ast.kind==='class'&&false)this.unsup('Не можна створити об’єкт інтерфейсу '+cls,node.line);
+      this.ensureInit(rc);
+      const o=this.mk('obj',{ci:rc,f:{}});this.allocFields(rc,o);
+      let root=rc;while(root.sup)root=root.sup;if(root.supName&&EXC.hasOwnProperty(root.supName)){o.exc=true;o.msg=null;o.cause=null;}
+      this.runCtor(rc,o,args,node&&node.line);return o;}
+    return this.constructBuiltin(cls,args,node);},
+  fieldInit(rc,o){
+    rc.ast.fields.filter(f=>!f.static&&f.init).forEach(f=>{o.f[f.name]=this.coerce(f.ty,this.evInit(f.init,f.ty));});
+    rc.ast.iinit.forEach(b=>this.exec(b));},
+  setExcArgs(o,args){
+    if(args.length>=1){const a=args[0];if(isStr(a)||a===null){o.msg=a===null?null:S(a);}else if(a&&a.kind==='obj'){o.cause=a;o.msg=this.excToString(a);}}
+    if(args.length>=2&&args[1]&&args[1].kind==='obj')o.cause=args[1];},
+  runCtor(rc,o,args,line){
+    const ast=rc.ast,sup=rc.sup;
+    const supBuiltin=!sup&&rc.supName&&EXC.hasOwnProperty(rc.supName);
+    let ct=null;
+    if(ast.ctors.length){ct=this.pickMethod(ast.ctors.map(c=>({m:c,rc})),args);if(!ct)this.unsup('Не знайдено конструктор '+rc.name+' для цих аргументів',line);}
+    const label='new '+rc.name+'('+args.map(a=>this.sh(a,12)).join(', ')+')';
+    const caller=this.fr;if(caller&&line)caller.line=line;
+    if(!ct){
+      if(ast.kind==='record'){
+        const fr=this.pushFrame(label,rc,o,ast.line);fr.mname=rc.name;
+        try{ast.rec.forEach((p,i)=>this.declare(p.name,p.ty,this.coerce(p.ty,args[i])));
+          if(ast.compact){this.emit(ast.line,'Запис (record): виконується компактний конструктор','call');this.exec(ast.compact);}
+          else this.emit(ast.line,'Створюємо record '+rc.name+': поля заповнюються з аргументів','call');
+          ast.rec.forEach(p=>{o.f[p.name]=this.findCell(p.name).v;});
+          this.emit(ast.line,'Об’єкт готовий','ret');
+        }finally{this.popFrame();}
+        return;}
+      if(args.length&&!supBuiltin&&!sup&&!rc.isEnum&&!ast.anon)this.unsup('Не знайдено конструктор '+rc.name+' з аргументами',line);
+      if(sup)this.runCtor(sup,o,ast.anon?args:[],line);else if(supBuiltin&&args.length)this.setExcArgs(o,args);
+      const hasInit=ast.fields.some(f=>!f.static&&f.init)||ast.iinit.length;
+      if(hasInit){const fr=this.pushFrame(label,rc,o,ast.line);fr.mname=rc.name;try{this.fieldInit(rc,o);}finally{this.popFrame();}}
+      return;}
+    const m=ct.m;
+    const fr=this.pushFrame(label,rc,o,m.line);fr.mname=rc.name;fr.ret='void';
+    try{
+      this.bindParams(m,args);
+      this.emit(m.line,'Створюємо об’єкт: викликається конструктор '+rc.name+(m.params.length?' (параметри: '+m.params.map((p,i)=>p.name+'='+this.sh(args[i],14)).join(', ')+')':'')+'.','call');
+      const sts=m.body.st;let first=sts[0];let rest=sts;
+      this.pushScope();
+      if(first&&first.k==='ExprS'&&first.e.k==='CtorCall'){
+        const cc=first.e;const a=cc.args.map(x=>this.ev(x));rest=sts.slice(1);
+        if(cc.sup){if(sup)this.runCtor(sup,o,a,first.line);else if(supBuiltin)this.setExcArgs(o,a);this.fieldInit(rc,o);}
+        else{this.runCtor(rc,o,a,first.line);}
+      }else{if(sup)this.runCtor(sup,o,[],m.line);this.fieldInit(rc,o);}
+      for(const st of rest){const c=this.exec(st);if(c&&c.r!==undefined)break;}
+      this.popScope();
+      this.emit(m.body.end,'Конструктор завершив роботу — об’єкт готовий, повертаємось у '+(caller?caller.name.split('(')[0]:'програму'),'ret');
+    }finally{this.popFrame();}},
+  evNew(n){
+    const args=n.args.map(a=>this.ev(a));
+    if(n.anon){const rc=this.rcs.get(n.cls);this.ensureInit(rc);const o=this.mk('obj',{ci:rc,f:{}});this.allocFields(rc,o);o.cap=this.fr.scopes.slice().concat(this.fr.outer||[]);o.encl=this.fr.self;this.runCtor(rc,o,args,n.line);return o;}
+    if(n.cls==='Thread'||n.cls==='Runnable')this.unsup('Потоки (Thread) візуалізатор не підтримує',n.line);
+    return this.construct(n.cls,args,n);},
+  print(text,nl,err){const t=text+(nl?'\n':'');if(err)this.errOut+=t;else this.out+=t;},
+  evCall(n){
+    const name=n.name;
+    // System.out.xxx
+    if(n.tg&&n.tg.k==='Field'&&n.tg.o.k==='Name'&&n.tg.o.name==='System'&&(n.tg.name==='out'||n.tg.name==='err')&&!this.resolve('System')){
+      const args=n.args.map(a=>this.ev(a));const err=n.tg.name==='err';
+      let text='';
+      if(name==='println'||name==='print'){if(args.length){const a=args[0];text=(a&&a.kind==='arr'&&a.et==='char')?a.a.map(c=>String.fromCharCode(c.c)).join(''):this.jstr(a);}}
+      else if(name==='printf'||name==='format'){text=this.format(S(args[0]),args.slice(1));}
+      else if(name==='flush')return undefined;
+      else this.unsup('System.out.'+name+' не підтримується',n.line);
+      this.print(text,name==='println',err);
+      const shown=text.length>60?text.slice(0,59)+'…':text;
+      this.hint=(err?'Виводимо в потік помилок: ':'Виводимо в консоль: ')+(shown===''&&name==='println'?'(порожній рядок)':shown.replace(/\n/g,'⏎'));
+      return undefined;}
+    // unqualified
+    if(!n.tg){
+      const args=n.args.map(a=>this.ev(a));
+      const self=this.fr.self;let cands=[];
+      if(self&&self.ci)cands=this.findMethods(self.ci,name);
+      let pk=this.pickMethod(cands,args);
+      if(!pk){let rc=this.fr.rc;let g=0;while(rc&&!pk&&g++<10){pk=this.pickMethod(this.findMethods(rc,name),args);if(!pk)rc=rc.outer?this.rcs.get(rc.outer):null;}}
+      if(!pk&&self&&self.encl){let e=self.encl,g=0;while(e&&!pk&&g++<5){if(e.ci){pk=this.pickMethod(this.findMethods(e.ci,name),args);if(pk)return this.invoke(pk.m,pk.rc,pk.m.static?null:e,args,n);}e=e.encl;}}
+      if(!pk&&(name==='values'||name==='valueOf')){let rc=this.fr.rc;while(rc&&!rc.isEnum)rc=rc.outer?this.rcs.get(rc.outer):null;if(rc){this.ensureInit(rc);if(name==='values')return this.newArr(rc.name,rc.enumVals.slice());const f=rc.enumVals.find(e=>e.f.__name===S(args[0]));if(!f)this.throwJ('IllegalArgumentException','No enum constant '+rc.name+'.'+S(args[0]));return f;}}
+      if(!pk&&self&&self.kind==='obj'){return this.objBuiltin(self,name,args,n);}
+      if(!pk)this.unsup('Метод «'+name+'» не знайдено',n.line);
+      return this.invoke(pk.m,pk.rc,pk.m.static?null:self,args,n);}
+    if(n.tg.k==='Super'){
+      const args=n.args.map(a=>this.ev(a));const rc=this.fr.rc;
+      let cands=[];if(rc.sup)cands=this.findMethods(rc.sup,name);
+      (rc.ifaces||[]).forEach(i=>{const r=this.rcs.get(i);if(r)cands=cands.concat(this.findMethods(r,name));});
+      const pk=this.pickMethod(cands.filter(c=>!c.m.abs),args);
+      if(pk)return this.invoke(pk.m,pk.rc,this.fr.self,args,n);
+      return this.objBuiltin(this.fr.self,name,args,n,true);}
+    // static call on class name?
+    const cls=this.asClassName(n.tg);
+    if(cls!==null){
+      const args=n.args.map(a=>this.ev(a));
+      const rc=this.rcs.get(cls);
+      if(rc){this.ensureInit(rc);
+        const pk=this.pickMethod(this.findMethods(rc,name).filter(c=>c.m.static),args);
+        if(pk)return this.invoke(pk.m,pk.rc,null,args,n);
+        if(rc.isEnum){if(name==='values')return this.newArr(cls,rc.enumVals.slice());
+          if(name==='valueOf'){const f=rc.enumVals.find(e=>e.f.__name===S(args[0]));if(!f)this.throwJ('IllegalArgumentException','No enum constant '+cls+'.'+S(args[0]));return f;}}
+        this.unsup('Статичний метод «'+cls+'.'+name+'» не знайдено',n.line);}
+      const r=this.tryStatic(cls,name,args,n);
+      if(r===NOSTATIC)this.unsup('Метод «'+cls+'.'+name+'» візуалізатор поки не знає',n.line);
+      return r;}
+    // instance call
+    const recv=this.ev(n.tg);
+    const args=n.args.map(a=>this.ev(a));
+    if(recv===null){
+      const tn=n.tg.k==='Name'&&this.findCell(n.tg.name)?this.findCell(n.tg.name).t:'Object';
+      this.npe('Cannot invoke "'+tn+'.'+name+'()" because "'+(n.tg.src||'?')+'" is null');}
+    // remove(Object) vs remove(int) for lists
+    if(recv.kind==='list'&&name==='remove'&&args.length===1&&typeof args[0]==='number'){
+      const a=n.args[0];let boxed=false;
+      if(a.k==='Call'&&a.name==='valueOf')boxed=true;
+      if(a.k==='Cast'&&/^(Integer|Object)$/.test(a.ty))boxed=true;
+      if(a.k==='Name'){const c=this.findCell(a.name);if(c&&c.t==='Integer')boxed=true;}
+      if(boxed){const i=recv.a.findIndex(x=>this.equalsVal(x,args[0]));if(i>=0){recv.a.splice(i,1);recv.mod++;}this.hint=this.hintCall(n,i>=0);return i>=0;}}
+    const res=this.invokeOn(recv,name,args,n);
+    if(!(recv.kind==='obj'&&recv.ci&&!this.lastWasBuiltin)&&this.hint===null&&recv.kind!=='fn'){this.hint=this.hintCall(n,res,args);}
+    return res;},
+  hintCall(n,res,args){return 'Викликаємо '+(n.src||n.name+'()')+(res!==undefined&&res!==null&&typeof res!=='object'||isStr(res)||res instanceof Dbl||res instanceof Lng||res instanceof Chr?' → '+this.sh(res):res!==undefined&&res!==null?' → '+this.sh(res,30):'');},
+  invokeOn(recv,name,args,n){
+    this.lastWasBuiltin=false;
+    if(recv===null)this.npe('Cannot invoke "Object.'+name+'()" because value is null');
+    if(typeof recv==='object'&&recv.kind==='obj'){
+      if(recv.ci){const pk=this.pickMethod(this.findMethods(recv.ci,name),args);
+        if(pk&&!pk.m.abs&&pk.m.body)return this.invoke(pk.m,pk.rc,pk.m.static?null:recv,args,n);
+        this.lastWasBuiltin=true;return this.objBuiltin(recv,name,args,n);}
+      this.lastWasBuiltin=true;return this.objBuiltin(recv,name,args,n);}
+    if(recv.kind==='fn'){
+      if(['andThen','compose','negate','reversed','thenComparing','and','or','thenComparingInt'].includes(name))return this.fnCombinator(recv,name,args);
+      if(name==='equals')return recv===args[0];if(name==='hashCode')return this.hashOf(recv);if(name==='toString')return this.jstr(recv);
+      return this.callFn(recv,args);}
+    this.lastWasBuiltin=true;
+    return this.builtinMethod(recv,name,args,n);},
+  objBuiltin(o,name,args,n,viaSuper){
+    switch(name){
+      case 'toString':return o.ci?(viaSuper?(o.ci.name+'@'+this.hashOf(o).toString(16)):this.jstr(o)):this.excToString(o);
+      case 'equals':return viaSuper?o===args[0]:this.equalsVal(o,args[0]);
+      case 'hashCode':return viaSuper?(0x1b6d3586+o.id*0x3a1f)|0:this.hashOf(o);
+      case 'getClass':return this.mk('obj',{ci:null,cname:'Class',f:{},of:o});
+      case 'name':if(o.ci&&o.ci.isEnum)return o.f.__name;break;
+      case 'ordinal':if(o.ci&&o.ci.isEnum)return o.f.__ord;break;
+      case 'compareTo':if(o.ci&&o.ci.isEnum)return o.f.__ord-args[0].f.__ord;break;
+      case 'getDeclaringClass':break;
+      case 'getMessage':case 'getLocalizedMessage':if(o.exc)return o.msg===undefined?null:o.msg;break;
+      case 'getCause':if(o.exc)return o.cause||null;break;
+      case 'printStackTrace':if(o.exc){this.errOut+=this.excToString(o)+'\n\tat Main.main(Main.java)\n';return undefined;}break;
+      case 'getStackTrace':if(o.exc)return this.newArr('StackTraceElement',[]);break;
+      case 'initCause':if(o.exc){o.cause=args[0];return o;}break;
+      case 'addSuppressed':if(o.exc)return undefined;break;
+      case 'getSimpleName':case 'getName':if(o.cname==='Class'){const t=o.of;const nm=this.className(t);return name==='getName'?(t.kind==='obj'&&!t.ci?this.qnameExc(t):nm):nm;}break;
+      case 'close':return undefined;
+    }
+    if(o.ci&&o.ci.ast.kind==='record'&&args.length===0&&Object.prototype.hasOwnProperty.call(o.f,name))return o.f[name];
+    this.unsup('Метод «'+name+'» не знайдено у класі '+this.className(o),n&&n.line);},
+});
+/* ===== JV runtime part 5: formatting, statics, builtin methods ===== */
+EXC.IllegalFormatConversionException='IllegalArgumentException';EXC.MatchException='RuntimeException';EXC.UnknownFormatConversionException='IllegalArgumentException';EXC.MissingFormatArgumentException='IllegalArgumentException';
+EXPKG.IllegalFormatConversionException='java.util.';EXPKG.UnknownFormatConversionException='java.util.';EXPKG.MissingFormatArgumentException='java.util.';
+function roundHalfUp(x,prec){ // x finite number -> fixed string like Java's %.nf
+  let neg=x<0||(x===0&&1/x<0);let a=Math.abs(x);let s=String(a);
+  if(s.indexOf('e')>=0){return (neg?'-':'')+a.toFixed(Math.min(prec,100));}
+  let [ip,fp]=s.split('.');fp=fp||'';
+  if(fp.length<=prec){fp=fp.padEnd(prec,'0');return (neg?'-':'')+ip+(prec?'.'+fp:'');}
+  const up=fp.charCodeAt(prec)>=53;let digits=(ip+fp.slice(0,prec)).split('').map(Number);
+  if(up){let i=digits.length-1;while(i>=0){if(digits[i]===9){digits[i]=0;i--;}else{digits[i]++;break;}}if(i<0)digits.unshift(1);}
+  const ds=digits.join('');const il=ds.length-prec;
+  const r=ds.slice(0,il)+(prec?'.'+ds.slice(il):'');
+  return (neg&&/[1-9]/.test(r)?'-':(neg?'-':''))+r;}
+function addCommas(s){const m=s.match(/^(-?)(\d+)(.*)$/);if(!m)return s;return m[1]+m[2].replace(/\B(?=(\d{3})+(?!\d))/g,',')+m[3];}
+Object.assign(Interp.prototype,{
+  format(f,args){
+    let ai=0;
+    return f.replace(/%(\d+\$)?([-#+ 0,(]*)(\d+)?(?:\.(\d+))?([a-zA-Z%])/g,(m,pos,flags,w,pr,cv)=>{
+      if(cv==='n')return '\n';if(cv==='%')return '%';
+      let a;if(pos)a=args[parseInt(pos)-1];else{if(ai>=args.length)this.throwJ('MissingFormatArgumentException',"Format specifier '"+m+"'");a=args[ai++];}
+      let r;const up=cv==='S'||cv==='X'||cv==='E'||cv==='B';const c=cv.toLowerCase();
+      switch(c){
+        case 'd':{if(a===null){r='null';break;}if(!(typeof a==='number'||a instanceof Lng))this.throwJ('IllegalFormatConversionException','d != '+this.qname(a));
+          r=(a instanceof Lng?a.v:BigInt(a)).toString();if(flags.includes('+')&&r[0]!=='-')r='+'+r;else if(flags.includes(' ')&&r[0]!=='-')r=' '+r;if(flags.includes(','))r=addCommas(r);break;}
+        case 'f':{if(a===null){r='null';break;}if(!(a instanceof Dbl))this.throwJ('IllegalFormatConversionException','f != '+this.qname(a));
+          const p=pr===undefined?6:parseInt(pr);if(!Number.isFinite(a.v))r=fmtD(a.v);else r=roundHalfUp(a.v,p);if(flags.includes('+')&&r[0]!=='-')r='+'+r;if(flags.includes(','))r=addCommas(r);break;}
+        case 'e':{const p=pr===undefined?6:parseInt(pr);r=this.numD(a).toExponential(p).replace(/e([+-])(\d)$/,'e$10$2');break;}
+        case 's':{r=this.jstr(a);if(pr!==undefined)r=r.slice(0,parseInt(pr));break;}
+        case 'c':{r=a instanceof Chr?String.fromCharCode(a.c):typeof a==='number'?String.fromCharCode(a):this.jstr(a);break;}
+        case 'b':{r=a===null?'false':typeof a==='boolean'?String(a):'true';break;}
+        case 'x':{r=(a instanceof Lng?BigInt.asUintN(64,a.v):BigInt.asUintN(32,BigInt(a))).toString(16);break;}
+        case 'o':{r=(a instanceof Lng?BigInt.asUintN(64,a.v):BigInt.asUintN(32,BigInt(a))).toString(8);break;}
+        case 'h':{r=(this.hashOf(a)>>>0).toString(16);break;}
+        default:this.throwJ('UnknownFormatConversionException',"Conversion = '"+cv+"'");}
+      if(up)r=r.toUpperCase();
+      if(w!==undefined){const W=parseInt(w);if(r.length<W){if(flags.includes('-'))r=r.padEnd(W);else if(flags.includes('0')&&'dfxXeo'.includes(cv)){const sg=/^[+-]/.test(r)?r[0]:'';r=sg+r.slice(sg.length).padStart(W-sg.length,'0');}else r=r.padStart(W);}}
+      return r;});},
+  nfe(s){this.throwJ('NumberFormatException',s===null?'Cannot parse null string: null':'For input string: "'+s+'"'+'');},
+  parseIntS(s,radix,isLong){
+    if(s===null)this.throwJ('NumberFormatException','Cannot parse null string: null');
+    const str=S(s);radix=radix||10;
+    const re=radix===10?/^[+-]?\d+$/:radix===16?/^[+-]?[0-9a-fA-F]+$/:radix===2?/^[+-]?[01]+$/:/^[+-]?[0-9a-zA-Z]+$/;
+    if(!re.test(str))this.nfe(str);
+    if(isLong){let v=BigInt(radix===10?str:parseInt(str,radix));if(radix===10){v=BigInt(str);}if(v>9223372036854775807n||v<-9223372036854775808n)this.nfe(str);return new Lng(v);}
+    const v=parseInt(str,radix);if(v>2147483647||v<-2147483648)this.throwJ('NumberFormatException','For input string: "'+str+'"'+(radix!==10?' under radix '+radix:''));return v;},
+  newOpt(v){return this.mk('opt',{v});},
+  tryStatic(cls,name,args,n){
+    const a0=args[0],a1=args[1];
+    switch(cls){
+      case 'Math':case 'StrictMath':{
+        const D=x=>this.numD(x);
+        switch(name){
+          case 'abs':return typeof a0==='number'?(a0<0?(-a0)|0:a0):a0 instanceof Lng?new Lng(a0.v<0n?-a0.v:a0.v):a0 instanceof Chr?a0.c:new Dbl(Math.abs(a0.v));
+          case 'max':case 'min':{const r=Math.max(this.kindRank(a0),this.kindRank(a1));const pick=(name==='max')?(D(a0)>=D(a1)?a0:a1):(D(a0)<=D(a1)?a0:a1);if(r===2)return new Dbl(D(pick));if(r===1)return pick instanceof Lng?pick:new Lng(D(pick));return pick instanceof Chr?pick.c:pick;}
+          case 'pow':return new Dbl(Math.pow(D(a0),D(a1)));case 'sqrt':return new Dbl(Math.sqrt(D(a0)));case 'cbrt':return new Dbl(Math.cbrt(D(a0)));
+          case 'floor':return new Dbl(Math.floor(D(a0)));case 'ceil':return new Dbl(Math.ceil(D(a0)));
+          case 'rint':{const x=D(a0);const f=Math.floor(x);const d=x-f;return new Dbl(d<0.5?f:d>0.5?f+1:(f%2===0?f:f+1));}
+          case 'round':{const x=D(a0);if(a0 instanceof Dbl)return new Lng(BigInt(Math.floor(x+0.5)));return Math.floor(x+0.5)|0;}
+          case 'random':return new Dbl(Math.random());
+          case 'floorDiv':{if(D(a1)===0)this.throwJ('ArithmeticException','/ by zero');return Math.floor(D(a0)/D(a1))|0;}
+          case 'floorMod':{if(D(a1)===0)this.throwJ('ArithmeticException','/ by zero');const m=D(a0)%D(a1);return (m!==0&&(m<0)!==(D(a1)<0))?m+D(a1):m;}
+          case 'hypot':return new Dbl(Math.hypot(D(a0),D(a1)));case 'sin':return new Dbl(Math.sin(D(a0)));case 'cos':return new Dbl(Math.cos(D(a0)));case 'tan':return new Dbl(Math.tan(D(a0)));
+          case 'log':return new Dbl(Math.log(D(a0)));case 'log10':return new Dbl(Math.log10(D(a0)));case 'exp':return new Dbl(Math.exp(D(a0)));
+          case 'signum':return new Dbl(Math.sign(D(a0)));case 'toRadians':return new Dbl(D(a0)*Math.PI/180);case 'toDegrees':return new Dbl(D(a0)*180/Math.PI);
+          case 'addExact':case 'subtractExact':case 'multiplyExact':{
+            if(a0 instanceof Lng||a1 instanceof Lng){const x=BigInt(a0 instanceof Lng?a0.v:a0),y=BigInt(a1 instanceof Lng?a1.v:a1);const r=name==='addExact'?x+y:name==='subtractExact'?x-y:x*y;if(r>9223372036854775807n||r<-9223372036854775808n)this.throwJ('ArithmeticException','long overflow');return new Lng(r);}
+            const r=name==='addExact'?a0+a1:name==='subtractExact'?a0-a1:a0*a1;if(r>2147483647||r<-2147483648)this.throwJ('ArithmeticException','integer overflow');return r;}
+          case 'toIntExact':{const v=a0.v;if(v>2147483647n||v<-2147483648n)this.throwJ('ArithmeticException','integer overflow');return Number(v);}
+        }break;}
+      case 'Integer':case 'Long':case 'Short':case 'Byte':{
+        const L=cls==='Long';
+        switch(name){
+          case 'parseInt':case 'parseLong':case 'valueOf':case 'parseShort':case 'parseByte':{if(a0!==null&&!isStr(a0)){return L?this.coerce('long',a0):a0 instanceof Chr?a0.c:a0;}return this.parseIntS(a0,a1,L);}
+          case 'toString':return a1!==undefined?(a0).toString(a1):this.jstr(a0);
+          case 'toBinaryString':return (a0>>>0).toString(2);case 'toHexString':return (a0 instanceof Lng?BigInt.asUintN(64,a0.v):a0>>>0).toString(16);case 'toOctalString':return (a0>>>0).toString(8);
+          case 'compare':return this.compareVals(a0,a1);case 'signum':return Math.sign(this.numD(a0));
+          case 'max':return this.tryStatic('Math','max',args);case 'min':return this.tryStatic('Math','min',args);case 'sum':return this.binop('+',a0,a1);
+          case 'bitCount':return (a0>>>0).toString(2).replace(/0/g,'').length;case 'abs':return this.tryStatic('Math','abs',args);
+          case 'hashCode':return this.hashOf(a0);case 'reverse':{return parseInt((a0>>>0).toString(2).padStart(32,'0').split('').reverse().join(''),2)|0;}
+        }break;}
+      case 'Double':case 'Float':
+        switch(name){
+          case 'parseDouble':case 'parseFloat':case 'valueOf':{const FL=cls==='Float';if(a0!==null&&!isStr(a0))return this.coerce('double',a0);if(a0===null)this.npe('Cannot invoke "String.trim()" because "in" is null');const s=S(a0).trim();if(!/^[+-]?(\d+\.?\d*|\.\d+)([eE][+-]?\d+)?[dDfF]?$/.test(s)&&!/^[+-]?(NaN|Infinity)$/.test(s)){this.throwJ('NumberFormatException',s===''?'empty String':'For input string: "'+S(a0)+'"');}return new Dbl(parseFloat(s),FL);}
+          case 'compare':return this.compareVals(a0,a1);case 'isNaN':return Number.isNaN(this.numD(a0));case 'isInfinite':return !Number.isFinite(this.numD(a0))&&!Number.isNaN(this.numD(a0));
+          case 'toString':return this.jstr(a0);case 'max':case 'min':return this.tryStatic('Math',name,args);case 'sum':return this.binop('+',a0,a1);
+        }break;
+      case 'Boolean':
+        switch(name){case 'parseBoolean':case 'valueOf':return typeof a0==='boolean'?a0:a0!==null&&S(a0).toLowerCase()==='true';case 'toString':return String(a0);case 'compare':return this.compareVals(a0,a1);}break;
+      case 'Character':{
+        const c=a0 instanceof Chr?a0.c:a0;const ch=typeof c==='number'?String.fromCharCode(c):'';
+        switch(name){
+          case 'isDigit':return /\p{Nd}/u.test(ch);case 'isLetter':return /\p{L}/u.test(ch);case 'isLetterOrDigit':return /[\p{L}\p{Nd}]/u.test(ch);case 'isAlphabetic':return /\p{L}/u.test(ch);
+          case 'isUpperCase':return /\p{Lu}/u.test(ch);case 'isLowerCase':return /\p{Ll}/u.test(ch);case 'isWhitespace':case 'isSpaceChar':return /\s/.test(ch);
+          case 'toUpperCase':{const r=ch.toUpperCase();const o=r.length===1?r.charCodeAt(0):c;return a0 instanceof Chr?new Chr(o):o;}
+          case 'toLowerCase':{const r=ch.toLowerCase();const o=r.length===1?r.charCodeAt(0):c;return a0 instanceof Chr?new Chr(o):o;}
+          case 'getNumericValue':{if(/[0-9]/.test(ch))return c-48;if(/[a-zA-Z]/.test(ch))return ch.toLowerCase().charCodeAt(0)-87;return -1;}
+          case 'toString':case 'valueOf':return name==='toString'?ch:new Chr(c);case 'compare':return c-(a1 instanceof Chr?a1.c:a1);case 'toChars':return this.newArr('char',[new Chr(c)]);
+          case 'digit':{const d=parseInt(ch,a1);return Number.isNaN(d)?-1:d;}case 'forDigit':return new Chr(a0<10?48+a0:87+a0);
+        }break;}
+      case 'String':
+        switch(name){
+          case 'valueOf':case 'copyValueOf':return (a0&&a0.kind==='arr'&&a0.et==='char')?a0.a.map(c=>String.fromCharCode(c.c)).join(''):this.jstr(a0);
+          case 'format':return this.format(S(a0),args.slice(1));
+          case 'join':{const items=(args.length===2&&a1&&(a1.kind==='list'||a1.kind==='set'||a1.kind==='arr'))?(a1.kind==='set'?this.setOrder(a1):a1.a):args.slice(1);return items.map(x=>this.jstr(x)).join(S(a0));}
+        }break;
+      case 'Arrays':{
+        switch(name){
+          case 'toString':return a0===null?'null':'['+a0.a.map(x=>this.jstr(x)).join(', ')+']';
+          case 'deepToString':{const f=x=>x&&x.kind==='arr'?'['+x.a.map(f).join(', ')+']':this.jstr(x);return f(a0);}
+          case 'sort':{let from=0,to=a0.a.length,cmp=null;if(args.length>=3){from=a1;to=args[2];cmp=args[3]||null;}else if(args.length===2)cmp=a1;
+            const part=a0.a.slice(from,to);this.sortArr(part,cmp);for(let i=0;i<part.length;i++)a0.a[from+i]=part[i];return undefined;}
+          case 'fill':{if(args.length===2){for(let i=0;i<a0.a.length;i++)a0.a[i]=this.coerce(a0.et,a1);}else{for(let i=a1;i<args[2];i++)a0.a[i]=this.coerce(a0.et,args[3]);}return undefined;}
+          case 'asList':{const items=(args.length===1&&a0&&a0.kind==='arr')?a0.a.slice():args.slice();const l=this.newList(items,'ArrayList');l.fixed=true;return l;}
+          case 'copyOf':{const r=a0.a.slice(0,a1);while(r.length<a1)r.push(this.defaultOf(a0.et));return this.newArr(a0.et,r);}
+          case 'copyOfRange':{const r=a0.a.slice(a1,args[2]);while(r.length<args[2]-a1)r.push(this.defaultOf(a0.et));return this.newArr(a0.et,r);}
+          case 'equals':return a0===a1||a0!==null&&a1!==null&&a0.a.length===a1.a.length&&a0.a.every((x,i)=>this.equalsVal(x,a1.a[i]));
+          case 'hashCode':{let h=1;a0.a.forEach(x=>{h=(Math.imul(h,31)+this.hashOf(x))|0;});return h;}
+          case 'stream':return this.mk('stream',{a:a0.a.slice(),prim:a0.et==='int'?'int':a0.et==='double'?'double':a0.et==='long'?'long':null});
+          case 'binarySearch':{let lo=0,hi=a0.a.length-1;while(lo<=hi){const mid=(lo+hi)>>>1;const c=this.compareVals(a0.a[mid],a1);if(c<0)lo=mid+1;else if(c>0)hi=mid-1;else return mid;}return -(lo+1);}
+        }break;}
+      case 'Collections':
+        switch(name){
+          case 'sort':this.sortList(a0,a1||null);return undefined;
+          case 'reverse':a0.a.reverse();a0.mod++;return undefined;
+          case 'max':case 'min':{if(!a0.a.length)this.throwJ('NoSuchElementException',null);const cmp=a1?((x,y)=>this.callFn(a1,[x,y])):((x,y)=>this.compareVals(x,y));let b=a0.a[0];for(const x of a0.a)if(name==='max'?cmp(x,b)>0:cmp(x,b)<0)b=x;return b;}
+          case 'swap':{const t=a0.a[a1];a0.a[a1]=a0.a[args[2]];a0.a[args[2]]=t;return undefined;}
+          case 'unmodifiableList':case 'unmodifiableSet':case 'unmodifiableCollection':case 'unmodifiableMap':{const c=this.copyColl(a0);c.fixed=true;return c;}
+          case 'emptyList':return Object.assign(this.newList([],'ArrayList'),{fixed:true});
+          case 'frequency':return a0.a.filter(x=>this.equalsVal(x,a1)).length;
+          case 'addAll':{for(const x of args.slice(1))this.listAdd(a0,x);return true;}
+          case 'nCopies':return Object.assign(this.newList(Array.from({length:a0},()=>a1)),{fixed:true});
+          case 'shuffle':{for(let i=a0.a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a0.a[i],a0.a[j]]=[a0.a[j],a0.a[i]];}return undefined;}
+          case 'reverseOrder':return this.mk('fn',{native:(x)=>this.compareVals(x[1],x[0])});
+        }break;
+      case 'List':case 'Set':case 'Map':
+        if(name==='of'||name==='copyOf'){
+          if(cls==='List'){const l=this.newList(name==='of'?args.slice():a0.a.slice(),'ImmutableList');l.fixed=true;return l;}
+          if(cls==='Set'){const s=this.mk('set',{e:[],t:'ImmutableSet',cap:16});(name==='of'?args:a0.a).forEach(x=>{if(this.setFind(s,x)>=0&&name==='of')this.throwJ('IllegalArgumentException','duplicate element: '+this.jstr(x));if(this.setFind(s,x)<0)s.e.push(x);});this.grow(s);s.fixed=true;return s;}
+          const m=this.mk('map',{e:[],t:'ImmutableMap',cap:16});if(name==='of'){for(let i=0;i<args.length;i+=2)m.e.push([args[i],args[i+1]]);}else a0.e.forEach(e=>m.e.push([e[0],e[1]]));this.grow(m);m.fixed=true;return m;}
+        if(cls==='Map'&&name==='entry')return this.mk('entry',{k:a0,v:a1});
+        break;
+      case 'Objects':
+        switch(name){case 'equals':return this.equalsVal(a0,a1);case 'hash':{let h=1;args.forEach(x=>{h=(Math.imul(h,31)+this.hashOf(x))|0;});return h;}case 'hashCode':return this.hashOf(a0);
+          case 'isNull':return a0===null;case 'nonNull':return a0!==null;case 'toString':return a0===null&&a1!==undefined?a1:this.jstr(a0);
+          case 'requireNonNull':if(a0===null)this.throwJ('NullPointerException',a1!==undefined?S(a1):null);return a0;case 'requireNonNullElse':return a0===null?a1:a0;}break;
+      case 'System':
+        switch(name){case 'currentTimeMillis':return new Lng(Date.now());case 'nanoTime':return new Lng(BigInt(Date.now())*1000000n);case 'exit':throw new ExitEx(a0);
+          case 'lineSeparator':return '\n';case 'identityHashCode':return (0x1b6d3586+(a0&&a0.id||0)*0x3a1f)|0;
+          case 'arraycopy':{if(a2n(args[2])===null||a0===null)this.npe(null);const len=args[4];if(a1<0||args[3]<0||len<0||a1+len>a0.a.length||args[3]+len>args[2].a.length)this.throwJ('ArrayIndexOutOfBoundsException','arraycopy: last source index '+(a1+len)+' out of bounds for length '+a0.a.length);
+            const tmp=a0.a.slice(a1,a1+len);for(let i=0;i<len;i++)args[2].a[args[3]+i]=tmp[i];return undefined;}
+          case 'getProperty':case 'getenv':return null;case 'gc':return undefined;}break;
+      case 'Thread':if(name==='sleep')return undefined;this.unsup('Потоки (Thread) візуалізатор не підтримує');break;
+      case 'Optional':if(name==='of'){if(a0===null)this.npe(null);return this.newOpt(a0);}if(name==='ofNullable')return this.newOpt(a0);if(name==='empty')return this.newOpt(null);break;
+      case 'IntStream':case 'LongStream':case 'DoubleStream':
+        if(name==='range'||name==='rangeClosed'){const a=[];for(let i=a0;name==='range'?i<a1:i<=a1;i++)a.push(i);return this.mk('stream',{a,prim:'int'});}
+        if(name==='of')return this.mk('stream',{a:args.length===1&&a0.kind==='arr'?a0.a.slice():args.slice(),prim:cls==='IntStream'?'int':'double'});
+        break;
+      case 'Stream':if(name==='of')return this.mk('stream',{a:args.length===1&&a0&&a0.kind==='arr'?a0.a.slice():args.slice(),prim:null});break;
+      case 'Collectors':return this.mk('coll',{type:name,args});
+      case 'Comparator':
+        if(name==='comparing'||name==='comparingInt'||name==='comparingDouble'||name==='comparingLong'){const kf=a0;const kc=a1;return this.mk('fn',{native:(x)=>{const p=this.callFn(kf,[x[0]]),q=this.callFn(kf,[x[1]]);return kc?this.callFn(kc,[p,q]):this.compareVals(p,q);}});}
+        if(name==='naturalOrder')return this.mk('fn',{native:(x)=>this.compareVals(x[0],x[1])});
+        if(name==='reverseOrder')return this.mk('fn',{native:(x)=>this.compareVals(x[1],x[0])});break;
+      case 'ThreadLocalRandom':if(name==='current')return new JRandom(Date.now());break;
+      case 'LocalDate':case 'LocalDateTime':case 'Duration':case 'Instant':this.unsup('Дата і час ('+cls+') візуалізатор не підтримує');break;
+    }
+    return NOSTATIC;},
+  copyColl(c){if(c.kind==='list')return this.newList(c.a.slice(),c.t);if(c.kind==='set')return this.mk('set',{e:c.e.slice(),t:c.t,cap:c.cap});return this.mk('map',{e:c.e.map(e=>[e[0],e[1]]),t:c.t,cap:c.cap});},
+  sortArr(a,cmp){const f=cmp?((x,y)=>{const r=this.callFn(cmp,[x,y]);return r;}):((x,y)=>this.compareVals(x,y));
+    // stable merge sort via JS sort (stable)
+    a.sort(f);},
+  sortList(l,cmp){this.sortArr(l.a,cmp);l.mod++;},
+  listAdd(l,x){if(l.fixed)this.throwJ('UnsupportedOperationException',null);l.a.push(x);l.mod++;return true;},
+  fnCombinator(fn,name,args){
+    switch(name){
+      case 'reversed':return this.mk('fn',{native:(x)=>this.callFn(fn,[x[1],x[0]])});
+      case 'negate':return this.mk('fn',{native:(x)=>!this.callFn(fn,x)});
+      case 'and':return this.mk('fn',{native:(x)=>this.callFn(fn,x)&&this.callFn(args[0],x)});
+      case 'or':return this.mk('fn',{native:(x)=>this.callFn(fn,x)||this.callFn(args[0],x)});
+      case 'andThen':return this.mk('fn',{native:(x)=>{const r=this.callFn(fn,x);return args[0].native||true?this.callFn(args[0],r===undefined?x:[r]):0;}});
+      case 'compose':return this.mk('fn',{native:(x)=>this.callFn(fn,[this.callFn(args[0],x)])});
+      case 'thenComparing':case 'thenComparingInt':return this.mk('fn',{native:(x)=>{const r=this.callFn(fn,x);if(r!==0)return r;
+          const g=args[0];if(g.ps&&g.ps.length===2||g.native&&g.native.length===0&&false)return this.callFn(g,x);
+          // key extractor
+          const p=this.callFn(g,[x[0]]);if(g.ps&&g.ps.length===1||g.native){const q=this.callFn(g,[x[1]]);return this.compareVals(p,q);}return this.callFn(g,x);}});}
+  },
+});
+function a2n(x){return x;}
+/* ===== JV runtime part 6: builtin objects ===== */
+Object.assign(Interp.prototype,{
+  constructBuiltin(cls,args,node){
+    const a0=args[0];
+    if(EXC.hasOwnProperty(cls)){const o=this.newExc(cls,null);this.setExcArgs(o,args);return o;}
+    switch(cls){
+      case 'ArrayList':case 'LinkedList':case 'Vector':case 'Stack':case 'ArrayDeque':case 'CopyOnWriteArrayList':{
+        const l=this.newList([],cls==='ArrayDeque'?'ArrayDeque':cls);
+        if(a0&&typeof a0==='object'&&(a0.kind==='list'||a0.kind==='set'))l.a=a0.kind==='set'?this.setOrder(a0):a0.a.slice();
+        else if(typeof a0==='number'&&a0<0)this.throwJ('IllegalArgumentException','Illegal Capacity: '+a0);return l;}
+      case 'PriorityQueue':{const l=this.newList([],'PriorityQueue');l.pq=true;
+        for(const x of args){if(x&&x.kind==='fn')l.cmp=x;else if(x&&(x.kind==='list'||x.kind==='set')){(x.kind==='set'?this.setOrder(x):x.a).forEach(v=>this.pqAdd(l,v));}}return l;}
+      case 'HashMap':case 'LinkedHashMap':case 'TreeMap':case 'ConcurrentHashMap':case 'Hashtable':{
+        const m=this.mk('map',{e:[],t:cls==='ConcurrentHashMap'||cls==='Hashtable'?'HashMap':cls,cap:16});
+        if(a0&&a0.kind==='map')a0.e.forEach(e=>m.e.push([e[0],e[1]]));
+        if(cls==='TreeMap'&&a0&&a0.kind==='fn')m.cmp=a0;this.grow(m);return m;}
+      case 'HashSet':case 'LinkedHashSet':case 'TreeSet':{
+        const s=this.mk('set',{e:[],t:cls,cap:16});
+        if(a0&&(a0.kind==='list'||a0.kind==='set'))(a0.kind==='set'?this.setOrder(a0):a0.a).forEach(x=>{if(this.setFind(s,x)<0)s.e.push(x);});
+        if(cls==='TreeSet'&&a0&&a0.kind==='fn')s.cmp=a0;this.grow(s);return s;}
+      case 'StringBuilder':case 'StringBuffer':return this.mk('sb',{s:isStr(a0)?S(a0):''});
+      case 'String':return new StrObj(a0===undefined?'':(a0&&a0.kind==='arr')?a0.a.map(c=>String.fromCharCode(c.c)).join(''):this.jstr(a0));
+      case 'Object':return this.mk('obj',{ci:null,cname:'Object',f:{}});
+      case 'Random':return new Proxy(Object.assign(new JRandom(a0!==undefined?Number(a0 instanceof Lng?a0.v:a0):Date.now()),{kind:'rnd',id:this.nid++}),{});
+      case 'Scanner':case 'BufferedReader':case 'InputStreamReader':return this.mk('scan',{});
+      case 'Integer':case 'Double':case 'Long':case 'Boolean':case 'Character':return a0;
+      case 'AtomicInteger':case 'AtomicLong':return this.mk('atom',{v:a0===undefined?0:a0});
+      case 'Thread':case 'Runnable':this.unsup('Потоки (Thread) візуалізатор не підтримує',node&&node.line);
+    }
+    this.unsup('Клас «'+cls+'» візуалізатор не підтримує',node&&node.line);},
+  pqAdd(l,x){l.a.push(x);let i=l.a.length-1;const cmp=(p,q)=>l.cmp?this.callFn(l.cmp,[p,q]):this.compareVals(p,q);
+    while(i>0){const p=(i-1)>>1;if(cmp(l.a[i],l.a[p])<0){[l.a[i],l.a[p]]=[l.a[p],l.a[i]];i=p;}else break;}l.mod++;},
+  pqPoll(l){if(!l.a.length)return null;const top=l.a[0];const last=l.a.pop();if(l.a.length){l.a[0]=last;let i=0;const n=l.a.length;const cmp=(p,q)=>l.cmp?this.callFn(l.cmp,[p,q]):this.compareVals(p,q);
+      for(;;){let s=i;const L=2*i+1,R=L+1;if(L<n&&cmp(l.a[L],l.a[s])<0)s=L;if(R<n&&cmp(l.a[R],l.a[s])<0)s=R;if(s===i)break;[l.a[i],l.a[s]]=[l.a[s],l.a[i]];i=s;}}l.mod++;return top;},
+  ioobe(i,len){this.throwJ('IndexOutOfBoundsException','Index '+i+' out of bounds for length '+len);},
+  builtinMethod(r,name,args,n){
+    const a0=args[0],a1=args[1];
+    if(isStr(r))return this.strMethod(S(r),name,args,r);
+    if(typeof r==='number'||typeof r==='boolean'||r instanceof Dbl||r instanceof Lng||r instanceof Chr){
+      switch(name){
+        case 'intValue':return this.castTo('int',r);case 'doubleValue':return this.castTo('double',r);case 'longValue':return this.castTo('long',r);case 'charValue':return r;case 'booleanValue':return r;
+        case 'equals':return this.equalsVal(r,a0);case 'hashCode':return this.hashOf(r);case 'toString':return this.jstr(r);case 'compareTo':case 'compare':return this.compareVals(r,a0);
+        case 'isNaN':return Number.isNaN(r.v);}
+    }
+    switch(r.kind){
+      case 'sb':return this.sbMethod(r,name,args);
+      case 'list':return this.listMethod(r,name,args,n);
+      case 'map':return this.mapMethod(r,name,args,n);
+      case 'set':return this.setMethod(r,name,args,n);
+      case 'arr':
+        if(name==='clone')return this.newArr(r.et,r.a.slice());if(name==='length')return r.a.length;
+        if(name==='equals')return r===a0;if(name==='hashCode')return this.hashOf(r);if(name==='getClass')return this.mk('obj',{ci:null,cname:'Class',f:{},of:r});break;
+      case 'iter':
+        if(name==='hasNext')return r.i<r.src.length;
+        if(name==='next'){if(r.list&&r.list.mod!==r.exp)this.throwJ('ConcurrentModificationException',null);if(r.i>=r.src.length)this.throwJ('NoSuchElementException',null);r.last=r.i;return r.src[r.i++];}
+        if(name==='remove'){if(r.last<0)this.throwJ('IllegalStateException',null);if(r.list){r.list.a.splice(r.last,1);r.list.mod++;r.exp=r.list.mod;r.src=r.list.a;r.i=r.last;r.last=-1;}else if(r.setRef){const k=r.src[r.last];const ix=this.setFind(r.setRef,k);if(ix>=0)r.setRef.e.splice(ix,1);if(r.setRef.view){const j=this.mapFind(r.setRef.view,r.setRef.entries?k.k:k);if(j>=0)r.setRef.view.e.splice(j,1);}r.src=r.src.slice();r.src.splice(r.last,1);r.i=r.last;r.last=-1;}return undefined;}
+        break;
+      case 'entry':
+        if(name==='getKey')return r.k;if(name==='getValue')return r.v;if(name==='setValue'){const old=r.v;r.v=a0;if(r.m){const ix=this.mapFind(r.m,r.k);if(ix>=0)r.m.e[ix][1]=a0;}return old;}
+        if(name==='toString')return this.jstr(r);if(name==='equals')return this.equalsVal(r,a0);if(name==='hashCode')return this.hashOf(r);break;
+      case 'opt':
+        switch(name){case 'isPresent':return r.v!==null;case 'isEmpty':return r.v===null;case 'get':case 'orElseThrow':if(r.v===null){if(a0)throw new JThrow(this.callFn(a0,[]));this.throwJ('NoSuchElementException','No value present');}return r.v;
+          case 'orElse':return r.v===null?a0:r.v;case 'orElseGet':return r.v===null?this.callFn(a0,[]):r.v;case 'ifPresent':if(r.v!==null)this.callFn(a0,[r.v]);return undefined;
+          case 'getAsDouble':case 'getAsInt':case 'getAsLong':if(r.v===null)this.throwJ('NoSuchElementException','No value present');return r.v;
+          case 'map':return r.v===null?r:this.newOpt(this.callFn(a0,[r.v]));case 'filter':return r.v!==null&&this.callFn(a0,[r.v])===true?r:this.newOpt(null);
+          case 'toString':return this.jstr(r);case 'equals':return a0&&a0.kind==='opt'&&this.equalsVal(r.v,a0.v);}break;
+      case 'scan':return this.scanMethod(r,name,args);
+      case 'rnd':
+        switch(name){case 'nextInt':{if(args.length===2)return a0+r.nextInt(a1-a0);if(a0!==undefined&&a0<=0)this.throwJ('IllegalArgumentException','bound must be positive');return r.nextInt(a0);}case 'nextDouble':return new Dbl(r.nextDouble());case 'nextBoolean':return r.nextBoolean();case 'nextLong':return new Lng((BigInt(r.next(32))<<32n)+BigInt(r.next(32)));}break;
+      case 'atom':
+        switch(name){case 'get':case 'intValue':return r.v;case 'set':r.v=a0;return undefined;case 'incrementAndGet':r.v=this.binop('+',r.v,1);return r.v;case 'getAndIncrement':{const o=r.v;r.v=this.binop('+',r.v,1);return o;}case 'decrementAndGet':r.v=this.binop('-',r.v,1);return r.v;case 'addAndGet':r.v=this.binop('+',r.v,a0);return r.v;}break;
+      case 'stream':return this.streamMethod(r,name,args,n);
+      case 'coll':break;
+      case 'out':if(name==='println'||name==='print'){this.print(args.length?this.jstr(a0):'',name==='println',r.err);return undefined;}if(name==='printf'){this.print(this.format(S(a0),args.slice(1)),false,r.err);return undefined;}break;
+    }
+    this.unsup('Метод «'+name+'» для '+this.className(r)+' візуалізатор поки не підтримує',n&&n.line);},
+  strMethod(s,name,args,orig){
+    const a0=args[0],a1=args[1];
+    const sidx=(i,len)=>{this.throwJ('StringIndexOutOfBoundsException','Index '+i+' out of bounds for length '+len);};
+    switch(name){
+      case 'length':return s.length;
+      case 'charAt':{if(a0<0||a0>=s.length)this.throwJ('StringIndexOutOfBoundsException','Index '+a0+' out of bounds for length '+s.length);return new Chr(s.charCodeAt(a0));}
+      case 'substring':{const e=a1===undefined?s.length:a1;if(a0<0||e>s.length||a0>e)this.throwJ('StringIndexOutOfBoundsException','begin '+a0+', end '+e+', length '+s.length);return s.slice(a0,e);}
+      case 'subSequence':return s.slice(a0,a1);
+      case 'indexOf':{const t=a0 instanceof Chr?String.fromCharCode(a0.c):typeof a0==='number'?String.fromCharCode(a0):S(a0);return s.indexOf(t,a1||0);}
+      case 'lastIndexOf':{const t=a0 instanceof Chr?String.fromCharCode(a0.c):typeof a0==='number'?String.fromCharCode(a0):S(a0);return a1===undefined?s.lastIndexOf(t):s.lastIndexOf(t,a1);}
+      case 'contains':return s.includes(this.jstr(a0));
+      case 'startsWith':return s.startsWith(S(a0),a1||0);case 'endsWith':return s.endsWith(S(a0));
+      case 'equals':return isStr(a0)&&S(a0)===s;case 'equalsIgnoreCase':return a0!==null&&S(a0).toLowerCase()===s.toLowerCase();
+      case 'compareTo':return this.compareVals(s,a0);case 'compareToIgnoreCase':return this.compareVals(s.toLowerCase(),S(a0).toLowerCase());
+      case 'isEmpty':return s.length===0;case 'isBlank':return s.trim().length===0;
+      case 'trim':case 'strip':return s.trim();case 'stripLeading':return s.trimStart();case 'stripTrailing':return s.trimEnd();
+      case 'toUpperCase':return s.toUpperCase();case 'toLowerCase':return s.toLowerCase();
+      case 'concat':return new StrObj(s+S(a0));
+      case 'replace':{const f=this.jstr(a0),t=this.jstr(a1);return s.split(f).join(t);}
+      case 'replaceAll':return s.replace(new RegExp(S(a0),'g'),S(a1).replace(/\$(\d)/g,'$$$1'));
+      case 'replaceFirst':return s.replace(new RegExp(S(a0)),S(a1));
+      case 'matches':return new RegExp('^(?:'+S(a0)+')$').test(s);
+      case 'split':{let parts=s.split(new RegExp(S(a0)));if(a1===undefined||a1===0){while(parts.length>1&&parts[parts.length-1]==='')parts.pop();if(s==='')parts=[''];}
+        else if(a1>0&&parts.length>a1){const re=new RegExp(S(a0),'g');let out=[],last=0,m,cnt=1;while(cnt<a1&&(m=re.exec(s))){out.push(s.slice(last,m.index));last=m.index+m[0].length;cnt++;if(m[0]==='')re.lastIndex++;}out.push(s.slice(last));parts=out;}
+        if(parts.length&&parts[0]===''&&s.length>0&&new RegExp('^(?:'+S(a0)+')').exec(s)&&new RegExp('^(?:'+S(a0)+')').exec(s)[0]==='')parts.shift();
+        return this.newArr('String',parts);}
+      case 'toCharArray':return this.newArr('char',[...s].map(c=>new Chr(c.charCodeAt(0))));
+      case 'chars':return this.mk('stream',{a:[...s].map(c=>c.charCodeAt(0)),prim:'int'});
+      case 'repeat':{if(a0<0)this.throwJ('IllegalArgumentException','count is negative: '+a0);return s.repeat(a0);}
+      case 'hashCode':return hashStr(s);case 'toString':return orig;case 'intern':return s;
+      case 'format':case 'formatted':return this.format(s,args);
+      case 'lines':return this.mk('stream',{a:s.split(/\r?\n/),prim:null});
+      case 'codePointAt':return s.charCodeAt(a0);
+      case 'getClass':return this.mk('obj',{ci:null,cname:'Class',f:{},of:s});
+    }
+    this.unsup('Метод String.'+name+'() візуалізатор не підтримує');},
+  sbMethod(r,name,args){
+    const a0=args[0],a1=args[1];
+    const chk=(i,len)=>{if(i<0||i>len)this.throwJ('StringIndexOutOfBoundsException','offset '+i+', length '+len);};
+    switch(name){
+      case 'append':{r.s+=(a0&&a0.kind==='arr'&&a0.et==='char')?a0.a.map(c=>String.fromCharCode(c.c)).join(''):this.jstr(a0);return r;}
+      case 'toString':return r.s;case 'length':return r.s.length;case 'isEmpty':return r.s.length===0;
+      case 'reverse':r.s=[...r.s].reverse().join('');return r;
+      case 'insert':chk(a0,r.s.length);r.s=r.s.slice(0,a0)+this.jstr(a1)+r.s.slice(a0);return r;
+      case 'deleteCharAt':if(a0<0||a0>=r.s.length)this.throwJ('StringIndexOutOfBoundsException','index '+a0+',length '+r.s.length);r.s=r.s.slice(0,a0)+r.s.slice(a0+1);return r;
+      case 'delete':r.s=r.s.slice(0,a0)+r.s.slice(Math.min(a1,r.s.length));return r;
+      case 'setLength':r.s=a0<=r.s.length?r.s.slice(0,a0):r.s+'\0'.repeat(a0-r.s.length);return undefined;
+      case 'charAt':if(a0<0||a0>=r.s.length)this.throwJ('StringIndexOutOfBoundsException','index '+a0+',length '+r.s.length);return new Chr(r.s.charCodeAt(a0));
+      case 'setCharAt':r.s=r.s.slice(0,a0)+String.fromCharCode(a1.c)+r.s.slice(a0+1);return undefined;
+      case 'indexOf':return r.s.indexOf(S(a0));case 'replace':r.s=r.s.slice(0,a0)+S(args[2])+r.s.slice(Math.min(a1,r.s.length));return r;
+      case 'substring':return r.s.slice(a0,a1===undefined?r.s.length:a1);case 'equals':return r===a0;case 'hashCode':return this.hashOf(r);
+      case 'capacity':return Math.max(16,r.s.length);case 'compareTo':return this.compareVals(r.s,a0.s);
+    }
+    this.unsup('Метод StringBuilder.'+name+'() не підтримується');},
+  listMethod(l,name,args,n){
+    const a0=args[0],a1=args[1];const A=l.a;
+    const mut=()=>{if(l.fixed)this.throwJ('UnsupportedOperationException',null);};
+    const idxOk=(i,len)=>{if(typeof i!=='number'||i<0||i>=len)this.ioobe(i,len);};
+    if(l.pq){
+      switch(name){case 'add':case 'offer':this.pqAdd(l,a0);return true;case 'poll':return this.pqPoll(l);case 'remove':if(args.length===0){if(!A.length)this.throwJ('NoSuchElementException',null);return this.pqPoll(l);}break;
+        case 'peek':return A.length?A[0]:null;case 'element':if(!A.length)this.throwJ('NoSuchElementException',null);return A[0];case 'size':return A.length;case 'isEmpty':return A.length===0;case 'clear':A.length=0;l.mod++;return undefined;case 'addAll':a0.a.forEach(x=>this.pqAdd(l,x));return true;}}
+    const stack=l.t==='Stack';
+    switch(name){
+      case 'add':case 'addLast':case 'offer':case 'offerLast':case 'addElement':mut();if(args.length===2){if(a0<0||a0>A.length)this.ioobe(a0,A.length);A.splice(a0,0,a1);l.mod++;return undefined;}A.push(a0);l.mod++;return name==='addLast'?undefined:true;
+      case 'addFirst':case 'offerFirst':mut();A.unshift(a0);l.mod++;return name==='addFirst'?undefined:true;
+      case 'push':if(stack){A.push(a0);l.mod++;return a0;}A.unshift(a0);l.mod++;return undefined;
+      case 'pop':if(!A.length)this.throwJ(stack?'EmptyStackException':'NoSuchElementException',null);l.mod++;return stack?A.pop():A.shift();
+      case 'peek':if(stack){if(!A.length)this.throwJ('EmptyStackException',null);return A[A.length-1];}return A.length?A[0]:null;
+      case 'peekFirst':return A.length?A[0]:null;case 'peekLast':return A.length?A[A.length-1]:null;
+      case 'poll':case 'pollFirst':l.mod++;return A.length?A.shift():null;case 'pollLast':l.mod++;return A.length?A.pop():null;
+      case 'element':case 'getFirst':case 'firstElement':if(!A.length)this.throwJ('NoSuchElementException',null);return A[0];
+      case 'getLast':case 'lastElement':if(!A.length)this.throwJ('NoSuchElementException',null);return A[A.length-1];
+      case 'removeFirst':if(!A.length)this.throwJ('NoSuchElementException',null);l.mod++;return A.shift();
+      case 'removeLast':if(!A.length)this.throwJ('NoSuchElementException',null);l.mod++;return A.pop();
+      case 'empty':return A.length===0;case 'search':{const i=A.map(x=>x).reverse().findIndex(x=>this.equalsVal(x,a0));return i<0?-1:i+1;}
+      case 'get':case 'elementAt':idxOk(a0,A.length);return A[a0];
+      case 'set':mut();idxOk(a0,A.length);{const o=A[a0];A[a0]=a1;return o;}
+      case 'size':return A.length;case 'isEmpty':return A.length===0;
+      case 'contains':return A.some(x=>this.equalsVal(x,a0));
+      case 'indexOf':return A.findIndex(x=>this.equalsVal(x,a0));
+      case 'lastIndexOf':{for(let i=A.length-1;i>=0;i--)if(this.equalsVal(A[i],a0))return i;return -1;}
+      case 'remove':{mut();
+        if(args.length===0){if(!A.length)this.throwJ('NoSuchElementException',null);l.mod++;return A.shift();}
+        if(typeof a0==='number'&&l.t!=='ArrayDeque'){idxOk(a0,A.length);l.mod++;return A.splice(a0,1)[0];}
+        const i=A.findIndex(x=>this.equalsVal(x,a0));if(i>=0){A.splice(i,1);l.mod++;}return i>=0;}
+      case 'clear':mut();A.length=0;l.mod++;return undefined;
+      case 'addAll':{mut();const src=a0.kind==='set'?this.setOrder(a0):a0.a;if(args.length===2){A.splice(a0,0,...a1.a);}else A.push(...src);l.mod++;return src.length>0;}
+      case 'removeAll':{mut();const b=A.length;l.a=A.filter(x=>!a0.a.some(y=>this.equalsVal(x,y)));l.mod++;return l.a.length!==b;}
+      case 'retainAll':{mut();const b=A.length;l.a=A.filter(x=>a0.a.some(y=>this.equalsVal(x,y)));l.mod++;return l.a.length!==b;}
+      case 'containsAll':return a0.a.every(y=>A.some(x=>this.equalsVal(x,y)));
+      case 'removeIf':{mut();const b=A.length;l.a=A.filter(x=>this.callFn(a0,[x])!==true);l.mod++;return l.a.length!==b;}
+      case 'replaceAll':mut();for(let i=0;i<A.length;i++)A[i]=this.callFn(a0,[A[i]]);return undefined;
+      case 'forEach':{const exp=l.mod;for(let i=0;i<A.length;i++){this.callFn(a0,[A[i]]);if(l.mod!==exp)this.throwJ('ConcurrentModificationException',null);}return undefined;}
+      case 'sort':mut();this.sortList(l,a0||null);return undefined;
+      case 'subList':return this.newList(A.slice(a0,a1),'ArrayList');
+      case 'toArray':return this.newArr('Object',A.slice());
+      case 'iterator':case 'listIterator':return this.mk('iter',{src:A,i:0,last:-1,list:l,exp:l.mod});
+      case 'descendingIterator':return this.mk('iter',{src:A.slice().reverse(),i:0,last:-1});
+      case 'stream':return this.mk('stream',{a:A.slice(),prim:null});
+      case 'equals':return this.equalsVal(l,a0);case 'hashCode':return this.hashOf(l);case 'toString':return this.jstr(l);
+      case 'reversed':return this.newList(A.slice().reverse());
+      case 'ensureCapacity':case 'trimToSize':return undefined;
+    }
+    this.unsup('Метод '+l.t+'.'+name+'() не підтримується',n&&n.line);},
+  mapMethod(m,name,args,n){
+    const a0=args[0],a1=args[1];
+    const mut=()=>{if(m.fixed)this.throwJ('UnsupportedOperationException',null);};
+    const tree=this.mapKind(m.t)==='Tree';
+    const put=(k,v)=>{if(k===null&&tree)this.npe(null);const i=this.mapFind(m,k);if(i>=0){const o=m.e[i][1];m.e[i][1]=v;return o;}m.e.push([k,v]);this.grow(m);return null;};
+    switch(name){
+      case 'put':mut();return put(a0,a1);
+      case 'get':{const i=this.mapFind(m,a0);return i>=0?m.e[i][1]:null;}
+      case 'getOrDefault':{const i=this.mapFind(m,a0);return i>=0?m.e[i][1]:a1;}
+      case 'containsKey':return this.mapFind(m,a0)>=0;
+      case 'containsValue':return m.e.some(e=>this.equalsVal(e[1],a0));
+      case 'remove':{mut();const i=this.mapFind(m,a0);if(i<0)return null;const o=m.e[i][1];m.e.splice(i,1);return o;}
+      case 'size':return m.e.length;case 'isEmpty':return m.e.length===0;case 'clear':mut();m.e.length=0;return undefined;
+      case 'putIfAbsent':{mut();const i=this.mapFind(m,a0);if(i>=0&&m.e[i][1]!==null)return m.e[i][1];put(a0,a1);return null;}
+      case 'putAll':mut();a0.e.forEach(e=>put(e[0],e[1]));return undefined;
+      case 'keySet':{const s=this.mk('set',{e:this.mapOrder(m).map(e=>e[0]),t:'LinkedHashSet',cap:16});s.view=m;return s;}
+      case 'values':return this.newList(this.mapOrder(m).map(e=>e[1]),'ArrayList');
+      case 'entrySet':{const s=this.mk('set',{e:this.mapOrder(m).map(e=>{const en=this.mk('entry',{k:e[0],v:e[1]});en.m=m;return en;}),t:'LinkedHashSet',cap:16});s.entries=true;s.view=m;return s;}
+      case 'forEach':this.mapOrder(m).slice().forEach(e=>this.callFn(a0,[e[0],e[1]]));return undefined;
+      case 'computeIfAbsent':{const i=this.mapFind(m,a0);if(i>=0&&m.e[i][1]!==null)return m.e[i][1];const v=this.callFn(a1,[a0]);if(v!==null)put(a0,v);return v;}
+      case 'computeIfPresent':{const i=this.mapFind(m,a0);if(i<0)return null;const v=this.callFn(a1,[a0,m.e[i][1]]);if(v===null)m.e.splice(i,1);else m.e[i][1]=v;return v;}
+      case 'compute':{const i=this.mapFind(m,a0);const v=this.callFn(a1,[a0,i>=0?m.e[i][1]:null]);if(v===null){if(i>=0)m.e.splice(i,1);}else put(a0,v);return v;}
+      case 'merge':{mut();const i=this.mapFind(m,a0);if(i<0||m.e[i][1]===null){put(a0,a1);return a1;}const v=this.callFn(args[2],[m.e[i][1],a1]);if(v===null)m.e.splice(i,1);else m.e[i][1]=v;return v;}
+      case 'replace':{const i=this.mapFind(m,a0);if(i<0)return null;const o=m.e[i][1];m.e[i][1]=a1;return o;}
+      case 'firstKey':case 'lastKey':{if(!m.e.length)this.throwJ('NoSuchElementException',null);const o=this.mapOrder(m);return o[name==='firstKey'?0:o.length-1][0];}
+      case 'firstEntry':case 'lastEntry':{if(!m.e.length)return null;const o=this.mapOrder(m);const e=o[name==='firstEntry'?0:o.length-1];return this.mk('entry',{k:e[0],v:e[1]});}
+      case 'equals':return this.equalsVal(m,a0);case 'hashCode':return this.hashOf(m);case 'toString':return this.jstr(m);
+    }
+    this.unsup('Метод '+m.t+'.'+name+'() не підтримується',n&&n.line);},
+  setMethod(s,name,args,n){
+    const a0=args[0];const mut=()=>{if(s.fixed)this.throwJ('UnsupportedOperationException',null);};
+    switch(name){
+      case 'add':{mut();if(this.setFind(s,a0)>=0)return false;if(a0===null&&this.mapKind(s.t)==='Tree')this.npe(null);s.e.push(a0);this.grow(s);if(s.view)return true;return true;}
+      case 'contains':return this.setFind(s,a0)>=0;
+      case 'remove':{mut();const i=this.setFind(s,a0);if(i<0)return false;s.e.splice(i,1);if(s.view){const j=this.mapFind(s.view,s.entries?a0.k:a0);if(j>=0)s.view.e.splice(j,1);}return true;}
+      case 'size':return s.e.length;case 'isEmpty':return s.e.length===0;case 'clear':mut();s.e.length=0;return undefined;
+      case 'addAll':{mut();let ch=false;(a0.kind==='set'?this.setOrder(a0):a0.a).forEach(x=>{if(this.setFind(s,x)<0){s.e.push(x);ch=true;}});this.grow(s);return ch;}
+      case 'removeAll':{mut();const b=s.e.length;s.e=s.e.filter(x=>!(a0.kind==='set'?a0.e:a0.a).some(y=>this.equalsVal(x,y)));return s.e.length!==b;}
+      case 'retainAll':{mut();const b=s.e.length;s.e=s.e.filter(x=>(a0.kind==='set'?a0.e:a0.a).some(y=>this.equalsVal(x,y)));return s.e.length!==b;}
+      case 'containsAll':return (a0.kind==='set'?a0.e:a0.a).every(y=>this.setFind(s,y)>=0);
+      case 'iterator':{const src=this.setOrder(s);return this.mk('iter',{src,i:0,last:-1,setRef:s});}
+      case 'forEach':this.setOrder(s).forEach(x=>this.callFn(a0,[x]));return undefined;
+      case 'stream':return this.mk('stream',{a:this.setOrder(s),prim:null});
+      case 'removeIf':{const b=s.e.length;s.e=s.e.filter(x=>this.callFn(a0,[x])!==true);return s.e.length!==b;}
+      case 'toArray':return this.newArr('Object',this.setOrder(s));
+      case 'first':case 'last':{if(!s.e.length)this.throwJ('NoSuchElementException',null);const o=this.setOrder(s);return o[name==='first'?0:o.length-1];}
+      case 'equals':return this.equalsVal(s,a0);case 'hashCode':return this.hashOf(s);case 'toString':return this.jstr(s);
+    }
+    this.unsup('Метод '+s.t+'.'+name+'() не підтримується',n&&n.line);},
+  scanMethod(sc,name,args){
+    const rest=()=>this.stdin.slice(this.sp);
+    const skipWs=()=>{while(this.sp<this.stdin.length&&/\s/.test(this.stdin[this.sp]))this.sp++;};
+    const tok=()=>{skipWs();if(this.sp>=this.stdin.length)this.throwJ('NoSuchElementException',null);let j=this.sp;while(j<this.stdin.length&&!/\s/.test(this.stdin[j]))j++;const t=this.stdin.slice(this.sp,j);return {t,j};};
+    switch(name){
+      case 'nextLine':case 'readLine':{if(this.sp>=this.stdin.length){if(name==='readLine')return null;this.throwJ('NoSuchElementException','No line found');}let j=this.stdin.indexOf('\n',this.sp);if(j<0)j=this.stdin.length;const l=this.stdin.slice(this.sp,j).replace(/\r$/,'');this.sp=Math.min(j+1,this.stdin.length+1);if(this.sp>this.stdin.length)this.sp=this.stdin.length;return l;}
+      case 'next':{const {t,j}=tok();this.sp=j;return t;}
+      case 'nextInt':{const {t,j}=tok();if(!/^[+-]?\d+$/.test(t))this.throwJ('InputMismatchException','For input string: "'+t+'"');this.sp=j;return parseInt(t,10);}
+      case 'nextLong':{const {t,j}=tok();if(!/^[+-]?\d+$/.test(t))this.throwJ('InputMismatchException','For input string: "'+t+'"');this.sp=j;return new Lng(BigInt(t));}
+      case 'nextDouble':{const {t,j}=tok();if(isNaN(parseFloat(t)))this.throwJ('InputMismatchException','For input string: "'+t+'"');this.sp=j;return new Dbl(parseFloat(t));}
+      case 'nextBoolean':{const {t,j}=tok();this.sp=j;return t.toLowerCase()==='true';}
+      case 'hasNext':{let k=this.sp;while(k<this.stdin.length&&/\s/.test(this.stdin[k]))k++;return k<this.stdin.length;}
+      case 'hasNextLine':return this.sp<this.stdin.length;
+      case 'hasNextInt':{let k=this.sp;while(k<this.stdin.length&&/\s/.test(this.stdin[k]))k++;let j=k;while(j<this.stdin.length&&!/\s/.test(this.stdin[j]))j++;return /^[+-]?\d+$/.test(this.stdin.slice(k,j));}
+      case 'close':return undefined;
+    }
+    this.unsup('Метод Scanner.'+name+'() не підтримується');},
+  streamMethod(st,name,args,n){
+    const a0=args[0],a1=args[1];const A=st.a;const call=(f,x)=>this.callFn(f,x);
+    const mkS=(a,prim)=>this.mk('stream',{a,prim:prim===undefined?st.prim:prim});
+    const opt=(v)=>this.newOpt(v);
+    switch(name){
+      case 'filter':return mkS(A.filter(x=>call(a0,[x])===true));
+      case 'map':return mkS(A.map(x=>this.coerce(st.prim==='double'?'double':st.prim==='int'?'int':'Object',call(a0,[x]))));
+      case 'mapToInt':return mkS(A.map(x=>call(a0,[x])),'int');case 'mapToDouble':return mkS(A.map(x=>this.coerce('double',call(a0,[x]))),'double');case 'mapToLong':return mkS(A.map(x=>call(a0,[x])),'long');
+      case 'mapToObj':return mkS(A.map(x=>call(a0,[x])),null);case 'boxed':return mkS(A,null);case 'asDoubleStream':return mkS(A.map(x=>this.coerce('double',x)),'double');
+      case 'sorted':{const c=A.slice();this.sortArr(c,a0||null);return mkS(c);}
+      case 'distinct':{const o=[];A.forEach(x=>{if(!o.some(y=>this.equalsVal(x,y)))o.push(x);});return mkS(o);}
+      case 'limit':return mkS(A.slice(0,Number(a0 instanceof Lng?a0.v:a0)));case 'skip':return mkS(A.slice(Number(a0 instanceof Lng?a0.v:a0)));
+      case 'peek':A.forEach(x=>call(a0,[x]));return st;
+      case 'forEach':case 'forEachOrdered':A.forEach(x=>call(a0,[x]));return undefined;
+      case 'count':return new Lng(A.length);
+      case 'sum':{if(st.prim==='double')return new Dbl(A.reduce((s,x)=>s+this.numD(x),0));if(st.prim==='long')return new Lng(A.reduce((s,x)=>s+BigInt(x instanceof Lng?x.v:x),0n));return A.reduce((s,x)=>(s+x)|0,0);}
+      case 'average':return A.length?opt(new Dbl(A.reduce((s,x)=>s+this.numD(x),0)/A.length)):opt(null);
+      case 'max':case 'min':{if(!A.length)return opt(null);const cmp=a0?((p,q)=>call(a0,[p,q])):((p,q)=>this.compareVals(p,q));let b=A[0];for(const x of A)if(name==='max'?cmp(x,b)>0:cmp(x,b)<0)b=x;return opt(b);}
+      case 'reduce':{if(args.length===1){if(!A.length)return opt(null);let acc=A[0];for(let i=1;i<A.length;i++)acc=call(a0,[acc,A[i]]);return opt(acc);}let acc=a0;A.forEach(x=>{acc=call(a1,[acc,x]);});return acc;}
+      case 'anyMatch':return A.some(x=>call(a0,[x])===true);case 'allMatch':return A.every(x=>call(a0,[x])===true);case 'noneMatch':return !A.some(x=>call(a0,[x])===true);
+      case 'findFirst':case 'findAny':return opt(A.length?A[0]:null);
+      case 'toList':{const l=this.newList(A.slice(),'ImmutableList');l.fixed=true;return l;}
+      case 'toArray':return this.newArr(st.prim||'Object',A.slice());
+      case 'collect':return this.collectWith(A,a0);
+      case 'getAsInt':break;
+    }
+    this.unsup('Метод Stream.'+name+'() не підтримується',n&&n.line);},
+  collectWith(A,c){
+    const call=(f,x)=>this.callFn(f,x);
+    switch(c.type){
+      case 'toList':return this.newList(A.slice(),'ArrayList');
+      case 'toSet':{const s=this.mk('set',{e:[],t:'HashSet',cap:16});A.forEach(x=>{if(this.setFind(s,x)<0)s.e.push(x);});this.grow(s);return s;}
+      case 'joining':{const sep=c.args[0]!==undefined?S(c.args[0]):'';return (c.args[1]!==undefined?S(c.args[1]):'')+A.map(x=>this.jstr(x)).join(sep)+(c.args[2]!==undefined?S(c.args[2]):'');}
+      case 'counting':return new Lng(A.length);
+      case 'summingInt':return A.reduce((s,x)=>(s+call(c.args[0],[x]))|0,0);
+      case 'averagingInt':case 'averagingDouble':return new Dbl(A.length?A.reduce((s,x)=>s+this.numD(call(c.args[0],[x])),0)/A.length:0);
+      case 'groupingBy':{const m=this.mk('map',{e:[],t:'HashMap',cap:16});A.forEach(x=>{const k=call(c.args[0],[x]);const i=this.mapFind(m,k);if(i>=0)m.e[i][1].push(x);else m.e.push([k,[x]]);});this.grow(m);
+        m.e.forEach(e=>{e[1]=c.args[1]?this.collectWith(e[1],c.args[1]):this.newList(e[1],'ArrayList');});return m;}
+      case 'partitioningBy':{const m=this.mk('map',{e:[[false,[]],[true,[]]],t:'LinkedHashMap',cap:16});A.forEach(x=>{const k=call(c.args[0],[x])===true;m.e[k?1:0][1].push(x);});m.e.forEach(e=>{e[1]=c.args[1]?this.collectWith(e[1],c.args[1]):this.newList(e[1],'ArrayList');});return m;}
+      case 'toMap':{const m=this.mk('map',{e:[],t:'HashMap',cap:16});A.forEach(x=>{const k=call(c.args[0],[x]),v=call(c.args[1],[x]);const i=this.mapFind(m,k);if(i>=0){if(c.args[2])m.e[i][1]=call(c.args[2],[m.e[i][1],v]);else this.throwJ('IllegalStateException','Duplicate key '+this.jstr(k)+' (attempted merging values '+this.jstr(m.e[i][1])+' and '+this.jstr(v)+')');}else m.e.push([k,v]);});this.grow(m);return m;}
+      case 'mapping':return this.collectWith(A.map(x=>call(c.args[0],[x])),c.args[1]);
+    }
+    this.unsup('Collectors.'+c.type+'() не підтримується');},
+});
+/* ===== entry ===== */
+function runProgram(src,stdin,opt){
+  const res={steps:[],out:'',err:'',error:null,unsup:null,truncated:null,source:src};
+  let classes;
+  try{classes=parse(src);}catch(e){if(e.unsup){res.unsup=e.message;res.line=e.line;return res;}throw e;}
+  const it=new Interp(classes,stdin,opt);
+  let mainRc=null,mainM=null;
+  for(const rc of it.rcs.values()){const ms=(rc.methods.get('main')||[]).filter(m=>m.static);if(ms.length){mainRc=rc;mainM=ms[0];break;}}
+  if(!mainM){res.unsup='Не знайдено метод main (public static void main(String[] args))';return res;}
+  try{
+    it.ensureInit(mainRc);
+    const fr=it.pushFrame('main',mainRc,null,mainM.line);fr.mname='main';fr.ret='void';
+    it.declare(mainM.params[0]?mainM.params[0].name:'args','String[]',it.newArr('String',[])).hide=true;
+    it.emit(mainM.line,'Програма запускається: Java викликає метод main — звідси починається виконання. У стеку з’являється перший кадр.','start');
+    it.exec(mainM.body);
+    it.emit(mainM.body.end,'Метод main завершився — програма закінчила роботу.','end');
+  }catch(e){
+    if(e instanceof JThrow){
+      const ex=e.obj;const txt='Exception in thread "main" '+it.excToString(ex)+'\n\tat '+(it.fr?it.fr.name.split('(')[0]:'Main.main')+'(Main.java)';
+      it.errOut+=txt+'\n';
+      try{it.steps.push(it.snapshot(it.fr?it.fr.line:0,'Виняток не було перехоплено — програма аварійно завершилась: '+it.excToString(ex),'crash'));}catch(_){}
+      res.error={type:it.className(ex),msg:ex.msg,line:it.fr?it.fr.line:0};
+    }else if(e instanceof ExitEx){try{it.emit(it.fr?it.fr.line:0,'System.exit('+e.code+') — програма завершена достроково','end');}catch(_){}}
+    else if(e instanceof StopEx){res.truncated=e.why;}
+    else if(e.unsup){res.unsup=e.message;res.line=e.line;}
+    else if(e instanceof RangeError){it.errOut+='Exception in thread "main" java.lang.StackOverflowError\n';res.error={type:'StackOverflowError',msg:null,line:0};try{it.steps.push(it.snapshot(it.fr?it.fr.line:0,'Занадто глибока рекурсія — StackOverflowError','crash'));}catch(_){}}
+    else{res.unsup='Внутрішня помилка візуалізатора: '+e.message;res.internal=e.stack;}
+  }
+  if(it.skipped>0||res.truncated){try{it.steps.push(it.snapshot(it.fr?it.fr.line:(mainM.body.end),res.truncated==='loop'?'Виконання зупинено: схоже на нескінченний цикл або дуже довгу програму. Показано початок роботи.':'Програма виконувалась довго, тому ми пропустили '+(it.skipped||0)+' кроків. Це її кінцевий стан.','end'));}catch(_){}}
+  res.skipped=it.skipped||0;res.steps=it.steps;res.out=it.out;res.err=it.errOut;return res;
+}
+return {run:runProgram,parse:parse};
+})();
+/*JV-END*/
+
+/*VZUI-BEGIN*/
+/* ================= Візуалізатор коду (UI) ================= */
+const VZ={res:null,i:0,play:false,speed:1,timer:0,hi:0,code:'',stdin:'',title:'',back:'home',dim:null,cl:0};
+const VZC=new Map();
+function vzWrap(code){
+  if(!code)return null;
+  if(/\bclass\s+\w+/.test(code)&&/static\s+void\s+main/.test(code))return {src:code,dim:[]};
+  if(/\[\[\d\]\]/.test(code))return null;
+  if(/^\s*(SELECT|UPDATE|INSERT|DELETE|CREATE|DROP)\b/mi.test(code))return null;
+  if(/^\s*(\$ |git |cd |ls\b)/m.test(code))return null;
+  const lines=code.replace(/\s+$/,'').split('\n');const imports=[],members=[],body=[];
+  const MEM=/^(?:(?:public|private|protected|static|final|abstract)\s+)*(?:class|interface|enum|record)\s+\w+/;
+  const METH=/^(?:(?:public|private)\s+)?static\s+[\w<>\[\], ?]+\s+\w+\s*\(.*\)\s*(?:throws [\w, ]+)?\s*\{\s*$/;
+  const FLD=/^(?:(?:public|private)\s+)?static\s+[^(]*;\s*$/;
+  let i=0;
+  while(i<lines.length){
+    const l=lines[i];
+    if(/^\s*import\s/.test(l)){imports.push(l.trim());i++;continue;}
+    if(MEM.test(l)||METH.test(l)){
+      let depth=0,started=false;const blk=[];
+      while(i<lines.length){const ln=lines[i];blk.push(ln);
+        const clean=ln.replace(/"(?:\\.|[^"\\])*"|'(?:\\.|[^'\\])*'|\/\/.*$/g,'');
+        for(const ch of clean){if(ch==='{'){depth++;started=true;}else if(ch==='}')depth--;}
+        i++;if(started&&depth<=0)break;}
+      members.push(blk);continue;}
+    if(FLD.test(l)){members.push([l]);i++;continue;}
+    body.push(l);i++;}
+  const hasMain=members.some(b=>/static\s+void\s+main/.test(b.join('\n')));
+  const out=[],dim=[];const D=(s)=>{out.push(s);dim.push(out.length);};
+  imports.forEach(D);if(imports.length)D('');
+  D('public class Main {');
+  members.forEach(b=>{b.forEach(l=>out.push(l.trim()===''?'':'    '+l));out.push('');});
+  const bodyTxt=body.join('\n').trim();
+  if(hasMain){ if(bodyTxt)return null; }
+  else{ if(!bodyTxt)return null;
+    D('    public static void main(String[] args) throws Exception {');
+    body.forEach(l=>out.push(l.trim()===''?'':'        '+l));
+    D('    }');}
+  D('}');
+  return {src:out.join('\n')+'\n',dim};
+}
+function vzRun(w,stdin){
+  const key=w.src+'\u0000'+(stdin||'');
+  if(VZC.has(key))return VZC.get(key);
+  let r;try{r=JV.run(w.src,stdin||'');}catch(e){r={steps:[],unsup:'Внутрішня помилка візуалізатора: '+e.message};}
+  if(VZC.size>40)VZC.clear();VZC.set(key,r);return r;
+}
+function vzOK(code,stdin){
+  try{const w=vzWrap(code);if(!w)return false;const r=vzRun(w,stdin);return !r.unsup&&r.steps.length>1;}catch(e){return false;}
+}
+function vzStop(){VZ.play=false;if(VZ.timer){clearInterval(VZ.timer);VZ.timer=0;}}
+function openViz(code,o){
+  o=o||{};vzStop();
+  VZ.code=code;VZ.stdin=o.stdin||'';VZ.title=o.title||'Покроково';VZ.back=o.back||'home';VZ.i=0;VZ.hi=0;VZ.exp=!!o.exp;
+  const w=vzWrap(code);
+  if(!w){VZ.res={steps:[],unsup:'У цьому коді немає запуску програми (методу main), тому покроково його виконати не можна. Додай main або відкрий приклад із повною програмою.',nomain:true};VZ.dim=new Set();VZ.src=code;}
+  else{VZ.res=vzRun(w,VZ.stdin);VZ.dim=new Set(w.dim);VZ.src=w.src;}
+  screen='viz';fx.view=true;render();window.scrollTo(0,0);
+}
+function vzCode(src,dim){
+  let carry='';
+  const lines=hl(src.replace(/\n$/,'')).split('\n').map((l,i)=>{let t=carry+l;const o=(t.match(/<span /g)||[]).length,c=(t.match(/<\/span>/g)||[]).length;
+    if(o>c){const m=t.match(/<span class="t-\w+">/g);carry=m[m.length-1];t+='</span>'.repeat(o-c);}else carry='';
+    return '<div class="vl'+(dim&&dim.has(i+1)?' dim':'')+'" id="vl'+(i+1)+'"><b>'+(i+1)+'</b><span>'+(t||' ')+'</span></div>';});
+  return lines.join('');
+}
+function vzHue(id){return (id*67+20)%360;}
+function vzV(d,key,ch){
+  const c=ch.has(key)?' chg':'';
+  if(d.r!==undefined)return '<button class="vref'+c+'" data-act="vzref" data-id="'+d.r+'" style="--rc:hsl('+vzHue(d.r)+' 55% 46%)" aria-label="Посилання на об’єкт '+d.r+'">→ #'+d.r+'</button>';
+  if(d.u)return '<span class="vv vzun" title="змінна ще не отримала значення">?</span>';
+  return '<span class="vv t-'+(d.k||'x')+(d.nl?' nl':'')+c+'">'+esc(d.p)+'</span>';
+}
+function vzDiff(prev,cur){
+  const ch=new Set(),nw=new Set();
+  const pf=prev?prev.frames:[];
+  cur.frames.forEach((f,fi)=>{
+    const pfr=pf[fi]&&pf[fi].fn===f.fn?pf[fi]:null;if(!pfr)nw.add('f'+fi);
+    f.vars.forEach(v=>{const key=fi+':'+v.n;const pv=pfr&&pfr.vars.find(x=>x.n===v.n);
+      if(!pv)nw.add(key);else if(pv.p!==v.p||pv.r!==v.r)ch.add(key);});});
+  const ph=new Map();(prev?prev.heap:[]).forEach(h=>ph.set(h.id,h));
+  cur.heap.forEach(h=>{const p=ph.get(h.id);if(!p){nw.add('h'+h.id);return;}
+    const cmp=(a,b,pre)=>{(a||[]).forEach((x,i)=>{const y=(b||[])[i];if(!y||JSON.stringify(x)!==JSON.stringify(y))ch.add('h'+h.id+':'+pre+i);});};
+    if(h.items)cmp(h.items,p.items,'');if(h.f)cmp(h.f,p.f,'f');if(h.entries)cmp(h.entries,p.entries,'e');
+    if(h.text!==undefined&&h.text!==p.text)ch.add('h'+h.id+':t');
+    if(h.n!==p.n&&h.items&&h.items.length>(p.items||[]).length)ch.add('h'+h.id+':'+(h.items.length-1));
+    if(h.entries&&h.entries.length>(p.entries||[]).length)ch.add('h'+h.id+':e'+(h.entries.length-1));});
+  const ss=new Map();(prev?prev.statics:[]).forEach(s=>s.vars.forEach(v=>ss.set(s.cls+'.'+v.n,v)));
+  cur.statics.forEach(s=>s.vars.forEach(v=>{const pv=ss.get(s.cls+'.'+v.n);if(!pv)nw.add('s'+s.cls+'.'+v.n);else if(pv.p!==v.p||pv.r!==v.r)ch.add('s'+s.cls+'.'+v.n);}));
+  return {ch,nw};
+}
+function vzHeapCard(h,df){
+  const rc='hsl('+vzHue(h.id)+' 55% 46%)';
+  let b='';
+  const cnt=(h.n!==undefined?' <small>('+h.n+')</small>':'');
+  if(h.items){
+    b='<div class="cells">'+h.items.map((d,i)=>'<div class="cell"><small>'+i+'</small><span class="'+(df.ch.has('h'+h.id+':'+i)?'chg':'')+'">'+vzV(d,'x',df.ch).replace(/ chg/,'')+'</span></div>').join('')+(h.more?'<div class="cell vzmore">…ще '+h.more+'</div>':'')+(!h.items.length?'<div class="empty">порожньо</div>':'')+'</div>';
+  }else if(h.entries){
+    b='<div class="flds">'+h.entries.map((e,i)=>'<div class="fld'+(df.ch.has('h'+h.id+':e'+i)?' chg':'')+'"><span class="fk">'+vzV(e[0],'x',df.ch)+'</span><span class="ar">→</span>'+vzV(e[1],'x',df.ch)+'</div>').join('')+(h.more?'<div class="empty">…ще '+h.more+'</div>':'')+(!h.entries.length?'<div class="empty">порожньо</div>':'')+'</div>';
+  }else if(h.f){
+    b='<div class="flds">'+(h.en?'<div class="fld"><span class="fk">name</span>'+vzV({p:'"'+h.en+'"',k:'s'},'x',df.ch)+'</div>':'')+h.f.map((f,i)=>'<div class="fld'+(df.ch.has('h'+h.id+':f'+i)?' chg':'')+'"><span class="fk">'+esc(f[0])+'</span>'+vzV(f[1],'x',df.ch)+'</div>').join('')+(!h.f.length&&!h.en?'<div class="empty">без полів</div>':'')+'</div>';
+  }else if(h.text!==undefined){
+    b='<code class="sbt'+(df.ch.has('h'+h.id+':t')?' chg':'')+'">"'+esc(h.text)+'"</code>';
+  }else b='<div class="empty">'+esc(h.t||'')+'</div>';
+  return '<div class="hc k-'+h.k+(df.nw.has('h'+h.id)?' new':'')+(VZ.hi===h.id?' hi':'')+(h.exc?' exc':'')+'" id="hc'+h.id+'" style="--rc:'+rc+'"><div class="hh"><i>#'+h.id+'</i><b>'+esc(h.t)+'</b>'+cnt+'</div>'+b+'</div>';
+}
+function vzMem(s,df){
+  let h='<h3 class="vz-h">Стек викликів <small>(методи, що зараз виконуються)</small></h3>';
+  const fr=s.frames;
+  if(!fr.length)h+='<p class="empty">Програма завершилась — стек порожній.</p>';
+  for(let fi=fr.length-1;fi>=0;fi--){
+    const f=fr[fi];const top=fi===fr.length-1;
+    h+='<div class="frame'+(top?' vztop':'')+(df.nw.has('f'+fi)?' new':'')+'"><header><span>'+esc(f.fn)+'</span>'+(top?'<em>виконується зараз</em>':'<em>чекає</em>')+'</header>';
+    if(!f.vars.length)h+='<div class="var none">змінних ще немає</div>';
+    f.vars.forEach(v=>{const key=fi+':'+v.n;
+      h+='<div class="var'+(df.nw.has(key)?' new':'')+'"><span class="vn">'+esc(v.n)+(v.t?' <small>'+esc(v.t)+'</small>':'')+'</span>'+vzV(v,key,df.ch)+'</div>';});
+    h+='</div>';
+  }
+  if(s.statics.length){
+    h+='<h3 class="vz-h">Статичні поля <small>(спільні для класу)</small></h3>';
+    s.statics.forEach(st=>{h+='<div class="frame vzst"><header><span>'+esc(st.cls)+'</span></header>'+st.vars.map(v=>'<div class="var"><span class="vn">'+esc(v.n)+' <small>'+esc(v.t)+'</small></span>'+vzV(v,'s'+st.cls+'.'+v.n,df.ch)+'</div>').join('')+'</div>';});
+  }
+  h+='<h3 class="vz-h">Купа <small>(heap: тут живуть об’єкти, масиви, списки)</small></h3>';
+  if(!s.heap.length)h+='<p class="empty">Об’єктів у купі поки немає. Вони з’являються, коли Java виконує <code>new</code>.</p>';
+  s.heap.forEach(x=>{h+=vzHeapCard(x,df);});
+  return h;
+}
+function vzView(){
+  const r=VZ.res;
+  let h='<div class="view'+(fx.view?' enter':'')+'"><div class="viz"><div class="lhead"><button class="x" data-act="vzback" aria-label="Назад">'+IC.cross+'</button><h1 class="ide-t">'+esc(VZ.title)+'</h1></div>';
+  if(r.unsup){
+    const syn=!/підтрим|не знає|Внутріш|немає запуску|Потоки|візуалізатор/i.test(r.unsup);
+    h+='<div class="vz-bad"><div class="vz-bad-m">'+mascot('sad',72)+'</div><div><h2>'+(syn?'Схоже, в коді є помилка':'Цей код візуалізатор поки не вміє')+'</h2><p>'+esc(r.unsup)+(r.line&&!r.nomain?' <b>(рядок '+r.line+')</b>':'')+'</p>'
+      +(syn?'<p class="desc">Перевір дужки, крапки з комою та лапки. Якщо код правильний, натисни «Запустити» у пісочниці: справжня Java скаже точніше.</p>':'<p class="desc">Це не твоя помилка: візуалізатор розуміє основи Java (змінні, умови, цикли, методи, класи, масиви, списки, мапи, винятки), але не потоки, файли чи мережу.</p>')+'</div></div>';
+    if(r.line&&!r.nomain&&VZ.src){const ln=(VZ.src.split('\n')[r.line-1]||'').trim();if(ln)h+='<div class="errline"><span>Біля рядка '+r.line+':</span><code>'+esc(ln)+'</code></div>';}
+    h+='<div class="btnrow"><button class="btn ghost" data-act="vzback">Назад</button><button class="btn" data-act="vzedit">Відкрити в пісочниці</button></div></div></div>';
+    return h;}
+  h+='<div class="vz-grid"><div class="vz-left"><div class="vz-top"><div class="vz-code" id="vzcode" tabindex="0" aria-label="Код програми">'+vzCode(VZ.src,VZ.dim)+'</div>'
+    +'<div class="vz-note" id="vznote"></div></div>'
+    +'<div class="vz-ctl"><div class="vz-btns">'
+      +'<button class="vzb" data-act="vzgo" data-d="first" aria-label="На початок">'+IC.vfirst+'</button>'
+      +'<button class="vzb" data-act="vzgo" data-d="prev" aria-label="Крок назад">'+IC.vprev+'</button>'
+      +'<button class="vzb main" id="vzplay" data-act="vzgo" data-d="play" aria-label="Грати">'+IC.vplay+'</button>'
+      +'<button class="vzb" data-act="vzgo" data-d="next" aria-label="Крок вперед">'+IC.vnext+'</button>'
+      +'<button class="vzb" data-act="vzgo" data-d="last" aria-label="В кінець">'+IC.vlast+'</button></div>'
+    +'<input type="range" id="vzr" min="0" max="'+(r.steps.length-1)+'" value="0" aria-label="Крок виконання"><div class="vz-meta"><span id="vzcnt"></span><span class="vz-sp">'+[0.5,1,2,4].map(x=>'<button class="uchip sm" data-act="vzspeed" data-v="'+x+'" id="vzsp'+x+'">'+x+'×</button>').join('')+'</span></div></div></div>'
+    +'<div class="vz-right"><div id="vzmem" class="vz-mem"></div><div class="console vz-out" id="vzout"></div></div>'
+    +'<div class="vz-more"><div class="vz-tools"><button class="btn ghost sm" data-act="vzedit">Змінити код</button></div>'
+    +'<details class="vz-help"><summary>Як читати цей екран?</summary><div><p><b>Підсвічений рядок</b> у коді це те, що Java щойно виконала. Жовта вспишка біля значення означає, що воно змінилось.</p><p><b>Стек</b> це «стіл» програми: кожен виклик методу кладе туди свою картку зі змінними, а коли метод завершується, картка зникає.</p><p><b>Купа</b> це склад для об’єктів, масивів і списків. У змінній лежить лише стрілка <code>→ #3</code> на потрібну коробку. Натисни на стрілку, щоб побачити, куди вона веде.</p></div></details></div></div></div></div>';
+  return h;
+}
+function vzPaint(){
+  const r=VZ.res;if(screen!=='viz'||!r||r.unsup){vzStop();return;}
+  const n=r.steps.length;VZ.i=Math.max(0,Math.min(n-1,VZ.i));
+  const s=r.steps[VZ.i],prev=VZ.i>0?r.steps[VZ.i-1]:null;
+  const df=vzDiff(prev,s);
+  const code=document.getElementById('vzcode');
+  if(code){
+    const old=code.querySelector('.vl.cur');if(old)old.classList.remove('cur','crash');
+    const el=document.getElementById('vl'+s.line);
+    if(el){el.classList.add('cur');if(s.kind==='crash'||s.kind==='err')el.classList.add('crash');
+      const top=el.offsetTop-code.clientHeight/2+el.clientHeight/2;
+      if(Math.abs(code.scrollTop-top)>code.clientHeight*0.3||el.offsetTop<code.scrollTop||el.offsetTop+el.clientHeight>code.scrollTop+code.clientHeight)code.scrollTo({top:Math.max(0,top),behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'});}
+  }
+  const nt=document.getElementById('vznote');
+  if(nt){nt.className='vz-note k-'+s.kind;nt.innerHTML='<div class="vz-fox">'+mascot(s.kind==='crash'||s.kind==='err'?'sad':s.kind==='end'?'cheer':'idle',44)+'</div><p>'+esc(s.note||'')+'</p>';nt.classList.remove('pop');void nt.offsetWidth;nt.classList.add('pop');}
+  const mem=document.getElementById('vzmem');if(mem)mem.innerHTML=vzMem(s,df);
+  const out=document.getElementById('vzout');
+  if(out){const po=prev?prev.out:'';const o=s.out;let hh='<span class="con-l">Вивід програми</span><pre>';
+    if(!o&&!s.err)hh+='<i class="muted">(поки нічого не виведено)</i>';
+    else{const keep=o.startsWith(po)?po:'';hh+=esc(keep)+(o.length>keep.length?'<span class="newout">'+esc(o.slice(keep.length))+'</span>':'');
+      if(s.err)hh+='<span class="errout">'+esc(s.err)+'</span>';}
+    hh+='</pre>';out.innerHTML=hh;}
+  const rg=document.getElementById('vzr');if(rg&&+rg.value!==VZ.i)rg.value=VZ.i;
+  const ct=document.getElementById('vzcnt');if(ct)ct.textContent='Крок '+(VZ.i+1)+' з '+n+(r.truncated?' (далі програма занадто довга для показу)':'');
+  const pl=document.getElementById('vzplay');if(pl){pl.innerHTML=VZ.play?IC.vpause:IC.vplay;pl.setAttribute('aria-label',VZ.play?'Пауза':'Грати');}
+  document.querySelectorAll('[data-act="vzgo"]').forEach(b=>{const d=b.dataset.d;if(d==='first'||d==='prev')b.disabled=VZ.i===0;if(d==='next'||d==='last')b.disabled=VZ.i>=n-1;});
+  [0.5,1,2,4].forEach(x=>{const b=document.getElementById('vzsp'+x);if(b)b.classList.toggle('on',VZ.speed===x);});
+}
+function vzGo(d){
+  const r=VZ.res;if(!r||r.unsup)return;const n=r.steps.length;
+  if(d==='play'){
+    if(VZ.play){vzStop();vzPaint();return;}
+    if(VZ.i>=n-1)VZ.i=0;
+    VZ.play=true;vzTick();return;}
+  vzStop();
+  if(d==='first')VZ.i=0;else if(d==='last')VZ.i=n-1;else if(d==='prev')VZ.i--;else if(d==='next')VZ.i++;
+  vzPaint();
+}
+function vzTick(){
+  if(VZ.timer)clearInterval(VZ.timer);
+  const step=()=>{if(screen!=='viz'){vzStop();return;}
+    if(VZ.i>=VZ.res.steps.length-1){vzStop();vzPaint();return;}
+    VZ.i++;vzPaint();};
+  vzPaint();
+  VZ.timer=setInterval(step,Math.round(1500/VZ.speed));
+}
+function vzKey(e){
+  if(screen!=='viz'||!VZ.res||VZ.res.unsup)return false;
+  const t=e.target;if(t&&(t.tagName==='TEXTAREA'||t.tagName==='INPUT'&&t.type!=='range'))return false;
+  if(e.key==='ArrowRight'||e.key==='ArrowDown'&&false){e.preventDefault();vzGo('next');return true;}
+  if(e.key==='ArrowLeft'){e.preventDefault();vzGo('prev');return true;}
+  if(e.key===' '&&(!t||t.tagName!=='BUTTON')){e.preventDefault();vzGo('play');return true;}
+  return false;
+}
+function vzBack(){
+  vzStop();
+  if(VZ.back==='lesson'&&L){screen='lesson';}
+  else if(VZ.back==='ide'){screen='ide';}
+  else{goHome();return;}
+  fx.view=false;render();window.scrollTo(0,0);
+}
+/*VZUI-END*/
+
+/*JVBLOCK-END*/
 const IDE={code:'public class Main {\n    public static void main(String[] args) {\n        System.out.println("Привіт, Java!");\n    }\n}\n',stdin:'',out:'',kind:'',busy:false,lang:0};
 const SAMPLES=[
  ['Привіт','public class Main {\n    public static void main(String[] args) {\n        System.out.println("Привіт, Java!");\n    }\n}\n',''],
@@ -8630,7 +10703,7 @@ function ideView(){
   h+='<div class="chips-row">'+SAMPLES.map((s,i)=>'<button class="uchip" data-act="sample" data-i="'+i+'">'+esc(s[0])+'</button>').join('')+'</div>';
   h+='<textarea id="ide-code" class="code-ta" spellcheck="false" autocapitalize="off" autocomplete="off" aria-label="Код Java">'+esc(IDE.code)+'</textarea>';
   h+='<label class="ide-l" for="ide-in">Ввід програми (для Scanner), якщо потрібен</label><textarea id="ide-in" class="area mono" rows="2" spellcheck="false">'+esc(IDE.stdin)+'</textarea>';
-  h+='<button class="btn" data-act="run"'+(IDE.busy?' disabled':'')+'>'+(IDE.busy?'Виконується…':'Запустити')+'</button>';
+  h+='<div class="btnrow"><button class="btn ghost" data-act="vz">Покроково</button><button class="btn" data-act="run"'+(IDE.busy?' disabled':'')+'>'+(IDE.busy?'Виконується…':'Запустити')+'</button></div>';
   h+='<div class="console'+(IDE.kind==='err'?' err':'')+'"><span class="con-l">Результат</span><pre>'+esc(IDE.out||'Натисни «Запустити».')+'</pre></div>';
   if(IDE.errLine){const lt=(IDE.code.split('\n')[IDE.errLine-1]||'').trim();h+='<div class="errline"><span>Помилка в рядку '+IDE.errLine+':</span><code>'+esc(lt)+'</code><button class="btn ghost sm" data-act="gotoerr">Показати в коді</button></div>';}
   h+='</div></div>';
